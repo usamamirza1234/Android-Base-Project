@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.armoomragames.denketa">
+    package="com.ast.MyBills">
 
     <application
-        android:name=".MyApplication"
+        android:name="com.ast.MyBills.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".IntroActivity"
+            android:name="com.ast.MyBills.IntroActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan">
             <!--android:windowSoftInputMode="stateHidden|adjustResize"-->
@@ -29,7 +29,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.ast.MyBills.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />
@@ -42,13 +42,13 @@
         <!--endregion-->
 
         <!--region FCM Declaration-->
-        <service android:name=".FCMUtils.MyInstanceIDListenerService">
+        <service android:name="com.ast.MyBills.FCMUtils.MyInstanceIDListenerService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name=".FCMUtils.MyFcmListenerService">
+        <service android:name="com.ast.MyBills.FCMUtils.MyFcmListenerService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
