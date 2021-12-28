@@ -38,18 +38,11 @@
                     android:layout_gravity="center_vertical"
                     android:paddingStart="10dp"
                     android:paddingEnd="2dp"
-                    android:text="OneBill"
+                    android:text="MyBills"
                     android:textColor="@color/white_1"
                     android:textSize="@dimen/fontsize_large" />
 
-                <TextView
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="App"
-                    android:textColor="@color/black_1"
-                    android:textSize="@dimen/fontsize_large" />
 
             </LinearLayout>
 

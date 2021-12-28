@@ -94,7 +94,10 @@ dependencies {
 //    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
     implementation 'com.github.aakira:expandable-layout:1.6.0@aar'
 
+    
+    implementation 'com.google.android.material:material:1.1.0'
 
-
+    //Graph lib
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 
 }

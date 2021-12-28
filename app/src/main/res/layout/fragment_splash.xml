@@ -18,13 +18,13 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:src="@mipmap/ic_launcher_round"/>
 
                 <TextView
@@ -32,19 +32,12 @@
                     android:paddingEnd="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OneBill"
+                    android:text="My Bill"
                     android:textColor="@color/white_1"
                     android:textSize="@dimen/fontsize_large"
                     android:layout_gravity="center_vertical"/>
 
-                <TextView
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="App"
-                    android:textColor="@color/black_1"
-                    android:textSize="@dimen/fontsize_large"
-                    android:layout_gravity="center_vertical"/>
 
             </LinearLayout>
 
