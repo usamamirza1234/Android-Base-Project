@@ -54,8 +54,9 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
     Integer selection = null;
 
 
-    TextView txv_billDetails_company;
-    TextView txv_billDetails_name;
+    TextView txv_billDetails_company,txv_billDetails_name;
+
+    TextView txvpdf,txvhistory;
     TextView txv_billDetails_address;
     TextView txv_billDetails_tariff;
     TextView txv_billDetails_billing_month;
@@ -161,9 +162,12 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         txv_billDetails_unit = view.findViewById(R.id.frg_home_electricity_txv_bill_units);
         txv_billDetails_due_date = view.findViewById(R.id.frg_home_electricity_txv_bill_due_date);
         txv_billDetails_current_month = view.findViewById(R.id.frg_home_electricity_txv_bill_current_month);
+        txvpdf = view.findViewById(R.id.electricityhomepdf);
+        txvhistory = view.findViewById(R.id.electricityhomehistory);
 
+        txvpdf.setOnClickListener(this);
+        txvhistory.setOnClickListener(this);
 
-        llHistory.setOnClickListener(this);
 
     }
 
@@ -215,7 +219,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 
 
         txv_billDetails_company.setText(lstBillInfo.get(selection).getBillType());
-        txv_billDetails_name.setText(lstBillInfo.get(selection).getCity());
+     //   txv_billDetails_name.setText(lstBillInfo.get(selection).getCity());
         txv_billDetails_address.setText(lstBillInfo.get(selection).getAddress());
 
     }
@@ -225,9 +229,13 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.frg_home_electricity_llHistory:
-            //navToHistoryFragment();
+            case R.id.electricityhomepdf:
+           // navToPDFFragment(selection);
             break;
+
+            case R.id.electricityhomehistory:
+            //  navToBillAnaylsisFragment(selection);
+                break;
 
         }
     }
@@ -321,6 +329,22 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_BillAnaylsisFragment);
+        frg.setArguments(bundle);
+        ft.hide(this);
+        ft.commit();
+    }
+
+    private void navToPDFFragment(int selection) {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft;
+        Fragment frg = new PdfFragment();
+        ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("key_selection" , selection);
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_PdfFragment);
+        Log.d("selection", "selectedPosition navToPDFFragment " + selection);
+        ft.addToBackStack(AppConstt.FragTag.FN_PdfFragment);
         frg.setArguments(bundle);
         ft.hide(this);
         ft.commit();

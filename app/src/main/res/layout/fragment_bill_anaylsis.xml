@@ -113,7 +113,7 @@
                             >
 
                             <TextView
-                                android:id="@+id/btnview"
+                                android:id="@+id/billanalysispdf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
@@ -141,7 +141,7 @@
                             >
 
                             <TextView
-                                android:id="@+id/btnview"
+                                android:id="@+id/history"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
@@ -537,12 +537,59 @@
      
 
             </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/shp_stoke_thm_black"
+                android:padding="5dp">
 
 
-<!--            <com.github.mikephil.charting.charts.BarChart-->
-<!--                android:id="@+id/piechart"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="400dp" />-->
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="60dp"
+                        android:background="@color/red"
+
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Origin/Source Wise Disease Spread"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/fontsize_mini"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Theileriosis Anthrax"
+                        android:textColor="@color/black_1"
+                        android:textSize="@dimen/fontsize_tiny" />
+                </LinearLayout>
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/BarHistoryUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_below="@+id/heading"
+
+                    android:layout_marginBottom="10dp">
+
+                </com.github.mikephil.charting.charts.BarChart>
+
+            </RelativeLayout>
 
         </LinearLayout>
 

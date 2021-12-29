@@ -188,7 +188,7 @@ android:layout_gravity="center"
                                >
 
                                <TextView
-                                   android:id="@+id/btnview"
+                                   android:id="@+id/electricityhomepdf"
                                    android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
                                    android:layout_centerInParent="true"
@@ -216,7 +216,7 @@ android:layout_gravity="center"
                                >
 
                                <TextView
-                                   android:id="@+id/btnview"
+                                   android:id="@+id/electricityhomehistory"
                                    android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
                                    android:layout_centerInParent="true"
@@ -474,6 +474,7 @@ android:layout_gravity="center"
 
 
                     <LinearLayout
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"

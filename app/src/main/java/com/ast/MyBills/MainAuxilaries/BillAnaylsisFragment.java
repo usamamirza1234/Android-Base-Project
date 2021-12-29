@@ -20,10 +20,25 @@ import com.ast.MyBills.MainAuxilaries.DModels.DModelBillAnaylsis;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
+import com.ast.MyBills.Utils.ChartManagers.BarChartManager;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_A;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
@@ -32,8 +47,8 @@ import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 public class BillAnaylsisFragment extends Fragment implements View.OnClickListener {
     private boolean isFirstTime = true;
 
-   // BarChart chart;
-   TextView txv_billinfo;
+    BarChart mBarHistoryUnit;
+   TextView txv_billinfo,txvPdf;
     private ArrayList<DModelBillInfo> lstBillInfo;
     private ArrayList<DModelBillAnaylsis> lstBillAnaylsis;
     private ArrayList<String> xLabel;
@@ -62,11 +77,12 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         populateBillInfo();
         populateBillAnaylsis();
 
-//        if (selection == null) {
-//            selection = 0;
-////            llBillDetails.setVisibility(View.GONE);
-//        } else setBillDetails();
-////        showBarChart();
+        if (selection == null) {
+            selection = 0;
+//            llBillDetails.setVisibility(View.GONE);
+        } else setBillDetails();
+
+        showBarHistoryUnit();
         return frg;
     }
 
@@ -83,20 +99,6 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         lstBillInfo = new ArrayList<>();
         lstBillAnaylsis = new ArrayList<>();
 
-        xLabel = new ArrayList<>();
-        xLabel.add("Jan");
-        xLabel.add("Feb");
-        xLabel.add("Mar");
-        xLabel.add("Apr");
-        xLabel.add("May");
-        xLabel.add("Jun");
-        xLabel.add("Jul");
-        xLabel.add("Aug");
-        xLabel.add("Sep");
-        xLabel.add("Oct");
-        xLabel.add("Nov");
-        xLabel.add("Dec");
-
     }
 
     private void bindviews(View view) {
@@ -110,119 +112,51 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         txv_billDetails_company = view.findViewById(R.id.frg_bill_anaylsis_txv_bill_company);
         txv_billinfo = view.findViewById(R.id.frg_bill_anaylsis_llBill_billinfo);
         txv_billinfo.setOnClickListener(this);
+        txvPdf = view.findViewById(R.id.billanalysispdf);
+        txvPdf.setOnClickListener(this);
 
+        mBarHistoryUnit = view.findViewById(R.id.BarHistoryUnit);
 
-        //chart = view.findViewById(R.id.piechart);
-        //initBarDataSet();
 
     }
-//
-//    private void showBarChart() {
-//        ArrayList<Double> valueList = new ArrayList<Double>();
-//        ArrayList<BarEntry> entries = new ArrayList<>();
-//        String title = "Bill";
-//
-//        //input data
-////        for (int i = 0; i < 6; i++) {
-////            valueList.add((i+1) * 200.1);
-////        }
-//
-//
-//        valueList.add(220.0);
-//        valueList.add(320.0);
-//        valueList.add(420.0);
-//        valueList.add(20.0);
-//        valueList.add(220.0);
-////        valueList.add(520.0);
-////        valueList.add(620.0);
-////        valueList.add(650.0);
-////        valueList.add(620.0);
-//
-//
-//        //fit the data into a bar
-//        for (int i = 0; i < valueList.size(); i++) {
-//            BarEntry barEntry = new BarEntry(i, valueList.get(i).floatValue());
-//            entries.add(barEntry);
-//        }
-//
-//        BarDataSet barDataSet = new BarDataSet(entries, title);
-//
-//        BarData data = new BarData(barDataSet);
-//        chart.setData(data);
-//        chart.invalidate();
-//    }
-//
-//    private void initBarDataSet() {
-//        //hiding the grey background of the chart, default false if not set
-//        chart.setDrawGridBackground(false);
-//        //remove the bar shadow, default false if not set
-//        chart.setDrawBarShadow(false);
-//        //remove border of the chart, default false if not set
-//        chart.setDrawBorders(false);
-//
-//        //remove the description label text located at the lower right corner
-//        Description description = new Description();
-//        description.setEnabled(false);
-//        chart.setDescription(description);
-//
-//        //setting animation for y-axis, the bar will pop up from 0 to its value within the time we set
-//        chart.animateY(1000);
-//        //setting animation for x-axis, the bar will pop up separately within the time we set
-//        chart.animateX(1000);
-//
-////        XAxis xAxis = chart.getXAxis();
-////        //change the position of x-axis to the bottom
-////        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-////        //set the horizontal distance of the grid line
-////        xAxis.setGranularity(1f);
-////        //hiding the x-axis line, default true if not set
-////        xAxis.setDrawAxisLine(false);
-////        //hiding the vertical grid lines, default true if not set
-////        xAxis.setDrawGridLines(false);
-//
-//
-//
-//
-//
-//
-//        XAxis xAxis = chart.getXAxis();
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-//        xAxis.setDrawGridLines(false);
-//        xAxis.setValueFormatter(new IAxisValueFormatter() {
-//            @Override
-//            public String getFormattedValue(float value, AxisBase axis) {
-//                return xLabel.get((int)value);
-//            }
-//        });
-//
-//
-//
-//
-//
-//        YAxis leftAxis = chart.getAxisLeft();
-//        //hiding the left y-axis line, default true if not set
-//        leftAxis.setDrawAxisLine(false);
-//
-//        YAxis rightAxis = chart.getAxisRight();
-//        //hiding the right y-axis line, default true if not set
-//        rightAxis.setDrawAxisLine(false);
-//
-//        Legend legend = chart.getLegend();
-//        //setting the shape of the legend form to line, default square shape
-//        legend.setForm(Legend.LegendForm.LINE);
-//        //setting the text size of the legend
-//        legend.setTextSize(11f);
-//        //setting the alignment of legend toward the chart
-//        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-//        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-//        //setting the stacking direction of legend
-//        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-//        //setting the location of legend outside the chart, default false if not set
-//        legend.setDrawInside(false);
-//
-//
-//        chart.setOnChartValueSelectedListener(new barChartOnChartValueSelectedListener());
-//    }
+
+    private void  showBarHistoryUnit(){
+
+
+        List<String> xAxisValues = new ArrayList<>();
+        xAxisValues.add("Jan");
+        xAxisValues.add("Feb");
+        xAxisValues.add("March");
+        xAxisValues.add("Apr");
+        xAxisValues.add("May");
+        xAxisValues.add("Jun");
+        xAxisValues.add("Jul");
+        xAxisValues.add("Aug");
+        xAxisValues.add("Sep");
+        xAxisValues.add("Oct");
+        xAxisValues.add("Nov");
+        xAxisValues.add("Dec");
+
+
+        ArrayList<BarEntry> yValueGroup1 = new ArrayList<>();
+
+        yValueGroup1.add(new BarEntry(1f, 500f));
+        yValueGroup1.add(new BarEntry(2f, 200f));
+        yValueGroup1.add(new BarEntry(3f, 300f));
+        yValueGroup1.add(new BarEntry(4f, 400f));
+        yValueGroup1.add(new BarEntry(5f, 700f));
+        yValueGroup1.add(new BarEntry(6f, 214f));
+        yValueGroup1.add(new BarEntry(7f, 900f));
+        yValueGroup1.add(new BarEntry(8f, 1000f));
+        yValueGroup1.add(new BarEntry(9f, 1100f));
+        yValueGroup1.add(new BarEntry(10f, 1400f));
+        yValueGroup1.add(new BarEntry(11f, 1700f));
+        yValueGroup1.add(new BarEntry(12f, 1900f));
+
+        BarChartManager barChartManager = new BarChartManager(mBarHistoryUnit, getContext());
+        barChartManager.showBarChartVertical(yValueGroup1, xAxisValues);
+
+    }
 
 
     private void populateBillInfo() {
@@ -250,7 +184,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
                         break;
 
                     case EVENT_B:
-
+                       // navToPDFFragment(selection);
                         break;
                 }
             });
@@ -313,6 +247,10 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
                // navToElectricityHomeFragment();
                 break;
 
+            case R.id.billanalysispdf:
+              // navToPDFFragment(selection);
+                break;
+
         }
     }
 
@@ -351,17 +289,33 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         ft.commit();
     }
 
-//    private class barChartOnChartValueSelectedListener implements OnChartValueSelectedListener {
-//
-//        @Override
-//        public void onValueSelected(Entry e, Highlight h) {
-//            //trigger activity when the bar value is selected
-//
-//        }
-//
-//        @Override
-//        public void onNothingSelected() {
-//
-//        }
-//    }
+    private void navToPDFFragment(int selection) {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft;
+        Fragment frg = new PdfFragment();
+        ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("key_selection" , selection);
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_PdfFragment);
+        Log.d("selection", "selectedPosition navToPDFFragment " + selection);
+        ft.addToBackStack(AppConstt.FragTag.FN_PdfFragment);
+        frg.setArguments(bundle);
+        ft.hide(this);
+        ft.commit();
+    }
+
+    private class barChartOnChartValueSelectedListener implements OnChartValueSelectedListener {
+
+        @Override
+        public void onValueSelected(Entry e, Highlight h) {
+            //trigger activity when the bar value is selected
+
+        }
+
+        @Override
+        public void onNothingSelected() {
+
+        }
+    }
 }

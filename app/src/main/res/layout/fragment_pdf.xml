@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="@color/white_1">
+
+
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/frg_prdmnu_nsv_productparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:fillViewport="true"
+            app:layout_anchorGravity="bottom"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <!--Data Section-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/white_1"
+                android:orientation="vertical">
+
+
+
+
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="3dp"
+                   android:background="@drawable/shp_rect_rounded_light_blue_stoke"
+                   android:orientation="horizontal">
+
+
+                   <ImageView
+                       android:layout_width="35dp"
+android:layout_gravity="center"
+                       android:layout_height="35dp"
+                       android:layout_margin="5dp"
+                       android:layout_centerVertical="true"
+
+                       android:elevation="2dp"
+                       android:scaleType="centerCrop"
+
+                       android:src="@drawable/ic_bill" />
+
+                   <TextView
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="30"
+                       android:padding="10dp"
+                       android:paddingStart="10dp"
+                       android:layout_gravity="center"
+                       android:paddingEnd="10dp"
+                       android:text="Electricity"
+                       android:textColor="@color/black_1"
+                       android:textCursorDrawable="@null"
+                       android:textSize="@dimen/fontsize_small"
+                       android:textStyle="bold" />
+
+
+                   <LinearLayout
+
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical">
+                       <!--BUTTON-->
+
+                       <LinearLayout
+                           android:visibility="visible"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+
+                           android:orientation="vertical"
+                           android:weightSum="100">
+
+
+                           <RelativeLayout
+                               android:layout_width="wrap_content"
+                               android:layout_height="match_parent"
+                               android:layout_margin="1dp"
+                               android:layout_weight="1"
+                               android:gravity="start"
+
+
+                               >
+
+                               <TextView
+                                   android:id="@+id/electricityhomebillinfo"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+
+                                   android:layout_centerHorizontal="true"
+
+
+                                   android:layout_marginStart="1dp"
+                                   android:layout_marginLeft="1dp"
+                                   android:layout_marginTop="1dp"
+                                   android:layout_marginEnd="1dp"
+                                   android:layout_marginRight="1dp"
+                                   android:gravity="start"
+                                   android:text="Bill Info"
+                                   android:textColor="@color/black"
+                                   android:textSize="10dp"
+                                   android:textStyle="bold" />
+
+                           </RelativeLayout>
+
+                           <RelativeLayout
+                               android:layout_width="wrap_content"
+                               android:layout_height="match_parent"
+                               android:layout_margin="1dp"
+                               android:layout_weight="1"
+                               android:gravity="start"
+
+                               >
+
+                               <TextView
+                                   android:id="@+id/btnview"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_centerInParent="true"
+                                   android:layout_margin="1dp"
+                                   android:gravity="start"
+
+
+
+                                   android:text="PDF"
+                                   android:textColor="@color/black"
+                                   android:textSize="10dp"
+                                   android:textStyle="bold" />
+
+                           </RelativeLayout>
+
+
+
+                           <RelativeLayout
+                               android:layout_width="wrap_content"
+                               android:layout_height="match_parent"
+                               android:layout_margin="1dp"
+                               android:layout_weight="1"
+                               android:gravity="start"
+
+                               >
+
+                               <TextView
+                                   android:id="@+id/electricityhomehistory"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_centerHorizontal="true"
+
+
+                                   android:layout_marginStart="1dp"
+                                   android:layout_marginLeft="1dp"
+                                   android:layout_marginEnd="1dp"
+                                   android:layout_marginRight="1dp"
+                                   android:layout_marginBottom="1dp"
+                                   android:gravity="center"
+                                   android:text="History"
+                                   android:textColor="@color/black"
+                                   android:textSize="10dp"
+                                   android:textStyle="bold" />
+
+                           </RelativeLayout>
+
+
+
+
+
+
+
+
+
+                       </LinearLayout>
+
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginStart="10dp"
+                           android:layout_marginTop="5dp"
+                           android:layout_marginEnd="10dp"
+                           android:background="@color/red"
+                           >
+
+
+
+
+
+                       </LinearLayout>
+
+                       <LinearLayout
+                           android:visibility="gone"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginStart="10dp"
+                           android:layout_marginTop="5dp"
+                           android:layout_marginEnd="10dp"
+                           android:orientation="horizontal"
+                           android:weightSum="100">
+
+                           <RelativeLayout
+
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content">
+
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center"
+                                   android:gravity="center"
+                                   android:layout_centerInParent="false"
+                                   android:layout_marginLeft="0dp"
+                                   android:padding="10dp"
+                                   android:text="All Diseases, All Species, All Sources, All District"
+                                   android:textColor="@color/black"
+                                   android:textSize="@dimen/fontsize_tiny"
+                                   android:textStyle="bold" />
+
+                           </RelativeLayout>
+
+
+
+
+
+
+                           <RelativeLayout
+
+                               android:id="@+id/map"
+                               android:layout_width="wrap_content"
+                               android:layout_height="40dp"
+                               android:layout_margin="0dp"
+                               android:layout_weight="0"
+                               android:gravity="center"
+
+                               >
+                               <com.ast.MyBills.Utils.CircleImageView
+                                   android:layout_width="35dp"
+
+                                   android:layout_height="50dp"
+                                   android:layout_alignParentEnd="false"
+                                   android:layout_centerVertical="false"
+                                   android:layout_marginEnd="0dp"
+                                   android:elevation="2dp"
+                                   android:scaleType="centerCrop"
+
+                                   />
+                           </RelativeLayout>
+
+
+
+
+                       </LinearLayout>
+
+
+
+
+
+                   </LinearLayout>
+
+
+
+                   <LinearLayout
+                       android:id="@+id/frg_home_electricity_llHistory"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentEnd="true"
+                       android:layout_gravity="center"
+                       android:layout_centerInParent="true"
+                       android:orientation="vertical">
+
+                       <ImageView
+                           android:layout_width="35dp"
+                           android:layout_height="35dp"
+                           android:layout_centerVertical="true"
+                           android:elevation="2dp"
+                           android:layout_margin="5dp"
+                           android:scaleType="centerCrop"
+                           android:src="@drawable/icbillcalender" />
+
+
+                   </LinearLayout>
+
+
+
+
+
+
+               </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/shp_rect_rounded_light_white"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="@color/light_gray"
+                        android:orientation="horizontal"
+                        android:weightSum="110">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="30"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="Bill Type"
+                            android:textColor="@color/black_1"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="30"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="City"
+                            android:textColor="@color/black_1"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="30"
+                            android:gravity="end"
+                            android:lines="1"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="Address"
+                            android:textColor="@color/black_1"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/frg_home_electricity_rcvElectricityInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/frg_home_electricity_llBill_Details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/shp_rect_rounded_light_white"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="@color/thm_red_dark"
+                        android:orientation="horizontal"
+                        android:weightSum="30">
+
+                        <TextView
+                            android:id="@+id/frg_home_electricity_txv_bill_company"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="30"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="Bill Type"
+                            android:textColor="@color/black"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_small"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</RelativeLayout>

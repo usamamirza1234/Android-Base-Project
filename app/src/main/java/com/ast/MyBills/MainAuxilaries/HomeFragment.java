@@ -129,7 +129,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void populateBillInfo() {
         lstBillDashboardInfo.clear();
 
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Gas", "23100" +0, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "23100" +0, "20-4-2021", "paid", "F9"));
         lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "23100" +1, "20-4-2021", "Unpaid", "F9"));
         lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "23100" +2, "20-4-2021", "paid", "F9"));
         lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "23100" +3, "20-4-2021", "paid", "F9"));
