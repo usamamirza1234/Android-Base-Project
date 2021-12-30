@@ -51,10 +51,10 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
             rlBack = frg.findViewById(R.id.frg_signin_rlToolbar);
             rlBack.setOnClickListener(this);
             rlForgot = frg.findViewById(R.id.frg_sigin_rlforgot);
-            rlSignUp = frg.findViewById(R.id.frg_sigin_rlCreate);
+
 
             rlSignin.setOnClickListener(this);
-            rlSignUp.setOnClickListener(this);
+
             rlForgot.setOnClickListener(this);
 
 
@@ -85,9 +85,6 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
                     navToForgotPasswordFragment();
                     break;
 
-                case R.id.frg_sigin_rlCreate:
-                    navToSignUpFragment();
-                    break;
 
 
 

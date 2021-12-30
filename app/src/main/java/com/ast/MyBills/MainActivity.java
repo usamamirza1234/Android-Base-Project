@@ -2,6 +2,7 @@ package com.ast.MyBills;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -19,12 +20,20 @@ import com.ast.MyBills.IntroAuxilaries.MyBillsFragment;
 import com.ast.MyBills.MainAuxilaries.EditProfileFragment;
 import com.ast.MyBills.MainAuxilaries.ElectricityHomeFragment;
 import com.ast.MyBills.MainAuxilaries.HomeFragment;
+import com.ast.MyBills.MainAuxilaries.PdfFragment;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.CircleImageView;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.google.android.material.navigation.NavigationView;
+import com.shockwave.pdfium.PdfDocument;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, IBadgeUpdateListener {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, IBadgeUpdateListener{
 
     LinearLayout llPriority_Sector, llDashboard, llPerformancemonitoring, llRapid, llissues, llFeedback, llImmediateDiseasesReportsIDR, llIssuesFacedPrivate, llLogout;
     CircleImageView editprofile;
@@ -39,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout rlToolbar, rlMenu ,idr;
     private Dialog progressDialog;
     RelativeLayout mMap,mcalendar;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         editprofile = findViewById(R.id.profile);
         editprofile.setOnClickListener(this);
-
 
 
 
@@ -140,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
     public void navToHomeFragment() {
         clearMyBackStack();
         Fragment frg = new HomeFragment();
@@ -424,7 +436,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-    }}
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+}
 
 
 

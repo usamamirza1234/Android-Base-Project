@@ -38,24 +38,17 @@ import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 
 
 public class ElectricityHomeFragment extends Fragment implements View.OnClickListener {
-    private boolean isFirstTime = true;
-    Timer timer;
-    int currentPage, mIndicatorPosition;
-    private ArrayList<DModelBanner> lstElectricAds;
+
     private ArrayList<DModelBillInfo> lstBillInfo;
     IBadgeUpdateListener mBadgeUpdateListener;
     RecyclerView rcvElectInfo;
     LinearLayout llBillDetails,llHistory;
-    private RtlViewPager viewPgrFeaturedBanner;
-    private CircleIndicator circleIndicator;
     ElectricityInfoRcvAdapter electricityInfoRcvAdapter;
-    private FeaturedAdsViewPagerAdapter featuredAdsViewPagerAdapter;
     int position_ = 0;
     Integer selection = null;
 
 
     TextView txv_billDetails_company,txv_billDetails_name;
-
     TextView txvpdf,txvhistory;
     TextView txv_billDetails_address;
     TextView txv_billDetails_tariff;
@@ -73,7 +66,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         init();
         bindviews(frg);
 
-        initializeAds();
+
         populateBillInfo();
 
         if (selection == null) {
@@ -85,67 +78,15 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         return frg;
     }
 
-    private void initializeAds() {
-
-
-        Drawable uploadPrscp;
-        if (AppConfig.getInstance().isEnglishMode) {
-            uploadPrscp = getActivity().getResources().getDrawable(R.drawable.ic_baseline_wifi_protected_setup_24);
-        } else {
-            uploadPrscp = getActivity().getResources().getDrawable(R.drawable.ic_baseline_wifi_protected_setup_24);
-        }
-
-
-        lstElectricAds.add(new DModelBanner("4", "https://i.ytimg.com/vi/66u6-W5sUVI/maxresdefault.jpg", uploadPrscp, true));
-        lstElectricAds.add(new DModelBanner("3", "https://d3nuqriibqh3vw.cloudfront.net/nescafe_original_resized.jpg?X5opHznbHMpf6P5EgUfoX_NafvL7eCyT", uploadPrscp, true));
-        lstElectricAds.add(new DModelBanner("2", "https://i2.wp.com/campaignsoftheworld.com/wp-content/uploads/2019/06/Sarfaraz-Ahmed-Yawn-memes-COTW-2.jpg?w=960&ssl=1", uploadPrscp, true));
-        lstElectricAds.add(new DModelBanner("1", "https://i.dawn.com/primary/2016/02/56b9905e791f9.jpg", uploadPrscp, true));
-        lstElectricAds.add(new DModelBanner("0", "https://mir-s3-cdn-cf.behance.net/project_modules/1400/7b18be17592343.562bbf99ac2ca.jpg", uploadPrscp, true));
-//        lstFeaturedOutlets.add(new DModelBanner("-1", "", uploadPrscp, false));
-
-
-        featuredAdsViewPagerAdapter = new FeaturedAdsViewPagerAdapter(getActivity(), lstElectricAds, this, new IAdapterCallback() {
-            @Override
-            public void onAdapterEventFired(int eventId, int position) {
-                switch (eventId) {
-                    case EVENT_A:
-
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
-
-        viewPgrFeaturedBanner.setAdapter(featuredAdsViewPagerAdapter);
-        viewPgrFeaturedBanner.setCurrentItem(0);
-        viewPgrFeaturedBanner.setOffscreenPageLimit(1);
-        circleIndicator.setVisibility(View.VISIBLE);
-        circleIndicator.setViewPager(viewPgrFeaturedBanner);
-
-
-        if (timer != null) {
-            timer.cancel();
-            timer.purge();
-        }
-        currentPage = 0;
-        mIndicatorPosition = 0;
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new timerTask(), 2000, 2500);
-
-    }
 
     private void init() {
         setBottomBar();
 
-        lstElectricAds = new ArrayList<>();
+
         lstBillInfo = new ArrayList<>();
     }
 
     private void bindviews(View view) {
-
-        viewPgrFeaturedBanner = view.findViewById(R.id.frg_market_viewpgr_featured_banner);
-        circleIndicator = view.findViewById(R.id.frg_market_viewpagr_indicator);
 
         rcvElectInfo = view.findViewById(R.id.frg_home_electricity_rcvElectricityInfo);
         llBillDetails = view.findViewById(R.id.frg_home_electricity_llBill_Details);
@@ -175,10 +116,10 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
     private void populateBillInfo() {
         lstBillInfo.clear();
 
-        lstBillInfo.add(new DModelBillInfo("ISECo", "23100" +0, "F9"));
-        lstBillInfo.add(new DModelBillInfo("WAPDA", "23100" + 1, "F10"));
-        lstBillInfo.add(new DModelBillInfo("WASA", "23100" + 2, "F11"));
-        lstBillInfo.add(new DModelBillInfo("LESCO", "23100" + 2, "I18"));
+        lstBillInfo.add(new DModelBillInfo("ISECo", "2,31" +0, "F9"));
+        lstBillInfo.add(new DModelBillInfo("WAPDA", "2,31" + 1, "F10"));
+        lstBillInfo.add(new DModelBillInfo("WASA", "2,31" + 2, "F11"));
+        lstBillInfo.add(new DModelBillInfo("LESCO", "2,31" + 2, "I18"));
 
 
         if (electricityInfoRcvAdapter == null) {
@@ -197,7 +138,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
                         break;
 
                     case EVENT_B:
-                       // navToBillAnaylsisFragment(position);
+                        navToBillAnaylsisFragment(position);
                         break;
                 }
             });
@@ -262,47 +203,6 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             setBottomBar();
         }
     }
-
-
-    public class timerTask extends TimerTask {
-
-        @Override
-        public void run() {
-            if (getActivity() != null) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        if (isFirstTime) {
-                            isFirstTime = false;
-                        } else {
-                            try {
-                                if (viewPgrFeaturedBanner.getCurrentItem() == lstElectricAds.size() - 1) {
-                                    currentPage = 0;
-                                    mIndicatorPosition = 0;
-                                    //updateIndicatorViews(mIndicatorPosition);
-                                }
-                                if (currentPage == 0) {
-                                    viewPgrFeaturedBanner.setCurrentItem(currentPage, true);
-                                    currentPage = currentPage + 1;
-                                } else {
-                                    viewPgrFeaturedBanner.setCurrentItem(currentPage, true);
-                                    currentPage = currentPage + 1;
-                                }
-
-                                //updateIndicatorViews(mIndicatorPosition++);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
-                });
-            }
-        }
-    }
-
-
 
 //    private void navToHistoryFragment() {
 //

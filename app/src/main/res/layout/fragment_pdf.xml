@@ -379,7 +379,7 @@ android:layout_gravity="center"
 
                 <LinearLayout
                     android:id="@+id/frg_home_electricity_llBill_Details"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
 
@@ -415,6 +415,21 @@ android:layout_gravity="center"
 
 
                     </LinearLayout>
+
+                    <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffffff"
+                       >
+
+
+                        <com.github.barteksc.pdfviewer.PDFView
+                            android:id="@+id/pdfView"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+
+                    </RelativeLayout>
 
 
 

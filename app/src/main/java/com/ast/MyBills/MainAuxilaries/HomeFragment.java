@@ -129,11 +129,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void populateBillInfo() {
         lstBillDashboardInfo.clear();
 
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "23100" +0, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "23100" +1, "20-4-2021", "Unpaid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "23100" +2, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "23100" +3, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "23100" +4, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2021", "Unpaid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2021", "Unpaid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "20-4-2021", "paid", "F9"));
         if (dashboardinforcvadapter == null) {
 
             dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(), lstBillDashboardInfo, (eventId, position) -> {

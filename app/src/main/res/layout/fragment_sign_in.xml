@@ -148,61 +148,24 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/frg_sigin_rlforgot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="100">
+                android:layout_marginEnd="20dp">
 
-                <RelativeLayout
-                    android:id="@+id/frg_sigin_rlforgot"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="50">
+                    android:layout_centerInParent="true"
+                    android:padding="5dp"
+                    android:text="Forgot your password?"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/fontsize_tiny"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="Forgot your password?"
-                        android:textColor="@color/black_1"
-                        android:textSize="@dimen/fontsize_tiny" />
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/frg_sigin_rlCreate"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/edttext_height_xmedium"
-                    android:layout_gravity="center"
-                    android:layout_weight="50">
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/black_1"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:padding="5dp"
-                        android:text="@string/frg_signin_create_account"
-                        android:textColor="@color/black_1"
-                        android:textSize="@dimen/fontsize_tiny" />
-
-                </RelativeLayout>
-            </LinearLayout>
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/frg_presigin_rlskiplogin"
                 android:layout_width="wrap_content"

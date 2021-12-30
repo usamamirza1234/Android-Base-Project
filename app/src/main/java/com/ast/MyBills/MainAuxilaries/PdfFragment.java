@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ast.MyBills.AppConfig;
+import com.ast.MyBills.MainActivity;
 import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBanner;
@@ -25,18 +26,25 @@ import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.IAdapterCallback;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
 import com.duolingo.open.rtlviewpager.RtlViewPager;
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.shockwave.pdfium.PdfDocument;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
+import static android.content.ContentValues.TAG;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_A;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 
 
-public class PdfFragment extends Fragment implements View.OnClickListener {
+public class PdfFragment extends Fragment implements View.OnClickListener, OnLoadCompleteListener {
     private boolean isFirstTime = true;
     Timer timer;
     int currentPage, mIndicatorPosition;
@@ -52,10 +60,9 @@ public class PdfFragment extends Fragment implements View.OnClickListener {
     private FeaturedAdsViewPagerAdapter featuredAdsViewPagerAdapter;
     int position_ = 0;
     Integer selection = null;
-
-
     TextView txv_billDetails_company;
-
+//pdf
+PDFView pdfview;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,6 +79,7 @@ public class PdfFragment extends Fragment implements View.OnClickListener {
             setBillDetails();
 //            llBillDetails.setVisibility(View.GONE);
         } else setBillDetails();
+
 
         return frg;
     }
@@ -99,11 +107,17 @@ public class PdfFragment extends Fragment implements View.OnClickListener {
         rcvElectInfo = view.findViewById(R.id.frg_home_electricity_rcvElectricityInfo);
         llBillDetails = view.findViewById(R.id.frg_home_electricity_llBill_Details);
         History = view.findViewById(R.id.electricityhomehistory);
-
         billinfo = view.findViewById(R.id.electricityhomebillinfo);
-
-
         txv_billDetails_company = view.findViewById(R.id.frg_home_electricity_txv_bill_company);
+
+        pdfview = view.findViewById(R.id.pdfView);
+        pdfview.fromAsset("pdf1.pdf")
+                .enableSwipe(true)
+                .swipeHorizontal(true)
+                .enableAnnotationRendering(true)
+                .scrollHandle(new DefaultScrollHandle(getContext()))
+                .onLoad(this)
+                .load();
 
 
 
@@ -111,6 +125,27 @@ public class PdfFragment extends Fragment implements View.OnClickListener {
         billinfo.setOnClickListener(this);
 
     }
+
+    @Override
+    public void loadComplete(int nbPages) {
+        PdfDocument.Meta meta = pdfview.getDocumentMeta();
+        printBookmarksTree(pdfview.getTableOfContents(), "-");
+
+    }
+
+    public void printBookmarksTree(List<PdfDocument.Bookmark> tree, String sep) {
+        for (PdfDocument.Bookmark b : tree) {
+
+            Log.e(TAG, String.format("%s %s, p %d", sep, b.getTitle(), b.getPageIdx()));
+
+            if (b.hasChildren()) {
+                printBookmarksTree(b.getChildren(), sep + "-");
+            }
+        }
+    }
+
+
+
 
 
     private void populateBillInfo() {
@@ -230,4 +265,5 @@ public class PdfFragment extends Fragment implements View.OnClickListener {
         ft.hide(this);
         ft.commit();
     }
+
 }

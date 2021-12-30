@@ -130,7 +130,7 @@
                     android:layout_centerInParent="true"
                     android:background="@null"
                     android:cursorVisible="true"
-                    android:hint="@string/frg_signup_email"
+                    android:hint="@string/frg_signup_password"
                     android:padding="10dp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
@@ -170,7 +170,7 @@
 
 
             <RelativeLayout
-
+android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edttext_height_medium"
                 android:layout_marginStart="20dp"

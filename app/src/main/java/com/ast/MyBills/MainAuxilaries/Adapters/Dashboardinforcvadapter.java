@@ -66,8 +66,8 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
         holder.txv_bill.setText(mData.get(position).BillType);
         holder.txv_city.setText(mData.get(position).Amount);
         holder.txv_address.setText(mData.get(position).DueDate);
-        holder.txv_status.setText(mData.get(position).Status);
-        holder.txv_act.setText(mData.get(position).Act);
+//        holder.txv_status.setText(mData.get(position).Status);
+//        holder.txv_act.setText(mData.get(position).Act);
 
 
         holder.txv_view.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
@@ -113,8 +113,8 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
             txv_city = itemView.findViewById(R.id.lay_bill_info_txv_city);
             txv_bill = itemView.findViewById(R.id.lay_bill_info_txv_billtype);
             txv_view = itemView.findViewById(R.id.lay_bill_info_txv_view);
-            txv_status = itemView.findViewById(R.id.lay_bill_info_txv_status);
-            txv_act = itemView.findViewById(R.id.lay_bill_info_txv_act);
+         //   txv_status = itemView.findViewById(R.id.lay_bill_info_txv_status);
+           // txv_act = itemView.findViewById(R.id.lay_bill_info_txv_act);
 
             llDetails = itemView.findViewById(R.id.lay_bill_info_llDetails);
             llParent = itemView.findViewById(R.id.lay_bill_info_llParent);
@@ -128,8 +128,8 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
                 txv_address.setTextColor(mContext.getResources().getColor(R.color.black));
                 txv_city.setTextColor(mContext.getResources().getColor(R.color.black));
                 txv_bill.setTextColor(mContext.getResources().getColor(R.color.black));
-                txv_status.setTextColor(mContext.getResources().getColor(R.color.black));
-                txv_act.setTextColor(mContext.getResources().getColor(R.color.black));
+              //  txv_status.setTextColor(mContext.getResources().getColor(R.color.black));
+               // txv_act.setTextColor(mContext.getResources().getColor(R.color.black));
                 txv_view.setTextColor(mContext.getResources().getColor(R.color.black));
 
             } else {
@@ -137,8 +137,8 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
                 txv_address.setTextColor(mContext.getResources().getColor(R.color.white));
                 txv_city.setTextColor(mContext.getResources().getColor(R.color.white));
                 txv_bill.setTextColor(mContext.getResources().getColor(R.color.white));
-                txv_status.setTextColor(mContext.getResources().getColor(R.color.white));
-                txv_act.setTextColor(mContext.getResources().getColor(R.color.white));
+              //  txv_status.setTextColor(mContext.getResources().getColor(R.color.white));
+              //  txv_act.setTextColor(mContext.getResources().getColor(R.color.white));
                 txv_view.setTextColor(mContext.getResources().getColor(R.color.thm_blue_dark));
 
 
