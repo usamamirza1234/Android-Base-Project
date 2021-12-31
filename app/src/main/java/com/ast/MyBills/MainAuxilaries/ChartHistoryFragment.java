@@ -15,79 +15,75 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ast.MyBills.MainAuxilaries.Adapters.BillAnaylsisRcvAdapter;
+import com.ast.MyBills.MainAuxilaries.Adapters.ChartHistoryRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
+import com.ast.MyBills.MainAuxilaries.Adapters.PDFRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillAnaylsis;
-import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
+import com.ast.MyBills.MainAuxilaries.DModels.DModelChartHistory;
+import com.ast.MyBills.MainAuxilaries.DModels.DModelChartHistory;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.ChartManagers.BarChartManager;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-
+import com.shockwave.pdfium.PdfDocument;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_A;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 
+public class ChartHistoryFragment extends Fragment implements View.OnClickListener {
 
-public class BillAnaylsisFragment extends Fragment implements View.OnClickListener {
-    private boolean isFirstTime = true;
 
-    BarChart mBarHistoryUnit;
-   TextView txv_billinfo,txvPdf;
-    private ArrayList<DModelBillInfo> lstBillInfo;
-    private ArrayList<DModelBillAnaylsis> lstBillAnaylsis;
-    private ArrayList<String> xLabel;
+    private ArrayList<DModelChartHistory> lstChartHistory;
     IBadgeUpdateListener mBadgeUpdateListener;
     RecyclerView rcvElectInfo;
-    RecyclerView rcvBillAnaylsis;
-    LinearLayout llBillDetails;
 
-    ElectricityInfoRcvAdapter electricityInfoRcvAdapter;
-    BillAnaylsisRcvAdapter billAnaylsisRcvAdapter;
-
+    TextView History,billinfo,pdf;
+    ChartHistoryRcvAdapter chartHistoryRcvAdapter;
     int position_ = 0;
     Integer selection = null;
-
-
     TextView txv_billDetails_company;
 
+    BarChart mBarHistoricalPayment,mBarHistoricalUnitsConsumed;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View frg = inflater.inflate(R.layout.fragment_bill_anaylsis, container, false);
+        View frg = inflater.inflate(R.layout.fragment_chart_history, container, false);
 
         init();
         bindviews(frg);
 
+
         populateBillInfo();
-        populateBillAnaylsis();
 
         if (selection == null) {
-            selection = 0;
-//            llBillDetails.setVisibility(View.GONE);
-        } else setBillDetails();
+            selection=0;
 
-        showBarHistoryUnit();
+//            llBillDetails.setVisibility(View.GONE);
+        }
+
+
+        showBarHistoricalPayment();
+        showBarHistoricalUnitsConsumed();
+
         return frg;
     }
 
 
+
     private void init() {
+
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             selection = bundle.getInt("key_selection");
@@ -96,31 +92,29 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         setBottomBar();
 
 
-        lstBillInfo = new ArrayList<>();
-        lstBillAnaylsis = new ArrayList<>();
-
+        lstChartHistory = new ArrayList<>();
     }
 
     private void bindviews(View view) {
 
 
-        rcvElectInfo = view.findViewById(R.id.frg_bill_anaylsis_rcvElectricityInfo);
-        rcvBillAnaylsis = view.findViewById(R.id.frg_bill_anaylsis_rcvMonthsAnaylsis);
-        llBillDetails = view.findViewById(R.id.frg_bill_anaylsis_llBill_Details);
 
+        rcvElectInfo = view.findViewById(R.id.frg_home_electricity_rcvElectricityInfo);
 
-        txv_billDetails_company = view.findViewById(R.id.frg_bill_anaylsis_txv_bill_company);
-        txv_billinfo = view.findViewById(R.id.frg_bill_anaylsis_llBill_billinfo);
-        txv_billinfo.setOnClickListener(this);
-        txvPdf = view.findViewById(R.id.billanalysispdf);
-        txvPdf.setOnClickListener(this);
+        pdf = view.findViewById(R.id.charthistorypdf);
+        History = view.findViewById(R.id.electricityhomehistory);
+        billinfo = view.findViewById(R.id.electricityhomebillinfo);
+        txv_billDetails_company = view.findViewById(R.id.frg_home_electricity_txv_bill_company);
 
-        mBarHistoryUnit = view.findViewById(R.id.BarHistoryUnit);
-
+        mBarHistoricalPayment = view.findViewById(R.id.BarHistoricalPayment);
+        mBarHistoricalUnitsConsumed = view.findViewById(R.id.BarHistoricalUnitsConsumed);
+        pdf.setOnClickListener(this);
+        History.setOnClickListener(this);
+        billinfo.setOnClickListener(this);
 
     }
 
-    private void  showBarHistoryUnit(){
+    private void  showBarHistoricalPayment(){
 
 
         List<String> xAxisValues = new ArrayList<>();
@@ -153,24 +147,64 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         yValueGroup1.add(new BarEntry(11f, 1700f));
         yValueGroup1.add(new BarEntry(12f, 1900f));
 
-        BarChartManager barChartManager = new BarChartManager(mBarHistoryUnit, getContext());
+        BarChartManager barChartManager = new BarChartManager(mBarHistoricalPayment, getContext());
+        barChartManager.showBarChartVertical(yValueGroup1, xAxisValues);
+
+    }
+
+    private void  showBarHistoricalUnitsConsumed(){
+
+
+        List<String> xAxisValues = new ArrayList<>();
+        xAxisValues.add("Jan");
+        xAxisValues.add("Feb");
+        xAxisValues.add("March");
+        xAxisValues.add("Apr");
+        xAxisValues.add("May");
+        xAxisValues.add("Jun");
+        xAxisValues.add("Jul");
+        xAxisValues.add("Aug");
+        xAxisValues.add("Sep");
+        xAxisValues.add("Oct");
+        xAxisValues.add("Nov");
+        xAxisValues.add("Dec");
+
+
+        ArrayList<BarEntry> yValueGroup1 = new ArrayList<>();
+
+        yValueGroup1.add(new BarEntry(1f, 500f));
+        yValueGroup1.add(new BarEntry(2f, 200f));
+        yValueGroup1.add(new BarEntry(3f, 300f));
+        yValueGroup1.add(new BarEntry(4f, 400f));
+        yValueGroup1.add(new BarEntry(5f, 700f));
+        yValueGroup1.add(new BarEntry(6f, 214f));
+        yValueGroup1.add(new BarEntry(7f, 900f));
+        yValueGroup1.add(new BarEntry(8f, 1000f));
+        yValueGroup1.add(new BarEntry(9f, 1100f));
+        yValueGroup1.add(new BarEntry(10f, 1400f));
+        yValueGroup1.add(new BarEntry(11f, 1700f));
+        yValueGroup1.add(new BarEntry(12f, 1900f));
+
+        BarChartManager barChartManager = new BarChartManager(mBarHistoricalUnitsConsumed, getContext());
         barChartManager.showBarChartVertical(yValueGroup1, xAxisValues);
 
     }
 
 
+
+
     private void populateBillInfo() {
-        lstBillInfo.clear();
+        lstChartHistory.clear();
 
-        lstBillInfo.add(new DModelBillInfo("ISECo", "23100" + 0, "F9"));
-        lstBillInfo.add(new DModelBillInfo("WAPDA", "23100" + 1, "F10"));
-        lstBillInfo.add(new DModelBillInfo("WASA", "23100" + 2, "F11"));
-        lstBillInfo.add(new DModelBillInfo("LESCO", "23100" + 2, "I18"));
+        lstChartHistory.add(new DModelChartHistory("ISECo", "23100" +0, "F9"));
+        lstChartHistory.add(new DModelChartHistory("WAPDA", "23100" + 1, "F10"));
+        lstChartHistory.add(new DModelChartHistory("WASA", "23100" + 2, "F11"));
+        lstChartHistory.add(new DModelChartHistory("LESCO", "23100" + 2, "I18"));
 
 
-        if (electricityInfoRcvAdapter == null) {
+        if (chartHistoryRcvAdapter == null) {
 
-            electricityInfoRcvAdapter = new ElectricityInfoRcvAdapter(getActivity(), lstBillInfo, selection, (eventId, position) -> {
+            chartHistoryRcvAdapter = new ChartHistoryRcvAdapter(getActivity(), lstChartHistory, (eventId, position) -> {
                 switch (eventId) {
                     case EVENT_A:
 
@@ -179,77 +213,48 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
 //                        txvSelected_Disease.setVisibility(View.VISIBLE);
 //                        txvSelected_Disease.setText(AppConfig.getInstance().lst_DiseasesDef.get(position).getDiseaseName());
 
-                        setBillDetails();
+
 
                         break;
 
                     case EVENT_B:
-                       navToPDFFragment(selection);
+
                         break;
                 }
             });
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             rcvElectInfo.setLayoutManager(linearLayoutManager);
-            rcvElectInfo.setAdapter(electricityInfoRcvAdapter);
+            rcvElectInfo.setAdapter(chartHistoryRcvAdapter);
 
         } else {
-            electricityInfoRcvAdapter.notifyDataSetChanged();
+            chartHistoryRcvAdapter.notifyDataSetChanged();
         }
 
-
     }
 
 
-    private void populateBillAnaylsis() {
-        lstBillAnaylsis.clear();
-
-
-        lstBillAnaylsis.add(new DModelBillAnaylsis("500", "Jan", "220"));
-        lstBillAnaylsis.add(new DModelBillAnaylsis("200", "Feb", "320"));
-        lstBillAnaylsis.add(new DModelBillAnaylsis("300", "Mar", "420"));
-        lstBillAnaylsis.add(new DModelBillAnaylsis("100", "Apr", "20"));
-        lstBillAnaylsis.add(new DModelBillAnaylsis("100", "May", "220"));
-
-
-        if (billAnaylsisRcvAdapter == null) {
-
-            billAnaylsisRcvAdapter = new BillAnaylsisRcvAdapter(getActivity(), lstBillAnaylsis, (eventId, position) -> {
-
-            });
-
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-            rcvBillAnaylsis.setLayoutManager(linearLayoutManager);
-            rcvBillAnaylsis.setAdapter(billAnaylsisRcvAdapter);
-
-        } else {
-            billAnaylsisRcvAdapter.notifyDataSetChanged();
-        }
-
-
-    }
-
-
-    private void setBillDetails() {
-        if (selection == null)
-            llBillDetails.setVisibility(View.GONE);
-        else llBillDetails.setVisibility(View.VISIBLE);
-
-        txv_billDetails_company.setText(lstBillInfo.get(selection).getBillType());
-    }
 
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.frg_bill_anaylsis_llBill_billinfo:
+            case R.id.electricityhomebillinfo:
                 navToElectricityHomeFragment();
                 break;
 
-            case R.id.billanalysispdf:
+            case R.id.electricityhomehistory:
+                navToBillAnaylsisFragment(selection);
+                break;
+
+            case R.id.charthistorypdf:
                 navToPDFFragment(selection);
                 break;
+
+
+
+
 
         }
     }
@@ -263,8 +268,8 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         }
         if (getActivity() != null && isAdded()) {
             mBadgeUpdateListener.setToolbarState(AppConstt.ToolbarState.TOOLBAR_VISIBLE);
-//            mBadgeUpdateListener.setHeaderTitle(getString(R.string.BillAnaylsisFragment));
             mBadgeUpdateListener.setHeaderTitle("");
+
         }
 
     }
@@ -276,7 +281,6 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
             setBottomBar();
         }
     }
-
     private void navToElectricityHomeFragment() {
 
         FragmentManager fm = getFragmentManager();
@@ -285,6 +289,22 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         ft = fm.beginTransaction();
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
+        ft.hide(this);
+        ft.commit();
+    }
+
+    private void navToBillAnaylsisFragment(int selection) {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft;
+        Fragment frg = new BillAnaylsisFragment();
+        ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("key_selection" , selection);
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
+        Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
+        ft.addToBackStack(AppConstt.FragTag.FN_BillAnaylsisFragment);
+        frg.setArguments(bundle);
         ft.hide(this);
         ft.commit();
     }
@@ -305,17 +325,4 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         ft.commit();
     }
 
-    private class barChartOnChartValueSelectedListener implements OnChartValueSelectedListener {
-
-        @Override
-        public void onValueSelected(Entry e, Highlight h) {
-            //trigger activity when the bar value is selected
-
-        }
-
-        @Override
-        public void onNothingSelected() {
-
-        }
-    }
 }

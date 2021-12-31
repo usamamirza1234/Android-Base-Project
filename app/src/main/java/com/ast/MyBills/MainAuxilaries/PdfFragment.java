@@ -19,8 +19,9 @@ import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.MainActivity;
 import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
+import com.ast.MyBills.MainAuxilaries.Adapters.PDFRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBanner;
-import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
+import com.ast.MyBills.MainAuxilaries.DModels.DModelPDF;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.IAdapterCallback;
@@ -45,19 +46,14 @@ import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 
 
 public class PdfFragment extends Fragment implements View.OnClickListener, OnLoadCompleteListener {
-    private boolean isFirstTime = true;
-    Timer timer;
-    int currentPage, mIndicatorPosition;
-    private ArrayList<DModelBanner> lstElectricAds;
-    private ArrayList<DModelBillInfo> lstBillInfo;
+
+
+    private ArrayList<DModelPDF> lstPDF;
     IBadgeUpdateListener mBadgeUpdateListener;
     RecyclerView rcvElectInfo;
     LinearLayout llBillDetails;
     TextView History,billinfo;
-    private RtlViewPager viewPgrFeaturedBanner;
-    private CircleIndicator circleIndicator;
-    ElectricityInfoRcvAdapter electricityInfoRcvAdapter;
-    private FeaturedAdsViewPagerAdapter featuredAdsViewPagerAdapter;
+    PDFRcvAdapter pdfRcvAdapter;
     int position_ = 0;
     Integer selection = null;
     TextView txv_billDetails_company;
@@ -95,14 +91,13 @@ PDFView pdfview;
         }
         setBottomBar();
 
-        lstElectricAds = new ArrayList<>();
-        lstBillInfo = new ArrayList<>();
+
+        lstPDF = new ArrayList<>();
     }
 
     private void bindviews(View view) {
 
-        viewPgrFeaturedBanner = view.findViewById(R.id.frg_market_viewpgr_featured_banner);
-        circleIndicator = view.findViewById(R.id.frg_market_viewpagr_indicator);
+
 
         rcvElectInfo = view.findViewById(R.id.frg_home_electricity_rcvElectricityInfo);
         llBillDetails = view.findViewById(R.id.frg_home_electricity_llBill_Details);
@@ -149,17 +144,17 @@ PDFView pdfview;
 
 
     private void populateBillInfo() {
-        lstBillInfo.clear();
+        lstPDF.clear();
 
-        lstBillInfo.add(new DModelBillInfo("ISECo", "23100" +0, "F9"));
-        lstBillInfo.add(new DModelBillInfo("WAPDA", "23100" + 1, "F10"));
-        lstBillInfo.add(new DModelBillInfo("WASA", "23100" + 2, "F11"));
-        lstBillInfo.add(new DModelBillInfo("LESCO", "23100" + 2, "I18"));
+        lstPDF.add(new DModelPDF("ISECo", "23100" +0, "F9"));
+        lstPDF.add(new DModelPDF("WAPDA", "23100" + 1, "F10"));
+        lstPDF.add(new DModelPDF("WASA", "23100" + 2, "F11"));
+        lstPDF.add(new DModelPDF("LESCO", "23100" + 2, "I18"));
 
 
-        if (electricityInfoRcvAdapter == null) {
+        if (pdfRcvAdapter == null) {
 
-            electricityInfoRcvAdapter = new ElectricityInfoRcvAdapter(getActivity(), lstBillInfo, (eventId, position) -> {
+            pdfRcvAdapter = new PDFRcvAdapter(getActivity(), lstPDF, (eventId, position) -> {
                 switch (eventId) {
                     case EVENT_A:
 
@@ -173,17 +168,17 @@ PDFView pdfview;
                         break;
 
                     case EVENT_B:
-
+                        //navToChartHistory(selection);
                         break;
                 }
             });
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             rcvElectInfo.setLayoutManager(linearLayoutManager);
-            rcvElectInfo.setAdapter(electricityInfoRcvAdapter);
+            rcvElectInfo.setAdapter(pdfRcvAdapter);
 
         } else {
-            electricityInfoRcvAdapter.notifyDataSetChanged();
+            pdfRcvAdapter.notifyDataSetChanged();
         }
 
     }
@@ -194,7 +189,7 @@ PDFView pdfview;
         else llBillDetails.setVisibility(View.VISIBLE);
 
 
-        txv_billDetails_company.setText(lstBillInfo.get(selection).getBillType());
+        txv_billDetails_company.setText(lstPDF.get(selection).getBillType());
 
 
     }
@@ -261,6 +256,22 @@ PDFView pdfview;
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_BillAnaylsisFragment);
+        frg.setArguments(bundle);
+        ft.hide(this);
+        ft.commit();
+    }
+
+    private void navToChartHistory(int selection) {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft;
+        Fragment frg = new ChartHistoryFragment();
+        ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("key_selection" , selection);
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ChartHistoryFragment);
+        Log.d("selection", "selectedPosition navToPDFFragment " + selection);
+        ft.addToBackStack(AppConstt.FragTag.FN_ChartHistoryFragment);
         frg.setArguments(bundle);
         ft.hide(this);
         ft.commit();

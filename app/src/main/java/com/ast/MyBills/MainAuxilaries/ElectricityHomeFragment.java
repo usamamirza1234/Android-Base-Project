@@ -171,11 +171,11 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 
         switch (v.getId()) {
             case R.id.electricityhomepdf:
-           // navToPDFFragment(selection);
+            navToPDFFragment(selection);
             break;
 
             case R.id.electricityhomehistory:
-            //  navToBillAnaylsisFragment(selection);
+             navToBillAnaylsisFragment(selection);
                 break;
 
         }

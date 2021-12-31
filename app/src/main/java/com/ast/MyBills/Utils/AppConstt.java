@@ -191,6 +191,7 @@ public interface AppConstt {
         String FN_AlertsFragment = "AlertsFragment" ;
         String FN_BillAnaylsisFragment = "BillAnaylsisFragment" ;
         String FN_PdfFragment = "PdfFragment" ;
+        String FN_ChartHistoryFragment = "ChartHistoryFragment" ;
     }
 
 

@@ -4,8 +4,11 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ast.MyBills.IntroAuxilaries.MyBillsFragment;
+import com.ast.MyBills.MainAuxilaries.Adapters.BillTypeSpinnerAdapter;
+import com.ast.MyBills.MainAuxilaries.Adapters.BillerSpinnerAdapter;
+import com.ast.MyBills.MainAuxilaries.BillAnaylsisFragment;
+import com.ast.MyBills.MainAuxilaries.ChartHistoryFragment;
 import com.ast.MyBills.MainAuxilaries.EditProfileFragment;
 import com.ast.MyBills.MainAuxilaries.ElectricityHomeFragment;
 import com.ast.MyBills.MainAuxilaries.HomeFragment;
@@ -31,6 +38,7 @@ import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.google.android.material.navigation.NavigationView;
 import com.shockwave.pdfium.PdfDocument;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, IBadgeUpdateListener{
@@ -50,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout mMap,mcalendar;
 
 
+    BillerSpinnerAdapter billerSpinnerAdapter;
+    Spinner spinnerBiller;
+
 
 
     @Override
@@ -66,15 +77,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         navToHomeFragment();
 
+        populateSpinnerBiller();
+
+    }
+
+
+
+    private void populateSpinnerBiller() {
+        ArrayList<String> lstBiller = new ArrayList<>();
+
+        lstBiller.add("IESCO");
+        lstBiller.add("WAPDA");
+        lstBiller.add("GEPCO");
+        lstBiller.add("PESCO");
+
+        lstBiller.add(getResources().getString(R.string.select_biller_type));
+
+
+        billerSpinnerAdapter = new BillerSpinnerAdapter(this, lstBiller);
+        spinnerBiller.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+
+                int Pos = Integer.parseInt(selectedItem);
+//                txvBillType.setText(lstGender.get(position));
+
+
+            } // to close the onItemSelected
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerBiller.setAdapter(billerSpinnerAdapter);
+        spinnerBiller.setSelection(billerSpinnerAdapter.getCount());
+
+
     }
 
 
     private void bindviews() {
+//        Spinner dropdown1 = findViewById(R.id.spinner1);
+//        Spinner dropdown2 = findViewById(R.id.spinner2);
+//        String[] items1 = new String[]{"Electricity", "Gas", "Water"};
+//        String[] items2 = new String[]{"Electricity", "Gas", "Water"};
+//        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);
+//        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+//        dropdown1.setAdapter(adapter1);
+//        dropdown2.setAdapter(adapter2);
+
 
         editprofile = findViewById(R.id.profile);
+        spinnerBiller = findViewById(R.id.frg_my_bills_spinnerBiller);
+
         editprofile.setOnClickListener(this);
-
-
 
 
         drawer = findViewById(R.id.act_main_drawr);
@@ -162,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ft.commit();
 
     }
+
 
 
     public void navToEditProfileFragment() {
