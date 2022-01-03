@@ -108,6 +108,10 @@ dependencies {
     //pdf
     implementation 'com.github.barteksc:android-pdf-viewer:2.0.3'
 
+    //SMS Verification
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.1'
+
 
 
 }

@@ -130,15 +130,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lstBillDashboardInfo.clear();
 
         lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2021", "Unpaid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2021", "Unpaid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "20-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2019", "Unpaid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "10-4-2018", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "24-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "09-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "22-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "14-4-2021", "Unpaid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "17-4-2021", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "23-4-2022", "paid", "F9"));
+        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "02-4-2022", "paid", "F9"));
         if (dashboardinforcvadapter == null) {
 
             dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(), lstBillDashboardInfo, (eventId, position) -> {

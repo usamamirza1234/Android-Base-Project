@@ -120,10 +120,8 @@
                                 android:layout_margin="1dp"
                                 android:gravity="start"
 
-
-
                                 android:text="PDF"
-                                android:textColor="@color/black"
+
                                 android:textSize="10dp"
                                 android:textStyle="bold" />
 

@@ -151,7 +151,7 @@
                 android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
 
                 <EditText
-                    android:id="@+id/frg_signup_edt_phone"
+                    android:id="@+id/etOTP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -164,6 +164,19 @@
                     android:textColor="@color/light_gray3"
                     android:textColorHint="@color/light_gray3"
                     android:textCursorDrawable="@null"
+                    android:textSize="@dimen/fontsize_mini" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/verifyno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="false"
+                    android:padding="8dp"
+                    android:text="Verify"
+                   android:background="@drawable/shp_rect_rounded_yellow_mini"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/black_1"
                     android:textSize="@dimen/fontsize_mini" />
 
             </RelativeLayout>

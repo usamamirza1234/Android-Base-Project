@@ -106,7 +106,7 @@ PDFView pdfview;
         txv_billDetails_company = view.findViewById(R.id.frg_home_electricity_txv_bill_company);
 
         pdfview = view.findViewById(R.id.pdfView);
-        pdfview.fromAsset("pdf1.pdf")
+        pdfview.fromAsset("Bill.pdf")
                 .enableSwipe(true)
                 .swipeHorizontal(true)
                 .enableAnnotationRendering(true)
@@ -146,10 +146,10 @@ PDFView pdfview;
     private void populateBillInfo() {
         lstPDF.clear();
 
-        lstPDF.add(new DModelPDF("ISECo", "23100" +0, "F9"));
-        lstPDF.add(new DModelPDF("WAPDA", "23100" + 1, "F10"));
-        lstPDF.add(new DModelPDF("WASA", "23100" + 2, "F11"));
-        lstPDF.add(new DModelPDF("LESCO", "23100" + 2, "I18"));
+        lstPDF.add(new DModelPDF("ISECo", "11" +0, "F9"));
+        lstPDF.add(new DModelPDF("WAPDA", "10" + 1, "F10"));
+        lstPDF.add(new DModelPDF("WASA", "32" + 2, "F11"));
+        lstPDF.add(new DModelPDF("LESCO", "12" + 2, "I18"));
 
 
         if (pdfRcvAdapter == null) {

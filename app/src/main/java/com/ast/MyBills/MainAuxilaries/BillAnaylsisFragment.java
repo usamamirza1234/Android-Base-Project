@@ -162,10 +162,10 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     private void populateBillInfo() {
         lstBillInfo.clear();
 
-        lstBillInfo.add(new DModelBillInfo("ISECo", "23100" + 0, "F9"));
-        lstBillInfo.add(new DModelBillInfo("WAPDA", "23100" + 1, "F10"));
-        lstBillInfo.add(new DModelBillInfo("WASA", "23100" + 2, "F11"));
-        lstBillInfo.add(new DModelBillInfo("LESCO", "23100" + 2, "I18"));
+        lstBillInfo.add(new DModelBillInfo("ISECo", "23" + 0, "F9"));
+        lstBillInfo.add(new DModelBillInfo("WAPDA", "28" + 1, "F10"));
+        lstBillInfo.add(new DModelBillInfo("WASA", "20" + 2, "F11"));
+        lstBillInfo.add(new DModelBillInfo("LESCO", "29" + 2, "I18"));
 
 
         if (electricityInfoRcvAdapter == null) {
@@ -248,7 +248,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
                 break;
 
             case R.id.billanalysispdf:
-                navToPDFFragment(selection);
+              //  navToPDFFragment(selection);
                 break;
 
         }
