@@ -132,20 +132,33 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         xAxisValues.add("Dec");
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
         ArrayList<BarEntry> yValueGroup1 = new ArrayList<>();
 
-        yValueGroup1.add(new BarEntry(1f, 500f));
-        yValueGroup1.add(new BarEntry(2f, 200f));
-        yValueGroup1.add(new BarEntry(3f, 300f));
-        yValueGroup1.add(new BarEntry(4f, 400f));
-        yValueGroup1.add(new BarEntry(5f, 700f));
-        yValueGroup1.add(new BarEntry(6f, 214f));
-        yValueGroup1.add(new BarEntry(7f, 900f));
-        yValueGroup1.add(new BarEntry(8f, 1000f));
-        yValueGroup1.add(new BarEntry(9f, 1100f));
-        yValueGroup1.add(new BarEntry(10f, 1400f));
-        yValueGroup1.add(new BarEntry(11f, 1700f));
-        yValueGroup1.add(new BarEntry(12f, 1900f));
+        yValueGroup1.add(new BarEntry(1f, 8540));
+        yValueGroup1.add(new BarEntry(2f, 10569f));
+        yValueGroup1.add(new BarEntry(3f, 4149f));
+        yValueGroup1.add(new BarEntry(4f, 8073f));
+        yValueGroup1.add(new BarEntry(5f, 10598f));
+        yValueGroup1.add(new BarEntry(6f, 13552f));
+        yValueGroup1.add(new BarEntry(7f, 39091f));
+        yValueGroup1.add(new BarEntry(8f, 58358f));
+        yValueGroup1.add(new BarEntry(9f, 25000f));
+        yValueGroup1.add(new BarEntry(10f, 41362f));
+        yValueGroup1.add(new BarEntry(11f, 65665f));
+        yValueGroup1.add(new BarEntry(12f, 63000f));
 
         BarChartManager barChartManager = new BarChartManager(mBarHistoricalPayment, getContext());
         barChartManager.showBarChartVertical(yValueGroup1, xAxisValues);
@@ -172,18 +185,32 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
 
         ArrayList<BarEntry> yValueGroup1 = new ArrayList<>();
 
-        yValueGroup1.add(new BarEntry(1f, 500f));
-        yValueGroup1.add(new BarEntry(2f, 200f));
-        yValueGroup1.add(new BarEntry(3f, 300f));
-        yValueGroup1.add(new BarEntry(4f, 400f));
-        yValueGroup1.add(new BarEntry(5f, 700f));
-        yValueGroup1.add(new BarEntry(6f, 214f));
-        yValueGroup1.add(new BarEntry(7f, 900f));
-        yValueGroup1.add(new BarEntry(8f, 1000f));
-        yValueGroup1.add(new BarEntry(9f, 1100f));
-        yValueGroup1.add(new BarEntry(10f, 1400f));
-        yValueGroup1.add(new BarEntry(11f, 1700f));
-        yValueGroup1.add(new BarEntry(12f, 1900f));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        yValueGroup1.add(new BarEntry(1f, 1300));
+        yValueGroup1.add(new BarEntry(2f, 1800));
+        yValueGroup1.add(new BarEntry(3f, 1250));
+        yValueGroup1.add(new BarEntry(4f, 2500));
+        yValueGroup1.add(new BarEntry(5f, 3000));
+        yValueGroup1.add(new BarEntry(6f, 4500));
+        yValueGroup1.add(new BarEntry(7f, 4600));
+        yValueGroup1.add(new BarEntry(8f, 3500));
+        yValueGroup1.add(new BarEntry(9f, 2000));
+        yValueGroup1.add(new BarEntry(10f, 1800));
+        yValueGroup1.add(new BarEntry(11f, 1700));
+        yValueGroup1.add(new BarEntry(12f, 1200));
 
         BarChartManager barChartManager = new BarChartManager(mBarHistoricalUnitsConsumed, getContext());
         barChartManager.showBarChartVertical(yValueGroup1, xAxisValues);

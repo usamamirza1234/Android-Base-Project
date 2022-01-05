@@ -4,24 +4,27 @@ public class DModelBillDashboardInfo {
     public String  BillType;
     public String  Amount;
 
-    public String getStatus() {
+
+
+
+    public int getStatus() {
         return Status;
     }
 
-    public String getAct() {
+    public int getAct() {
         return Act;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         Status = status;
     }
 
-    public void setAct(String act) {
+    public void setAct(int act) {
         Act = act;
     }
 
-    public String  Status;
-    public String  Act;
+    public int  Status;
+    public int  Act;
 
 
     public String getBillType() {
@@ -50,7 +53,7 @@ public class DModelBillDashboardInfo {
 
     public String  DueDate;
 
-    public DModelBillDashboardInfo(String billType, String amount, String dueDate, String status, String act) {
+    public DModelBillDashboardInfo(String billType, String amount, String dueDate, int status, int act) {
         BillType = billType;
         Amount = amount;
         DueDate = dueDate;
@@ -59,6 +62,7 @@ public class DModelBillDashboardInfo {
 
     }
 
-    public DModelBillDashboardInfo() {
+
+    public DModelBillDashboardInfo(String billType) {
     }
 }

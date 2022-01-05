@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillDashboardInfo;
 import com.ast.MyBills.R;
+import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.IAdapterCallback;
 
 import java.util.ArrayList;
@@ -22,16 +23,16 @@ import java.util.ArrayList;
 public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinforcvadapter.ViewHolder> {
 
     private Integer selectedPosition = null;
-    private final ArrayList<DModelBillDashboardInfo> mData;
+    private  ArrayList<DModelBillDashboardInfo> mData;
     private final Context mContext;
     private final IAdapterCallback iAdapterCallback;
-
+    String _case;
 
     public Dashboardinforcvadapter(Context mContext, ArrayList<DModelBillDashboardInfo> mData,
                                      IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
-
+        this._case = _case;
         this.iAdapterCallback = iAdapterCallback;
 
 
@@ -41,6 +42,7 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
                                      IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
+        this._case = _case;
         this.selectedPosition = selectedPosition;
 
         Log.d("selection", "selectedPosition " + selectedPosition);
@@ -62,6 +64,48 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
+//
+//      if (!_case.equalsIgnoreCase("")) {
+//            //idr har jga shape accordingly bna dain or asy dali map k liye uska color
+//            if (_case.equalsIgnoreCase("overdue")) {
+//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position));
+//
+//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_overdue_off));
+//            } else if (_case.equalsIgnoreCase("upcoming")) {
+//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
+//
+//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_upcoming_off));
+//            } else if (_case.equalsIgnoreCase("paid")) {
+//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_C, position));
+//
+//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
+//            }
+//        }
+//        else
+//        {
+//            switch (mData.get(position).getStatus())
+//            {
+//                case AppConstt.bill.OVERDUE:
+//                    holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_C,position));
+//
+//                    holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_overdue_off));
+//                    break;
+//
+//                case AppConstt.bill.UPCOMING:
+//                    holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B,position));
+//
+//                    holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_upcoming_off));
+//                    break;
+//
+//                case AppConstt.bill.PAID:
+//                    holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A,position));
+//                    holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
+//
+//                    break;
+//                default:  holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_all_off));
+//                    break;
+//            }
+//        }
 
         holder.txv_bill.setText(mData.get(position).BillType);
         holder.txv_city.setText(mData.get(position).Amount);
@@ -87,7 +131,11 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
         holder.styleViewSection((selectedPosition != null && selectedPosition == holder.getAdapterPosition()), position);
 
 
+        //////
+
     }
+
+
 
 
     @Override
@@ -145,6 +193,14 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
             }
 
         }
+    }
+    public void filterList(ArrayList<DModelBillDashboardInfo> filterllist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        mData = filterllist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
     }
 
 }

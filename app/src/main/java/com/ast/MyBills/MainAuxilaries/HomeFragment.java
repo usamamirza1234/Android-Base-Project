@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.MainAuxilaries.Adapters.Dashboardinforcvadapter;
@@ -34,6 +36,8 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
+import static android.media.CamcorderProfile.get;
+import static com.ast.MyBills.Utils.AppConstt.bill.ALL;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_A;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 
@@ -45,6 +49,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     int currentPage, mIndicatorPosition;
     private ArrayList<DModelBanner> lstElectricAds;
     private ArrayList<DModelBillDashboardInfo> lstBillDashboardInfo;
+    private ArrayList<DModelBillDashboardInfo> lstBillDashboardElement;
+    private ArrayList<DModelBillDashboardInfo> lstBillDashboardElementFilter;
+
+TextView overdue,upcoming,paid,all;
 
     RecyclerView rcvdashboardinfo;
     LinearLayout llBillDetails,llHistory;
@@ -65,7 +73,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         bindviews(frg);
 
         initializeAds();
-        populateBillInfo();
+        populateBillInfo(ALL);
 
         if (selection == null) {
             selection=0;
@@ -125,37 +133,85 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         timer.scheduleAtFixedRate(new HomeFragment.timerTask(), 2000, 2500);
 
     }
+//real
+//    private void populateBillInfo() {
+//        lstBillDashboardInfo.clear();
+//
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", "paid", 10));
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2019", "Unpaid", 10));
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "10-4-2018", "paid", 10));
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "24-4-2021", "paid", 10));
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "09-4-2021", "paid", 20));
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "22-4-2021", "paid", 20));
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "14-4-2021", "Unpaid", 30));
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "17-4-2021", "paid", 30));
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "23-4-2022", "paid", 20));
+//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "02-4-2022", "paid", 30));
+//        if (dashboardinforcvadapter == null) {
+//
+//            dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(), lstBillDashboardInfo, (eventId, position) -> {
+//                switch (eventId) {
+//                    case EVENT_A:
+//
+//                        position_ = position;
+//                        selection = position;
+////                        txvSelected_Disease.setVisibility(View.VISIBLE);
+////                        txvSelected_Disease.setText(AppConfig.getInstance().lst_DiseasesDef.get(position).getDiseaseName());
+//
+//
+//
+//                        break;
+//
+//                    case EVENT_B:
+//                        //navToBillAnaylsisFragment(position);
+//                        navToElectricityHomeFragment(position);
+//                        break;
+//                }
+//            });
+//
+//            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+//            rcvdashboardinfo.setLayoutManager(linearLayoutManager);
+//            rcvdashboardinfo.setAdapter(dashboardinforcvadapter);
+//
+//        } else {
+//            dashboardinforcvadapter.notifyDataSetChanged();
+//        }
+//
+//    }
 
-    private void populateBillInfo() {
-        lstBillDashboardInfo.clear();
+//under
+    private void populateBillInfo(int act) {
+        lstBillDashboardElementFilter.clear();
+        lstBillDashboardElement.clear();
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", 1, 10));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2019", 2, 10));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "10-4-2018", 3, 10));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("TV", "2,00" +3, "24-4-2021", 4, 10));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "09-4-2021", 7, 20));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "22-4-2021", 8, 20));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Water", "2,00" +1, "14-4-2021", 9, 30));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "17-4-2021", 10, 30));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("TV", "2,00" +3, "23-4-2022", 11, 20));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "02-4-2022", 12, 30));
+        for (int i = 0; i < lstBillDashboardElement.size(); i++) {
+            if ( act != 0) {
+                if (lstBillDashboardElement.get(i).getAct() == act) {
+                    lstBillDashboardElementFilter.add(new DModelBillDashboardInfo(lstBillDashboardElement.get(i).BillType, lstBillDashboardElement.get(i).Amount, lstBillDashboardElement.get(i).DueDate, lstBillDashboardElement.get(i).Status, lstBillDashboardElement.get(i).Act));
+                }
 
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2019", "Unpaid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "10-4-2018", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "24-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "09-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "22-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "14-4-2021", "Unpaid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "17-4-2021", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "23-4-2022", "paid", "F9"));
-        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "02-4-2022", "paid", "F9"));
+            }else {
+                lstBillDashboardElementFilter.add(new DModelBillDashboardInfo(lstBillDashboardElement.get(i).BillType, lstBillDashboardElement.get(i).Amount, lstBillDashboardElement.get(i).DueDate, lstBillDashboardElement.get(i).Status, lstBillDashboardElement.get(i).Act));
+            }
+        }
         if (dashboardinforcvadapter == null) {
 
-            dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(), lstBillDashboardInfo, (eventId, position) -> {
+            dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(), lstBillDashboardElementFilter, (eventId, position) -> {
                 switch (eventId) {
                     case EVENT_A:
-
                         position_ = position;
                         selection = position;
-//                        txvSelected_Disease.setVisibility(View.VISIBLE);
-//                        txvSelected_Disease.setText(AppConfig.getInstance().lst_DiseasesDef.get(position).getDiseaseName());
-
-
-
                         break;
-
                     case EVENT_B:
-                        //navToBillAnaylsisFragment(position);
                         navToElectricityHomeFragment(position);
                         break;
                 }
@@ -170,11 +226,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
     //region INIT
     private void init() {
         setToolbar();
         lstElectricAds = new ArrayList<>();
         lstBillDashboardInfo = new ArrayList<>();
+        lstBillDashboardElementFilter = new ArrayList<>();
+        lstBillDashboardElement= new ArrayList<>();
+
+
+
+
+
+
 
     }
     private void bindviews(View view) {
@@ -183,7 +248,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         circleIndicator = view.findViewById(R.id.frg_market_viewpagr_indicator);
 
         rcvdashboardinfo = view.findViewById(R.id.frg_home_dashboard_rcvdashboardInfo);
-
+        overdue= view.findViewById(R.id.overdue);
+        upcoming= view.findViewById(R.id.upcoming);
+        paid= view.findViewById(R.id.paid);
+        all= view.findViewById(R.id.alll);
+        all.setOnClickListener(this);
+        overdue.setOnClickListener(this);
+        upcoming.setOnClickListener(this);
+        paid.setOnClickListener(this);
     }
 
 
@@ -218,8 +290,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
 
 
-            case R.id.profile:
+            case R.id.overdue:
+                populateBillInfo(AppConstt.bill.OVERDUE);
 
+
+                break;
+            case R.id.alll:
+                populateBillInfo(ALL);
+
+
+                break;
+
+            case R.id.upcoming:
+                populateBillInfo(AppConstt.bill.UPCOMING);
+
+
+                break;
+
+            case R.id.paid:
+                populateBillInfo(AppConstt.bill.PAID);
 
 
                 break;

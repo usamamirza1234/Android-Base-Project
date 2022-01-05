@@ -168,7 +168,7 @@ PDFView pdfview;
                         break;
 
                     case EVENT_B:
-                        //navToChartHistory(selection);
+                        navToChartHistory(selection);
                         break;
                 }
             });
