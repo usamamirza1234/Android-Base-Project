@@ -102,7 +102,7 @@
 
                <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="match_parent"
+                   android:layout_height="wrap_content"
                    android:layout_marginEnd="3dp"
                    android:background="@drawable/shp_rect_rounded_light_blue_stoke"
                    android:orientation="horizontal">
@@ -550,7 +550,7 @@ android:layout_gravity="center"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center"
                                                 android:gravity="center"
-                                                android:lines="1"
+
                                                 android:id="@+id/frg_home_electricity_txv_bill_reference"
 
                                                 android:text=""
@@ -638,9 +638,9 @@ android:layout_gravity="center"
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_gravity="center"
-                                                android:gravity="center"
-                                                android:lines="1"
+                                                android:layout_gravity="start"
+                                                android:gravity="start"
+
                                                 android:text=""    android:id="@+id/frg_home_electricity_txv_bill_name"
 
                                                 android:textColor="@color/dark_gray"
@@ -728,9 +728,9 @@ android:layout_gravity="center"
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_gravity="center"
-                                                android:gravity="center"
-                                                android:lines="1"
+                                                android:layout_gravity="start"
+                                                android:gravity="start"
+
                                                 android:text=""    android:id="@+id/frg_home_electricity_txv_bill_adderess"
 
                                                 android:textColor="@color/dark_gray"
@@ -820,7 +820,7 @@ android:layout_gravity="center"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center"
                                                 android:gravity="center"
-                                                android:lines="1"
+
                                                 android:text=""
                                                 android:id="@+id/frg_home_electricity_txv_bill_teriff"
 
@@ -911,7 +911,7 @@ android:layout_gravity="center"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center"
                                                 android:gravity="center"
-                                                android:lines="1"
+
                                                 android:text=""
                                                 android:id="@+id/frg_home_electricity_txv_bill_billing_month"
 
@@ -1003,7 +1003,7 @@ android:layout_gravity="center"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center"
                                                 android:gravity="center"
-                                                android:lines="1"
+
                                                 android:text=""
                                                 android:id="@+id/frg_home_electricity_txv_bill_billing_month"
 
@@ -1097,7 +1097,7 @@ android:layout_gravity="center"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center"
                                                 android:gravity="center"
-                                                android:lines="1"
+
                                                 android:text=""
                                                 android:textColor="@color/dark_gray"
                                                 android:textSize="@dimen/fontsize_mini" />
@@ -1187,7 +1187,7 @@ android:layout_gravity="center"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center"
                                                 android:gravity="center"
-                                                android:lines="1"
+
                                                 android:text=""
                                                 android:textColor="@color/dark_gray"
                                                 android:textSize="@dimen/fontsize_mini" />

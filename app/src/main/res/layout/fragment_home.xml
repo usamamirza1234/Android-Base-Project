@@ -582,7 +582,59 @@
                     android:orientation="vertical">
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
+                        android:background="@color/light_gray"
+                        android:orientation="horizontal"
+                        android:weightSum="110">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="30"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="Bill Type"
+                            android:textColor="@color/black_1"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="30"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="Amount"
+                            android:textColor="@color/black_1"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="30"
+                            android:gravity="end"
+                            android:lines="1"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="Due Date"
+                            android:textColor="@color/black_1"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
 
 
                     <androidx.recyclerview.widget.RecyclerView

@@ -133,51 +133,7 @@ TextView overdue,upcoming,paid,all;
         timer.scheduleAtFixedRate(new HomeFragment.timerTask(), 2000, 2500);
 
     }
-//real
-//    private void populateBillInfo() {
-//        lstBillDashboardInfo.clear();
-//
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", "paid", 10));
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2019", "Unpaid", 10));
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "10-4-2018", "paid", 10));
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "24-4-2021", "paid", 10));
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "09-4-2021", "paid", 20));
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "22-4-2021", "paid", 20));
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Water", "2,00" +1, "14-4-2021", "Unpaid", 30));
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "17-4-2021", "paid", 30));
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("TV", "2,00" +3, "23-4-2022", "paid", 20));
-//        lstBillDashboardInfo.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "02-4-2022", "paid", 30));
-//        if (dashboardinforcvadapter == null) {
-//
-//            dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(), lstBillDashboardInfo, (eventId, position) -> {
-//                switch (eventId) {
-//                    case EVENT_A:
-//
-//                        position_ = position;
-//                        selection = position;
-////                        txvSelected_Disease.setVisibility(View.VISIBLE);
-////                        txvSelected_Disease.setText(AppConfig.getInstance().lst_DiseasesDef.get(position).getDiseaseName());
-//
-//
-//
-//                        break;
-//
-//                    case EVENT_B:
-//                        //navToBillAnaylsisFragment(position);
-//                        navToElectricityHomeFragment(position);
-//                        break;
-//                }
-//            });
-//
-//            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-//            rcvdashboardinfo.setLayoutManager(linearLayoutManager);
-//            rcvdashboardinfo.setAdapter(dashboardinforcvadapter);
-//
-//        } else {
-//            dashboardinforcvadapter.notifyDataSetChanged();
-//        }
-//
-//    }
+
 
 //under
     private void populateBillInfo(int act) {

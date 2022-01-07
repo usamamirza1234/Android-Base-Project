@@ -122,6 +122,7 @@ public interface ApiMethod {
         String Authorization_TOKEN = "token";
         String Lang = "lang";
         String Default_Auth = "mankoosha!and$";
+        String Bearer = "Bearer ";
     }
 
 }

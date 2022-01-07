@@ -1,5 +1,7 @@
 package com.ast.MyBills.MainAuxilaries;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,10 +21,12 @@ import com.ast.MyBills.MainAuxilaries.Adapters.BillAnaylsisRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillAnaylsis;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
+import com.ast.MyBills.MainAuxilaries.WebServices.More_WebHit_Get_Bills;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.ChartManagers.BarChartManager;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
+import com.ast.MyBills.Utils.IWebCallback;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
@@ -37,6 +42,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +62,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     RecyclerView rcvElectInfo;
     RecyclerView rcvBillAnaylsis;
     LinearLayout llBillDetails;
-
+    private Dialog progressDialog;
     ElectricityInfoRcvAdapter electricityInfoRcvAdapter;
     BillAnaylsisRcvAdapter billAnaylsisRcvAdapter;
 
@@ -80,8 +86,9 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         if (selection == null) {
             selection = 0;
 //            llBillDetails.setVisibility(View.GONE);
-        } else setBillDetails();
-
+        } else
+            //setBillDetails();
+            RequestBills();
         showBarHistoryUnit();
         return frg;
     }
@@ -118,6 +125,82 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         mBarHistoryUnit = view.findViewById(R.id.BarHistoryUnit);
 
 
+    }
+
+
+    List<List<String>> lastYear = new ArrayList<List<String>>();
+    private void RequestBills() {
+        // showProgDialog();
+        More_WebHit_Get_Bills more_webHit_get_bills = new More_WebHit_Get_Bills();
+        more_webHit_get_bills.getBills(getContext(), new IWebCallback() {
+            @Override
+            public void onWebResult(boolean isSuccess, String strMsg) {
+                if (isSuccess) {
+                    //dismissProgDialog();
+                    if (More_WebHit_Get_Bills.responseObject != null &&
+                            More_WebHit_Get_Bills.responseObject.getIescoBill() != null)
+                    {
+
+
+//
+                        // dModelBillInfo.setBillType(More_WebHit_Get_Bills.responseObject.getIescoBill().getNAME());
+
+
+
+
+
+                        if ( More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size()>0)
+                        {
+                            for (int i=0;i< More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size();i++)
+                            {
+                                if (i>0)
+                                {
+                                    DModelBillAnaylsis dModelBillAnaylsis = new DModelBillAnaylsis();
+
+
+
+
+                                    lstBillAnaylsis.add(dModelBillAnaylsis);
+                                    populateBillAnaylsis();
+                                    Log.d("LOG_AS","Elements of lastYearBills "+  More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
+                                    lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
+
+                                }
+
+                            }
+                        }
+
+                    }
+
+                    else {
+                        //dismissProgDialog();
+                        Toast.makeText(getContext(), "Error :" + strMsg, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onWebException(Exception ex) {
+                //dismissProgDialog();
+                Toast.makeText(getContext(), "Exception :" + ex.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+    //region  functions for Dialog
+    private void dismissProgDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+    private void showProgDialog() {
+        progressDialog = new Dialog(getActivity(), R.style.AppTheme);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.dialog_progress);
+
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     private void  showBarHistoryUnit(){
@@ -205,11 +288,11 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         lstBillAnaylsis.clear();
 
 
-        lstBillAnaylsis.add(new DModelBillAnaylsis("500", "Jan", "220"));
-        lstBillAnaylsis.add(new DModelBillAnaylsis("200", "Feb", "320"));
-        lstBillAnaylsis.add(new DModelBillAnaylsis("300", "Mar", "420"));
-        lstBillAnaylsis.add(new DModelBillAnaylsis("100", "Apr", "20"));
-        lstBillAnaylsis.add(new DModelBillAnaylsis("100", "May", "220"));
+//        lstBillAnaylsis.add(new DModelBillAnaylsis("500", "Jan", "220"));
+//        lstBillAnaylsis.add(new DModelBillAnaylsis("200", "Feb", "320"));
+//        lstBillAnaylsis.add(new DModelBillAnaylsis("300", "Mar", "420"));
+//        lstBillAnaylsis.add(new DModelBillAnaylsis("100", "Apr", "20"));
+//        lstBillAnaylsis.add(new DModelBillAnaylsis("100", "May", "220"));
 
 
         if (billAnaylsisRcvAdapter == null) {
@@ -236,6 +319,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         else llBillDetails.setVisibility(View.VISIBLE);
 
         txv_billDetails_company.setText(lstBillInfo.get(selection).getBillType());
+
     }
 
 

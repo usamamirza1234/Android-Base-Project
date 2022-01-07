@@ -10,6 +10,9 @@ public class DModelBillAnaylsis {
         Month = month;
         Units = units;
     }
+    public DModelBillAnaylsis() {
+
+    }
 
     public String getPayment() {
         return Payment;

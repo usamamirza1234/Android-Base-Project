@@ -95,7 +95,7 @@ public interface AppConstt {
 
     //Default Api Retry and Timeout in millis
     int LIMIT_API_RETRY = 0;
-    int LIMIT_TIMOUT_MILLIS = 15000;
+    int LIMIT_TIMOUT_MILLIS = 50000;
 
 
     String PREF_FILE_NAME = "pref_base_proj";
