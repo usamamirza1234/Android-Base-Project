@@ -38,6 +38,7 @@ import me.relex.circleindicator.CircleIndicator;
 
 import static android.media.CamcorderProfile.get;
 import static com.ast.MyBills.Utils.AppConstt.bill.ALL;
+import static com.ast.MyBills.Utils.AppConstt.bill.OVERDUE;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_A;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 
@@ -52,8 +53,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ArrayList<DModelBillDashboardInfo> lstBillDashboardElement;
     private ArrayList<DModelBillDashboardInfo> lstBillDashboardElementFilter;
 
-TextView overdue,upcoming,paid,all;
-
+TextView txvoverdue,txvupcoming,txvpaid,txvall;
+LinearLayout llImportantDates;
     RecyclerView rcvdashboardinfo;
     LinearLayout llBillDetails,llHistory;
     private RtlViewPager viewPgrFeaturedBanner;
@@ -137,6 +138,7 @@ TextView overdue,upcoming,paid,all;
 
 //under
     private void populateBillInfo(int act) {
+
         lstBillDashboardElementFilter.clear();
         lstBillDashboardElement.clear();
         lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", 1, 10));
@@ -161,7 +163,7 @@ TextView overdue,upcoming,paid,all;
         }
         if (dashboardinforcvadapter == null) {
 
-            dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(), lstBillDashboardElementFilter, (eventId, position) -> {
+            dashboardinforcvadapter = new Dashboardinforcvadapter( getActivity(), lstBillDashboardElementFilter,act, (eventId, position) -> {
                 switch (eventId) {
                     case EVENT_A:
                         position_ = position;
@@ -204,14 +206,16 @@ TextView overdue,upcoming,paid,all;
         circleIndicator = view.findViewById(R.id.frg_market_viewpagr_indicator);
 
         rcvdashboardinfo = view.findViewById(R.id.frg_home_dashboard_rcvdashboardInfo);
-        overdue= view.findViewById(R.id.overdue);
-        upcoming= view.findViewById(R.id.upcoming);
-        paid= view.findViewById(R.id.paid);
-        all= view.findViewById(R.id.alll);
-        all.setOnClickListener(this);
-        overdue.setOnClickListener(this);
-        upcoming.setOnClickListener(this);
-        paid.setOnClickListener(this);
+        llImportantDates= view.findViewById(R.id.homeImportantdates);
+        txvoverdue= view.findViewById(R.id.overdue);
+        txvupcoming= view.findViewById(R.id.upcoming);
+        txvpaid= view.findViewById(R.id.paid);
+        txvall= view.findViewById(R.id.alll);
+        txvall.setOnClickListener(this);
+        txvoverdue.setOnClickListener(this);
+        txvupcoming.setOnClickListener(this);
+        txvpaid.setOnClickListener(this);
+        llImportantDates.setOnClickListener(this);
     }
 
 
@@ -266,6 +270,13 @@ TextView overdue,upcoming,paid,all;
             case R.id.paid:
                 populateBillInfo(AppConstt.bill.PAID);
 
+
+                break;
+
+
+            case R.id.homeImportantdates:
+
+                navToImportantDatesFragment();
 
                 break;
         }
@@ -328,17 +339,17 @@ TextView overdue,upcoming,paid,all;
 
 
 
-//    private void navToHistoryFragment() {
-//
-//        FragmentManager fm = getFragmentManager();
-//        FragmentTransaction ft;
-//        Fragment frg = new HistoryFragment();
-//        ft = fm.beginTransaction();
-//        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
-//        ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
-//        ft.hide(this);
-//        ft.commit();
-//    }
+    private void navToImportantDatesFragment() {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft;
+        Fragment frg = new ImportantDatesFragment();
+        ft = fm.beginTransaction();
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
+        ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
+        ft.hide(this);
+        ft.commit();
+    }
 //
 //    private void navToBillAnaylsisFragment(int selection) {
 //

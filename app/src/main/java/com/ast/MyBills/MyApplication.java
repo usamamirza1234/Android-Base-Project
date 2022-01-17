@@ -32,7 +32,7 @@ public class MyApplication extends Application {
     private static final int serif_idx = 2;
     private static final int monospace_idx = 3;
     public static Context mContext;
-    private static com.ast.MyBills.MyApplication applicationContext;
+    private static MyApplication applicationContext;
     // Defining sans as the normal (default) typeface.
     private String DEFAULT_NORMAL_BOLD_FONT_FILENAME = "";
     private String DEFAULT_NORMAL_BOLD_ITALIC_FONT_FILENAME = "";
@@ -70,7 +70,7 @@ public class MyApplication extends Application {
 //    }
     private FirebaseAnalytics mFirebaseAnalytics;
 
-    public static com.ast.MyBills.MyApplication getInstance() {
+    public static MyApplication getInstance() {
         return applicationContext;
     }
 
@@ -80,7 +80,7 @@ public class MyApplication extends Application {
         mContext = this;
         applicationContext = this;
 
-        com.ast.MyBills.AppConfig.initInstance(mContext);
+        AppConfig.initInstance(mContext);
 //        if (AppConfig.getInstance().loadFCMDeviceToken().equals(""))
 //        {
 //            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {

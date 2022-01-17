@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,14 +64,39 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        _case ="uk";
 
-//
-//      if (!_case.equalsIgnoreCase("")) {
+
+
+        switch (selectedPosition)
+        {
+
+            case AppConstt.bill.OVERDUE:
+                Log.d("LOG_AS","OverDue "+AppConstt.bill.OVERDUE);
+                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position));
+                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_overdue_off));
+                break;
+
+            case AppConstt.bill.PAID:
+                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
+                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
+                break;
+
+            case AppConstt.bill.UPCOMING:
+                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_C, position));
+                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_upcoming_off));
+                break;
+
+            case AppConstt.bill.ALL:
+                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_D, position));
+                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_all_off));
+                break;
+        }
+
+//      if (!_case.equalsIgnoreCase(AppConstt.bill.OVERDUE)) {
 //            //idr har jga shape accordingly bna dain or asy dali map k liye uska color
 //            if (_case.equalsIgnoreCase("overdue")) {
-//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position));
 //
-//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_overdue_off));
 //            } else if (_case.equalsIgnoreCase("upcoming")) {
 //                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
 //

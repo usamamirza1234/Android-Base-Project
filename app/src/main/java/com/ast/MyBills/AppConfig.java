@@ -15,14 +15,19 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import com.ast.MyBills.Utils.AppConstt;
@@ -34,6 +39,7 @@ import com.ast.MyBills.Utils.IWebPaginationCallback;
 import com.ast.MyBills.Utils.RModel_Error;
 import com.ast.MyBills.Utils.RModel_Message;
 import com.ast.MyBills.Utils.RModel_onFailureError;
+import com.google.gson.reflect.TypeToken;
 
 
 public class AppConfig {
@@ -54,6 +60,8 @@ public class AppConfig {
     public String urlWebview;
     public String currentAppVersion;
     public String mLanguage;
+    //IESCO Year List
+  public   List<List<String>> lastYear = new ArrayList<List<String>>();
 
     //General golbal data for the App
     private Context mContext;
@@ -203,7 +211,6 @@ public class AppConfig {
             iWebIndexedCallback.onWebException(ex, _index);
         }
     }
-
     public void parsErrorMessage(final IWebPaginationCallback iWebPaginationCallback, byte[] responseBody,
                                  final int _index, final int _currIndex) {
         try {
@@ -269,10 +276,12 @@ public class AppConfig {
         this.mRole = "";
         this.mUser = new DModelUser();
 
-        loadUserProfile();
+     //   loadUserProfile();
 
 
     }
+
+
 
     //region Regulate user custom screen settings
     public Context regulateDisplayScale(final Context baseContext) {
@@ -324,6 +333,25 @@ public class AppConfig {
         return newContext;
     }
     //endregion
+
+//IESCO Year List
+    public void saveBillsList(ArrayList<DModel_Bill> lstBill) {
+        String json = gson.toJson(lstBill);
+        editor.putString("key_lst_lstlstBill", json);
+        editor.commit();
+
+        Log.d("sharedPref","saveBillsList: " + json);
+    }
+
+    public ArrayList<DModel_Bill> getBillsList() {
+        Type type = new TypeToken<List<DModel_Bill>>() {}.getType();
+        ArrayList<DModel_Bill> list = gson.fromJson(sharedPref.getString("key_lst_lstlstBill", ""), type);
+        if (list == null)
+            list = new ArrayList<>();
+        else
+            saveBillsList(list);
+        return list;
+    }
 
     public Context regulateDisplayScaleObselete(final Context baseContext) {
         Context newContext;

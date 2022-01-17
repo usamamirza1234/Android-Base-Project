@@ -51,7 +51,7 @@ public class PdfFragment extends Fragment implements View.OnClickListener, OnLoa
     private ArrayList<DModelPDF> lstPDF;
     IBadgeUpdateListener mBadgeUpdateListener;
     RecyclerView rcvElectInfo;
-    LinearLayout llBillDetails;
+    LinearLayout llBillDetails, llpdfImportantdates;
     TextView History,billinfo;
     PDFRcvAdapter pdfRcvAdapter;
     int position_ = 0;
@@ -104,7 +104,7 @@ PDFView pdfview;
         History = view.findViewById(R.id.electricityhomehistory);
         billinfo = view.findViewById(R.id.electricityhomebillinfo);
         txv_billDetails_company = view.findViewById(R.id.frg_home_electricity_txv_bill_company);
-
+        llpdfImportantdates = view.findViewById(R.id.frg_home_pdf_llImportantdates);
         pdfview = view.findViewById(R.id.pdfView);
         pdfview.fromAsset("Bill.pdf")
                 .enableSwipe(true)
@@ -115,7 +115,7 @@ PDFView pdfview;
                 .load();
 
 
-
+        llpdfImportantdates.setOnClickListener(this);
         History.setOnClickListener(this);
         billinfo.setOnClickListener(this);
 
@@ -206,7 +206,9 @@ PDFView pdfview;
             case R.id.electricityhomehistory:
                 navToBillAnaylsisFragment(selection);
                 break;
-
+            case R.id.frg_home_pdf_llImportantdates:
+                navToImportantDatesFragment();
+                break;
 
         }
     }
@@ -273,6 +275,17 @@ PDFView pdfview;
         Log.d("selection", "selectedPosition navToPDFFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_ChartHistoryFragment);
         frg.setArguments(bundle);
+        ft.hide(this);
+        ft.commit();
+    }
+    private void navToImportantDatesFragment() {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft;
+        Fragment frg = new ImportantDatesFragment();
+        ft = fm.beginTransaction();
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
+        ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
         ft.hide(this);
         ft.commit();
     }

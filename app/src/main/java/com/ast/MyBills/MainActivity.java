@@ -30,6 +30,7 @@ import com.ast.MyBills.MainAuxilaries.ChartHistoryFragment;
 import com.ast.MyBills.MainAuxilaries.EditProfileFragment;
 import com.ast.MyBills.MainAuxilaries.ElectricityHomeFragment;
 import com.ast.MyBills.MainAuxilaries.HomeFragment;
+import com.ast.MyBills.MainAuxilaries.ImportantDatesFragment;
 import com.ast.MyBills.MainAuxilaries.PdfFragment;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.CircleImageView;

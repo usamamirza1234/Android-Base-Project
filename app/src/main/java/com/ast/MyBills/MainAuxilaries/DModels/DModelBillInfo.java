@@ -11,6 +11,71 @@ public class DModelBillInfo {
     public String  WithinDueDate;
     public String  ReadingDate;
 
+    public String getTariff() {
+        return Tariff;
+    }
+
+    public void setTariff(String tariff) {
+        Tariff = tariff;
+    }
+
+    public String getMeterStatus() {
+        return MeterStatus;
+    }
+
+    public void setMeterStatus(String meterStatus) {
+        MeterStatus = meterStatus;
+    }
+
+    public String getPrevReading() {
+        return prevReading;
+    }
+
+    public void setPrevReading(String prevReading) {
+        this.prevReading = prevReading;
+    }
+
+    public String getPresentReading() {
+        return presentReading;
+    }
+
+    public void setPresentReading(String presentReading) {
+        this.presentReading = presentReading;
+    }
+
+    public String getUnits() {
+        return Units;
+    }
+
+    public void setUnits(String units) {
+        Units = units;
+    }
+
+    public String getCurrentAmount() {
+        return CurrentAmount;
+    }
+
+    public void setCurrentAmount(String currentAmount) {
+        CurrentAmount = currentAmount;
+    }
+
+    public String  Tariff;
+    public String  MeterStatus;
+    public String  prevReading;
+    public String  presentReading;
+    public String  Units;
+    public String  CurrentAmount;
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String  Name;
+
     public String getBillMonth() {
         return BillMonth;
     }

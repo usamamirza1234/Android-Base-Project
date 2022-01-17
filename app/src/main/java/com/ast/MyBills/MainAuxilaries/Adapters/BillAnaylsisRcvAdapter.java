@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ast.MyBills.MainAuxilaries.DModels.DModelBillAnaylsis;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.IAdapterCallback;
 
@@ -18,12 +18,12 @@ import java.util.ArrayList;
 
 public class BillAnaylsisRcvAdapter extends RecyclerView.Adapter<BillAnaylsisRcvAdapter.ViewHolder> {
 
-    private final ArrayList<DModelBillAnaylsis> mData;
+    private final ArrayList<DModel_Bill> mData;
     private final Context mContext;
     private final IAdapterCallback iAdapterCallback;
 
 
-    public BillAnaylsisRcvAdapter(Context mContext, ArrayList<DModelBillAnaylsis> mData,
+    public BillAnaylsisRcvAdapter(Context mContext, ArrayList<DModel_Bill> mData,
                                   IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
@@ -49,9 +49,9 @@ public class BillAnaylsisRcvAdapter extends RecyclerView.Adapter<BillAnaylsisRcv
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
 
-        holder.txv_payment.setText(mData.get(position).Payment);
-        holder.txv_month.setText(mData.get(position).Month);
-        holder.txv_units.setText(mData.get(position).Units);
+        holder.txv_payment.setText(mData.get(position).getPAYMENT());
+        holder.txv_month.setText(mData.get(position).getMONTH());
+        holder.txv_units.setText(mData.get(position).getUNITS());
 
 
 

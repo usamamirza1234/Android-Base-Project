@@ -64,9 +64,9 @@ public class ElectricityInfoRcvAdapter extends RecyclerView.Adapter<ElectricityI
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
 
-       // holder.txv_bill.setText(mData.get(position).BillType);
-        holder.txv_city.setText(mData.get(position).City);
-        holder.txv_address.setText(mData.get(position).Address);
+        holder.txv_bill.setText(mData.get(position).getBillType());
+        holder.txv_city.setText(mData.get(position).getCity() + "\n" +mData.get(position).getAddress());
+       // holder.txv_address.setText(mData.get(position).Address);
 
 
         holder.txv_view.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));

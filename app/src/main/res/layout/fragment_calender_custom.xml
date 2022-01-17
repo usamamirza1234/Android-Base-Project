@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+<androidx.core.widget.NestedScrollView
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_1"
+    android:clickable="true"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_1"
+       android:padding="10dp"
+        android:orientation="vertical"
+      >
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="?attr/colorPrimary"
+
+                app:expandedTitleTextAppearance="@android:color/transparent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@+id/frg_outletdetail_tlbr">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    app:layout_collapseMode="parallax">
+
+
+
+                    <com.duolingo.open.rtlviewpager.RtlViewPager
+                        android:id="@+id/frg_market_viewpgr_featured_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/frg_market_rl_banner"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:visibility="visible" />
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/frg_market_viewpagr_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="30dp"
+                        android:gravity="center"
+                        android:padding="10dip"
+                        android:visibility="visible"
+                        app:strokeWidth="0dp" />
+
+                </RelativeLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+<!--        <com.github.sundeepk.compactcalendarview.CompactCalendarView-->
+
+<!--            android:id="@+id/compactcalendar_view"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:paddingRight="10dp"-->
+<!--            android:paddingLeft="10dp"-->
+<!--            android:layout_height="400dp"-->
+
+
+<!--            />-->
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shp_rect_rounded_light_yellow"
+
+            android:orientation="horizontal"
+            android:weightSum="30">
+
+            <TextView
+                android:id="@+id/frg_home_electricity_txv_bill_company"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="30"
+                android:gravity="center"
+                android:padding="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Important Dates"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/fontsize_small"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shp_rect_rounded_white"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+
+            <LinearLayout
+                android:layout_width="177dp"
+                android:padding="2dp"
+                android:layout_margin="2dp"
+                android:layout_height="190dp"
+                android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
+
+                <com.ast.MyBills.MainAuxilaries.MaterialCalendar.materialcalendarview.MaterialCalendarView
+                    android:id="@+id/dlg_reorder_mcv_calndr"
+                    android:layout_width="177dp"
+                    android:layout_height="190dp"
+                    app:mcv_selectionColor="@color/thm_yellow_1"
+                    app:mcv_showOtherDates="decorated_disabled" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="visible"
+                android:layout_width="177dp"
+                android:layout_height="190dp"
+                android:padding="2dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/shp_rect_rounded_yellow_mini_stoke"
+                android:orientation="vertical">
+
+                <com.ast.MyBills.MainAuxilaries.MaterialCalendar.materialcalendarview.MaterialCalendarView
+                    android:id="@+id/dlg_reorder_mcv_calndr_nextmonth"
+                    android:layout_width="177dp"
+                    android:layout_height="190dp"
+
+                    app:mcv_selectionColor="@color/thm_yellow_1"
+                    app:mcv_showOtherDates="decorated_disabled" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+android:layout_margin="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="20">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/shp_circle_yellow" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:includeFontPadding="false"
+                    android:text="@string/frag_calender_todays_slot"
+                    android:textSize="@dimen/fontsize_tiny" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/shp_circle_red" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:includeFontPadding="false"
+                    android:text="@string/frag_calender_important_dates"
+                    android:textSize="@dimen/fontsize_tiny" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shp_rect_rounded_light_white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:background="@color/thm_yellow_1"
+                    android:orientation="horizontal"
+                    android:weightSum="75">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="25"
+                        android:padding="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="Date"
+                        android:textColor="@color/black_1"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/fontsize_mini"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="25"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:padding="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="Amount"
+                        android:textColor="@color/black_1"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/fontsize_mini"
+                        android:textStyle="bold" />
+
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="25"
+                        android:gravity="end"
+                        android:lines="1"
+                        android:padding="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="Biller"
+                        android:textColor="@color/black_1"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/fontsize_mini"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:background="@color/thm_yellow_1"
+                    android:id="@+id/frg_my_bills_rcvImportantDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>
+</LinearLayout>

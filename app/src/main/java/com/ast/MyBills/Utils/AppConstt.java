@@ -331,6 +331,15 @@ public interface AppConstt {
 
     }
 
+
+    public interface status {
+        int ALL = 0;
+        int UPCOMING =20 ;
+        int PAID =30 ;
+        int OVERDUE =10 ;
+
+    }
+
     public interface ViewPagerState {
         public int upcomingBookingFragment = 0;
         public int previousBookingFragment = 1;

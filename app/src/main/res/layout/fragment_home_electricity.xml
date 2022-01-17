@@ -329,7 +329,7 @@ android:layout_gravity="center"
 
 
                    <LinearLayout
-                       android:id="@+id/frg_home_electricity_llHistory"
+                       android:id="@+id/frg_home_electricity_llImportantdates"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_alignParentEnd="true"
@@ -338,6 +338,7 @@ android:layout_gravity="center"
                        android:orientation="vertical">
 
                        <ImageView
+
                            android:layout_width="35dp"
                            android:layout_height="35dp"
                            android:layout_centerVertical="true"
@@ -380,7 +381,7 @@ android:layout_gravity="center"
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="30"
+                            android:layout_weight="25"
                             android:padding="10dp"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
@@ -393,19 +394,19 @@ android:layout_gravity="center"
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="30"
-                            android:gravity="center"
+                            android:layout_weight="85"
+                            android:gravity="start"
                             android:lines="1"
-                            android:padding="10dp"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:text="City"
+                            android:padding="0dp"
+
+                            android:text="City/Address"
                             android:textColor="@color/black_1"
                             android:textCursorDrawable="@null"
                             android:textSize="@dimen/fontsize_mini"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:visibility="gone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="30"
@@ -1005,7 +1006,7 @@ android:layout_gravity="center"
                                                 android:gravity="center"
 
                                                 android:text=""
-                                                android:id="@+id/frg_home_electricity_txv_bill_billing_month"
+                                                android:id="@+id/frg_home_electricity_txv_bill_meter_status"
 
                                                 android:textColor="@color/dark_gray"
                                                 android:textSize="@dimen/fontsize_mini" />
@@ -1459,7 +1460,7 @@ android:layout_gravity="center"
                                                 android:layout_gravity="center"
                                                 android:gravity="center"
                                                 android:lines="1"
-                                                android:id="@+id/frg_home_electricity_txv_bill_current_month"
+                                                android:id="@+id/frg_home_electricity_txv_bill_current_amount"
                                                 android:text=""
                                                 android:textColor="@color/dark_gray"
                                                 android:textSize="@dimen/fontsize_mini" />

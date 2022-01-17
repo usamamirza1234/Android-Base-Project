@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ast.billmanagment.mybills.MaterialCalendar.materialcalendarview.MaterialCalendarView
+        android:id="@+id/dlg_reorder_mcv_calndr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:mcv_selectionColor="@color/blue"
+        app:mcv_showOtherDates="decorated_disabled" />
+</RelativeLayout>

@@ -14,11 +14,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -115,5 +117,12 @@ dependencies {
 //api
     implementation 'com.android.volley:volley:1.1.0'
 
+    implementation 'sun.bob:mcalendarview:1.0.0'
+//otp
+    implementation 'swarajsaaj:otpreader:1.1'
+//Calendrt
+    implementation 'com.squareup:android-times-square:1.6.5@aar'
 
+    //CompactCalendar
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
 }

@@ -54,6 +54,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
     int position_ = 0;
     Integer selection = null;
     TextView txv_billDetails_company;
+    LinearLayout llChartHistoryImportantDates;
 
     BarChart mBarHistoricalPayment,mBarHistoricalUnitsConsumed;
 
@@ -102,6 +103,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         rcvElectInfo = view.findViewById(R.id.frg_home_electricity_rcvElectricityInfo);
 
         pdf = view.findViewById(R.id.charthistorypdf);
+        llChartHistoryImportantDates = view.findViewById(R.id.frg_chart_history_llImportantDates);
         History = view.findViewById(R.id.electricityhomehistory);
         billinfo = view.findViewById(R.id.electricityhomebillinfo);
         txv_billDetails_company = view.findViewById(R.id.frg_home_electricity_txv_bill_company);
@@ -111,7 +113,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         pdf.setOnClickListener(this);
         History.setOnClickListener(this);
         billinfo.setOnClickListener(this);
-
+        llChartHistoryImportantDates.setOnClickListener(this);
     }
 
     private void  showBarHistoricalPayment(){
@@ -279,6 +281,10 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
                 navToPDFFragment(selection);
                 break;
 
+            case R.id.frg_chart_history_llImportantDates:
+                navToImportantDatesFragment();
+                break;
+
 
 
 
@@ -307,6 +313,19 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         if (!isHidden()) {
             setBottomBar();
         }
+    }
+
+
+    private void navToImportantDatesFragment() {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft;
+        Fragment frg = new ImportantDatesFragment();
+        ft = fm.beginTransaction();
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
+        ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
+        ft.hide(this);
+        ft.commit();
     }
     private void navToElectricityHomeFragment() {
 
