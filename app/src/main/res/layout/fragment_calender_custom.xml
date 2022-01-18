@@ -143,6 +143,7 @@
                     android:layout_width="177dp"
                     android:layout_height="190dp"
                     app:mcv_selectionColor="@color/thm_yellow_1"
+
                     app:mcv_showOtherDates="decorated_disabled" />
 
             </LinearLayout>
@@ -161,8 +162,12 @@
                     android:layout_width="177dp"
                     android:layout_height="190dp"
 
+
                     app:mcv_selectionColor="@color/thm_yellow_1"
                     app:mcv_showOtherDates="decorated_disabled" />
+
+<!--                app:mcv_tileSize="match_parent"-->
+<!--                app:mcv_tileHeight="match_parent"-->
 
 
 

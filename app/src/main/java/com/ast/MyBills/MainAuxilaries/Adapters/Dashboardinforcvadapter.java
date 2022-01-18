@@ -27,23 +27,15 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
     private  ArrayList<DModelBillDashboardInfo> mData;
     private final Context mContext;
     private final IAdapterCallback iAdapterCallback;
-    String _case;
+    int _case;
 
-    public Dashboardinforcvadapter(Context mContext, ArrayList<DModelBillDashboardInfo> mData,
+
+
+    public Dashboardinforcvadapter(Context mContext, ArrayList<DModelBillDashboardInfo> mData, int icase,
                                      IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
-        this._case = _case;
-        this.iAdapterCallback = iAdapterCallback;
-
-
-    }
-
-    public Dashboardinforcvadapter(Context mContext, ArrayList<DModelBillDashboardInfo> mData, int selectedPosition,
-                                     IAdapterCallback iAdapterCallback) {
-        this.mContext = mContext;
-        this.mData = mData;
-        this._case = _case;
+        this._case = icase;
         this.selectedPosition = selectedPosition;
 
         Log.d("selection", "selectedPosition " + selectedPosition);
@@ -64,11 +56,37 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        _case ="uk";
 
 
 
-        switch (selectedPosition)
+
+
+
+        holder.txv_bill.setText(mData.get(position).BillType);
+        holder.txv_city.setText(mData.get(position).Amount);
+        holder.txv_address.setText(mData.get(position).DueDate);
+//        holder.txv_status.setText(mData.get(position).Status);
+//        holder.txv_act.setText(mData.get(position).Act);
+
+
+        holder.txv_view.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
+
+
+        holder.llDetails.setOnClickListener(v -> {
+
+            if (selectedPosition != null) {
+
+                notifyItemChanged(selectedPosition);
+            }
+            selectedPosition = holder.getAdapterPosition();
+            notifyDataSetChanged();
+            iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position);
+        });
+
+
+
+
+        switch (_case)
         {
 
             case AppConstt.bill.OVERDUE:
@@ -93,71 +111,8 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
                 break;
         }
 
-//      if (!_case.equalsIgnoreCase(AppConstt.bill.OVERDUE)) {
-//            //idr har jga shape accordingly bna dain or asy dali map k liye uska color
-//            if (_case.equalsIgnoreCase("overdue")) {
-//
-//            } else if (_case.equalsIgnoreCase("upcoming")) {
-//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
-//
-//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_upcoming_off));
-//            } else if (_case.equalsIgnoreCase("paid")) {
-//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_C, position));
-//
-//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
-//            }
-//        }
-//        else
-//        {
-//            switch (mData.get(position).getStatus())
-//            {
-//                case AppConstt.bill.OVERDUE:
-//                    holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_C,position));
-//
-//                    holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_overdue_off));
-//                    break;
-//
-//                case AppConstt.bill.UPCOMING:
-//                    holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B,position));
-//
-//                    holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_upcoming_off));
-//                    break;
-//
-//                case AppConstt.bill.PAID:
-//                    holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A,position));
-//                    holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
-//
-//                    break;
-//                default:  holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_all_off));
-//                    break;
-//            }
-//        }
-
-        holder.txv_bill.setText(mData.get(position).BillType);
-        holder.txv_city.setText(mData.get(position).Amount);
-        holder.txv_address.setText(mData.get(position).DueDate);
-//        holder.txv_status.setText(mData.get(position).Status);
-//        holder.txv_act.setText(mData.get(position).Act);
-
-
-        holder.txv_view.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
-
-
-        holder.llDetails.setOnClickListener(v -> {
-
-            if (selectedPosition != null) {
-
-                notifyItemChanged(selectedPosition);
-            }
-            selectedPosition = holder.getAdapterPosition();
-            notifyDataSetChanged();
-            iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position);
-        });
-
         holder.styleViewSection((selectedPosition != null && selectedPosition == holder.getAdapterPosition()), position);
 
-
-        //////
 
     }
 
@@ -198,7 +153,12 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
 
         public void styleViewSection(boolean b, int Position) {
             if (!b) {
-                llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_gray_bg));
+
+//                if (_case==20){
+//                    llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
+//                }
+
+//                llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_gray_bg));
                 txv_address.setTextColor(mContext.getResources().getColor(R.color.black));
                 txv_city.setTextColor(mContext.getResources().getColor(R.color.black));
                 txv_bill.setTextColor(mContext.getResources().getColor(R.color.black));

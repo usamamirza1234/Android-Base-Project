@@ -49,7 +49,7 @@ public class DisableSelectedDatesDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-
+// TODO: 17-Jan-22  to  change important dates color 
         view.addSpan(new SideDotSpan(colorCircle, colorStroke, radius));
         view.addSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.white)));
         view.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.shp_circle_red));

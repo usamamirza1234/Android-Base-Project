@@ -2,6 +2,12 @@ package com.ast.MyBills.MainAuxilaries;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,23 +15,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.MainAuxilaries.Adapters.Dashboardinforcvadapter;
-import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBanner;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillDashboardInfo;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
-import com.ast.MyBills.Utils.CircleImageView;
 import com.ast.MyBills.Utils.IAdapterCallback;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
 import com.duolingo.open.rtlviewpager.RtlViewPager;
@@ -36,33 +32,30 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
-import static android.media.CamcorderProfile.get;
 import static com.ast.MyBills.Utils.AppConstt.bill.ALL;
-import static com.ast.MyBills.Utils.AppConstt.bill.OVERDUE;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_A;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private IBadgeUpdateListener mBadgeUpdateListener;
-    private boolean isFirstTime = true;
     Timer timer;
     int currentPage, mIndicatorPosition;
+    TextView txvoverdue, txvupcoming, txvpaid, txvall;
+    LinearLayout llImportantDates;
+    RecyclerView rcvdashboardinfo;
+    LinearLayout llBillDetails, llHistory;
+    Dashboardinforcvadapter dashboardinforcvadapter;
+    int position_ = 0;
+    Integer selection = null;
+    private IBadgeUpdateListener mBadgeUpdateListener;
+    private boolean isFirstTime = true;
     private ArrayList<DModelBanner> lstElectricAds;
     private ArrayList<DModelBillDashboardInfo> lstBillDashboardInfo;
     private ArrayList<DModelBillDashboardInfo> lstBillDashboardElement;
     private ArrayList<DModelBillDashboardInfo> lstBillDashboardElementFilter;
-
-TextView txvoverdue,txvupcoming,txvpaid,txvall;
-LinearLayout llImportantDates;
-    RecyclerView rcvdashboardinfo;
-    LinearLayout llBillDetails,llHistory;
     private RtlViewPager viewPgrFeaturedBanner;
     private CircleIndicator circleIndicator;
-    Dashboardinforcvadapter dashboardinforcvadapter;
     private FeaturedAdsViewPagerAdapter featuredAdsViewPagerAdapter;
-    int position_ = 0;
-    Integer selection = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,8 +70,8 @@ LinearLayout llImportantDates;
         populateBillInfo(ALL);
 
         if (selection == null) {
-            selection=0;
-           // setBillDetails();
+            selection = 0;
+            // setBillDetails();
 //            llBillDetails.setVisibility(View.GONE);
         }
 
@@ -136,34 +129,48 @@ LinearLayout llImportantDates;
     }
 
 
-//under
+    //under
     private void populateBillInfo(int act) {
 
         lstBillDashboardElementFilter.clear();
         lstBillDashboardElement.clear();
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "20-4-2021", 1, 10));
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("Water", "2,00" +1, "20-4-2019", 2, 10));
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "10-4-2018", 3, 10));
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("TV", "2,00" +3, "24-4-2021", 4, 10));
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "09-4-2021", 7, 20));
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" +0, "22-4-2021", 8, 20));
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("Water", "2,00" +1, "14-4-2021", 9, 30));
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("Mobile", "2,00" +2, "17-4-2021", 10, 30));
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("TV", "2,00" +3, "23-4-2022", 11, 20));
-        lstBillDashboardElement.add(new DModelBillDashboardInfo("Internet", "2,00" +4, "02-4-2022", 12, 30));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" + 0, "20-4-2021", 1, 10));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Water", "2,00" + 1, "20-4-2019", 2, 10));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Mobile", "2,00" + 2, "10-4-2018", 3, 10));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("TV", "2,00" + 3, "24-4-2021", 4, 10));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Internet", "2,00" + 4, "09-4-2021", 7, 20));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" + 0, "22-4-2021", 8, 20));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Water", "2,00" + 1, "14-4-2021", 9, 30));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Mobile", "2,00" + 2, "17-4-2021", 10, 30));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("TV", "2,00" + 3, "23-4-2022", 11, 20));
+        lstBillDashboardElement.add(new DModelBillDashboardInfo("Internet", "2,00" + 4, "02-4-2022", 12, 30));
         for (int i = 0; i < lstBillDashboardElement.size(); i++) {
-            if ( act != 0) {
+            if (act != 0) {
                 if (lstBillDashboardElement.get(i).getAct() == act) {
                     lstBillDashboardElementFilter.add(new DModelBillDashboardInfo(lstBillDashboardElement.get(i).BillType, lstBillDashboardElement.get(i).Amount, lstBillDashboardElement.get(i).DueDate, lstBillDashboardElement.get(i).Status, lstBillDashboardElement.get(i).Act));
                 }
 
-            }else {
+            } else {
+
                 lstBillDashboardElementFilter.add(new DModelBillDashboardInfo(lstBillDashboardElement.get(i).BillType, lstBillDashboardElement.get(i).Amount, lstBillDashboardElement.get(i).DueDate, lstBillDashboardElement.get(i).Status, lstBillDashboardElement.get(i).Act));
             }
         }
+
+
+
+        populateBils(act, lstBillDashboardElementFilter);
+
+    }
+
+    private void populateBils(int act, ArrayList<DModelBillDashboardInfo> lstvdsf) {
+
+        int s =act;
+        dashboardinforcvadapter = null;
         if (dashboardinforcvadapter == null) {
 
-            dashboardinforcvadapter = new Dashboardinforcvadapter( getActivity(), lstBillDashboardElementFilter,act, (eventId, position) -> {
+
+            dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(),lstvdsf, act,  (eventId, position) -> {
+
                 switch (eventId) {
                     case EVENT_A:
                         position_ = position;
@@ -182,8 +189,8 @@ LinearLayout llImportantDates;
         } else {
             dashboardinforcvadapter.notifyDataSetChanged();
         }
-
     }
+
 
     //region INIT
     private void init() {
@@ -191,35 +198,28 @@ LinearLayout llImportantDates;
         lstElectricAds = new ArrayList<>();
         lstBillDashboardInfo = new ArrayList<>();
         lstBillDashboardElementFilter = new ArrayList<>();
-        lstBillDashboardElement= new ArrayList<>();
-
-
-
-
-
+        lstBillDashboardElement = new ArrayList<>();
 
 
     }
+
     private void bindviews(View view) {
 
         viewPgrFeaturedBanner = view.findViewById(R.id.frg_market_viewpgr_featured_banner);
         circleIndicator = view.findViewById(R.id.frg_market_viewpagr_indicator);
 
         rcvdashboardinfo = view.findViewById(R.id.frg_home_dashboard_rcvdashboardInfo);
-        llImportantDates= view.findViewById(R.id.homeImportantdates);
-        txvoverdue= view.findViewById(R.id.overdue);
-        txvupcoming= view.findViewById(R.id.upcoming);
-        txvpaid= view.findViewById(R.id.paid);
-        txvall= view.findViewById(R.id.alll);
+        llImportantDates = view.findViewById(R.id.homeImportantdates);
+        txvoverdue = view.findViewById(R.id.overdue);
+        txvupcoming = view.findViewById(R.id.upcoming);
+        txvpaid = view.findViewById(R.id.paid);
+        txvall = view.findViewById(R.id.alll);
         txvall.setOnClickListener(this);
         txvoverdue.setOnClickListener(this);
         txvupcoming.setOnClickListener(this);
         txvpaid.setOnClickListener(this);
         llImportantDates.setOnClickListener(this);
     }
-
-
-
 
 
     void setToolbar() {
@@ -282,6 +282,34 @@ LinearLayout llImportantDates;
         }
     }
 
+    private void navToElectricityHomeFragment(int selection) {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft;
+        Fragment frg = new ElectricityHomeFragment();
+        ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("key_selection", selection);
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
+        Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
+        ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
+        frg.setArguments(bundle);
+        ft.hide(this);
+        ft.commit();
+
+    }
+
+    private void navToImportantDatesFragment() {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft;
+        Fragment frg = new ImportantDatesFragment();
+        ft = fm.beginTransaction();
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
+        ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
+        ft.hide(this);
+        ft.commit();
+    }
+
     public class timerTask extends TimerTask {
 
         @Override
@@ -318,37 +346,6 @@ LinearLayout llImportantDates;
                 });
             }
         }
-    }
-
-
-        private void navToElectricityHomeFragment(int selection) {
-            FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft;
-        Fragment frg = new ElectricityHomeFragment();
-        ft = fm.beginTransaction();
-        Bundle bundle = new Bundle();
-        bundle.putInt("key_selection" , selection);
-        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
-        Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
-        ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
-        frg.setArguments(bundle);
-        ft.hide(this);
-        ft.commit();
-
-    }
-
-
-
-    private void navToImportantDatesFragment() {
-
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft;
-        Fragment frg = new ImportantDatesFragment();
-        ft = fm.beginTransaction();
-        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
-        ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
-        ft.hide(this);
-        ft.commit();
     }
 //
 //    private void navToBillAnaylsisFragment(int selection) {

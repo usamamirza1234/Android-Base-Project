@@ -144,10 +144,18 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
             mFormatForApi = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             materialCalendarView.setSelectedDate(selectedDate);
             materialCalendarView.setPagingEnabled(false);
+
             materialCalendarView.state().edit()
                     .setFirstDayOfWeek(Calendar.MONDAY)
+
                     .setMinimumDate(CalendarDay.from(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1))
                     .commit();
+
+//Day of Name in full form like,"Saturday", or if you need the first three characters you have to put "EEE" in the date format and your result will be "Sat".
+//            SimpleDateFormat sdf_ = new SimpleDateFormat("E");
+//            Date date1 = new Date();
+//            String dayName = sdf_.format(date1);
+
 //            materialCalendarView.addDecorator(new EventDecorator(getActivity()));
 //            materialCalendarView.addDecorator(new DisableDatesDecorator());   /// before date highlights
 //            materialCalendarView.addDecorator(new TodayDateDecorator(getActivity()));
@@ -185,6 +193,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
 
         }
 
+//Calendar 2
         if (getActivity() != null) {
 
 

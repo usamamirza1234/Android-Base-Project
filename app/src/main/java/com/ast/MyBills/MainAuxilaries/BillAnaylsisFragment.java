@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.MainAuxilaries.Adapters.BillAnaylsisRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
@@ -88,7 +89,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
 //            llBillDetails.setVisibility(View.GONE);
         } else
             //setBillDetails();
-
+           // RequestBillyear();
         showBarHistoryUnit();
         return frg;
     }
@@ -183,6 +184,68 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
 
     }
 
+    private void RequestBillyear() {
+        showProgDialog();
+        More_WebHit_Get_Bills more_webHit_get_bills = new More_WebHit_Get_Bills();
+        more_webHit_get_bills.getBills(getContext(), new IWebCallback() {
+            @Override
+            public void onWebResult(boolean isSuccess, String strMsg) {
+                if (isSuccess) {
+                    dismissProgDialog();
+                    if (More_WebHit_Get_Bills.responseObject != null &&
+                            More_WebHit_Get_Bills.responseObject.getIescoBill() != null)
+                    {
+                        if ( More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size()>0)
+                        {
+                            for (int i=0;i< More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size();i++)
+                            {
+                                if (i>0)
+                                {
+                                    Log.d("LOG_AS","Elements of lastYearBills "+  More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
+                                    AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
+
+                                    DModel_Bill dModel_bill = new DModel_Bill(
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0),
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1),
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2),
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3)
+                                    );
+//                                    dModel_bill.setPAYMENT(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0).get);
+
+                                    lstBillAnaylsis.add(dModel_bill);
+                                    populateBillAnaylsis();
+
+                                }
+
+                            }
+
+
+                            for (int i=0;i<lstBillAnaylsis.size();i++)
+                            {
+                                Log.d("LOG_AS","Elements of lastBill "+  lstBillAnaylsis.get(i).getBILL());
+                                Log.d("LOG_AS","Elements of lastBill "+  lstBillAnaylsis.get(i).getUNITS());
+                                Log.d("LOG_AS","Elements of lastBill "+  lstBillAnaylsis.get(i).getMONTH());
+                                Log.d("LOG_AS","Elements of lastBill "+  lstBillAnaylsis.get(i).getPAYMENT());
+
+                            }
+                        }
+
+                    }
+                    else {
+                        dismissProgDialog();
+                        Toast.makeText(getContext(), "Error :" + strMsg, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onWebException(Exception ex) {
+                dismissProgDialog();
+                Toast.makeText(getContext(), "Exception :" + ex.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     private void populateBillInfo() {
         lstBillInfo.clear();
@@ -227,10 +290,10 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
 
 
     private void populateBillAnaylsis() {
-        lstBillAnaylsis.clear();
+//        lstBillAnaylsis.clear();
 
 
-//        lstBillAnaylsis.add(new DModel_Bill("500", "Jan", "220"));
+       // lstBillAnaylsis.add(new DModel_Bill("500", "Jan", "220","1111"));
 //        lstBillAnaylsis.add(new DModel_Bill("200", "Feb", "320"));
 //        lstBillAnaylsis.add(new DModel_Bill("300", "Mar", "420"));
 //        lstBillAnaylsis.add(new DModel_Bill("100", "Apr", "20"));

@@ -13,7 +13,7 @@
 
     <!--FONTS -->
 
-    <dimen name="fontsize_xlarge">22sp</dimen>
+    <dimen name="fontsize_xlarge">21sp</dimen>
     <dimen name="fontsize_large">20sp</dimen>
     <dimen name="fontsize_medium">18sp</dimen>
     <dimen name="fontsize_normal">16sp</dimen>
@@ -22,6 +22,7 @@
     <dimen name="fontsize_tiny">10sp</dimen>
     <dimen name="fontsize_minute">8sp</dimen>
     <dimen name="fontsize_micro">6sp</dimen>
+    <dimen name="fontsize_neno">2sp</dimen>
     <!--SPECAIL CASE (using fontsize_tiny) -->
 
 

@@ -276,7 +276,7 @@ public class AppConfig {
         this.mRole = "";
         this.mUser = new DModelUser();
 
-     //   loadUserProfile();
+        loadUserProfile();
 
 
     }
