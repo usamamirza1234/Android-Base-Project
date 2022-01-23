@@ -71,7 +71,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         populateBillInfo(lstBillInfo);
         populateBillAnaylsis(lstBillAnaylsis);
 
-//        showBarHistoryUnit();
+        showBarHistoryUnit(lstBillAnaylsis);
         return frg;
     }
 
