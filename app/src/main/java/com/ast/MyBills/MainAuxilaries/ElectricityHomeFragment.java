@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
 import com.ast.MyBills.Utils.IWebCallback;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,7 @@ import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 
 public class ElectricityHomeFragment extends Fragment implements View.OnClickListener {
 
-    private ArrayList<DModelBillInfo> lstBillInfo;
+    private ArrayList<DModelBillInfo> lstBillInfo=AppConfig.getInstance().getBillsIESCO();
     private ArrayList lstData;
     IBadgeUpdateListener mBadgeUpdateListener;
     RecyclerView rcvElectInfo;
@@ -59,7 +62,8 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
     TextView txv_billDetails_current_amount;
     TextView txv_billDetails_reference;
     TextView txv_billDetails_MeterStatus;
-
+EditText ref;
+RelativeLayout add;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View frg = inflater.inflate(R.layout.fragment_home_electricity, container, false);
@@ -68,7 +72,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         bindviews(frg);
 
 
-        populateBillInfo();
+      // populateBillInfo();
 
         if (selection == null) {
             selection=0;
@@ -76,7 +80,16 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 //            llBillDetails.setVisibility(View.GONE);
         }
       //  RequestBills();
-        RequestBillyear();
+
+        if (AppConfig.getInstance().getBillsIESCO().size() > 0) {
+            AppConfig.getInstance().getBillsIESCO().clear();
+            RequestBillssavedIESCO();
+
+        }else {
+
+
+        }
+
         return frg;
     }
 
@@ -86,6 +99,14 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         lstBillInfo = new ArrayList<>();
 
         lstData = new ArrayList<>();
+
+        Bundle bundle = new Bundle();
+        bundle = getArguments();
+
+        if (bundle!=null)
+        {
+            sref = bundle.getString("key_iesco");
+        }
     }
 
 
@@ -93,6 +114,9 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 
 
     private void bindviews(View view) {
+        ref = view.findViewById(R.id.frg_my_bills_edt_ref);
+        add = view.findViewById(R.id.frg_my_bills_rlAdd);
+        add.setOnClickListener(this);
 
         rcvElectInfo = view.findViewById(R.id.frg_home_electricity_rcvElectricityInfo);
         llBillDetails = view.findViewById(R.id.frg_home_electricity_llBill_Details);
@@ -119,14 +143,21 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         llImportantdates.setOnClickListener(this);
 
 
+
     }
 
+
+    String sref ="";
     //request year
     List<DModel_Bill> lastBill = new ArrayList<>();
 
-    private void RequestBillyear() {
+    private void RequestBillyear(String _Entity,String StrRef) {
+
+
         showProgDialog();
         More_WebHit_Get_Bills more_webHit_get_bills = new More_WebHit_Get_Bills();
+
+
         more_webHit_get_bills.getBills(getContext(), new IWebCallback() {
             @Override
             public void onWebResult(boolean isSuccess, String strMsg) {
@@ -162,7 +193,12 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 
 
                         lstBillInfo.add(dModelBillInfo);
-                        populateBillInfo();
+                        populateBillInfo(lstBillInfo);
+
+
+                        AppConfig.getInstance().saveIESCO(lstBillInfo);
+
+
 
                         if ( More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size()>0)
                         {
@@ -182,6 +218,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 //                                    dModel_bill.setPAYMENT(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0).get);
 
                                     lastBill.add(dModel_bill);
+
 
                                 }
 
@@ -211,148 +248,45 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
                 dismissProgDialog();
                 Toast.makeText(getContext(), "Exception :" + ex.getMessage(), Toast.LENGTH_LONG).show();
             }
-        });
+        },_Entity,StrRef);
     }
+
+
+    private void RequestBillssavedIESCO() {
+
+      if (More_WebHit_Get_Bills.responseObject != null &&
+            More_WebHit_Get_Bills.responseObject.getIescoBill() != null) {
+          DModelBillInfo dModelBillInfo = new DModelBillInfo();
+
+
+          dModelBillInfo.setName(More_WebHit_Get_Bills.responseObject.getIescoBill().getNAME());
+          dModelBillInfo.setBillType(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
+          dModelBillInfo.setAddress(More_WebHit_Get_Bills.responseObject.getIescoBill().getADDRESS());
+          dModelBillInfo.setCity(More_WebHit_Get_Bills.responseObject.getIescoBill().getCity());
+          dModelBillInfo.setReference(More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
+
+
+          dModelBillInfo.setAfterDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEAFTERDUEDATE());
+          dModelBillInfo.setWithinDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
+          dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
+          dModelBillInfo.setBillMonth(More_WebHit_Get_Bills.responseObject.getIescoBill().getBILLMONTH());
+
+          dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+          dModelBillInfo.setConsumerID(More_WebHit_Get_Bills.responseObject.getIescoBill().getCONSUMERID());
+          dModelBillInfo.setCurrentAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
+
+          dModelBillInfo.setMeterStatus(More_WebHit_Get_Bills.responseObject.getIescoBill().getSTATUS());
+          dModelBillInfo.setTariff(More_WebHit_Get_Bills.responseObject.getIescoBill().getTARIFF());
+          dModelBillInfo.setUnits(More_WebHit_Get_Bills.responseObject.getIescoBill().getUNITS());
+          dModelBillInfo.setPresentReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPRESENTREADING());
+          dModelBillInfo.setPrevReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPREVIOUSREADING());
+
+
+          lstBillInfo.add(dModelBillInfo);
+          populateBillInfo(lstBillInfo);
+      }}
 //end
-        private void RequestBills() {
-            showProgDialog();
-            More_WebHit_Get_Bills more_webHit_get_bills = new More_WebHit_Get_Bills();
-            more_webHit_get_bills.getBills(getContext(), new IWebCallback() {
-                @Override
-                public void onWebResult(boolean isSuccess, String strMsg) {
 
-                    if (isSuccess) {
-                        dismissProgDialog();
-                        Log.d("LOG_AS", "SubmitFeedback: strResponse" + strMsg);
-                        if (More_WebHit_Get_Bills.responseObject != null &&
-                                More_WebHit_Get_Bills.responseObject.getIescoBill() != null)
-
-                        {
-
-
-                            DModelBillInfo dModelBillInfo = new DModelBillInfo();
-
-
-                            dModelBillInfo.setName(More_WebHit_Get_Bills.responseObject.getIescoBill().getNAME());
-                            dModelBillInfo.setBillType(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
-                            dModelBillInfo.setAddress(More_WebHit_Get_Bills.responseObject.getIescoBill().getADDRESS());
-                            dModelBillInfo.setCity(More_WebHit_Get_Bills.responseObject.getIescoBill().getCity());
-                            dModelBillInfo.setReference(More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
-
-
-                            dModelBillInfo.setAfterDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEAFTERDUEDATE());
-                            dModelBillInfo.setWithinDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
-                            dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
-                            dModelBillInfo.setBillMonth(More_WebHit_Get_Bills.responseObject.getIescoBill().getBILLMONTH());
-
-                            dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-                            dModelBillInfo.setConsumerID(More_WebHit_Get_Bills.responseObject.getIescoBill().getCONSUMERID());
-                            dModelBillInfo.setCurrentAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
-
-                            dModelBillInfo.setMeterStatus(More_WebHit_Get_Bills.responseObject.getIescoBill().getSTATUS());
-                            dModelBillInfo.setTariff(More_WebHit_Get_Bills.responseObject.getIescoBill().getTARIFF());
-                            dModelBillInfo.setUnits(More_WebHit_Get_Bills.responseObject.getIescoBill().getUNITS());
-                            dModelBillInfo.setPresentReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPRESENTREADING());
-                            dModelBillInfo.setPrevReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPREVIOUSREADING());
-
-
-                            lstBillInfo.add(dModelBillInfo);
-                            populateBillInfo();
-
-
-                            if ( More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size()>0)
-                            {
-                                for (int i=0;i< More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size();i++)
-                                {
-                                    if (i>0)
-                                    {
-
-                                        Log.d("LOG_AS","Elements of lastYearBills "+  More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
-
-                                      //  AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
-//                                       lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
-
-
-                                    }
-
-                                }
-
-//                                for (int i=0;i< AppConfig.getInstance().lastYear.size();i++)
-//                                {
-//                                    for (int j=0;j< AppConfig.getInstance().lastYear.get(i).size();j++)
-//                                    {
-////                                        lstData.add(AppConfig.getInstance().lastYear.get(i).get(j))
-//
-//
-//
-//                                        Log.d("data","" + AppConfig.getInstance().lastYear.get(i).get(j));
-//
-//                                    }
-//
-//                                }
-                            }
-
-                        }
-
-                        else {
-                            dismissProgDialog();
-                            Toast.makeText(getContext(), "Error :" + strMsg, Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                }
-
-                @Override
-                public void onWebException(Exception ex) {
-                    dismissProgDialog();
-                    Toast.makeText(getContext(), "Exception :" + ex.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-
-            ////////////
-
-
-//        showProgDialog();
-//        Home_WebHit_Get_IESCO home_webHit_get_iesco = new Home_WebHit_Get_IESCO();
-//        home_webHit_get_iesco.getDatabase(new IWebCallback() {
-//            @Override
-//            public void onWebResult(boolean isSuccess, String strMsg) {
-//                if (isSuccess) {
-//                    dismissProgDialog();
-//                    if (Home_WebHit_Get_IESCO.responseObject != null &&
-//                            Home_WebHit_Get_IESCO.responseObject.getIescoBill() != null) {
-//
-//                            DModelBillInfo dModelBillInfo = new DModelBillInfo();
-//
-//                            dModelBillInfo.setBillType(Home_WebHit_Get_IESCO.responseObject.getIescoBill().getADDRESS());
-//                            dModelBillInfo.setAddress(Home_WebHit_Get_IESCO.responseObject.getIescoBill().getNAME());
-//                            dModelBillInfo.setCity(Home_WebHit_Get_IESCO.responseObject.getIescoBill().getDUEDATE());
-//
-//
-//
-//                            lstBillInfo.add(dModelBillInfo);
-//
-//
-//
-//                        populateBillInfo();
-//                    }
-//
-//                    dismissProgDialog();
-//                } else {
-//                    dismissProgDialog();
-//                    Toast.makeText(getActivity(), strMsg, Toast.LENGTH_SHORT).show();
-////                    AppConfig.getInstance().showErrorMessage(getContext(), strMsg);
-//                }
-//            }
-//
-//            @Override
-//            public void onWebException(Exception ex) {
-//                dismissProgDialog();
-//                Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
-////                AppConfig.getInstance().showErrorMessage(getContext(), ex.toString());
-//            }
-//        });
-    }
     //region  functions for Dialog
     private void dismissProgDialog() {
         if (progressDialog != null) {
@@ -372,7 +306,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 
 
 
-    private void populateBillInfo() {
+    private void populateBillInfo( ArrayList<DModelBillInfo> lstBillInfo) {
 //        lstBillInfo.clear();
 //
 //        lstBillInfo.add(new DModelBillInfo("ISECo", "PLOT 34 A FLAT 4,I-8/M IBD", "F9"));
@@ -449,6 +383,12 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 
             case R.id.frg_home_electricity_llImportantdates:
                 navToImportantDatesFragment();
+                break;
+
+            case R.id.frg_my_bills_rlAdd:
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("reference", ref.getText().toString());
+                RequestBillyear(jsonObject.toString(),sref);
                 break;
 
         }

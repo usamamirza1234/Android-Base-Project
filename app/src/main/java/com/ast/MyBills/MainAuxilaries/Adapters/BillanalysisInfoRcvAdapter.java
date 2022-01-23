@@ -11,23 +11,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ast.MyBills.MainAuxilaries.DModels.DModelChartHistory;
+import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.IAdapterCallback;
 
 import java.util.ArrayList;
 
 
-public class ChartHistoryRcvAdapter extends RecyclerView.Adapter<ChartHistoryRcvAdapter.ViewHolder> {
+public class BillanalysisInfoRcvAdapter extends RecyclerView.Adapter<BillanalysisInfoRcvAdapter.ViewHolder> {
 
     private Integer selectedPosition = null;
-    private final ArrayList<DModelChartHistory> mData;
+    private final ArrayList<DModelBillInfo> mData;
     private final Context mContext;
     private final IAdapterCallback iAdapterCallback;
 
 
-    public ChartHistoryRcvAdapter(Context mContext, ArrayList<DModelChartHistory> mData,
-                                  IAdapterCallback iAdapterCallback) {
+    public BillanalysisInfoRcvAdapter(Context mContext, ArrayList<DModelBillInfo> mData,
+                                      IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
 
@@ -36,8 +36,8 @@ public class ChartHistoryRcvAdapter extends RecyclerView.Adapter<ChartHistoryRcv
 
     }
 
-    public ChartHistoryRcvAdapter(Context mContext, ArrayList<DModelChartHistory> mData, int selectedPosition,
-                                  IAdapterCallback iAdapterCallback) {
+    public BillanalysisInfoRcvAdapter(Context mContext, ArrayList<DModelBillInfo> mData, int selectedPosition,
+                                      IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
         this.selectedPosition = selectedPosition;
@@ -51,7 +51,7 @@ public class ChartHistoryRcvAdapter extends RecyclerView.Adapter<ChartHistoryRcv
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lay_item_bill_chart, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lay_item_bill_analysis, null);
 
 
         return new ViewHolder(view);
@@ -62,9 +62,9 @@ public class ChartHistoryRcvAdapter extends RecyclerView.Adapter<ChartHistoryRcv
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
 
-        holder.txv_bill.setText(mData.get(position).BillType);
-        holder.txv_city.setText(mData.get(position).City);
-        holder.txv_address.setText(mData.get(position).Address);
+        holder.txv_bill.setText(mData.get(position).getBillType());
+        holder.txv_city.setText(mData.get(position).getCity() + "\n" +mData.get(position).getAddress());
+       // holder.txv_address.setText(mData.get(position).Address);
 
 
         holder.txv_view.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));

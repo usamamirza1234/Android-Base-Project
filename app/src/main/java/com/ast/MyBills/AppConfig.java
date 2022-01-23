@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.google.gson.Gson;
 
@@ -62,6 +63,8 @@ public class AppConfig {
     public String mLanguage;
     //IESCO Year List
   public   List<List<String>> lastYear = new ArrayList<List<String>>();
+    public ArrayList<DModel_Bill> lstBillAnaylsis;
+
 
     //General golbal data for the App
     private Context mContext;
@@ -352,6 +355,36 @@ public class AppConfig {
             saveBillsList(list);
         return list;
     }
+    ///////
+
+    public void saveIESCO(ArrayList<DModelBillInfo> lstBillInfo) {
+        String json = gson.toJson(lstBillInfo);
+        editor.putString("key_lst_BillIESCO", json);
+        editor.commit();
+
+        Log.d("sharedPref","saveBillIESCO: " + json);
+    }
+
+    public ArrayList<DModelBillInfo> getBillsIESCO() {
+        Type type = new TypeToken<ArrayList<DModelBillInfo>>() {}.getType();
+        ArrayList<DModelBillInfo> list = gson.fromJson(sharedPref.getString("key_lst_lstlstIESCO", ""), type);
+        if (list == null)
+            list = new ArrayList<>();
+        else
+            saveIESCO(list);
+        return list;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     public Context regulateDisplayScaleObselete(final Context baseContext) {
         Context newContext;

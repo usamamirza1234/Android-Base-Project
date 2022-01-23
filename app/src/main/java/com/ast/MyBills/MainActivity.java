@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,14 +29,17 @@ import com.ast.MyBills.MainAuxilaries.Adapters.BillTypeSpinnerAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.BillerSpinnerAdapter;
 import com.ast.MyBills.MainAuxilaries.BillAnaylsisFragment;
 import com.ast.MyBills.MainAuxilaries.ChartHistoryFragment;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.MainAuxilaries.EditProfileFragment;
 import com.ast.MyBills.MainAuxilaries.ElectricityHomeFragment;
 import com.ast.MyBills.MainAuxilaries.HomeFragment;
 import com.ast.MyBills.MainAuxilaries.ImportantDatesFragment;
 import com.ast.MyBills.MainAuxilaries.PdfFragment;
+import com.ast.MyBills.MainAuxilaries.WebServices.More_WebHit_Get_Bills;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.CircleImageView;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
+import com.ast.MyBills.Utils.IWebCallback;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
@@ -220,6 +225,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+
+
+    //region  functions for Dialog
+    private void dismissProgDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+    private void showProgDialog() {
+        progressDialog = new Dialog(this, R.style.AppTheme);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.dialog_progress);
+
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
 
     public void navToHomeFragment() {
         clearMyBackStack();

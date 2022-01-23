@@ -66,6 +66,8 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     }
 
 
+
+
     private void populateSpinnerBillType() {
         ArrayList<String> lstGender = new ArrayList<>();
 
@@ -160,6 +162,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         setBottomBar();
         lstMyBills = new ArrayList<>();
     }
+
 
     private void bindviews(View view) {
         rcv_myBills = view.findViewById(R.id.frg_my_bills_rcvBills);
