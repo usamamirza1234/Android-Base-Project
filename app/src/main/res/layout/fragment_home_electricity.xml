@@ -358,7 +358,7 @@ android:layout_gravity="center"
                </LinearLayout>
 
                 <RelativeLayout
-android:visibility="visible"
+android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edttext_height_medium"
                     android:layout_marginStart="20dp"
@@ -384,7 +384,7 @@ android:visibility="visible"
 
                 </RelativeLayout>
                 <RelativeLayout
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/frg_my_bills_rlAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
