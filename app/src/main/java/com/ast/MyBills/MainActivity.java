@@ -1,20 +1,14 @@
 package com.ast.MyBills;
 
 import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.content.IntentSender;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,38 +19,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ast.MyBills.IntroAuxilaries.MyBillsFragment;
-import com.ast.MyBills.MainAuxilaries.Adapters.BillTypeSpinnerAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.BillerSpinnerAdapter;
-import com.ast.MyBills.MainAuxilaries.BillAnaylsisFragment;
-import com.ast.MyBills.MainAuxilaries.ChartHistoryFragment;
-import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.MainAuxilaries.EditProfileFragment;
-import com.ast.MyBills.MainAuxilaries.ElectricityHomeFragment;
 import com.ast.MyBills.MainAuxilaries.HomeFragment;
-import com.ast.MyBills.MainAuxilaries.ImportantDatesFragment;
-import com.ast.MyBills.MainAuxilaries.PdfFragment;
-import com.ast.MyBills.MainAuxilaries.WebServices.More_WebHit_Get_Bills;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.CircleImageView;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
-import com.ast.MyBills.Utils.IWebCallback;
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
-import com.google.android.gms.auth.GoogleAuthUtil;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.credentials.Credential;
-import com.google.android.gms.auth.api.credentials.HintRequest;
-import com.google.android.gms.auth.api.phone.SmsRetriever;
-import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.shockwave.pdfium.PdfDocument;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, IBadgeUpdateListener{
 

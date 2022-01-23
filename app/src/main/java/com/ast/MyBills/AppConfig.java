@@ -355,7 +355,6 @@ public class AppConfig {
             saveBillsList(list);
         return list;
     }
-    ///////
 
     public void saveIESCO(ArrayList<DModelBillInfo> lstBillInfo) {
         String json = gson.toJson(lstBillInfo);
@@ -367,7 +366,7 @@ public class AppConfig {
 
     public ArrayList<DModelBillInfo> getBillsIESCO() {
         Type type = new TypeToken<ArrayList<DModelBillInfo>>() {}.getType();
-        ArrayList<DModelBillInfo> list = gson.fromJson(sharedPref.getString("key_lst_lstlstIESCO", ""), type);
+        ArrayList<DModelBillInfo> list = gson.fromJson(sharedPref.getString("key_lst_BillIESCO", ""), type);
         if (list == null)
             list = new ArrayList<>();
         else

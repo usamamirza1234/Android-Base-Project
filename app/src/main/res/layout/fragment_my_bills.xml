@@ -140,6 +140,7 @@
                         android:cursorVisible="true"
                         android:hint="@string/frg_my_bills_enter_reference"
                         android:padding="10dp"
+                        android:text="09141241305000"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/light_gray3"
