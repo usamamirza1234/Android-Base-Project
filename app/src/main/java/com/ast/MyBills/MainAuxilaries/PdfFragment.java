@@ -21,6 +21,7 @@ import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.PDFRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBanner;
+import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelPDF;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
@@ -48,7 +49,7 @@ import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 public class PdfFragment extends Fragment implements View.OnClickListener, OnLoadCompleteListener {
 
 
-    private ArrayList<DModelPDF> lstPDF;
+  //  private ArrayList<DModelPDF> lstPDF;
     IBadgeUpdateListener mBadgeUpdateListener;
     RecyclerView rcvElectInfo;
     LinearLayout llBillDetails, llpdfImportantdates;
@@ -57,6 +58,8 @@ public class PdfFragment extends Fragment implements View.OnClickListener, OnLoa
     int position_ = 0;
     Integer selection = null;
     TextView txv_billDetails_company;
+    String sref = "";
+    private ArrayList<DModelBillInfo> lstPDF;
 //pdf
 PDFView pdfview;
 
@@ -68,7 +71,7 @@ PDFView pdfview;
         bindviews(frg);
 
 
-        populateBillInfo();
+        populateBillInfo(lstPDF);
 
         if (selection == null) {
             selection=0;
@@ -88,11 +91,12 @@ PDFView pdfview;
         if (bundle != null) {
             selection = bundle.getInt("key_selection");
             Log.d("selection", "selectedPosition init " + selection);
+            sref = bundle.getString("key_iesco");
         }
         setBottomBar();
 
-
-        lstPDF = new ArrayList<>();
+        lstPDF = AppConfig.getInstance().getBillsIESCO();
+        //lstPDF = new ArrayList<>();
     }
 
     private void bindviews(View view) {
@@ -143,13 +147,13 @@ PDFView pdfview;
 
 
 
-    private void populateBillInfo() {
-        lstPDF.clear();
-
-        lstPDF.add(new DModelPDF("ISECo", "11" +0, "F9"));
-        lstPDF.add(new DModelPDF("WAPDA", "10" + 1, "F10"));
-        lstPDF.add(new DModelPDF("WASA", "32" + 2, "F11"));
-        lstPDF.add(new DModelPDF("LESCO", "12" + 2, "I18"));
+    private void populateBillInfo(ArrayList<DModelBillInfo> lstPDF) {
+//        lstPDF.clear();
+//
+//        lstPDF.add(new DModelPDF("ISECo", "11" +0, "F9"));
+//        lstPDF.add(new DModelPDF("WAPDA", "10" + 1, "F10"));
+//        lstPDF.add(new DModelPDF("WASA", "32" + 2, "F11"));
+//        lstPDF.add(new DModelPDF("LESCO", "12" + 2, "I18"));
 
 
         if (pdfRcvAdapter == null) {

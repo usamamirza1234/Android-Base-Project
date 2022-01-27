@@ -89,6 +89,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/frg_presigin_rlforgot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

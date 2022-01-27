@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ast.MyBills.MainAuxilaries.DModels.DModelPDF;
+import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.IAdapterCallback;
 
@@ -21,12 +21,13 @@ import java.util.ArrayList;
 public class PDFRcvAdapter extends RecyclerView.Adapter<PDFRcvAdapter.ViewHolder> {
 
     private Integer selectedPosition = null;
-    private final ArrayList<DModelPDF> mData;
+    private final ArrayList<DModelBillInfo> mData;
+    
     private final Context mContext;
     private final IAdapterCallback iAdapterCallback;
 
 
-    public PDFRcvAdapter(Context mContext, ArrayList<DModelPDF> mData,
+    public PDFRcvAdapter(Context mContext, ArrayList<DModelBillInfo> mData,
                          IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
@@ -36,7 +37,7 @@ public class PDFRcvAdapter extends RecyclerView.Adapter<PDFRcvAdapter.ViewHolder
 
     }
 
-    public PDFRcvAdapter(Context mContext, ArrayList<DModelPDF> mData, int selectedPosition,
+    public PDFRcvAdapter(Context mContext, ArrayList<DModelBillInfo> mData, int selectedPosition,
                          IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
@@ -63,8 +64,7 @@ public class PDFRcvAdapter extends RecyclerView.Adapter<PDFRcvAdapter.ViewHolder
 
 
         holder.txv_bill.setText(mData.get(position).getBillType());
-        holder.txv_city.setText(mData.get(position).getCity());
-        holder.txv_address.setText(mData.get(position).getAddress());
+        holder.txv_city.setText(mData.get(position).getCity() + "\n" +mData.get(position).getAddress());
 
 
         holder.txv_view.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));

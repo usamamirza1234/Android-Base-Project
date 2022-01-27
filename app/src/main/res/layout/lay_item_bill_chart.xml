@@ -78,6 +78,7 @@
 
 
             <TextView
+                android:visibility="gone"
 
                 android:id="@+id/lay_bill_info_txv_view"
                 android:layout_width="0dp"

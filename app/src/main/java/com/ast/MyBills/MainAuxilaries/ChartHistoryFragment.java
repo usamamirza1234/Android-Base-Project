@@ -14,13 +14,16 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.MainAuxilaries.Adapters.BillAnaylsisRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.ChartHistoryRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.PDFRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillAnaylsis;
+import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelChartHistory;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelChartHistory;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.ChartManagers.BarChartManager;
@@ -45,7 +48,7 @@ import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 public class ChartHistoryFragment extends Fragment implements View.OnClickListener {
 
 
-    private ArrayList<DModelChartHistory> lstChartHistory;
+
     IBadgeUpdateListener mBadgeUpdateListener;
     RecyclerView rcvElectInfo;
 
@@ -55,6 +58,11 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
     Integer selection = null;
     TextView txv_billDetails_company;
     LinearLayout llChartHistoryImportantDates;
+    String sref = "";
+    private ArrayList<DModelBillInfo> lstChartHistory;
+    ArrayList<DModel_Bill> lstChartPayments;
+    ArrayList<DModel_Bill> lstChartUnits;
+
 
     BarChart mBarHistoricalPayment,mBarHistoricalUnitsConsumed;
 
@@ -66,7 +74,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         bindviews(frg);
 
 
-        populateBillInfo();
+        populateBillInfo(lstChartHistory);
 
         if (selection == null) {
             selection=0;
@@ -75,8 +83,8 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         }
 
 
-        showBarHistoricalPayment();
-        showBarHistoricalUnitsConsumed();
+        showBarHistoricalPayment(lstChartPayments);
+        showBarHistoricalUnitsConsumed(lstChartUnits);
 
         return frg;
     }
@@ -89,11 +97,16 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         if (bundle != null) {
             selection = bundle.getInt("key_selection");
             Log.d("selection", "selectedPosition init " + selection);
+            sref = bundle.getString("key_iesco");
         }
         setBottomBar();
 
+        lstChartPayments = AppConfig.getInstance().getBillsList();
 
-        lstChartHistory = new ArrayList<>();
+
+        lstChartUnits = AppConfig.getInstance().getBillsList();
+
+        lstChartHistory = AppConfig.getInstance().getBillsIESCO();
     }
 
     private void bindviews(View view) {
@@ -116,103 +129,104 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         llChartHistoryImportantDates.setOnClickListener(this);
     }
 
-    private void  showBarHistoricalPayment(){
+    private void  showBarHistoricalPayment(ArrayList<DModel_Bill> lstpaymentHistory){
+
+
 
 
         List<String> xAxisValues = new ArrayList<>();
-        xAxisValues.add("Jan");
-        xAxisValues.add("Feb");
-        xAxisValues.add("March");
-        xAxisValues.add("Apr");
-        xAxisValues.add("May");
-        xAxisValues.add("Jun");
-        xAxisValues.add("Jul");
-        xAxisValues.add("Aug");
-        xAxisValues.add("Sep");
-        xAxisValues.add("Oct");
-        xAxisValues.add("Nov");
-        xAxisValues.add("Dec");
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         ArrayList<BarEntry> yValueGroup1 = new ArrayList<>();
 
-        yValueGroup1.add(new BarEntry(1f, 8540));
-        yValueGroup1.add(new BarEntry(2f, 10569f));
-        yValueGroup1.add(new BarEntry(3f, 4149f));
-        yValueGroup1.add(new BarEntry(4f, 8073f));
-        yValueGroup1.add(new BarEntry(5f, 10598f));
-        yValueGroup1.add(new BarEntry(6f, 13552f));
-        yValueGroup1.add(new BarEntry(7f, 39091f));
-        yValueGroup1.add(new BarEntry(8f, 58358f));
-        yValueGroup1.add(new BarEntry(9f, 25000f));
-        yValueGroup1.add(new BarEntry(10f, 41362f));
-        yValueGroup1.add(new BarEntry(11f, 65665f));
-        yValueGroup1.add(new BarEntry(12f, 63000f));
+
+        for (int i=0;i< lstpaymentHistory.size();i++)
+        {
+            xAxisValues.add(lstpaymentHistory.get(i).getMONTH());
+            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(lstpaymentHistory.get(i).getPAYMENT())));
+        }
+
+//
+//        List<String> xAxisValues = new ArrayList<>();
+//        xAxisValues.add("Jan");
+//        xAxisValues.add("Feb");
+//        xAxisValues.add("March");
+//        xAxisValues.add("Apr");
+//        xAxisValues.add("May");
+//        xAxisValues.add("Jun");
+//        xAxisValues.add("Jul");
+//        xAxisValues.add("Aug");
+//        xAxisValues.add("Sep");
+//        xAxisValues.add("Oct");
+//        xAxisValues.add("Nov");
+//        xAxisValues.add("Dec");
+
+//        ArrayList<BarEntry> yValueGroup1 = new ArrayList<>();
+//
+//        yValueGroup1.add(new BarEntry(1f, 8540));
+//        yValueGroup1.add(new BarEntry(2f, 10569f));
+//        yValueGroup1.add(new BarEntry(3f, 4149f));
+//        yValueGroup1.add(new BarEntry(4f, 8073f));
+//        yValueGroup1.add(new BarEntry(5f, 10598f));
+//        yValueGroup1.add(new BarEntry(6f, 13552f));
+//        yValueGroup1.add(new BarEntry(7f, 39091f));
+//        yValueGroup1.add(new BarEntry(8f, 58358f));
+//        yValueGroup1.add(new BarEntry(9f, 25000f));
+//        yValueGroup1.add(new BarEntry(10f, 41362f));
+//        yValueGroup1.add(new BarEntry(11f, 65665f));
+//        yValueGroup1.add(new BarEntry(12f, 63000f));
 
         BarChartManager barChartManager = new BarChartManager(mBarHistoricalPayment, getContext());
         barChartManager.showBarChartVertical(yValueGroup1, xAxisValues);
 
     }
 
-    private void  showBarHistoricalUnitsConsumed(){
+    private void  showBarHistoricalUnitsConsumed(ArrayList<DModel_Bill> lstUnitHistory){
 
 
         List<String> xAxisValues = new ArrayList<>();
-        xAxisValues.add("Jan");
-        xAxisValues.add("Feb");
-        xAxisValues.add("March");
-        xAxisValues.add("Apr");
-        xAxisValues.add("May");
-        xAxisValues.add("Jun");
-        xAxisValues.add("Jul");
-        xAxisValues.add("Aug");
-        xAxisValues.add("Sep");
-        xAxisValues.add("Oct");
-        xAxisValues.add("Nov");
-        xAxisValues.add("Dec");
 
 
         ArrayList<BarEntry> yValueGroup1 = new ArrayList<>();
 
 
+        for (int i=0;i< lstUnitHistory.size();i++)
+        {
+            xAxisValues.add(lstUnitHistory.get(i).getMONTH());
+            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(lstUnitHistory.get(i).getPAYMENT())));
+        }
 
 
+//        List<String> xAxisValues = new ArrayList<>();
+//        xAxisValues.add("Jan");
+//        xAxisValues.add("Feb");
+//        xAxisValues.add("March");
+//        xAxisValues.add("Apr");
+//        xAxisValues.add("May");
+//        xAxisValues.add("Jun");
+//        xAxisValues.add("Jul");
+//        xAxisValues.add("Aug");
+//        xAxisValues.add("Sep");
+//        xAxisValues.add("Oct");
+//        xAxisValues.add("Nov");
+//        xAxisValues.add("Dec");
+//
+//
+//        ArrayList<BarEntry> yValueGroup1 = new ArrayList<>();
 
-
-
-
-
-
-
-
-
-
-
-        yValueGroup1.add(new BarEntry(1f, 1300));
-        yValueGroup1.add(new BarEntry(2f, 1800));
-        yValueGroup1.add(new BarEntry(3f, 1250));
-        yValueGroup1.add(new BarEntry(4f, 2500));
-        yValueGroup1.add(new BarEntry(5f, 3000));
-        yValueGroup1.add(new BarEntry(6f, 4500));
-        yValueGroup1.add(new BarEntry(7f, 4600));
-        yValueGroup1.add(new BarEntry(8f, 3500));
-        yValueGroup1.add(new BarEntry(9f, 2000));
-        yValueGroup1.add(new BarEntry(10f, 1800));
-        yValueGroup1.add(new BarEntry(11f, 1700));
-        yValueGroup1.add(new BarEntry(12f, 1200));
+//
+//        yValueGroup1.add(new BarEntry(1f, 1300));
+//        yValueGroup1.add(new BarEntry(2f, 1800));
+//        yValueGroup1.add(new BarEntry(3f, 1250));
+//        yValueGroup1.add(new BarEntry(4f, 2500));
+//        yValueGroup1.add(new BarEntry(5f, 3000));
+//        yValueGroup1.add(new BarEntry(6f, 4500));
+//        yValueGroup1.add(new BarEntry(7f, 4600));
+//        yValueGroup1.add(new BarEntry(8f, 3500));
+//        yValueGroup1.add(new BarEntry(9f, 2000));
+//        yValueGroup1.add(new BarEntry(10f, 1800));
+//        yValueGroup1.add(new BarEntry(11f, 1700));
+//        yValueGroup1.add(new BarEntry(12f, 1200));
 
         BarChartManager barChartManager = new BarChartManager(mBarHistoricalUnitsConsumed, getContext());
         barChartManager.showBarChartVertical(yValueGroup1, xAxisValues);
@@ -222,13 +236,13 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
 
 
 
-    private void populateBillInfo() {
-        lstChartHistory.clear();
-
-        lstChartHistory.add(new DModelChartHistory("ISECo", "23100" +0, "F9"));
-        lstChartHistory.add(new DModelChartHistory("WAPDA", "23100" + 1, "F10"));
-        lstChartHistory.add(new DModelChartHistory("WASA", "23100" + 2, "F11"));
-        lstChartHistory.add(new DModelChartHistory("LESCO", "23100" + 2, "I18"));
+    private void populateBillInfo(ArrayList<DModelBillInfo> lstChartHistory) {
+//        lstChartHistory.clear();
+//
+//        lstChartHistory.add(new DModelChartHistory("ISECo", "23100" +0, "F9"));
+//        lstChartHistory.add(new DModelChartHistory("WAPDA", "23100" + 1, "F10"));
+//        lstChartHistory.add(new DModelChartHistory("WASA", "23100" + 2, "F11"));
+//        lstChartHistory.add(new DModelChartHistory("LESCO", "23100" + 2, "I18"));
 
 
         if (chartHistoryRcvAdapter == null) {

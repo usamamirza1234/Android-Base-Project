@@ -109,7 +109,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     }
 
 
-    private void showBarHistoryUnit(ArrayList<DModel_Bill> lstExample) {
+    private void showBarHistoryUnit(ArrayList<DModel_Bill> lstUnitHistory) {
 
 
 
@@ -119,10 +119,10 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         ArrayList<BarEntry> yValueGroup1 = new ArrayList<>();
 
 
-        for (int i=0;i< lstExample.size();i++)
+        for (int i=0;i< lstUnitHistory.size();i++)
         {
-            xAxisValues.add(lstExample.get(i).getMONTH());
-            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(lstExample.get(i).getPAYMENT())));
+            xAxisValues.add(lstUnitHistory.get(i).getMONTH());
+            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(lstUnitHistory.get(i).getPAYMENT())));
         }
 
 
@@ -209,6 +209,9 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
 
 
     }
+
+
+
 
 
     private void setBillDetails() {

@@ -155,7 +155,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edttext_height_medium"
                 android:layout_marginStart="20dp"
@@ -164,6 +164,7 @@
                 android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
 
                 <EditText
+
                     android:id="@+id/frg_edit_profile_edt_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -211,7 +212,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edttext_height_medium"
                 android:layout_marginStart="20dp"
@@ -239,7 +240,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edttext_height_medium"
                 android:layout_marginStart="20dp"
@@ -267,7 +268,7 @@
 
 
             <RelativeLayout
-
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edttext_height_medium"
                 android:layout_marginStart="20dp"
@@ -276,6 +277,7 @@
                 android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
 
                 <EditText
+
                     android:id="@+id/frg_edit_profile_edt_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -296,7 +298,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/frg_presigin_rlregister"
+                android:id="@+id/frg_editprofile_rlnext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -309,7 +311,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:padding="10dp"
-                    android:text="@string/frg_edit_profile_update"
+                    android:text="@string/next"
                     android:textColor="@color/black_1"
                     android:textSize="@dimen/fontsize_mini" />
 
