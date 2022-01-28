@@ -112,6 +112,8 @@
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
 
+
+
                     <Spinner
                         android:id="@+id/frg_my_bills_spinnerBiller"
                         style="@style/spinnerItemStyle"
@@ -286,6 +288,7 @@
 
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/frg_presigin_rlrigister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

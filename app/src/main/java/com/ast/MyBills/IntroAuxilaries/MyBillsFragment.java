@@ -28,8 +28,10 @@ import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
+import com.ast.MyBills.Utils.CustomToast;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
 import com.ast.MyBills.Utils.IWebCallback;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +52,12 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     RecyclerView rcv_myBills;
     Spinner spinnerBillType;
     Spinner spinnerBiller;
+    RelativeLayout biller;
     String str_billType = "";
     RelativeLayout rlBack;
     ArrayList<DModel_Bill> lastBill;
     private TextView txvBillType;
+
     private TextView edt_Reffrence;
     private TextView edt_Account;
     private Dialog progressDialog;
@@ -67,10 +71,13 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         bindviews(frg);
 
 
-        populateMyBills();
-        populateSpinnerBillType();
 
+
+        populateMyBills(lstMyBills);
+
+        populateSpinnerBillType();
         populateSpinnerBiller();
+
 
 
         return frg;
@@ -93,9 +100,70 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 String selectedItem = parent.getItemAtPosition(position).toString();
 
                 int Pos = Integer.parseInt(selectedItem);
-//                txvBillType.setText(lstGender.get(position));
+               // txvBillType.setText(lstGender.get(position));
                 str_billType = (lstGender.get(position));
 
+
+                ArrayList<String> lstBiller = new ArrayList<>();
+                switch (str_billType) {
+                    case "Electricity":
+                       // CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
+
+
+
+                        lstBiller.add("IESCO");
+                        lstBiller.add("LESCO");
+                        lstBiller.add("PESCO");
+                        lstBiller.add("GEPCO");
+
+                        lstBiller.add(getResources().getString(R.string.select_biller_type));
+                        billerSpinnerAdapter = new BillerSpinnerAdapter(getContext(), lstBiller);
+                        spinnerBiller.setAdapter(billerSpinnerAdapter);
+                        spinnerBiller.setSelection(billerSpinnerAdapter.getCount());
+                        break;
+
+                    case "Gas":
+                      //  CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
+
+                        lstBiller.add("SSG");
+
+
+                        lstBiller.add(getResources().getString(R.string.select_biller_type));
+                        billerSpinnerAdapter = new BillerSpinnerAdapter(getContext(), lstBiller);
+                        spinnerBiller.setAdapter(billerSpinnerAdapter);
+                        spinnerBiller.setSelection(billerSpinnerAdapter.getCount());
+                        break;
+
+                    case "Water":
+                      //  CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
+
+
+
+                        lstBiller.add("Nestle");
+                        lstBiller.add("PepsiCo.");
+
+
+                        lstBiller.add(getResources().getString(R.string.select_biller_type));
+                        billerSpinnerAdapter = new BillerSpinnerAdapter(getContext(), lstBiller);
+                        spinnerBiller.setAdapter(billerSpinnerAdapter);
+                        spinnerBiller.setSelection(billerSpinnerAdapter.getCount());
+                        break;
+
+                    case "Mobile":
+                       // CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
+
+
+
+                        lstBiller.add("JAZZ");
+                        lstBiller.add("UFONE");
+                        lstBiller.add("ZONG");
+
+                        lstBiller.add(getResources().getString(R.string.select_biller_type));
+                        billerSpinnerAdapter = new BillerSpinnerAdapter(getContext(), lstBiller);
+                        spinnerBiller.setAdapter(billerSpinnerAdapter);
+                        spinnerBiller.setSelection(billerSpinnerAdapter.getCount());
+                        break;
+                }
 
             } // to close the onItemSelected
 
@@ -112,13 +180,12 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     private void populateSpinnerBiller() {
         ArrayList<String> lstBiller = new ArrayList<>();
 
-        lstBiller.add("IESCO");
-        lstBiller.add("WAPDA");
-        lstBiller.add("GEPCO");
-        lstBiller.add("PESCO");
+//        lstBiller.add("IESCO");
+//        lstBiller.add("WAPDA");
+//        lstBiller.add("GEPCO");
+//        lstBiller.add("PESCO");
 
         lstBiller.add(getResources().getString(R.string.select_biller_type));
-
 
         billerSpinnerAdapter = new BillerSpinnerAdapter(getContext(), lstBiller);
         spinnerBiller.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -126,7 +193,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 String selectedItem = parent.getItemAtPosition(position).toString();
 
                 int Pos = Integer.parseInt(selectedItem);
-//                txvBillType.setText(lstGender.get(position));
+               // txvBillType.setText(lstGender.get(position));
 
 
             } // to close the onItemSelected
@@ -141,7 +208,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void populateMyBills() {
+    private void populateMyBills( ArrayList<DModel_Bills> lstMyBills) {
 //        int size = (2);
 //        for (int i = size; i >= 0; i--) {
 //            lstMyBills.add(new DModel_Bills("Bill", "100"+i, (i + 1) + ""));
@@ -166,9 +233,10 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
     private void init() {
         setBottomBar();
-        lstMyBills = new ArrayList<>();
+       // lstMyBills = new ArrayList<>();
         lstBillInfo = new ArrayList<>();
         lastBill = new ArrayList<>();
+        lstMyBills = AppConfig.getInstance().getBillerSetting();
     }
 
     private void bindviews(View view) {
@@ -176,13 +244,15 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
 
         edt_Reffrence = view.findViewById(R.id.frg_my_bills_edt_ref);
-        edt_Account = view.findViewById(R.id.frg_my_bills_edt_ref);
+        edt_Account = view.findViewById(R.id.frg_my_bills_edt_acc_num);
 
 
         rlAdd = view.findViewById(R.id.frg_my_bills_rlAdd);
         spinnerBillType = view.findViewById(R.id.frg_my_bills_spinnerBilltpe);
         spinnerBiller = view.findViewById(R.id.frg_my_bills_spinnerBiller);
         txvBillType = view.findViewById(R.id.frg_my_bills_txvBilltype);
+
+
         rlBack = view.findViewById(R.id.frg_signin_rlToolbar);
         rlBack.setOnClickListener(this);
 
@@ -194,21 +264,26 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.frg_my_bills_rlAdd:
-                if (!edt_Reffrence.getText().toString().equalsIgnoreCase("")) {
-
-                    RequestBillyear(edt_Reffrence.getText().toString());
-
+//                if (!edt_Reffrence.getText().toString().equalsIgnoreCase("")) {
+//
+//                   // RequestBillyear(edt_Reffrence.getText().toString());
+//
 //                    lstMyBills.add(
 //                            new DModel_Bills(str_billType + "",
 //                                    edt_Reffrence.getText().toString() + "",
 //                                    edt_Account.getText().toString() + ""));
 //                    billListingRcvAdapter.notifyDataSetChanged();
+//                    if (AppConfig.getInstance().getBillerSetting().size() > 0) {
+//                        AppConfig.getInstance().getBillerSetting().clear();
 //
-
-
-                }
-
+//                    }
+//                    AppConfig.getInstance().saveBillerSetting(lstMyBills);
+//
+//
+//                }
+                checkErrorConditions();
                 closeKeyboard();
+
                 break;
 
             case R.id.frg_signin_rlToolbar:
@@ -216,6 +291,46 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 break;
 
         }
+    }
+
+
+    private void checkErrorConditions() {
+        if (checkPasswordError()) {
+
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("ref", edt_Reffrence.getText().toString());
+            jsonObject.addProperty("account", edt_Account.getText().toString());
+//            jsonObject.addProperty("billtype", txvBillType.getText().toString());
+//            jsonObject.addProperty("biller", txvBiller.getText().toString());
+
+            if (!edt_Reffrence.getText().toString().equalsIgnoreCase("")) {
+
+                    RequestBillyear(edt_Reffrence.getText().toString());
+
+                    lstMyBills.add(
+                            new DModel_Bills(str_billType + "",
+                                    edt_Reffrence.getText().toString() + "",
+                                    edt_Account.getText().toString() + ""));
+                    billListingRcvAdapter.notifyDataSetChanged();
+                    if (AppConfig.getInstance().getBillerSetting().size() > 0) {
+                        AppConfig.getInstance().getBillerSetting().clear();
+
+                    }
+                    AppConfig.getInstance().saveBillerSetting(lstMyBills);
+
+                }
+
+        }
+    }
+
+    private boolean checkPasswordError() {
+        if (!edt_Reffrence.getText().toString().equalsIgnoreCase("") && !edt_Account.getText().toString().isEmpty()) {
+            return true;
+        } else {
+            Toast.makeText(getContext(), "Enter all fields", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
     }
 
     void setBottomBar() {
@@ -298,6 +413,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                                             More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1),
                                             More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2),
                                             More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3)
+
                                     );
                                     lastBill.add(dModel_bill);
                                 }

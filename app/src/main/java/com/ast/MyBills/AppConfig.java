@@ -14,9 +14,12 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
+import com.ast.MyBills.Utils.CustomToast;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -371,6 +374,28 @@ public class AppConfig {
             list = new ArrayList<>();
         else
             saveIESCO(list);
+        return list;
+    }
+
+
+
+    //list biller Setting
+
+    public void saveBillerSetting(ArrayList<DModel_Bills> lstMyBills) {
+        String json = gson.toJson(lstMyBills);
+        editor.putString("key_lst_BillerSetting", json);
+        editor.commit();
+
+        Log.d("sharedPref","saveBillerSetting: " + json);
+    }
+
+    public ArrayList<DModel_Bills> getBillerSetting() {
+        Type type = new TypeToken<ArrayList<DModel_Bills>>() {}.getType();
+        ArrayList<DModel_Bills> list = gson.fromJson(sharedPref.getString("key_lst_BillerSetting", ""), type);
+        if (list == null)
+            list = new ArrayList<>();
+        else
+            saveBillerSetting(list);
         return list;
     }
 
