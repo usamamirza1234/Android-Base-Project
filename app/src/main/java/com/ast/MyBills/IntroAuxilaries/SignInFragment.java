@@ -112,6 +112,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
 
             AppConfig.getInstance().mUser.isLoggedIn = true;
             AppConfig.getInstance().saveUserProfile();
+
             navToMainActivity();
             }
         }

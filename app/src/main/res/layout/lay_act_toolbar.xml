@@ -182,6 +182,7 @@
                 android:padding="1dp"
                 android:src="@drawable/icalerts" />
             <com.ast.MyBills.Utils.CircleImageView
+                android:id="@+id/tlSetting"
                 android:layout_width="40dp"
 
                 android:layout_height="40dp"

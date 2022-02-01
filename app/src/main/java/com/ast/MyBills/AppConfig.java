@@ -16,9 +16,11 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.ast.MyBills.MainAuxilaries.DModels.DModelBillDashboardInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_CreateAccount;
 import com.ast.MyBills.Utils.CustomToast;
 import com.google.gson.Gson;
 
@@ -398,6 +400,28 @@ public class AppConfig {
             saveBillerSetting(list);
         return list;
     }
+
+
+    //Create Account
+
+    public void saveCreateAccount(ArrayList<DModel_CreateAccount> lstMyCreateAccount) {
+        String json = gson.toJson(lstMyCreateAccount);
+        editor.putString("key_lst_CreateAccount", json);
+        editor.commit();
+
+        Log.d("sharedPref","saveCreateAccount: " + json);
+    }
+
+    public ArrayList<DModel_CreateAccount> getCreateAccount() {
+        Type type = new TypeToken<ArrayList<DModel_CreateAccount>>() {}.getType();
+        ArrayList<DModel_CreateAccount> list = gson.fromJson(sharedPref.getString("key_lst_CreateAccount", ""), type);
+        if (list == null)
+            list = new ArrayList<>();
+        else
+            saveCreateAccount(list);
+        return list;
+    }
+
 
 
 

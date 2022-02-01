@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.IntroActivity;
+import com.ast.MyBills.IntroAuxilaries.WebServices.More_WebHit_Get_Bills;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_CreateAccount;
 import com.ast.MyBills.MainAuxilaries.SmsBroadcastReceiver;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
@@ -28,7 +33,9 @@ import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,15 +46,26 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
     private static final int REQ_USER_CONSENT = 200;
     SmsBroadcastReceiver smsBroadcastReceiver;
-    EditText etOTP;
+    EditText etOTP,etUsername,etPassword,etEmail;
     TextView verifyNumber;
     RelativeLayout rlBack, rlNext;
+
+    ArrayList<DModel_CreateAccount> lstCreateAccount;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View frg = inflater.inflate(R.layout.fragment_sign_up, container, false);
+
+        init();
         verifyNumber = frg.findViewById(R.id.verifyno);
         etOTP = frg.findViewById(R.id.etOTP);
+        etEmail = frg.findViewById(R.id.frg_signup_edt_email);
+        etPassword = frg.findViewById(R.id.frg_signup_edt_password);
+        etUsername = frg.findViewById(R.id.frg_signup_edt_username);
+
+
+
+
         rlBack = frg.findViewById(R.id.frg_signup_rlToolbar);
         rlNext = frg.findViewById(R.id.frg_presigin_rlnext);
         rlBack.setOnClickListener(this);
@@ -55,6 +73,11 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         verifyNumber.setOnClickListener(this);
         return frg;
     }
+    private void init() {
+
+        lstCreateAccount = AppConfig.getInstance().getCreateAccount();
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -70,8 +93,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.frg_presigin_rlnext:
-              navToMyBillsFragment();
 
+                checkErrorConditions();
 
                 break;
 
@@ -81,6 +104,40 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 break;
         }
 
+
+    }
+
+
+
+    private void checkErrorConditions() {
+        if (checkPasswordError()) {
+
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("Name", etUsername.getText().toString());
+            jsonObject.addProperty("Email", etEmail.getText().toString());
+            jsonObject.addProperty("Password", etPassword.getText().toString());
+            jsonObject.addProperty("Number", etOTP.getText().toString());
+
+            lstCreateAccount.add(
+                    new DModel_CreateAccount(etUsername.getText().toString() + "",
+                            etEmail.getText().toString() + "",
+                            etPassword.getText().toString() + "",
+                            etOTP.getText().toString() + ""));
+
+            AppConfig.getInstance().saveCreateAccount(lstCreateAccount);
+
+            navToMyBillsFragment();
+
+        }
+    }
+
+    private boolean checkPasswordError() {
+        if (!etUsername.getText().toString().equalsIgnoreCase("") && !etEmail.getText().toString().isEmpty() && !etPassword.getText().toString().isEmpty() && !etOTP.getText().toString().isEmpty()) {
+            return true;
+        } else {
+            Toast.makeText(getContext(), "Enter all fields", Toast.LENGTH_LONG).show();
+            return false;
+        }
 
     }
 //SMS

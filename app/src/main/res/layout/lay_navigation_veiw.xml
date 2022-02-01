@@ -289,7 +289,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/lay_navigationview_llFeedback"
+                android:id="@+id/lay_navigationview_llEditProfile"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
@@ -311,7 +311,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/lay_navigationview_llFeedback"
+                android:id="@+id/lay_navigationview_llSetting"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"

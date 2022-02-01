@@ -124,7 +124,7 @@
                 android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
 
                 <EditText
-                    android:id="@+id/frg_signup_edt_email"
+                    android:id="@+id/frg_signup_edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"

@@ -31,8 +31,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, IBadgeUpdateListener{
 
-    LinearLayout llPriority_Sector, llDashboard, llPerformancemonitoring, llRapid, llissues, llFeedback, llImmediateDiseasesReportsIDR, llIssuesFacedPrivate, llLogout;
-    CircleImageView editprofile;
+    LinearLayout llPriority_Sector, llDashboard, llPerformancemonitoring, llRapid, llissues,llEditProfile, llSetting, llImmediateDiseasesReportsIDR, llIssuesFacedPrivate, llLogout;
+    CircleImageView editprofile, Setting;
     FragmentTransaction ft;
     RelativeLayout rlBotmbar;
     public DrawerLayout drawer;
@@ -116,9 +116,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         editprofile = findViewById(R.id.profile);
+        Setting = findViewById(R.id.tlSetting);
+
         spinnerBiller = findViewById(R.id.frg_my_bills_spinnerBiller);
 
         editprofile.setOnClickListener(this);
+        Setting.setOnClickListener(this);
+
 
 
         drawer = findViewById(R.id.act_main_drawr);
@@ -134,8 +138,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         llPerformancemonitoring = findViewById(R.id.lay_navigationview_llPerformancemonitoring);
         llDashboard = findViewById(R.id.lay_navigationview_llDashboard);
         llRapid = findViewById(R.id.lay_navigationview_llRapid);
-
-        llFeedback = findViewById(R.id.lay_navigationview_llFeedback);
+        llEditProfile = findViewById(R.id.lay_navigationview_llEditProfile);
+        llSetting = findViewById(R.id.lay_navigationview_llSetting);
         llImmediateDiseasesReportsIDR = findViewById(R.id.lay_navigationview_llimmediatediseasesreports_idr);
         llIssuesFacedPrivate = findViewById(R.id.lay_navigationview_llIssuesFacedPrivate);
         llLogout = findViewById(R.id.lay_navigationview_llLogout);
@@ -160,8 +164,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         llDashboard.setOnClickListener(this);
 //        llRapid.setOnClickListener(this);
 //        llissues.setOnClickListener(this);
-//        llFeedback.setOnClickListener(this);
-
+        llSetting.setOnClickListener(this);
+        llEditProfile.setOnClickListener(this);
 
         llImmediateDiseasesReportsIDR.setOnClickListener(this);
 
@@ -378,9 +382,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -395,8 +396,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 navToHomeFragment();
 
                 break;
+            case R.id.lay_navigationview_llSetting:
+                closeDrawar();
+                navToEditProfileFragment();
+
+                break;
+            case R.id.lay_navigationview_llEditProfile:
+                closeDrawar();
+
+                navToEditProfileFragment();
+
+                break;
 
             case R.id.profile:
+                navToEditProfileFragment();
+
+
+                break;
+            case R.id.tlSetting:
                 navToEditProfileFragment();
 
 

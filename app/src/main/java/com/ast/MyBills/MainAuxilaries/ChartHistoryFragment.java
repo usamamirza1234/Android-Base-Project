@@ -193,7 +193,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         for (int i=0;i< lstUnitHistory.size();i++)
         {
             xAxisValues.add(lstUnitHistory.get(i).getMONTH());
-            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(lstUnitHistory.get(i).getPAYMENT())));
+            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(lstUnitHistory.get(i).getUNITS())));
         }
 
 

@@ -264,23 +264,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.frg_my_bills_rlAdd:
-//                if (!edt_Reffrence.getText().toString().equalsIgnoreCase("")) {
-//
-//                   // RequestBillyear(edt_Reffrence.getText().toString());
-//
-//                    lstMyBills.add(
-//                            new DModel_Bills(str_billType + "",
-//                                    edt_Reffrence.getText().toString() + "",
-//                                    edt_Account.getText().toString() + ""));
-//                    billListingRcvAdapter.notifyDataSetChanged();
-//                    if (AppConfig.getInstance().getBillerSetting().size() > 0) {
-//                        AppConfig.getInstance().getBillerSetting().clear();
-//
-//                    }
-//                    AppConfig.getInstance().saveBillerSetting(lstMyBills);
-//
-//
-//                }
+
                 checkErrorConditions();
                 closeKeyboard();
 
@@ -299,7 +283,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("ref", edt_Reffrence.getText().toString());
-            jsonObject.addProperty("account", edt_Account.getText().toString());
+          //  jsonObject.addProperty("account", edt_Account.getText().toString());
 //            jsonObject.addProperty("billtype", txvBillType.getText().toString());
 //            jsonObject.addProperty("biller", txvBiller.getText().toString());
 
@@ -307,24 +291,13 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
                     RequestBillyear(edt_Reffrence.getText().toString());
 
-                    lstMyBills.add(
-                            new DModel_Bills(str_billType + "",
-                                    edt_Reffrence.getText().toString() + "",
-                                    edt_Account.getText().toString() + ""));
-                    billListingRcvAdapter.notifyDataSetChanged();
-                    if (AppConfig.getInstance().getBillerSetting().size() > 0) {
-                        AppConfig.getInstance().getBillerSetting().clear();
-
-                    }
-                    AppConfig.getInstance().saveBillerSetting(lstMyBills);
 
                 }
-
         }
     }
 
     private boolean checkPasswordError() {
-        if (!edt_Reffrence.getText().toString().equalsIgnoreCase("") && !edt_Account.getText().toString().isEmpty()) {
+        if (!edt_Reffrence.getText().toString().equalsIgnoreCase("")) {
             return true;
         } else {
             Toast.makeText(getContext(), "Enter all fields", Toast.LENGTH_LONG).show();
@@ -403,36 +376,54 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         AppConfig.getInstance().saveIESCO(lstBillInfo);
 
                         if (More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size() > 0) {
+
                             for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size(); i++) {
-                                if (i > 0) {
-                                    Log.d("LOG_AS", "Elements of lastYearBills " + More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
-                                    AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
 
-                                    DModel_Bill dModel_bill = new DModel_Bill(
-                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0),
-                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1),
-                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2),
-                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3)
+                                    if (i > 0 ) {
+                                        Log.d("LOG_AS", "Elements of lastYearBills " + More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
+                                        AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
 
-                                    );
-                                    lastBill.add(dModel_bill);
+
+
+                                        DModel_Bill dModel_bill = new DModel_Bill(
+                                                More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0),
+                                                More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1),
+                                                More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2),
+                                                More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3)
+
+                                        );
+                                        lastBill.add(dModel_bill);
+                                    }
+
                                 }
 
+
+                                if (AppConfig.getInstance().getBillsList().size() > 0) {
+                                    AppConfig.getInstance().getBillsList().clear();
+
+                                }
+                                AppConfig.getInstance().saveBillsList(lastBill);
+
                             }
 
 
-                            if (AppConfig.getInstance().getBillsList().size() > 0) {
-                                AppConfig.getInstance().getBillsList().clear();
-
-                            }
-                            AppConfig.getInstance().saveBillsList(lastBill);
-
-                        }
-
-                    } else {
-                        dismissProgDialog();
-                        Toast.makeText(getContext(), "Error :" + strMsg, Toast.LENGTH_LONG).show();
                     }
+                    lstMyBills.add(
+                            new DModel_Bills(str_billType + "",
+                                    edt_Reffrence.getText().toString() + "",
+                                    edt_Account.getText().toString() + ""));
+
+                    billListingRcvAdapter.notifyDataSetChanged();
+
+
+                    if (AppConfig.getInstance().getBillerSetting().size() > 0) {
+                        AppConfig.getInstance().getBillerSetting().clear();
+
+                    }
+                    AppConfig.getInstance().saveBillerSetting(lstMyBills);
+                }else {
+                    dismissProgDialog();
+                    Toast.makeText(getContext(), "Reference Number Not Exist", Toast.LENGTH_LONG).show();
                 }
             }
 
