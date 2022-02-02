@@ -50,7 +50,9 @@ public class IntroActivity extends AppCompatActivity implements IBadgeUpdateList
             AppConfig.getInstance().shouldSkipSplash = false;
             navtoMainActivity();
         } else {
+
             navToSplash();
+           // navToPreSignInVAFragment();
         }
 
         setMyScreenSize();
@@ -244,10 +246,12 @@ public class IntroActivity extends AppCompatActivity implements IBadgeUpdateList
     }
 
     private void navToSplash() {
+
         Fragment frg = new SplashFragment();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.act_intro_content_frg, frg, AppConstt.FragTag.FN_SplashFragment);
         ft.commit();
+
     }
 
     private void navtoSignInFragment() {

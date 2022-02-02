@@ -632,7 +632,7 @@ public class AppConfig {
         //retain Language as well
         String appLangTemp = loadDefLanguage();
 
-        editor.clear();
+        //editor.clear();
         editor.commit();
 
         initUserSessionData();

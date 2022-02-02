@@ -423,7 +423,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                     AppConfig.getInstance().saveBillerSetting(lstMyBills);
                 }else {
                     dismissProgDialog();
-                    Toast.makeText(getContext(), "Reference Number Not Exist", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Reference Number Does Not Exist", Toast.LENGTH_LONG).show();
                 }
             }
 

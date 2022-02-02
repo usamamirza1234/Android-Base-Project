@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ast.MyBills.IntroAuxilaries.MyBillsFragment;
+import com.ast.MyBills.IntroAuxilaries.PreSignInFragment;
 import com.ast.MyBills.MainAuxilaries.Adapters.BillerSpinnerAdapter;
 import com.ast.MyBills.MainAuxilaries.EditProfileFragment;
 import com.ast.MyBills.MainAuxilaries.HomeFragment;
@@ -344,6 +345,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        ft.commit();
     }
 
+
+
+
     public void clearMyBackStack() {
         int count = fm.getBackStackEntryCount();
         for (int i = 0; i < count; ++i) {
@@ -389,7 +393,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 openDrawar();
                 break;
             case R.id.lay_navigationview_llLogout:
-                AppConfig.getInstance().navtoLogin();
+
+
+                    AppConfig.getInstance().navtoLogin();
+
+
+
                 break;
              case R.id.lay_navigationview_llDashboard:
                 closeDrawar();

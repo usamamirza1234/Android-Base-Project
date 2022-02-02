@@ -48,9 +48,9 @@ public class ImportantDatesRcvAdapter extends RecyclerView.Adapter<ImportantDate
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
 
-        holder.txv_date.setText(mData.get(position).Date);
-        holder.txv_amount.setText(mData.get(position).Amount);
-        holder.txv_biller.setText(mData.get(position).Biller);
+        holder.txv_date.setText(mData.get(position).getDate());
+        holder.txv_amount.setText(mData.get(position).getAmount());
+        holder.txv_biller.setText(mData.get(position).getBiller());
 
         holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position));
     }

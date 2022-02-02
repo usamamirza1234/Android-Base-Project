@@ -88,10 +88,12 @@ public class SplashFragment extends Fragment {
 //                                }
 
                                 requestSwitchLang();
-                                if (!AppConfig.getInstance().mUser.isLoggedIn())
-                                    navToPreSignInVAFragment();
-                                else
-                                    ((IntroActivity) getActivity()).navtoMainActivity();
+                                // TODO: 02-Feb-22
+//                                if (!AppConfig.getInstance().mUser.isLoggedIn())
+//
+                                navToPreSignInVAFragment();
+//                               else
+//                                    ((IntroActivity) getActivity()).navtoMainActivity();
 
 
                             }
