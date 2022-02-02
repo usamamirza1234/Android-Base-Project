@@ -219,7 +219,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
                     .commit();
 
 
-            materialCalendarView_nextMonth.addDecorator(new EventDecorator(getActivity()));
+              materialCalendarView_nextMonth.addDecorator(new EventDecorator(getActivity()));
 //            materialCalendarView_nextMonth.addDecorator(new DisableDatesDecorator());
 //            materialCalendarView_nextMonth.addDecorator(new TodayDateDecorator(getActivity()));
 

@@ -110,6 +110,8 @@ public class More_WebHit_Get_Bills {
 
             private String TARIFF;
 
+            private String TOTALUNITS;
+
             public void setBILLMONTH(String BILLMONTH){
                 this.BILLMONTH = BILLMONTH;
             }
@@ -230,8 +232,13 @@ public class More_WebHit_Get_Bills {
             public String getTARIFF(){
                 return this.TARIFF;
             }
+            public void setTOTALUNITS(String TOTALUNITS){
+                this.TOTALUNITS = TOTALUNITS;
+            }
+            public String getTOTALUNITS(){
+                return this.TOTALUNITS;
+            }
         }
-
 
         private IescoBill iescoBill;
 
@@ -243,17 +250,9 @@ public class More_WebHit_Get_Bills {
         }
 
 
-//        private IescoBill iescoBill;
-//
-//        public IescoBill getIescoBill() {
-//            return this.iescoBill;
-//        }
-//
-//        public void setIescoBill(IescoBill iescoBill) {
-//            this.iescoBill = iescoBill;
-//        }
-//
-//        public class IescoBill {
+
+//        public class IescoBill
+//        {
 //            private String BILLMONTH;
 //
 //            private String READINGDATE;
@@ -294,166 +293,139 @@ public class More_WebHit_Get_Bills {
 //
 //            private String TARIFF;
 //
-//            public String getBILLMONTH() {
-//                return this.BILLMONTH;
-//            }
-//
-//            public void setBILLMONTH(String BILLMONTH) {
+//            public void setBILLMONTH(String BILLMONTH){
 //                this.BILLMONTH = BILLMONTH;
 //            }
-//
-//            public String getREADINGDATE() {
-//                return this.READINGDATE;
+//            public String getBILLMONTH(){
+//                return this.BILLMONTH;
 //            }
-//
-//            public void setREADINGDATE(String READINGDATE) {
+//            public void setREADINGDATE(String READINGDATE){
 //                this.READINGDATE = READINGDATE;
 //            }
-//
-//            public String getISSUEDATE() {
-//                return this.ISSUEDATE;
+//            public String getREADINGDATE(){
+//                return this.READINGDATE;
 //            }
-//
-//            public void setISSUEDATE(String ISSUEDATE) {
+//            public void setISSUEDATE(String ISSUEDATE){
 //                this.ISSUEDATE = ISSUEDATE;
 //            }
-//
-//            public String getDUEDATE() {
-//                return this.DUEDATE;
+//            public String getISSUEDATE(){
+//                return this.ISSUEDATE;
 //            }
-//
-//            public void setDUEDATE(String DUEDATE) {
+//            public void setDUEDATE(String DUEDATE){
 //                this.DUEDATE = DUEDATE;
 //            }
-//
-//            public String getNAME() {
-//                return this.NAME;
+//            public String getDUEDATE(){
+//                return this.DUEDATE;
 //            }
-//
-//            public void setNAME(String NAME) {
+//            public void setNAME(String NAME){
 //                this.NAME = NAME;
 //            }
-//
-//            public String getADDRESS() {
-//                return this.ADDRESS;
+//            public String getNAME(){
+//                return this.NAME;
 //            }
-//
-//            public void setADDRESS(String ADDRESS) {
+//            public void setADDRESS(String ADDRESS){
 //                this.ADDRESS = ADDRESS;
 //            }
-//
-//            public String getCONSUMERID() {
-//                return this.CONSUMERID;
+//            public String getADDRESS(){
+//                return this.ADDRESS;
 //            }
-//
-//            public void setCONSUMERID(String CONSUMERID) {
+//            public void setCONSUMERID(String CONSUMERID){
 //                this.CONSUMERID = CONSUMERID;
 //            }
-//
-//            public String getPAYABLEWITHINDUEDATE() {
-//                return this.PAYABLEWITHINDUEDATE;
+//            public String getCONSUMERID(){
+//                return this.CONSUMERID;
 //            }
-//
-//            public void setPAYABLEWITHINDUEDATE(String PAYABLEWITHINDUEDATE) {
+//            public void setPAYABLEWITHINDUEDATE(String PAYABLEWITHINDUEDATE){
 //                this.PAYABLEWITHINDUEDATE = PAYABLEWITHINDUEDATE;
 //            }
-//
-//            public String getPAYABLEAFTERDUEDATE() {
-//                return this.PAYABLEAFTERDUEDATE;
+//            public String getPAYABLEWITHINDUEDATE(){
+//                return this.PAYABLEWITHINDUEDATE;
 //            }
-//
-//            public void setPAYABLEAFTERDUEDATE(String PAYABLEAFTERDUEDATE) {
+//            public void setPAYABLEAFTERDUEDATE(String PAYABLEAFTERDUEDATE){
 //                this.PAYABLEAFTERDUEDATE = PAYABLEAFTERDUEDATE;
 //            }
-//
-//            public List<List<String>> getLastYearBills() {
-//                return this.lastYearBills;
+//            public String getPAYABLEAFTERDUEDATE(){
+//                return this.PAYABLEAFTERDUEDATE;
 //            }
-//
-//            public void setLastYearBills(List<List<String>> lastYearBills) {
+//            public void setLastYearBills(List<List<String>> lastYearBills){
 //                this.lastYearBills = lastYearBills;
 //            }
-//
-//            public String getBillType() {
-//                return this.billType;
+//            public List<List<String>> getLastYearBills(){
+//                return this.lastYearBills;
 //            }
-//
-//            public void setBillType(String billType) {
+//            public void setBillType(String billType){
 //                this.billType = billType;
 //            }
-//
-//            public String getCity() {
-//                return this.city;
+//            public String getBillType(){
+//                return this.billType;
 //            }
-//
-//            public void setCity(String city) {
+//            public void setCity(String city){
 //                this.city = city;
 //            }
-//
-//            public String getReferenceNumber() {
-//                return this.referenceNumber;
+//            public String getCity(){
+//                return this.city;
 //            }
-//
-//            public void setReferenceNumber(String referenceNumber) {
+//            public void setReferenceNumber(String referenceNumber){
 //                this.referenceNumber = referenceNumber;
 //            }
-//
-//            public String getMETERNO() {
-//                return this.METERNO;
+//            public String getReferenceNumber(){
+//                return this.referenceNumber;
 //            }
-//
-//            public void setMETERNO(String METERNO) {
+//            public void setMETERNO(String METERNO){
 //                this.METERNO = METERNO;
 //            }
-//
-//            public String getPREVIOUSREADING() {
-//                return this.PREVIOUSREADING;
+//            public String getMETERNO(){
+//                return this.METERNO;
 //            }
-//
-//            public void setPREVIOUSREADING(String PREVIOUSREADING) {
+//            public void setPREVIOUSREADING(String PREVIOUSREADING){
 //                this.PREVIOUSREADING = PREVIOUSREADING;
 //            }
-//
-//            public String getPRESENTREADING() {
-//                return this.PRESENTREADING;
+//            public String getPREVIOUSREADING(){
+//                return this.PREVIOUSREADING;
 //            }
-//
-//            public void setPRESENTREADING(String PRESENTREADING) {
+//            public void setPRESENTREADING(String PRESENTREADING){
 //                this.PRESENTREADING = PRESENTREADING;
 //            }
-//
-//            public String getMF() {
-//                return this.MF;
+//            public String getPRESENTREADING(){
+//                return this.PRESENTREADING;
 //            }
-//
-//            public void setMF(String MF) {
+//            public void setMF(String MF){
 //                this.MF = MF;
 //            }
-//
-//            public String getUNITS() {
-//                return this.UNITS;
+//            public String getMF(){
+//                return this.MF;
 //            }
-//
-//            public void setUNITS(String UNITS) {
+//            public void setUNITS(String UNITS){
 //                this.UNITS = UNITS;
 //            }
-//
-//            public String getSTATUS() {
-//                return this.STATUS;
+//            public String getUNITS(){
+//                return this.UNITS;
 //            }
-//
-//            public void setSTATUS(String STATUS) {
+//            public void setSTATUS(String STATUS){
 //                this.STATUS = STATUS;
 //            }
-//
-//            public String getTARIFF() {
-//                return this.TARIFF;
+//            public String getSTATUS(){
+//                return this.STATUS;
 //            }
-//
-//            public void setTARIFF(String TARIFF) {
+//            public void setTARIFF(String TARIFF){
 //                this.TARIFF = TARIFF;
 //            }
+//            public String getTARIFF(){
+//                return this.TARIFF;
+//            }
 //        }
+//
+//
+//        private IescoBill iescoBill;
+//
+//        public void setIescoBill(IescoBill iescoBill){
+//            this.iescoBill = iescoBill;
+//        }
+//        public IescoBill getIescoBill(){
+//            return this.iescoBill;
+//        }
+//
+
 
 
 

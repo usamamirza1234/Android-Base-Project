@@ -211,6 +211,13 @@ public class MaterialCalendarView extends ViewGroup {
 
     }
 
+    public void setprevMonth()
+    {
+        pager.setCurrentItem(pager.getCurrentItem() - 2, true);
+
+
+    }
+
     private final ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
