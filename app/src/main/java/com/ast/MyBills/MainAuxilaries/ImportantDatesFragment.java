@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ast.MyBills.AppConfig;
+import com.ast.MyBills.IntroAuxilaries.WebServices.More_WebHit_Get_Bills;
 import com.ast.MyBills.MainAuxilaries.Adapters.Dashboardinforcvadapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.ImportantDatesRcvAdapter;
@@ -36,6 +39,8 @@ import com.github.sundeepk.compactcalendarview.domain.Event;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -299,6 +304,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
 
 
     //region Fragment Compulsory
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void init() {
         setBottomBar();
         lstElectricAds = new ArrayList<>();
@@ -306,22 +312,53 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         strlstImportantDates = new ArrayList();
 
 
-        strlstImportantDates.add("2022-01-24");
-        strlstImportantDates.add("2022-01-26");
-        strlstImportantDates.add("2022-01-9");
-        strlstImportantDates.add("2022-01-27");
-        strlstImportantDates.add("2022-01-28");
-        strlstImportantDates.add("2022-01-1");
 
-        strlstImportantDates.add("2022-02-3");
-        strlstImportantDates.add("2022-02-4");
+        for (int i=0; i<AppConfig.getInstance().    lstImpUSAMA.size();i++)
+        {
+            String strdate = AppConfig.getInstance().    lstImpUSAMA.get(i);
+            Log.d("logApiData", "strdate:  " + strdate);
 
-        strlstImportantDates.add("2022-02-6");
+            SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);
+            try {
+                Date date = format.parse(strdate);
+                Log.d("logApiData", "date1:  " + date);
 
+
+                SimpleDateFormat dayMonth = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                String strmonth = dayMonth.format(date);
+                Log.d("logApiData","formattedDate:  " +strmonth);
+
+
+                strlstImportantDates.add(strmonth);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+//        String date = "15-Oct-2018";
+
+
+
+//        strlstImportantDates.add("2022-01-24");
+//        strlstImportantDates.add("2022-01-26");
+//        strlstImportantDates.add("2022-01-9");
+//        strlstImportantDates.add("2022-01-27");
+//        strlstImportantDates.add("2022-01-28");
+//        strlstImportantDates.add("2022-01-1");
+//
+//        strlstImportantDates.add("2022-02-3");
+//        strlstImportantDates.add("2022-02-4");
+//
+//        strlstImportantDates.add("2022-02-6");
 
 
 
     }
+
+
+
 
     private void bindviews(View view) {
 

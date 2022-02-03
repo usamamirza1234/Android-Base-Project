@@ -29,13 +29,11 @@ import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_ImportantDates;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
-import com.ast.MyBills.Utils.CustomToast;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
 import com.ast.MyBills.Utils.IWebCallback;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MyBillsFragment extends Fragment implements View.OnClickListener {
@@ -64,6 +62,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     private Dialog progressDialog;
     private ArrayList<DModelBillInfo> lstBillInfo;
     private ArrayList<DModel_ImportantDates> lstImp;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View frg = inflater.inflate(R.layout.fragment_my_bills, container, false);
@@ -235,6 +234,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     private void init() {
         setBottomBar();
         lstImp = new ArrayList<>();
+      AppConfig.getInstance().  lstImpUSAMA = new ArrayList<>();
        // lstMyBills = new ArrayList<>();
         lstBillInfo = new ArrayList<>();
         lastBill = new ArrayList<>();
@@ -367,16 +367,25 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         dModelBillInfo.setUnits(More_WebHit_Get_Bills.responseObject.getIescoBill().getTOTALUNITS());
                         dModelBillInfo.setPresentReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPRESENTREADING());
                         dModelBillInfo.setPrevReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPREVIOUSREADING());
+
+
+                        dModelBillInfo.setReadingDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
+                        dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
+                        dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
                         lstBillInfo.add(dModelBillInfo);
 
-
+                    AppConfig.getInstance().    lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+                        AppConfig.getInstance().       lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
+                        AppConfig.getInstance().          lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
 //                        DModel_ImportantDates dModel_importantDates = new DModel_ImportantDates();
 //                        dModel_importantDates.setBiller(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
 //                        dModel_importantDates.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
-//                        dModel_importantDates.setDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+//                        dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+//                        dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
+//                        dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
 //
 //                        lstImp.add(dModel_importantDates);
-
+//
 
 
                         if (AppConfig.getInstance().getBillsIESCO().size() > 0) {
