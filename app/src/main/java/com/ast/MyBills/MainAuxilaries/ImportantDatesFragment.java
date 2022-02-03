@@ -23,6 +23,7 @@ import com.ast.MyBills.MainAuxilaries.Adapters.Dashboardinforcvadapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.ImportantDatesRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBanner;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_ImportantDates;
 import com.ast.MyBills.MainAuxilaries.MaterialCalendar.decorators.DisableSelectedDatesDecorator;
 import com.ast.MyBills.MainAuxilaries.MaterialCalendar.decorators.EventDecorator;
@@ -86,7 +87,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         bindviews(frg);
         initializeAds();
         populateCalenders();
-        populateImportantDates();
+        populateImportantDates(lstImportantDates);
         return frg;
     }
 
@@ -266,15 +267,15 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
     //endregion
 
     //region Important Dates
-    private void populateImportantDates() {
-        lstImportantDates.clear();
-        int size = (strlstImportantDates.size());
-        for (int i = 0; i < size; i++) {
-
-
-            lstImportantDates.add(new DModel_ImportantDates(strlstImportantDates.get(i).toString() + "", "3,00" + i, "ISECO"));
-
-        }
+    private void populateImportantDates(ArrayList<DModel_ImportantDates> lstImportantDates) {
+      //  lstImportantDates.clear();
+//        int size = (strlstImportantDates.size());
+//        for (int i = 0; i < size; i++) {
+//
+//
+//           // lstImportantDates.add(new DModel_ImportantDates( AppConfig.getInstance().lstImpUSAMA.get(i).toString() + "", "" , ""));
+//
+//        }
 
         if (importantDatesRcvAdapter == null) {
 
@@ -310,8 +311,8 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         lstElectricAds = new ArrayList<>();
         lstImportantDates = new ArrayList<>();
         strlstImportantDates = new ArrayList();
-
-
+        lstImportantDates = AppConfig.getInstance().getimp();
+        AppConfig.getInstance().lstImpUSAMA = AppConfig.getInstance().getimpString();
 
         for (int i=0; i<AppConfig.getInstance().    lstImpUSAMA.size();i++)
         {

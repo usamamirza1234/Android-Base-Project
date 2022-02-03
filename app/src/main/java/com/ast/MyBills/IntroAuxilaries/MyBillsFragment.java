@@ -87,10 +87,20 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         ArrayList<String> lstGender = new ArrayList<>();
 
 
+
         lstGender.add("Electricity");
         lstGender.add("Gas");
         lstGender.add("Water");
-        lstGender.add("Mobile");
+        lstGender.add("Telephone");
+        lstGender.add("Mobile Phone");
+
+        lstGender.add("Education Fee");
+        lstGender.add("TV Cable");
+        lstGender.add("Internet");
+        lstGender.add("Society Bill");
+        lstGender.add("Loan");
+        lstGender.add("Insurance");
+        lstGender.add("Credit Line");
         lstGender.add(getResources().getString(R.string.select_bill_type));
 
 
@@ -116,6 +126,13 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         lstBiller.add("PESCO");
                         lstBiller.add("GEPCO");
 
+                        lstBiller.add("FESCO");
+                        lstBiller.add("MEPCO");
+                        lstBiller.add("HESCO");
+                        lstBiller.add("SEPCO");
+                        lstBiller.add("QESCO");
+                        lstBiller.add("TESCO");
+
                         lstBiller.add(getResources().getString(R.string.select_biller_type));
                         billerSpinnerAdapter = new BillerSpinnerAdapter(getContext(), lstBiller);
                         spinnerBiller.setAdapter(billerSpinnerAdapter);
@@ -125,7 +142,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                     case "Gas":
                       //  CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
 
-                        lstBiller.add("SSG");
+                        lstBiller.add("SNGPL");
 
 
                         lstBiller.add(getResources().getString(R.string.select_biller_type));
@@ -139,8 +156,8 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
 
 
-                        lstBiller.add("Nestle");
-                        lstBiller.add("PepsiCo.");
+                        lstBiller.add("WASA");
+
 
 
                         lstBiller.add(getResources().getString(R.string.select_biller_type));
@@ -149,14 +166,13 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         spinnerBiller.setSelection(billerSpinnerAdapter.getCount());
                         break;
 
-                    case "Mobile":
+                    case "Telephone":
                        // CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
 
 
 
-                        lstBiller.add("JAZZ");
-                        lstBiller.add("UFONE");
-                        lstBiller.add("ZONG");
+                        lstBiller.add("PTCL");
+
 
                         lstBiller.add(getResources().getString(R.string.select_biller_type));
                         billerSpinnerAdapter = new BillerSpinnerAdapter(getContext(), lstBiller);
@@ -375,16 +391,23 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         lstBillInfo.add(dModelBillInfo);
 
                     AppConfig.getInstance().    lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-                        AppConfig.getInstance().       lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
-                        AppConfig.getInstance().          lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
-//                        DModel_ImportantDates dModel_importantDates = new DModel_ImportantDates();
-//                        dModel_importantDates.setBiller(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
-//                        dModel_importantDates.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
-//                        dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-//                        dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
-//                        dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
-//
-//                        lstImp.add(dModel_importantDates);
+                      //  AppConfig.getInstance().       lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
+                       // AppConfig.getInstance().          lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
+
+///
+                        DModel_ImportantDates dModel_importantDates = new DModel_ImportantDates();
+                        dModel_importantDates.setBiller(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
+                        dModel_importantDates.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
+                        dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+
+
+                        lstImp.add(dModel_importantDates);
+                        if (AppConfig.getInstance().getimp().size() > 0) {
+                            AppConfig.getInstance().getimp().clear();
+
+                        }
+                        AppConfig.getInstance().saveimp(lstImp);
+                        AppConfig.getInstance().saveimpString( AppConfig.getInstance().lstImpUSAMA);
 //
 
 

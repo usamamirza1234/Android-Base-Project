@@ -21,6 +21,7 @@ import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_CreateAccount;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_EditProfile;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_ImportantDates;
 import com.ast.MyBills.Utils.CustomToast;
 import com.google.gson.Gson;
@@ -423,8 +424,67 @@ public class AppConfig {
         return list;
     }
 
+    //EditProfile
+
+    public void saveEditProfile(ArrayList<DModel_EditProfile> lstEditProfile) {
+        String json = gson.toJson(lstEditProfile);
+        editor.putString("key_lst_EditProfile", json);
+        editor.commit();
+
+        Log.d("sharedPref","saveEditProfile: " + json);
+    }
+
+    public ArrayList<DModel_EditProfile> getEditProfile() {
+        Type type = new TypeToken<ArrayList<DModel_EditProfile>>() {}.getType();
+        ArrayList<DModel_EditProfile> list = gson.fromJson(sharedPref.getString("key_lst_EditProfile", ""), type);
+        if (list == null)
+            list = new ArrayList<>();
+        else
+            saveEditProfile(list);
+        return list;
+    }
 
 
+    //imp
+
+    public void saveimp(ArrayList<DModel_ImportantDates> lstimp) {
+        String json = gson.toJson(lstimp);
+        editor.putString("key_lst_imp", json);
+        editor.commit();
+
+        Log.d("sharedPref","saveimp: " + json);
+    }
+
+    public ArrayList<DModel_ImportantDates> getimp() {
+        Type type = new TypeToken<ArrayList<DModel_ImportantDates>>() {}.getType();
+        ArrayList<DModel_ImportantDates> list = gson.fromJson(sharedPref.getString("key_lst_imp", ""), type);
+        if (list == null)
+            list = new ArrayList<>();
+        else
+            saveimp(list);
+        return list;
+    }
+
+
+    //impString
+
+    public void saveimpString(ArrayList<String> lstimpString) {
+        String json = gson.toJson(lstimpString);
+        editor.putString("key_lst_impString", json);
+        editor.commit();
+
+        Log.d("sharedPref","saveimp: " + json);
+    }
+
+    public ArrayList<String> getimpString() {
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        ArrayList<String> list = gson.fromJson(sharedPref.getString("key_lst_impString", ""), type);
+        if (list == null)
+            list = new ArrayList<>();
+        else
+            saveimpString(list);
+        return list;
+    }
 
 
 

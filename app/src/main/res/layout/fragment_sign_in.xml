@@ -84,7 +84,7 @@
                     android:padding="10dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text=""
+                    android:text="Admin"
                     android:textColor="@color/light_gray3"
                     android:textColorHint="@color/light_gray3"
                     android:textCursorDrawable="@null" />
@@ -115,7 +115,7 @@
                     android:padding="10dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text=""
+                    android:text="Admin123"
                     android:textColor="@color/light_gray3"
                     android:textColorHint="@color/light_gray3"
                     android:textCursorDrawable="@null" />

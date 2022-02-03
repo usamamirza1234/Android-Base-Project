@@ -95,7 +95,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             case R.id.frg_presigin_rlnext:
 
                 checkErrorConditions();
-
+                closeKeyboard();
                 break;
 
             case R.id.verifyno:
@@ -139,6 +139,11 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             return false;
         }
 
+    }
+
+
+    private void closeKeyboard() {
+        AppConfig.getInstance().closeKeyboard(getActivity());
     }
 //SMS
 

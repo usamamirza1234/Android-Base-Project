@@ -108,7 +108,7 @@
                 android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
 
                 <EditText
-                    android:id="@+id/frg_edit_profile_edt_confirm_password"
+                    android:id="@+id/frg_edit_profile_edt_Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -136,7 +136,7 @@
                 android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
 
                 <EditText
-                    android:id="@+id/frg_edit_profile_edt_confirm_password"
+                    android:id="@+id/frg_edit_profile_edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -165,7 +165,7 @@
 
                 <EditText
 
-                    android:id="@+id/frg_edit_profile_edt_confirm_password"
+                    android:id="@+id/frg_edit_profile_edt_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -193,7 +193,7 @@
                 android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
 
                 <EditText
-                    android:id="@+id/frg_edit_profile_edt_username"
+                    android:id="@+id/frg_edit_profile_edt_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
