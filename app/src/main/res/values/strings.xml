@@ -38,6 +38,10 @@
     <string name="frg_my_bills">My Bills</string>
     <string name="select_bill_type">Bill Type</string>
     <string name="select_biller_type">Select Biller</string>
+    <string name="verification_code_send">OTP Sent on your Mobile Number</string>
+    <string name="verification_code_send_2"> Please enter the verification OTP below</string>
+    <string name="enter_otp_that_send">\"Enter Pin Code that has been sent to your PHONE NUMBER\"</string>
+    <string name="technical_fault_otp">Due to some technical problem, you are not recieving the code via sms, therefore please use verification code:</string>
     <string name="frg_history">History</string>
     <string name="frg_important_dates">Important Dates</string>
     <string name="frg_settings">Settings</string>

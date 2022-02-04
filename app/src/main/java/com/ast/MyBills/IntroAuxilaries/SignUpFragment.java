@@ -1,8 +1,10 @@
 package com.ast.MyBills.IntroAuxilaries;
 
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,12 +22,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.IntroActivity;
+import com.ast.MyBills.IntroAuxilaries.WebServices.Intro_WebHit_Post_OTP;
 import com.ast.MyBills.IntroAuxilaries.WebServices.More_WebHit_Get_Bills;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_CreateAccount;
 import com.ast.MyBills.MainAuxilaries.SmsBroadcastReceiver;
+import com.ast.MyBills.MainAuxilaries.VerificationFragment_OTP;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
+import com.ast.MyBills.Utils.IWebCallback;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.credentials.Credential;
 import com.google.android.gms.auth.api.credentials.HintRequest;
@@ -49,7 +54,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     EditText etOTP,etUsername,etPassword,etEmail;
     TextView verifyNumber;
     RelativeLayout rlBack, rlNext;
-
+    private Dialog progressDialog;
     ArrayList<DModel_CreateAccount> lstCreateAccount;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,11 +105,66 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
             case R.id.verifyno:
 
-              //  startSmartUserConsent();
+                String strPhoneNumber = etOTP.getText().toString();
+                strPhoneNumber = "92" + strPhoneNumber.substring(1);
+
+                AppConfig.getInstance().mUser.setPhone(strPhoneNumber);
+                RequestOTP(data);
+
+                //startSmartUserConsent();
                 break;
         }
 
 
+    }
+    String data ="";
+
+    private void RequestOTP(String data) {
+        showProgDialog();
+        Intro_WebHit_Post_OTP intro_webHit_post_otp = new Intro_WebHit_Post_OTP();
+
+        intro_webHit_post_otp.postOTP(getContext(), new IWebCallback() {
+            @Override
+            public void onWebResult(boolean isSuccess, String strMsg) {
+                dismissProgDialog();
+                if (isSuccess) {
+//                    if (Intro_WebHit_Post_OTP.responseObject != null &&
+//                            Intro_WebHit_Post_OTP.responseObject.getResult() != null) {
+//
+//
+//                   //     navToCompleteFAProfileFragment();
+                   navOTPFragment();
+//
+//                    }
+
+                } else {
+                    AppConfig.getInstance().showErrorMessage(getContext(), strMsg);
+                }
+            }
+
+            @Override
+            public void onWebException(Exception ex) {
+//                CustomToast.showToastMessage(IntroActivity.this, AppConfig.getInstance().getNetworkExceptionMessage(ex.getMessage()), Toast.LENGTH_SHORT);
+                AppConfig.getInstance().showErrorMessage(getContext(), ex.getLocalizedMessage());
+            }
+        }, data);
+
+    }
+
+    //region  functions for Dialog
+    private void dismissProgDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    private void showProgDialog() {
+        progressDialog = new Dialog(getActivity(), R.style.AppTheme);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.dialog_progress);
+
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
 
@@ -221,6 +281,17 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Fragment frag = new MyBillsFragment();
+        ft.add(R.id.act_intro_content_frg, frag, AppConstt.FragTag.FN_MyBillsFragment);
+        ft.addToBackStack(AppConstt.FragTag.FN_MyBillsFragment);
+        ft.hide(this);
+        ft.commit();
+    }
+
+
+    private void navOTPFragment() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment frag = new VerificationFragment_OTP();
         ft.add(R.id.act_intro_content_frg, frag, AppConstt.FragTag.FN_MyBillsFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_MyBillsFragment);
         ft.hide(this);

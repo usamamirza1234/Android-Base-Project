@@ -36,6 +36,25 @@ public class DModelUser {
     public String Authorization;
     public String Password_Token;
 
+    public String getPinCode() {
+        return PinCode;
+    }
+
+    public void setPinCode(String pinCode) {
+        PinCode = pinCode;
+    }
+
+    public String getCNIC() {
+        return CNIC;
+    }
+
+    public void setCNIC(String CNIC) {
+        this.CNIC = CNIC;
+    }
+
+    public String PinCode;
+    public String CNIC;
+
     public DModelUser() {
         this.User_Id = 0;
         this.Name = "";
