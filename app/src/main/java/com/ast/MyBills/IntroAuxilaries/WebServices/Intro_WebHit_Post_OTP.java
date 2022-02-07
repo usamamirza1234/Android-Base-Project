@@ -22,6 +22,7 @@ import cz.msebera.android.httpclient.entity.StringEntity;
 public class Intro_WebHit_Post_OTP {
 
 
+
     //object bnaya ha api k respnse ko website a dalny k bad
     // root class ka nam hatm kr dia ha
     //andr wali czain rhny di han
@@ -71,7 +72,7 @@ public class Intro_WebHit_Post_OTP {
 
 
                             iWebCallback.onWebResult(true, "");
-
+//
 //                            switch (statusCode) {
 //
 //                                case AppConstt.ServerStatus.OK:

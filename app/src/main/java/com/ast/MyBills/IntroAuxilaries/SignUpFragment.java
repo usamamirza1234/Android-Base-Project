@@ -41,6 +41,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,7 +57,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     RelativeLayout rlBack, rlNext;
     private Dialog progressDialog;
     ArrayList<DModel_CreateAccount> lstCreateAccount;
-
+    int randomNumber;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View frg = inflater.inflate(R.layout.fragment_sign_up, container, false);
@@ -70,6 +71,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
 
 
+        Random random = new Random();
+        randomNumber = random.nextInt(9999);
 
         rlBack = frg.findViewById(R.id.frg_signup_rlToolbar);
         rlNext = frg.findViewById(R.id.frg_presigin_rlnext);
@@ -106,7 +109,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             case R.id.verifyno:
 
                 String strPhoneNumber = etOTP.getText().toString();
-                strPhoneNumber = "92" + strPhoneNumber.substring(1);
+                strPhoneNumber = "" + strPhoneNumber.substring(0);
 
                 AppConfig.getInstance().mUser.setPhone(strPhoneNumber);
 
@@ -117,10 +120,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("loginId", "923168159860");
-                jsonObject.addProperty("loginPassword",   "Roberts123@");
-                jsonObject.addProperty("Destination", "sms.MobileNumber");
+                jsonObject.addProperty("loginPassword",   "Roberts1234@");
+                jsonObject.addProperty("Destination", etOTP.getText().toString());
                 jsonObject.addProperty("Mask","smsapp");
-                jsonObject.addProperty("Message","sms.Text");
+                jsonObject.addProperty("Message",randomNumber);
                 jsonObject.addProperty("Unicode", "0");
                 jsonObject.addProperty("ShortCodePrefered", "n");
                 Log.d("LOG_AS", "postSignUp: " + jsonObject.toString());
@@ -132,7 +135,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
                 RequestOTP(jsonObject.toString());
 
-                //startSmartUserConsent();
+
                 break;
         }
 

@@ -37,6 +37,7 @@ import com.google.gson.JsonObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 
 import swarajsaaj.smscodereader.interfaces.OTPListener;
@@ -61,6 +62,8 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
     private CountDownTimer mTimer;
     private Dialog progressDialog;
 
+
+    int randomNumber;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,7 +74,8 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
         showSoftKeyboardForced();
         startCountDownTimer(TIME_COUNTDOWN);
 
-
+        Random random = new Random();
+        randomNumber = random.nextInt(9999);
         String strPhoneNumber = String.valueOf(AppConfig.getInstance().mUser.getPhone());
         strPhoneNumber = "" + strPhoneNumber.substring(1);
         strPhoneNumber = "0" + strPhoneNumber.substring(1);
@@ -130,14 +134,14 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
 //                    }
 
                 } else {
-                    AppConfig.getInstance().showErrorMessage(getContext(), strMsg);
+                  //  AppConfig.getInstance().showErrorMessage(getContext(), strMsg);
                 }
             }
 
             @Override
             public void onWebException(Exception ex) {
 //                CustomToast.showToastMessage(IntroActivity.this, AppConfig.getInstance().getNetworkExceptionMessage(ex.getMessage()), Toast.LENGTH_SHORT);
-                AppConfig.getInstance().showErrorMessage(getContext(), ex.getLocalizedMessage());
+                //AppConfig.getInstance().showErrorMessage(getContext(), ex.getLocalizedMessage());
             }
         }, data);
 
@@ -377,13 +381,40 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.frg_sign_up_verifictn_txv_nt_received:
-                requestCode();
+
+
+
+
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("loginId", "923168159860");
+                jsonObject.addProperty("loginPassword",   "Roberts1234@");
+                jsonObject.addProperty("Destination", AppConfig.getInstance().mUser.getPhone());
+                jsonObject.addProperty("Mask","smsapp");
+                jsonObject.addProperty("Message",randomNumber);
+                jsonObject.addProperty("Unicode", "0");
+                jsonObject.addProperty("ShortCodePrefered", "n");
+                Log.d("LOG_AS", "postSignUp: " + jsonObject.toString());
+                //requestCode();
+
+
+                Log.d("LOG_AS", "Resend " + resendTries);
+                Log.d("LOG_AS", "PinCodeTries " + pinCodeTries);
+                if (pinCodeTries < resendTries) {
+                    requestResendOTP(jsonObject.toString());
+
+                } else {
+
+                    showOTP();
+
+                }
+
+
 
 
                 break;
             case R.id.frg_verifiacction_rl_login:
 
-
+                  navToSignUpFragment();
                 Log.d("LOG_AS", "postOTP: getPinCode " + AppConfig.getInstance().mUser.getPinCode());
                 Log.d("LOG_AS", "postOTP: strEnteredPIN " + strEnteredPIN);
 
@@ -392,21 +423,20 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
                     Log.d("LOG_AS", "postOTP: getPhone " + AppConfig.getInstance().mUser.getPhone());
 
 
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("loginId", "923168159860");
-                    jsonObject.addProperty("loginPassword",   "Roberts123@");
-                    jsonObject.addProperty("Destination", "sms.MobileNumber");
-                    jsonObject.addProperty("Mask","smsapp");
-                    jsonObject.addProperty("Message","sms.Text");
-                    jsonObject.addProperty("Unicode", "0");
-                    jsonObject.addProperty("ShortCodePrefered", "n");
-                    Log.d("LOG_AS", "postSignUp: " + jsonObject.toString());
+//                    JsonObject jsonObject1 = new JsonObject();
+//                    jsonObject1.addProperty("loginId", "923168159860");
+//                    jsonObject1.addProperty("loginPassword",   "Roberts1234@");
+//                    jsonObject1.addProperty("Destination", AppConfig.getInstance().mUser.getPhone());
+//                    jsonObject1.addProperty("Mask","smsapp");
+//                    jsonObject1.addProperty("Message",randomNumber);
+//                    jsonObject1.addProperty("Unicode", "0");
+//                    jsonObject1.addProperty("ShortCodePrefered", "n");
+//                    Log.d("LOG_AS", "postSignUp: " + jsonObject1.toString());
 
 
-                    requestVerifyPin( jsonObject.toString());
+                 //  requestVerifyPin( jsonObject1.toString());
 
-                } else
-                    AppConfig.getInstance().showErrorMessage(getContext(), getString(R.string.enter_otp_that_send));
+                }
 
                 break;
             default:
@@ -414,20 +444,6 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
         }
     }
 
-    private void requestCode() {
-
-
-        Log.d("LOG_AS", "Resend " + resendTries);
-        Log.d("LOG_AS", "PinCodeTries " + pinCodeTries);
-        if (pinCodeTries < resendTries) {
-            requestResendOTP();
-
-        } else {
-
-            showOTP();
-
-        }
-    }
 
     private void showOTP() {
         String str_changeTextColot = getColoredSpanned("", "#A0A0A0");
@@ -452,61 +468,40 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
         return input;
     }
 
+    String data ="";
+    private void requestResendOTP(String data) {
 
-    private void requestResendOTP() {
 
 
-        String lang = "";
+            showProgDialog();
+            Intro_WebHit_Post_OTP intro_webHit_post_otp = new Intro_WebHit_Post_OTP();
 
-        if (AppConfig.getInstance().mLanguage.equalsIgnoreCase(AppConstt.AppLang.LANG_UR)) {
-            lang = "u";
-        } else {
-            lang = "e";
-        }
-
-        Date date = new Date();
-        String str_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH).format(date);
-        String data = "{" +
-                "\"id\"" + ":" + 0 + "," +
-                "\"pinCode\"" + ":" + 0 + "," +
-
-                "\"isDeleted\"" + ":" + true + "," +
-                "\"isVerfied\"" + ":" + true + "," +
-//                "\"cnic\"" + ":" + AppConfig.getInstance().mUser.getCNIC().replaceFirst("^0+(?!$)", "") + "," +
-                "\"farmerName\"" + ":\"" + AppConfig.getInstance().mUser.getName() + "\"," +
-                "\"createdDate\"" + ":\"" + str_DATE + "\"," +
-                "\"updatedDate\"" + ":\"" + str_DATE + "\"," +
-                "\"mobileNumber\"" + ":" + AppConfig.getInstance().mUser.getPhone() + "," +
-                "\"preferedLanguage\"" + ":\"" + lang + "\"}";
-
-        showProgDialog();
-        Intro_WebHit_Post_OTP intro_webHit_post_otp = new Intro_WebHit_Post_OTP();
-
-        intro_webHit_post_otp.postOTP(getContext(), new IWebCallback() {
-            @Override
-            public void onWebResult(boolean isSuccess, String strMsg) {
-                dismissProgDialog();
-                if (isSuccess) {
+            intro_webHit_post_otp.postOTP(getContext(), new IWebCallback() {
+                @Override
+                public void onWebResult(boolean isSuccess, String strMsg) {
+                    dismissProgDialog();
+                    if (isSuccess) {
 //                    if (Intro_WebHit_Post_OTP.responseObject != null &&
 //                            Intro_WebHit_Post_OTP.responseObject.getResult() != null) {
 //
-
+//
 //                   //     navToCompleteFAProfileFragment();
-
-
+                       // navToSignUpFragment();
+//
 //                    }
 
-                } else {
-                    AppConfig.getInstance().showErrorMessage(getContext(), strMsg);
+                    } else {
+                        AppConfig.getInstance().showErrorMessage(getContext(), strMsg);
+                    }
                 }
-            }
 
-            @Override
-            public void onWebException(Exception ex) {
+                @Override
+                public void onWebException(Exception ex) {
 //                CustomToast.showToastMessage(IntroActivity.this, AppConfig.getInstance().getNetworkExceptionMessage(ex.getMessage()), Toast.LENGTH_SHORT);
-                AppConfig.getInstance().showErrorMessage(getContext(), ex.getLocalizedMessage());
-            }
-        }, data);
+                    AppConfig.getInstance().showErrorMessage(getContext(), ex.getLocalizedMessage());
+                }
+            }, data);
+        }
     }
 
-}
+

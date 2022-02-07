@@ -14,6 +14,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillDashboardInfo;
@@ -24,6 +25,7 @@ import com.ast.MyBills.MainAuxilaries.DModels.DModel_CreateAccount;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_EditProfile;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_ImportantDates;
 import com.ast.MyBills.Utils.CustomToast;
+import com.ast.MyBills.Utils.PinEntry;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -55,6 +57,8 @@ public class AppConfig {
     public CustomAlertDialog customAlertDialog;
     //endregion
     public Gson gson;
+
+   public EditText etOTP;
     public String mRole;
     public byte mStateApp;
     public int scrnWidth, scrnHeight;
@@ -485,6 +489,10 @@ public class AppConfig {
             saveimpString(list);
         return list;
     }
+
+
+
+
 
 
 
