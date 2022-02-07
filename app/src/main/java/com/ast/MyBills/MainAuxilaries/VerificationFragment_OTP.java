@@ -32,6 +32,7 @@ import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.IWebCallback;
 import com.ast.MyBills.Utils.PinEntry;
+import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -387,36 +388,22 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
                 Log.d("LOG_AS", "postOTP: strEnteredPIN " + strEnteredPIN);
 
                 if (mPIN.getText().toString().equalsIgnoreCase(String.valueOf(AppConfig.getInstance().mUser.getPinCode()))) {
-                    String lang = "";
-
-                    if (AppConfig.getInstance().mLanguage.equalsIgnoreCase(AppConstt.AppLang.LANG_UR)) {
-                        lang = "u";
-                    } else {
-                        lang = "e";
-                    }
-
 
                     Log.d("LOG_AS", "postOTP: getPhone " + AppConfig.getInstance().mUser.getPhone());
-                    Date date = new Date();
-                    String str_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH).format(date);
-                    String data = "{" +
-                            "\"id\"" + ":" + 0 + "," +
-                            "\"pinCode\"" + ":" + AppConfig.getInstance().mUser.getPinCode() + "," +
-
-                            "\"isDeleted\"" + ":" + true + "," +
-                            "\"isVerfied\"" + ":" + true + "," +
-                          //  "\"cnic\"" + ":" + AppConfig.getInstance().mUser.getCNIC().replaceFirst("^0+(?!$)", "") + "," +
-                            "\"farmerName\"" + ":\"" + AppConfig.getInstance().mUser.getName() + "\"," +
-                            "\"createdDate\"" + ":\"" + str_DATE + "\"," +
-                            "\"updatedDate\"" + ":\"" + str_DATE + "\"," +
-                            "\"mobileNumber\"" + ":" + AppConfig.getInstance().mUser.getPhone() + "," +
-                            "\"preferedLanguage\"" + ":\"" + lang + "\"}";
 
 
-                    Log.d("LOG_AS", "postSignUp: " + data);
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("loginId", "923168159860");
+                    jsonObject.addProperty("loginPassword",   "Roberts123@");
+                    jsonObject.addProperty("Destination", "sms.MobileNumber");
+                    jsonObject.addProperty("Mask","smsapp");
+                    jsonObject.addProperty("Message","sms.Text");
+                    jsonObject.addProperty("Unicode", "0");
+                    jsonObject.addProperty("ShortCodePrefered", "n");
+                    Log.d("LOG_AS", "postSignUp: " + jsonObject.toString());
 
 
-                    requestVerifyPin(data);
+                    requestVerifyPin( jsonObject.toString());
 
                 } else
                     AppConfig.getInstance().showErrorMessage(getContext(), getString(R.string.enter_otp_that_send));

@@ -46,7 +46,7 @@ public class Intro_WebHit_Post_OTP {
 
 
         ///////////
-        Log.d("LOG_AS", "postOTP: " + myUrl + _signInEntity);
+        Log.d("LOG_AS", "postOTP: url is " + myUrl + " Params are"+ _signInEntity);
 
         StringEntity entity = null;
 

@@ -109,7 +109,28 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 strPhoneNumber = "92" + strPhoneNumber.substring(1);
 
                 AppConfig.getInstance().mUser.setPhone(strPhoneNumber);
-                RequestOTP(data);
+
+
+
+
+
+
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("loginId", "923168159860");
+                jsonObject.addProperty("loginPassword",   "Roberts123@");
+                jsonObject.addProperty("Destination", "sms.MobileNumber");
+                jsonObject.addProperty("Mask","smsapp");
+                jsonObject.addProperty("Message","sms.Text");
+                jsonObject.addProperty("Unicode", "0");
+                jsonObject.addProperty("ShortCodePrefered", "n");
+                Log.d("LOG_AS", "postSignUp: " + jsonObject.toString());
+
+
+
+
+
+
+                RequestOTP(jsonObject.toString());
 
                 //startSmartUserConsent();
                 break;
