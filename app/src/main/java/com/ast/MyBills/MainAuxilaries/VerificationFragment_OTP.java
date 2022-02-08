@@ -26,10 +26,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ast.MyBills.AppConfig;
+import com.ast.MyBills.IntroActivity;
+import com.ast.MyBills.IntroAuxilaries.MyBillsFragment;
 import com.ast.MyBills.IntroAuxilaries.SignUpFragment;
 import com.ast.MyBills.IntroAuxilaries.WebServices.Intro_WebHit_Post_OTP;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
+import com.ast.MyBills.Utils.CustomToast;
 import com.ast.MyBills.Utils.IWebCallback;
 import com.ast.MyBills.Utils.PinEntry;
 import com.google.gson.JsonObject;
@@ -401,7 +404,7 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
                 Log.d("LOG_AS", "PinCodeTries " + pinCodeTries);
                 if (pinCodeTries < resendTries) {
                     requestResendOTP(jsonObject.toString());
-
+                    CustomToast.showToastMessage(getActivity(),"OTP Sent", Toast.LENGTH_SHORT);
                 } else {
 
                     showOTP();
@@ -413,8 +416,9 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
 
                 break;
             case R.id.frg_verifiacction_rl_login:
+                navToMyBillsFragment();
+                //  navToSignUpFragment();
 
-                  navToSignUpFragment();
                 Log.d("LOG_AS", "postOTP: getPinCode " + AppConfig.getInstance().mUser.getPinCode());
                 Log.d("LOG_AS", "postOTP: strEnteredPIN " + strEnteredPIN);
 
@@ -442,6 +446,16 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
             default:
                 break;
         }
+    }
+
+    private void navToMyBillsFragment() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment frag = new MyBillsFragment();
+        ft.add(R.id.act_intro_content_frg, frag, AppConstt.FragTag.FN_MyBillsFragment);
+        ft.addToBackStack(AppConstt.FragTag.FN_MyBillsFragment);
+        ft.hide(this);
+        ft.commit();
     }
 
 

@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:background="@drawable/shp_rect_rounded_top_blue_medium"
+            android:background="@drawable/shp_rect_rounded_yellow_mini"
             android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -54,7 +54,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/green_govt" />
+            android:background="@color/thm_yellow_1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 android:background="@android:color/transparent"
-                android:text="OK"
+                android:text="Okay"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="@dimen/fontsize_mini" />

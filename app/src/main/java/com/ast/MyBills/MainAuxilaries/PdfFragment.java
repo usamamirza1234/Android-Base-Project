@@ -75,9 +75,11 @@ PDFView pdfview;
 
         if (selection == null) {
             selection=0;
-            setBillDetails();
+
 //            llBillDetails.setVisibility(View.GONE);
-        } else setBillDetails();
+        }
+        //else
+            //setBillDetails();
 
 
         return frg;
@@ -110,13 +112,13 @@ PDFView pdfview;
         txv_billDetails_company = view.findViewById(R.id.frg_home_electricity_txv_bill_company);
         llpdfImportantdates = view.findViewById(R.id.frg_home_pdf_llImportantdates);
         pdfview = view.findViewById(R.id.pdfView);
-        pdfview.fromAsset("Bill.pdf")
-                .enableSwipe(true)
-                .swipeHorizontal(true)
-                .enableAnnotationRendering(true)
-                .scrollHandle(new DefaultScrollHandle(getContext()))
-                .onLoad(this)
-                .load();
+//        pdfview.fromAsset("Bill.pdf")
+//                .enableSwipe(true)
+//                .swipeHorizontal(true)
+//                .enableAnnotationRendering(true)
+//                .scrollHandle(new DefaultScrollHandle(getContext()))
+//                .onLoad(this)
+//                .load();
 
 
         llpdfImportantdates.setOnClickListener(this);
@@ -168,6 +170,13 @@ PDFView pdfview;
 //                        txvSelected_Disease.setText(AppConfig.getInstance().lst_DiseasesDef.get(position).getDiseaseName());
 
                         setBillDetails();
+                        pdfview.fromAsset("Bill.pdf")
+                                .enableSwipe(true)
+                                .swipeHorizontal(true)
+                                .enableAnnotationRendering(true)
+                                .scrollHandle(new DefaultScrollHandle(getContext()))
+                                .onLoad(this)
+                                .load();
 
                         break;
 

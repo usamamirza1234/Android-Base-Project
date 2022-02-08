@@ -69,9 +69,9 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         }
 
         populateBillInfo(lstBillInfo);
-        populateBillAnaylsis(lstBillAnaylsis);
-
-        showBarHistoryUnit(lstBillAnaylsis);
+//        populateBillAnaylsis(lstBillAnaylsis);
+        mBarHistoryUnit.setVisibility(View.GONE);
+//        showBarHistoryUnit(lstBillAnaylsis);
         return frg;
     }
 
@@ -169,7 +169,9 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
                         position_ = position;
                         selection = position;
                         setBillDetails();
-
+                        showBarHistoryUnit(lstBillAnaylsis);
+                        populateBillAnaylsis(lstBillAnaylsis);
+                        mBarHistoryUnit.setVisibility(View.VISIBLE);
                         break;
 
                     case EVENT_B:
@@ -220,6 +222,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         else {
             llBillDetails.setVisibility(View.VISIBLE);
             txv_billDetails_company.setText(lstBillInfo.get(selection).getBillType());
+
 
         }
 

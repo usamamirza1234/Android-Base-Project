@@ -129,21 +129,21 @@
 
                                     android:layout_marginBottom="35dp"
                                     android:focusableInTouchMode="true"
-                                    android:textStyle="bold"  />
-<!--                                    android:accentType="character"-->
-<!--                                    android:applyDigitTextSize="true"-->
-<!--                                    android:digitBackground="@drawable/pin_entry_view_bg"-->
-<!--                                    android:digitHeight="50dp"-->
-<!--                                    android:digitSpacing="10dp"-->
-<!--                                    android:digitTextColor="@color/black"-->
-<!--                                    android:digitTextSize="6dp"-->
-<!--                                    android:digitWidth="@dimen/button_height_medium"-->
-<!--                                    android:mask=""-->
-<!--                                    android:numDigits="4"-->
-<!--                                    android:pinAccentColor="@color/orange"-->
-<!--                                    android:pinInputType="number"-->
+                                    android:textStyle="bold"
+                                    app:accentType="character"
+                                    app:applyDigitTextSize="true"
+                                    app:digitBackground="@drawable/pin_entry_view_bg"
+                                    app:digitHeight="50dp"
+                                    app:digitSpacing="10dp"
+                                    app:digitTextColor="@color/black"
+                                    app:digitTextSize="6dp"
+                                    app:digitWidth="@dimen/button_height_medium"
+                                    app:mask=""
+                                    app:numDigits="4"
+                                    app:pinAccentColor="@color/orange"
+                                    app:pinInputType="number"
 
-
+                                />
 
                             </RelativeLayout>
                             <TextView

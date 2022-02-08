@@ -463,16 +463,20 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
                     }
                     AppConfig.getInstance().saveBillerSetting(lstMyBills);
+                    Toast.makeText(getContext(), "Added", Toast.LENGTH_LONG).show();
+
                 }else {
                     dismissProgDialog();
-                    Toast.makeText(getContext(), "Reference Number Does Not Exist", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getContext(), "Reference Number Does Not Exist", Toast.LENGTH_LONG).show();
+                    AppConfig.getInstance().showErrorMessage(getContext(),"Reference Number Does Not Exist");
                 }
             }
 
             @Override
             public void onWebException(Exception ex) {
                 dismissProgDialog();
-                Toast.makeText(getContext(), "Exception :" + ex.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), "Exception :" + ex.getMessage(), Toast.LENGTH_LONG).show();
+                AppConfig.getInstance().showErrorMessage(getContext(),"Exception :"+ ex.getMessage());
             }
         }, StrRef);
     }

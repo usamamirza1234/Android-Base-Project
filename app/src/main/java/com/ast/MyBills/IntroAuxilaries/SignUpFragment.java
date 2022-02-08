@@ -50,8 +50,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class SignUpFragment extends Fragment implements View.OnClickListener {
 
-    private static final int REQ_USER_CONSENT = 200;
-    SmsBroadcastReceiver smsBroadcastReceiver;
+
     EditText etOTP,etUsername,etPassword,etEmail;
     TextView verifyNumber;
     RelativeLayout rlBack, rlNext;
@@ -106,37 +105,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 closeKeyboard();
                 break;
 
-            case R.id.verifyno:
-
-                String strPhoneNumber = etOTP.getText().toString();
-                strPhoneNumber = "" + strPhoneNumber.substring(0);
-
-                AppConfig.getInstance().mUser.setPhone(strPhoneNumber);
-
-
-
-
-
-
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("loginId", "923168159860");
-                jsonObject.addProperty("loginPassword",   "Roberts1234@");
-                jsonObject.addProperty("Destination", etOTP.getText().toString());
-                jsonObject.addProperty("Mask","smsapp");
-                jsonObject.addProperty("Message",randomNumber);
-                jsonObject.addProperty("Unicode", "0");
-                jsonObject.addProperty("ShortCodePrefered", "n");
-                Log.d("LOG_AS", "postSignUp: " + jsonObject.toString());
-
-
-
-
-
-
-                RequestOTP(jsonObject.toString());
-
-
-                break;
         }
 
 
@@ -196,6 +164,24 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private void checkErrorConditions() {
         if (checkPasswordError()) {
 
+            String strPhoneNumber = etOTP.getText().toString();
+            strPhoneNumber = "" + strPhoneNumber.substring(0);
+
+            AppConfig.getInstance().mUser.setPhone(strPhoneNumber);
+
+            JsonObject jsonObject1 = new JsonObject();
+            jsonObject1.addProperty("loginId", "923168159860");
+            jsonObject1.addProperty("loginPassword",   "Roberts1234@");
+            jsonObject1.addProperty("Destination", etOTP.getText().toString());
+            jsonObject1.addProperty("Mask","smsapp");
+            jsonObject1.addProperty("Message",randomNumber);
+            jsonObject1.addProperty("Unicode", "0");
+            jsonObject1.addProperty("ShortCodePrefered", "n");
+            Log.d("LOG_AS", "postSignUp: " + jsonObject1.toString());
+
+            RequestOTP(jsonObject1.toString());
+
+
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("Name", etUsername.getText().toString());
             jsonObject.addProperty("Email", etEmail.getText().toString());
@@ -210,7 +196,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
             AppConfig.getInstance().saveCreateAccount(lstCreateAccount);
 
-            navToMyBillsFragment();
+
+
 
         }
     }
@@ -231,72 +218,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     }
 //SMS
 
-
-    private void startSmartUserConsent() {
-        registerBroadcastReceiver();
-        Toast. makeText(getActivity(), "0!", Toast. LENGTH_SHORT).show();
-        SmsRetrieverClient client = SmsRetriever.getClient(getContext());
-        client.startSmsUserConsent(null);
-        //
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Toast. makeText(getActivity(), "2!", Toast. LENGTH_SHORT).show();
-
-        if (requestCode == REQ_USER_CONSENT){
-
-
-            if ((resultCode == RESULT_OK) && (data != null)){
-
-                String message = data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
-                getOtpFromMessage(message);
-
-
-            }
-
-
-        }
-
-    }
-
-    private void getOtpFromMessage(String message) {
-
-        Pattern otpPattern = Pattern.compile("(|^)\\d{6}");
-        Matcher matcher = otpPattern.matcher(message);
-        if (matcher.find()){
-
-            etOTP.setText(matcher.group(0));
-            Toast. makeText(getActivity(), "1!", Toast. LENGTH_SHORT).show();
-        }
-
-
-    }
-
-    private void registerBroadcastReceiver(){
-        Toast. makeText(getActivity(), "3!", Toast. LENGTH_SHORT).show();
-        smsBroadcastReceiver = new SmsBroadcastReceiver();
-
-        smsBroadcastReceiver.smsBroadcastReceiverListener = new SmsBroadcastReceiver.SmsBroadcastReceiverListener() {
-            @Override
-            public void onSuccess(Intent intent) {
-
-                startActivityForResult(intent,REQ_USER_CONSENT);
-
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        };
-
-        IntentFilter intentFilter = new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION);
-        registerForContextMenu(getView());
-
-    }
 
 
 

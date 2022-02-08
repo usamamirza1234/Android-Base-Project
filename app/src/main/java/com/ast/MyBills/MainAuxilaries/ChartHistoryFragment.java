@@ -83,9 +83,10 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         }
 
 
-        showBarHistoricalPayment(lstChartPayments);
-        showBarHistoricalUnitsConsumed(lstChartUnits);
-
+//        showBarHistoricalPayment(lstChartPayments);
+//        showBarHistoricalUnitsConsumed(lstChartUnits);
+        mBarHistoricalPayment.setVisibility(View.GONE);
+        mBarHistoricalUnitsConsumed.setVisibility(View.GONE);
         return frg;
     }
 
@@ -255,8 +256,10 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
                         selection = position;
 //                        txvSelected_Disease.setVisibility(View.VISIBLE);
 //                        txvSelected_Disease.setText(AppConfig.getInstance().lst_DiseasesDef.get(position).getDiseaseName());
-
-
+                        mBarHistoricalPayment.setVisibility(View.VISIBLE);
+                        mBarHistoricalUnitsConsumed.setVisibility(View.VISIBLE);
+                        showBarHistoricalPayment(lstChartPayments);
+                        showBarHistoricalUnitsConsumed(lstChartUnits);
 
                         break;
 

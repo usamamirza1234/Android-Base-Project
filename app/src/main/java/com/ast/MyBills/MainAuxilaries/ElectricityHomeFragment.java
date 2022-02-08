@@ -75,7 +75,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 
         if (selection == null) {
             selection = 0;
-             setBillDetails();
+             //setBillDetails();
         }
         if (AppConfig.getInstance().getBillsIESCO().size() > 0)
         {
