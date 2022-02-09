@@ -250,7 +250,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     private void init() {
         setBottomBar();
         lstImp = new ArrayList<>();
-      AppConfig.getInstance().  lstImpUSAMA = new ArrayList<>();
+      AppConfig.getInstance().lstImpDates = new ArrayList<>();
        // lstMyBills = new ArrayList<>();
         lstBillInfo = new ArrayList<>();
         lastBill = new ArrayList<>();
@@ -390,11 +390,11 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
                         lstBillInfo.add(dModelBillInfo);
 
-                    AppConfig.getInstance().    lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-                      //  AppConfig.getInstance().       lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
-                       // AppConfig.getInstance().          lstImpUSAMA.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
-
-///
+                    AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+//                        AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
+//                        AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
+//
+/////
                         DModel_ImportantDates dModel_importantDates = new DModel_ImportantDates();
                         dModel_importantDates.setBiller(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
                         dModel_importantDates.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
@@ -407,7 +407,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
                         }
                         AppConfig.getInstance().saveimp(lstImp);
-                        AppConfig.getInstance().saveimpString( AppConfig.getInstance().lstImpUSAMA);
+                        AppConfig.getInstance().saveimpString( AppConfig.getInstance().lstImpDates);
 //
 
 

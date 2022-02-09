@@ -96,16 +96,19 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
                 break;
 
             case AppConstt.bill.PAID:
+                Log.d("LOG_AS","PAID "+AppConstt.bill.PAID);
                 holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
                 holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
                 break;
 
             case AppConstt.bill.UPCOMING:
+                Log.d("LOG_AS","UPCOMING "+AppConstt.bill.UPCOMING);
                 holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_C, position));
                 holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_upcoming_off));
                 break;
 
             case AppConstt.bill.ALL:
+                Log.d("LOG_AS","ALL "+AppConstt.bill.ALL);
                 holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_D, position));
                 holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_all_off));
                 break;

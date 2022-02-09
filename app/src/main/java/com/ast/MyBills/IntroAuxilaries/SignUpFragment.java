@@ -1,9 +1,6 @@
 package com.ast.MyBills.IntroAuxilaries;
 
 import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,29 +19,15 @@ import androidx.fragment.app.FragmentTransaction;
 import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.IntroActivity;
 import com.ast.MyBills.IntroAuxilaries.WebServices.Intro_WebHit_Post_OTP;
-import com.ast.MyBills.IntroAuxilaries.WebServices.More_WebHit_Get_Bills;
-import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_CreateAccount;
-import com.ast.MyBills.MainAuxilaries.SmsBroadcastReceiver;
 import com.ast.MyBills.MainAuxilaries.VerificationFragment_OTP;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.IWebCallback;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.credentials.Credential;
-import com.google.android.gms.auth.api.credentials.HintRequest;
-import com.google.android.gms.auth.api.phone.SmsRetriever;
-import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static android.app.Activity.RESULT_OK;
 
 
 public class SignUpFragment extends Fragment implements View.OnClickListener {

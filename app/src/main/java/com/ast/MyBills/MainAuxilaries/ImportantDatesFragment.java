@@ -312,11 +312,11 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         lstImportantDates = new ArrayList<>();
         strlstImportantDates = new ArrayList();
         lstImportantDates = AppConfig.getInstance().getimp();
-        AppConfig.getInstance().lstImpUSAMA = AppConfig.getInstance().getimpString();
+        AppConfig.getInstance().lstImpDates = AppConfig.getInstance().getimpString();
 
-        for (int i=0; i<AppConfig.getInstance().    lstImpUSAMA.size();i++)
+        for (int i=0; i<AppConfig.getInstance().    lstImpDates.size();i++)
         {
-            String strdate = AppConfig.getInstance().    lstImpUSAMA.get(i);
+            String strdate = AppConfig.getInstance().    lstImpDates.get(i);
             Log.d("logApiData", "strdate:  " + strdate);
 
             SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);

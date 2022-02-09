@@ -65,7 +65,7 @@ public class AppConfig {
     //Custom Font Type Face
     public Typeface tfAppDefault;
     public DModelUser mUser;
-    public ArrayList<String> lstImpUSAMA;
+    public ArrayList<String> lstImpDates;
     public boolean isAppRunnig, isCommingFromSplash, isSwitchingLang, isEnglishMode, shouldSkipSplash, isComingFromForgotPassword;
     public int marginToast;
     public int nFCMCounter;
