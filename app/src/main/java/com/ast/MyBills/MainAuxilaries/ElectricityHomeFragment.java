@@ -38,13 +38,15 @@ import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
 
 
 public class ElectricityHomeFragment extends Fragment implements View.OnClickListener {
+    private final String TAG = "MYBILL";
 
     IBadgeUpdateListener mBadgeUpdateListener;
     RecyclerView rcvElectInfo;
     LinearLayout llBillDetails, llImportantdates;
     ElectricityInfoRcvAdapter electricityInfoRcvAdapter;
     int position_ = 0;
-    Integer selection = null;
+    String arrayKey = "000";
+    Integer selection = 0;
     TextView txv_billDetails_company, txv_billDetails_name;
     TextView txvpdf, txvhistory;
     TextView txv_billDetails_address;
@@ -77,9 +79,9 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             selection = 0;
              //setBillDetails();
         }
-        if (AppConfig.getInstance().getBillsIESCO().size() > 0)
+        if (lstBillInfo.size() > 0)
         {
-            populateBillInfo(AppConfig.getInstance().getBillsIESCO());
+            populateBillInfo(lstBillInfo);
         }
 
         return frg;
@@ -91,11 +93,20 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         bundle = getArguments();
         if (bundle != null) {
             sref = bundle.getString("key_iesco");
+            arrayKey = bundle.getString("key_fordata");
+            selection = bundle.getInt("key_selection");
         }
 
         lstBillInfo = new ArrayList<>();
         lstData = new ArrayList<>();
-        lstBillInfo = AppConfig.getInstance().getBillsIESCO();
+//        lstBillInfo = AppConfig.getInstance().getBillsIESCO();
+        lstBillInfo = AppConfig.getInstance().getBillsIESCO(arrayKey);
+
+
+
+        Log.d("MYBILL", "onWebResult: Key " +arrayKey + " "  +  AppConfig.getInstance().getBillsIESCO(arrayKey).size());
+
+
     }
 
     private void bindviews(View view) {
@@ -167,7 +178,8 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             llBillDetails.setVisibility(View.GONE);
         }
         else {
-            llBillDetails.setVisibility(View.VISIBLE);
+
+                 llBillDetails.setVisibility(View.VISIBLE);
             txv_billDetails_company.setText(lstBillInfo.get(selection).getBillType());
             txv_billDetails_name.setText(lstBillInfo.get(selection).getName());
             txv_billDetails_address.setText(lstBillInfo.get(selection).getAddress());
@@ -252,6 +264,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection", selection);
+        bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_BillAnaylsisFragment);

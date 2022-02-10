@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillDashboardInfo;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.IAdapterCallback;
@@ -24,15 +25,15 @@ import java.util.ArrayList;
 public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinforcvadapter.ViewHolder> {
 
     private Integer selectedPosition = null;
-    private  ArrayList<DModelBillDashboardInfo> mData;
+    private  ArrayList<DModel_Bills> mData;
     private final Context mContext;
     private final IAdapterCallback iAdapterCallback;
     int _case;
 
 
 
-    public Dashboardinforcvadapter(Context mContext, ArrayList<DModelBillDashboardInfo> mData, int icase,
-                                     IAdapterCallback iAdapterCallback) {
+    public Dashboardinforcvadapter(Context mContext, ArrayList<DModel_Bills> mData, int icase,
+                                   IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
         this._case = icase;
@@ -63,8 +64,8 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
 
 
         holder.txv_bill.setText(mData.get(position).BillType);
-        holder.txv_city.setText(mData.get(position).Amount);
-        holder.txv_address.setText(mData.get(position).DueDate);
+        holder.txv_city.setText(mData.get(position).getDuedate());
+        holder.txv_address.setText(mData.get(position).getPayableafterduedate());
 //        holder.txv_status.setText(mData.get(position).Status);
 //        holder.txv_act.setText(mData.get(position).Act);
 
@@ -183,7 +184,7 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
 
         }
     }
-    public void filterList(ArrayList<DModelBillDashboardInfo> filterllist) {
+    public void filterList(ArrayList<DModel_Bills> filterllist) {
         // below line is to add our filtered
         // list in our course array list.
         mData = filterllist;

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -35,6 +36,7 @@ import java.util.List;
 
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_A;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
+import static com.google.firebase.messaging.Constants.TAG;
 
 
 public class BillAnaylsisFragment extends Fragment implements View.OnClickListener {
@@ -55,6 +57,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     private ArrayList<DModelBillInfo> lstBillInfo;
     private ArrayList<String> xLabel;
     private Dialog progressDialog;
+    private String arrayKey="";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,7 +71,10 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
             selection = 0;
         }
 
-        populateBillInfo(lstBillInfo);
+        Log.d("MYBILL", "onWebResult: Key " +arrayKey + " "  +  AppConfig.getInstance().getBillsIESCO(arrayKey).size());
+
+
+        populateBillInfo(  AppConfig.getInstance().getBillsIESCO("k"+arrayKey));
 //        populateBillAnaylsis(lstBillAnaylsis);
         mBarHistoryUnit.setVisibility(View.GONE);
 //        showBarHistoryUnit(lstBillAnaylsis);
@@ -80,11 +86,13 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         if (bundle != null) {
             selection = bundle.getInt("key_selection");
             sref = bundle.getString("key_iesco");
+            arrayKey = bundle.getString("key_fordata");
+
         }
         setBottomBar();
         lstBillInfo = new ArrayList<>();
         lstBillAnaylsis = new ArrayList<>();
-        lstBillInfo = AppConfig.getInstance().getBillsIESCO();
+        lstBillInfo = AppConfig.getInstance().getBillsIESCO("k"+arrayKey);
         lstBillAnaylsis = AppConfig.getInstance().getBillsList();
     }
 
@@ -158,7 +166,6 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     }
 
     private void populateBillInfo(ArrayList<DModelBillInfo> lstBillInfo) {
-
 
         if (billanalysisInfoRcvAdapter == null) {
 

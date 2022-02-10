@@ -55,13 +55,14 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     String str_billType = "";
     RelativeLayout rlBack;
     ArrayList<DModel_Bill> lastBill;
+    String strbiller;
     private TextView txvBillType;
-
     private TextView edt_Reffrence;
     private TextView edt_Account;
     private Dialog progressDialog;
     private ArrayList<DModelBillInfo> lstBillInfo;
     private ArrayList<DModel_ImportantDates> lstImp;
+    private final String TAG = "MYBILL";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,13 +72,10 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         bindviews(frg);
 
 
-
-
         populateMyBills(lstMyBills);
 
         populateSpinnerBillType();
         populateSpinnerBiller();
-
 
 
         return frg;
@@ -85,7 +83,6 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
     private void populateSpinnerBillType() {
         ArrayList<String> lstGender = new ArrayList<>();
-
 
 
         lstGender.add("Electricity");
@@ -110,15 +107,14 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 String selectedItem = parent.getItemAtPosition(position).toString();
 
                 int Pos = Integer.parseInt(selectedItem);
-               // txvBillType.setText(lstGender.get(position));
+                // txvBillType.setText(lstGender.get(position));
                 str_billType = (lstGender.get(position));
 
 
                 ArrayList<String> lstBiller = new ArrayList<>();
                 switch (str_billType) {
                     case "Electricity":
-                       // CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
-
+                        // CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
 
 
                         lstBiller.add("IESCO");
@@ -140,7 +136,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         break;
 
                     case "Gas":
-                      //  CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
+                        //  CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
 
                         lstBiller.add("SNGPL");
 
@@ -152,12 +148,10 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         break;
 
                     case "Water":
-                      //  CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
-
+                        //  CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
 
 
                         lstBiller.add("WASA");
-
 
 
                         lstBiller.add(getResources().getString(R.string.select_biller_type));
@@ -167,8 +161,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         break;
 
                     case "Telephone":
-                       // CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
-
+                        // CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
 
 
                         lstBiller.add("PTCL");
@@ -209,9 +202,9 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 String selectedItem = parent.getItemAtPosition(position).toString();
 
                 int Pos = Integer.parseInt(selectedItem);
-               // txvBillType.setText(lstGender.get(position));
+                // txvBillType.setText(lstGender.get(position));
 
-
+//                strbiller = lstBiller.get(position);
             } // to close the onItemSelected
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -224,7 +217,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void populateMyBills( ArrayList<DModel_Bills> lstMyBills) {
+    private void populateMyBills(ArrayList<DModel_Bills> lstMyBills) {
 //        int size = (2);
 //        for (int i = size; i >= 0; i--) {
 //            lstMyBills.add(new DModel_Bills("Bill", "100"+i, (i + 1) + ""));
@@ -250,8 +243,8 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     private void init() {
         setBottomBar();
         lstImp = new ArrayList<>();
-      AppConfig.getInstance().lstImpDates = new ArrayList<>();
-       // lstMyBills = new ArrayList<>();
+        AppConfig.getInstance().lstImpDates = new ArrayList<>();
+        // lstMyBills = new ArrayList<>();
         lstBillInfo = new ArrayList<>();
         lastBill = new ArrayList<>();
         lstMyBills = AppConfig.getInstance().getBillerSetting();
@@ -289,7 +282,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.frg_signin_rlToolbar:
-                ((IntroActivity) getActivity()).onBackPressed();
+                getActivity().onBackPressed();
                 break;
 
         }
@@ -301,16 +294,16 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("ref", edt_Reffrence.getText().toString());
-          //  jsonObject.addProperty("account", edt_Account.getText().toString());
+            //  jsonObject.addProperty("account", edt_Account.getText().toString());
 //            jsonObject.addProperty("billtype", txvBillType.getText().toString());
 //            jsonObject.addProperty("biller", txvBiller.getText().toString());
 
             if (!edt_Reffrence.getText().toString().equalsIgnoreCase("")) {
 
-                    RequestBillyear(edt_Reffrence.getText().toString());
+                RequestBillyear(edt_Reffrence.getText().toString());
 
 
-                }
+            }
         }
     }
 
@@ -390,7 +383,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
                         lstBillInfo.add(dModelBillInfo);
 
-                    AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+                        AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
 //                        AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
 //                        AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
 //
@@ -402,60 +395,80 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
 
                         lstImp.add(dModel_importantDates);
-                        if (AppConfig.getInstance().getimp().size() > 0) {
-                            AppConfig.getInstance().getimp().clear();
+//                        if (AppConfig.getInstance().getimp().size() > 0) {
+//                            AppConfig.getInstance().getimp().clear();
+//
+//                        }
 
-                        }
+                        lstMyBills.add(
+                                new DModel_Bills(str_billType + "",
+                                        edt_Reffrence.getText().toString() + "",
+                                        edt_Account.getText().toString() + ""));
+
+
+
+                        lstMyBills.add(
+                                new DModel_Bills(str_billType + "",
+                                        edt_Reffrence.getText().toString() + "",
+                                        edt_Account.getText().toString() + "",
+                                        More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEAFTERDUEDATE(),
+                                        More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE()
+                                ));
+
+                        billListingRcvAdapter.notifyDataSetChanged();
+
+
                         AppConfig.getInstance().saveimp(lstImp);
-                        AppConfig.getInstance().saveimpString( AppConfig.getInstance().lstImpDates);
+                        AppConfig.getInstance().saveimpString(AppConfig.getInstance().lstImpDates);
 //
 
 
-                        if (AppConfig.getInstance().getBillsIESCO().size() > 0) {
-                            AppConfig.getInstance().getBillsIESCO().clear();
+//                        if (AppConfig.getInstance().getBillsIESCO().size() > 0) {
+//                            AppConfig.getInstance().getBillsIESCO().clear();
+//
+//                        }
 
-                        }
-                        AppConfig.getInstance().saveIESCO(lstBillInfo);
+
+                        String key =   edt_Reffrence.getText().toString();
+                        String yearkey = str_billType + "-" + strbiller + "-" + edt_Reffrence.getText().toString() + "-" + "year";
+
+
+                        Log.d(TAG, "onWebResult: Key " + key);
+
+                        AppConfig.getInstance().saveIESCO(key, lstBillInfo);
 
                         if (More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size() > 0) {
 
                             for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size(); i++) {
 
-                                    if (i > 0 ) {
-                                        Log.d("LOG_AS", "Elements of lastYearBills " + More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
-                                        AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
+                                if (i > 0) {
+                                    Log.d("LOG_AS", "Elements of lastYearBills " + More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
+                                    AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
 
 
+                                    DModel_Bill dModel_bill = new DModel_Bill(
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0),
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1),
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2),
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3)
 
-                                        DModel_Bill dModel_bill = new DModel_Bill(
-                                                More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0),
-                                                More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1),
-                                                More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2),
-                                                More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3)
-
-                                        );
-                                        lastBill.add(dModel_bill);
-                                    }
-
+                                    );
+                                    lastBill.add(dModel_bill);
                                 }
-
-
-                                if (AppConfig.getInstance().getBillsList().size() > 0) {
-                                    AppConfig.getInstance().getBillsList().clear();
-
-                                }
-                                AppConfig.getInstance().saveBillsList(lastBill);
 
                             }
 
 
-                    }
-                    lstMyBills.add(
-                            new DModel_Bills(str_billType + "",
-                                    edt_Reffrence.getText().toString() + "",
-                                    edt_Account.getText().toString() + ""));
+                            if (AppConfig.getInstance().getBillsList().size() > 0) {
+                                AppConfig.getInstance().getBillsList().clear();
 
-                    billListingRcvAdapter.notifyDataSetChanged();
+                            }
+                            AppConfig.getInstance().saveBillsList(lastBill);
+
+                        }
+
+
+                    }
 
 
                     if (AppConfig.getInstance().getBillerSetting().size() > 0) {
@@ -465,10 +478,10 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                     AppConfig.getInstance().saveBillerSetting(lstMyBills);
                     Toast.makeText(getContext(), "Added", Toast.LENGTH_LONG).show();
 
-                }else {
+                } else {
                     dismissProgDialog();
-                  //  Toast.makeText(getContext(), "Reference Number Does Not Exist", Toast.LENGTH_LONG).show();
-                    AppConfig.getInstance().showErrorMessage(getContext(),"Reference Number Does Not Exist");
+                    //  Toast.makeText(getContext(), "Reference Number Does Not Exist", Toast.LENGTH_LONG).show();
+                    AppConfig.getInstance().showErrorMessage(getContext(), "Reference Number Does Not Exist");
                 }
             }
 
@@ -476,7 +489,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
             public void onWebException(Exception ex) {
                 dismissProgDialog();
                 //Toast.makeText(getContext(), "Exception :" + ex.getMessage(), Toast.LENGTH_LONG).show();
-                AppConfig.getInstance().showErrorMessage(getContext(),"Exception :"+ ex.getMessage());
+                AppConfig.getInstance().showErrorMessage(getContext(), "Exception :" + ex.getMessage());
             }
         }, StrRef);
     }

@@ -367,9 +367,9 @@ public class AppConfig {
         return list;
     }
 
-    public void saveIESCO(ArrayList<DModelBillInfo> lstBillInfo) {
+    public void saveIESCO(String key , ArrayList<DModelBillInfo> lstBillInfo) {
         String json = gson.toJson(lstBillInfo);
-        editor.putString("key_lst_BillIESCO", json);
+        editor.putString(key, json);
         editor.commit();
 
         Log.d("sharedPref","saveBillIESCO: " + json);
@@ -380,12 +380,20 @@ public class AppConfig {
         ArrayList<DModelBillInfo> list = gson.fromJson(sharedPref.getString("key_lst_BillIESCO", ""), type);
         if (list == null)
             list = new ArrayList<>();
-        else
-            saveIESCO(list);
+        else {//            saveIESCO(list);
+             }
         return list;
     }
 
-
+    public ArrayList<DModelBillInfo> getBillsIESCO(String key) {
+        Type type = new TypeToken<ArrayList<DModelBillInfo>>() {}.getType();
+        ArrayList<DModelBillInfo> list = gson.fromJson(sharedPref.getString(key, ""), type);
+        if (list == null)
+            list = new ArrayList<>();
+        else
+            saveIESCO(key,list);
+        return list;
+    }
 
     //list biller Setting
 
