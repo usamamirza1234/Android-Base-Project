@@ -400,10 +400,10 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 //
 //                        }
 
-                        lstMyBills.add(
-                                new DModel_Bills(str_billType + "",
-                                        edt_Reffrence.getText().toString() + "",
-                                        edt_Account.getText().toString() + ""));
+//                        lstMyBills.add(
+//                                new DModel_Bills(str_billType + "",
+//                                        edt_Reffrence.getText().toString() + "",
+//                                        edt_Account.getText().toString() + ""));
 
 
 
