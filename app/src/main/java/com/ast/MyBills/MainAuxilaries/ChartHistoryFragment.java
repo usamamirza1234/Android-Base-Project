@@ -107,7 +107,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
 
         lstChartUnits = AppConfig.getInstance().getBillsList();
 
-        lstChartHistory = AppConfig.getInstance().getBillsIESCO();
+        lstChartHistory = AppConfig.getInstance().getBillsIESCO("");
     }
 
     private void bindviews(View view) {

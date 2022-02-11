@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ast.MyBills.AppConfig;
+import com.ast.MyBills.IntroAuxilaries.WebServices.More_WebHit_Get_Bills;
 import com.ast.MyBills.MainAuxilaries.Adapters.Dashboardinforcvadapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBanner;
@@ -182,7 +183,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         selection = position;
                         break;
                     case EVENT_B:
-                        navToElectricityHomeFragment(position,lstBillDashboardElement.get(position).getRefference_number());
+                        String key = "key"+ (lstBillDashboardElement.get(position).getRefference_number());
+
+                        navToElectricityHomeFragment(position,key);
                         break;
                 }
             });

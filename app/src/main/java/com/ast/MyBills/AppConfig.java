@@ -375,15 +375,7 @@ public class AppConfig {
         Log.d("sharedPref","saveBillIESCO: " + json);
     }
 
-    public ArrayList<DModelBillInfo> getBillsIESCO() {
-        Type type = new TypeToken<ArrayList<DModelBillInfo>>() {}.getType();
-        ArrayList<DModelBillInfo> list = gson.fromJson(sharedPref.getString("key_lst_BillIESCO", ""), type);
-        if (list == null)
-            list = new ArrayList<>();
-        else {//            saveIESCO(list);
-             }
-        return list;
-    }
+
 
     public ArrayList<DModelBillInfo> getBillsIESCO(String key) {
         Type type = new TypeToken<ArrayList<DModelBillInfo>>() {}.getType();

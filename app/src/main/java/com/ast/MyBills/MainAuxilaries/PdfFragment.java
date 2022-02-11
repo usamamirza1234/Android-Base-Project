@@ -97,7 +97,7 @@ PDFView pdfview;
         }
         setBottomBar();
 
-        lstPDF = AppConfig.getInstance().getBillsIESCO();
+        lstPDF = AppConfig.getInstance().getBillsIESCO("");
         //lstPDF = new ArrayList<>();
     }
 

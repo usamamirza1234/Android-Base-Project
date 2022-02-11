@@ -73,16 +73,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
 
         init();
         bindviews(frg);
-
-
-        if (selection == null) {
-            selection = 0;
-             //setBillDetails();
-        }
-        if (lstBillInfo.size() > 0)
-        {
-            populateBillInfo(lstBillInfo);
-        }
+        populateBillInfo(lstBillInfo);
 
         return frg;
     }
@@ -96,29 +87,19 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             arrayKey = bundle.getString("key_fordata");
             selection = bundle.getInt("key_selection");
         }
-
         lstBillInfo = new ArrayList<>();
         lstData = new ArrayList<>();
-//        lstBillInfo = AppConfig.getInstance().getBillsIESCO();
         lstBillInfo = AppConfig.getInstance().getBillsIESCO(arrayKey);
-
-
-
         Log.d("MYBILL", "onWebResult: Key " +arrayKey + " "  +  AppConfig.getInstance().getBillsIESCO(arrayKey).size());
-
-
     }
 
     private void bindviews(View view) {
         ref = view.findViewById(R.id.frg_my_bills_edt_ref);
         add = view.findViewById(R.id.frg_my_bills_rlAdd);
         add.setOnClickListener(this);
-
         rcvElectInfo = view.findViewById(R.id.frg_home_electricity_rcvElectricityInfo);
         llBillDetails = view.findViewById(R.id.frg_home_electricity_llBill_Details);
         llImportantdates = view.findViewById(R.id.frg_home_electricity_llImportantdates);
-
-
         txv_billDetails_company = view.findViewById(R.id.frg_home_electricity_txv_bill_company);
         txv_billDetails_name = view.findViewById(R.id.frg_home_electricity_txv_bill_name);
         txv_billDetails_address = view.findViewById(R.id.frg_home_electricity_txv_bill_adderess);
@@ -158,7 +139,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
                         break;
 
                     case EVENT_B:
-                        navToBillAnaylsisFragment(position);
+                        navToBillAnaylsisFragment(position,arrayKey);
                         break;
                 }
             });
@@ -178,7 +159,6 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             llBillDetails.setVisibility(View.GONE);
         }
         else {
-
                  llBillDetails.setVisibility(View.VISIBLE);
             txv_billDetails_company.setText(lstBillInfo.get(selection).getBillType());
             txv_billDetails_name.setText(lstBillInfo.get(selection).getName());
@@ -193,9 +173,6 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             txv_billDetails_pres_reading.setText(lstBillInfo.get(selection).getPresentReading());
             txv_billDetails_prev_reading.setText(lstBillInfo.get(selection).getPrevReading());
         }
-
-
-
     }
 
     @Override
@@ -206,9 +183,9 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
                 navToPDFFragment(selection);
                 break;
 
-            case R.id.electricityhomehistory:
-                navToBillAnaylsisFragment(selection);
-                break;
+//            case R.id.electricityhomehistory:
+//                navToBillAnaylsisFragment(selection);
+//                break;
 
             case R.id.frg_home_electricity_llImportantdates:
                 navToImportantDatesFragment();
@@ -256,7 +233,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         ft.commit();
     }
 
-    private void navToBillAnaylsisFragment(int selection) {
+    private void navToBillAnaylsisFragment(int selection,String arrayKey) {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft;

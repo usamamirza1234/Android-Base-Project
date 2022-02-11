@@ -70,8 +70,6 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
         init();
         bindviews(frg);
-
-
         populateMyBills(lstMyBills);
 
         populateSpinnerBillType();
@@ -409,7 +407,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
                         lstMyBills.add(
                                 new DModel_Bills(str_billType + "",
-                                        edt_Reffrence.getText().toString() + "",
+                                        (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) + "",
                                         edt_Account.getText().toString() + "",
                                         More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEAFTERDUEDATE(),
                                         More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE()
@@ -420,18 +418,9 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
                         AppConfig.getInstance().saveimp(lstImp);
                         AppConfig.getInstance().saveimpString(AppConfig.getInstance().lstImpDates);
-//
 
 
-//                        if (AppConfig.getInstance().getBillsIESCO().size() > 0) {
-//                            AppConfig.getInstance().getBillsIESCO().clear();
-//
-//                        }
-
-
-                        String key =   edt_Reffrence.getText().toString();
-                        String yearkey = str_billType + "-" + strbiller + "-" + edt_Reffrence.getText().toString() + "-" + "year";
-
+                        String key = "key"+ (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
 
                         Log.d(TAG, "onWebResult: Key " + key);
 
