@@ -59,6 +59,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
     TextView txv_billDetails_company;
     LinearLayout llChartHistoryImportantDates;
     String sref = "";
+    private String arrayKey="";
     private ArrayList<DModelBillInfo> lstChartHistory;
     ArrayList<DModel_Bill> lstChartPayments;
     ArrayList<DModel_Bill> lstChartUnits;
@@ -83,10 +84,9 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         }
 
 
-//        showBarHistoricalPayment(lstChartPayments);
-//        showBarHistoricalUnitsConsumed(lstChartUnits);
-        mBarHistoricalPayment.setVisibility(View.GONE);
-        mBarHistoricalUnitsConsumed.setVisibility(View.GONE);
+        showBarHistoricalPayment(lstChartPayments);
+        showBarHistoricalUnitsConsumed(lstChartUnits);
+
         return frg;
     }
 
@@ -99,15 +99,16 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
             selection = bundle.getInt("key_selection");
             Log.d("selection", "selectedPosition init " + selection);
             sref = bundle.getString("key_iesco");
+            arrayKey = bundle.getString("key_fordata");
         }
         setBottomBar();
 
         lstChartPayments = AppConfig.getInstance().getBillsList();
 
-
+        lstChartHistory = AppConfig.getInstance().getBillsIESCO(arrayKey);
         lstChartUnits = AppConfig.getInstance().getBillsList();
 
-        lstChartHistory = AppConfig.getInstance().getBillsIESCO("");
+      //  lstChartHistory = AppConfig.getInstance().getBillsIESCO("");
     }
 
     private void bindviews(View view) {
@@ -256,10 +257,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
                         selection = position;
 //                        txvSelected_Disease.setVisibility(View.VISIBLE);
 //                        txvSelected_Disease.setText(AppConfig.getInstance().lst_DiseasesDef.get(position).getDiseaseName());
-                        mBarHistoricalPayment.setVisibility(View.VISIBLE);
-                        mBarHistoricalUnitsConsumed.setVisibility(View.VISIBLE);
-                        showBarHistoricalPayment(lstChartPayments);
-                        showBarHistoricalUnitsConsumed(lstChartUnits);
+
 
                         break;
 
@@ -350,8 +348,12 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         FragmentTransaction ft;
         Fragment frg = new ElectricityHomeFragment();
         ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("key_selection" , selection);
+        bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
+        frg.setArguments(bundle);
         ft.hide(this);
         ft.commit();
     }
@@ -364,6 +366,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection" , selection);
+        bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_BillAnaylsisFragment);
@@ -379,6 +382,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         Fragment frg = new PdfFragment();
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
+        bundle.putString("key_fordata", arrayKey);
         bundle.putInt("key_selection" , selection);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_PdfFragment);
         Log.d("selection", "selectedPosition navToPDFFragment " + selection);

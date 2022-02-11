@@ -60,6 +60,7 @@ public class PdfFragment extends Fragment implements View.OnClickListener, OnLoa
     TextView txv_billDetails_company;
     String sref = "";
     private ArrayList<DModelBillInfo> lstPDF;
+    private String arrayKey="";
 //pdf
 PDFView pdfview;
 
@@ -94,10 +95,12 @@ PDFView pdfview;
             selection = bundle.getInt("key_selection");
             Log.d("selection", "selectedPosition init " + selection);
             sref = bundle.getString("key_iesco");
+            arrayKey = bundle.getString("key_fordata");
         }
         setBottomBar();
 
-        lstPDF = AppConfig.getInstance().getBillsIESCO("");
+       // lstPDF = AppConfig.getInstance().getBillsIESCO("");
+        lstPDF = AppConfig.getInstance().getBillsIESCO(arrayKey);
         //lstPDF = new ArrayList<>();
     }
 
@@ -112,13 +115,13 @@ PDFView pdfview;
         txv_billDetails_company = view.findViewById(R.id.frg_home_electricity_txv_bill_company);
         llpdfImportantdates = view.findViewById(R.id.frg_home_pdf_llImportantdates);
         pdfview = view.findViewById(R.id.pdfView);
-//        pdfview.fromAsset("Bill.pdf")
-//                .enableSwipe(true)
-//                .swipeHorizontal(true)
-//                .enableAnnotationRendering(true)
-//                .scrollHandle(new DefaultScrollHandle(getContext()))
-//                .onLoad(this)
-//                .load();
+        pdfview.fromAsset("Bill.pdf")
+                .enableSwipe(true)
+                .swipeHorizontal(true)
+                .enableAnnotationRendering(true)
+                .scrollHandle(new DefaultScrollHandle(getContext()))
+                .onLoad(this)
+                .load();
 
 
         llpdfImportantdates.setOnClickListener(this);
@@ -170,18 +173,12 @@ PDFView pdfview;
 //                        txvSelected_Disease.setText(AppConfig.getInstance().lst_DiseasesDef.get(position).getDiseaseName());
 
                         setBillDetails();
-                        pdfview.fromAsset("Bill.pdf")
-                                .enableSwipe(true)
-                                .swipeHorizontal(true)
-                                .enableAnnotationRendering(true)
-                                .scrollHandle(new DefaultScrollHandle(getContext()))
-                                .onLoad(this)
-                                .load();
+
 
                         break;
 
                     case EVENT_B:
-                        navToChartHistory(selection);
+                        navToChartHistory(selection,arrayKey);
                         break;
                 }
             });
@@ -217,7 +214,7 @@ PDFView pdfview;
                 break;
 
             case R.id.electricityhomehistory:
-                navToBillAnaylsisFragment(selection);
+                navToBillAnaylsisFragment(selection,arrayKey);
                 break;
             case R.id.frg_home_pdf_llImportantdates:
                 navToImportantDatesFragment();
@@ -254,13 +251,17 @@ PDFView pdfview;
         FragmentTransaction ft;
         Fragment frg = new ElectricityHomeFragment();
         ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("key_selection" , selection);
+        bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
+        frg.setArguments(bundle);
         ft.hide(this);
         ft.commit();
     }
 
-    private void navToBillAnaylsisFragment(int selection) {
+    private void navToBillAnaylsisFragment(int selection,String arrayKey) {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft;
@@ -268,6 +269,7 @@ PDFView pdfview;
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection" , selection);
+        bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_BillAnaylsisFragment);
@@ -276,7 +278,7 @@ PDFView pdfview;
         ft.commit();
     }
 
-    private void navToChartHistory(int selection) {
+    private void navToChartHistory(int selection,String arrayKey) {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft;
@@ -284,6 +286,7 @@ PDFView pdfview;
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection" , selection);
+        bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ChartHistoryFragment);
         Log.d("selection", "selectedPosition navToPDFFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_ChartHistoryFragment);

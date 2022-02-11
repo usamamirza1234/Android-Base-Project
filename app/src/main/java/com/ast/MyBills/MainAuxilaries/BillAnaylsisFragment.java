@@ -73,9 +73,8 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
 
 
 
-//        populateBillAnaylsis(lstBillAnaylsis);
-        mBarHistoryUnit.setVisibility(View.GONE);
-//        showBarHistoryUnit(lstBillAnaylsis);
+        showBarHistoryUnit(lstBillAnaylsis);
+        populateBillAnaylsis(lstBillAnaylsis);
         return frg;
     }
 
@@ -129,12 +128,11 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
                         position_ = position;
                         selection = position;
                         setBillDetails();
-                        showBarHistoryUnit(lstBillAnaylsis);
-                        populateBillAnaylsis(lstBillAnaylsis);
-                        mBarHistoryUnit.setVisibility(View.VISIBLE);
+
+
                         break;
                     case EVENT_B:
-                        navToPDFFragment(selection);
+                        navToPDFFragment(selection,arrayKey);
                         break;
                 }
             });
@@ -172,7 +170,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
                 navToElectricityHomeFragment();
                 break;
             case R.id.billanalysispdf:
-                navToPDFFragment(selection);
+                navToPDFFragment(selection,arrayKey);
                 break;
             case R.id.frg_home_billanalysis_llimportantdates:
                 navToImportantDatesFragment();
@@ -218,13 +216,17 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         FragmentTransaction ft;
         Fragment frg = new ElectricityHomeFragment();
         ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("key_selection" , selection);
+        bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
+        frg.setArguments(bundle);
         ft.hide(this);
         ft.commit();
     }
 
-    private void navToPDFFragment(int selection) {
+    private void navToPDFFragment(int selection,String arrayKey) {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft;
@@ -232,6 +234,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection", selection);
+        bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_PdfFragment);
         Log.d("selection", "selectedPosition navToPDFFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_PdfFragment);

@@ -74,7 +74,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         init();
         bindviews(frg);
         populateBillInfo(lstBillInfo);
-
+      //  setBillDetails();
         return frg;
     }
 
@@ -183,9 +183,9 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
                 navToPDFFragment(selection);
                 break;
 
-//            case R.id.electricityhomehistory:
-//                navToBillAnaylsisFragment(selection);
-//                break;
+         case R.id.electricityhomehistory:
+                navToBillAnaylsisFragment(selection,arrayKey);
+              break;
 
             case R.id.frg_home_electricity_llImportantdates:
                 navToImportantDatesFragment();
@@ -258,6 +258,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection", selection);
+        bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_PdfFragment);
         Log.d("selection", "selectedPosition navToPDFFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_PdfFragment);
