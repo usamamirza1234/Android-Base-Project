@@ -57,8 +57,8 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     private ArrayList<DModelBillInfo> lstBillInfo;
     private ArrayList<String> xLabel;
     private Dialog progressDialog;
-    private String arrayKey="";
-
+    private String arrayKey="000";
+    private String arrayKey1="";
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View frg = inflater.inflate(R.layout.fragment_bill_anaylsis, container, false);
@@ -66,8 +66,10 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         init();
         bindviews(frg);
 
+        Log.d("MYBILL", "onWebResult: Key " +arrayKey   + " "+ AppConfig.getInstance().getBillsIESCO(arrayKey));
 
-        Log.d("MYBILL", "onWebResult: Key " +arrayKey + " "  +  AppConfig.getInstance().getBillsIESCO(arrayKey).size());
+        Log.d("MYBILL", "onWebResult: Key1 " +arrayKey1 + " ss "  +  AppConfig.getInstance().getBillsList(arrayKey1));
+
         populateBillInfo(  lstBillInfo);
 
 
@@ -84,13 +86,19 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
             selection = bundle.getInt("key_selection");
             sref = bundle.getString("key_iesco");
             arrayKey = bundle.getString("key_fordata");
+         arrayKey1 = bundle.getString("key_fordata1");
 
         }
         setBottomBar();
         lstBillInfo = new ArrayList<>();
         lstBillAnaylsis = new ArrayList<>();
         lstBillInfo = AppConfig.getInstance().getBillsIESCO(arrayKey);
-        lstBillAnaylsis = AppConfig.getInstance().getBillsList();
+
+        lstBillAnaylsis = AppConfig.getInstance().getBillsList(arrayKey1);
+
+
+        Log.d("MYBILL", "onWebResult: Key123 " +arrayKey1 + " "  +  AppConfig.getInstance().getBillsList(arrayKey1));
+
     }
 
     private void bindviews(View view) {

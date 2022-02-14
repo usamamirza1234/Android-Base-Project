@@ -349,21 +349,21 @@ public class AppConfig {
     //endregion
 
 //IESCO Year List
-    public void saveBillsList(ArrayList<DModel_Bill> lstBill) {
+    public void saveBillsList(String key ,ArrayList<DModel_Bill> lstBill) {
         String json = gson.toJson(lstBill);
-        editor.putString("key_lst_lstlstBill", json);
+        editor.putString(key, json);
         editor.commit();
 
         Log.d("sharedPref","saveBillsList: " + json);
     }
 
-    public ArrayList<DModel_Bill> getBillsList() {
+    public ArrayList<DModel_Bill> getBillsList(String key) {
         Type type = new TypeToken<List<DModel_Bill>>() {}.getType();
-        ArrayList<DModel_Bill> list = gson.fromJson(sharedPref.getString("key_lst_lstlstBill", ""), type);
+        ArrayList<DModel_Bill> list = gson.fromJson(sharedPref.getString(key, ""), type);
         if (list == null)
             list = new ArrayList<>();
         else
-            saveBillsList(list);
+            saveBillsList(key,list);
         return list;
     }
 

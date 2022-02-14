@@ -60,6 +60,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
     LinearLayout llChartHistoryImportantDates;
     String sref = "";
     private String arrayKey="";
+    private String arrayKey1="";
     private ArrayList<DModelBillInfo> lstChartHistory;
     ArrayList<DModel_Bill> lstChartPayments;
     ArrayList<DModel_Bill> lstChartUnits;
@@ -103,10 +104,10 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         }
         setBottomBar();
 
-        lstChartPayments = AppConfig.getInstance().getBillsList();
+        lstChartPayments = AppConfig.getInstance().getBillsList(arrayKey1);
 
         lstChartHistory = AppConfig.getInstance().getBillsIESCO(arrayKey);
-        lstChartUnits = AppConfig.getInstance().getBillsList();
+        lstChartUnits = AppConfig.getInstance().getBillsList(arrayKey1);
 
       //  lstChartHistory = AppConfig.getInstance().getBillsIESCO("");
     }

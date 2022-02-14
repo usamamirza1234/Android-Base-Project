@@ -46,6 +46,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
     ElectricityInfoRcvAdapter electricityInfoRcvAdapter;
     int position_ = 0;
     String arrayKey = "000";
+    String arrayKey1 = "";
     Integer selection = 0;
     TextView txv_billDetails_company, txv_billDetails_name;
     TextView txvpdf, txvhistory;
@@ -86,6 +87,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             sref = bundle.getString("key_iesco");
             arrayKey = bundle.getString("key_fordata");
             selection = bundle.getInt("key_selection");
+       //     arrayKey1 = bundle.getString("key_fordata1");
         }
         lstBillInfo = new ArrayList<>();
         lstData = new ArrayList<>();
@@ -139,7 +141,9 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
                         break;
 
                     case EVENT_B:
-                        navToBillAnaylsisFragment(position,arrayKey);
+                        String key1= "key1  "+ (lstBillInfo.get(position).getReference());
+                        navToBillAnaylsisFragment(position,arrayKey,key1);
+
                         break;
                 }
             });
@@ -184,7 +188,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
                 break;
 
          case R.id.electricityhomehistory:
-                navToBillAnaylsisFragment(selection,arrayKey);
+                navToBillAnaylsisFragment(selection,arrayKey,arrayKey1);
               break;
 
             case R.id.frg_home_electricity_llImportantdates:
@@ -233,7 +237,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         ft.commit();
     }
 
-    private void navToBillAnaylsisFragment(int selection,String arrayKey) {
+    private void navToBillAnaylsisFragment(int selection,String arrayKey,String arrayKey1) {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft;
@@ -242,6 +246,9 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection", selection);
         bundle.putString("key_fordata", arrayKey);
+        bundle.putString("key_fordata1", arrayKey1);
+;
+
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_BillAnaylsisFragment);
