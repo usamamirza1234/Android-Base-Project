@@ -137,7 +137,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         lstBillDashboardElementFilter.clear();
         lstBillDashboardElement.clear();
-
         lstBillDashboardElement = AppConfig.getInstance().getBillerSetting();
 
 //        lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" + 0, "20-4-2021", 1, 10));
