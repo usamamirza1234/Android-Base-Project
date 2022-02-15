@@ -374,99 +374,43 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         dModelBillInfo.setUnits(More_WebHit_Get_Bills.responseObject.getIescoBill().getTOTALUNITS());
                         dModelBillInfo.setPresentReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPRESENTREADING());
                         dModelBillInfo.setPrevReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPREVIOUSREADING());
-
-
                         dModelBillInfo.setReadingDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
                         dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
                         dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-                        lstBillInfo.add(dModelBillInfo);
 
+                        lstBillInfo.add(dModelBillInfo);
                         AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-//                        AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
-//                        AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
-//
-/////
                         DModel_ImportantDates dModel_importantDates = new DModel_ImportantDates();
                         dModel_importantDates.setBiller(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
                         dModel_importantDates.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
                         dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-
-
                         lstImp.add(dModel_importantDates);
-//                        if (AppConfig.getInstance().getimp().size() > 0) {
-//                            AppConfig.getInstance().getimp().clear();
-//
-//                        }
-
-//                        lstMyBills.add(
-//                                new DModel_Bills(str_billType + "",
-//                                        edt_Reffrence.getText().toString() + "",
-//                                        edt_Account.getText().toString() + ""));
-
-
-
-                        lstMyBills.add(
-                                new DModel_Bills(str_billType + "",
-                                        (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) + "",
-                                        edt_Account.getText().toString() + "",
-                                        More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEAFTERDUEDATE(),
-                                        More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE()
-                                ));
-
+                        lstMyBills.add(new DModel_Bills(str_billType + "", (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) + "", edt_Account.getText().toString() + "", More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEAFTERDUEDATE(), More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE()));
                         billListingRcvAdapter.notifyDataSetChanged();
-
 
                         AppConfig.getInstance().saveimp(lstImp);
                         AppConfig.getInstance().saveimpString(AppConfig.getInstance().lstImpDates);
 
 
                         String key = "key"+ (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
-
                         Log.d(TAG, "onWebResult: Key " + key);
-
                         AppConfig.getInstance().saveIESCO(key, lstBillInfo);
-
                         if (More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size() > 0) {
-
                             for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size(); i++) {
-
                                 if (i > 0) {
-                                    Log.d("LOG_AS", "Elements of lastYearBills " + More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
                                     AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
-
-
-                                    DModel_Bill dModel_bill = new DModel_Bill(
-                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0),
-                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1),
-                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2),
-                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3)
-
-                                    );
+                                    DModel_Bill dModel_bill = new DModel_Bill(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0), More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1), More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2), More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3));
                                     lastBill.add(dModel_bill);
                                 }
-
                             }
-                            String key1 = "key1"+ More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber();
-
-
-
-//                            if (AppConfig.getInstance().getBillsList(key1).size() > 0) {
-//                                AppConfig.getInstance().getBillsList(key1).clear();
-//
-//                            }
-
+                            String key1 = key+"years";
                             AppConfig.getInstance().saveBillsList(key1,lastBill);
                             AppConfig.getInstance().getBillsList(key1);
                             Log.d(TAG,"SIZE WITHOUT KEY: " +lastBill.size());
                             Log.d(TAG,"SIZE WITH KEY: " + AppConfig.getInstance().getBillsList(key1).size());
                             Log.d(TAG,"KEY: " + key1);
-
                         }
-
-
                     }
-
-
                     if (AppConfig.getInstance().getBillerSetting().size() > 0) {
                         AppConfig.getInstance().getBillerSetting().clear();
 

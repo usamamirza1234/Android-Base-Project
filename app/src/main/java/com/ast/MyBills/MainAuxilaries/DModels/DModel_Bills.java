@@ -13,14 +13,8 @@ public class DModel_Bills {
         BillType = s;
         Refference_number = s1;
         Account_number = s2;
-        payableafterduedate = payableafterduedate;
-        duedate = duedate;
-    }
-
-    public DModel_Bills(String billType, String refference_number, String account_number) {
-        BillType = billType;
-        Refference_number = refference_number;
-        Account_number = account_number;
+        this.payableafterduedate = payableafterduedate;
+        this.duedate = duedate;
     }
 
 

@@ -138,31 +138,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lstBillDashboardElementFilter.clear();
         lstBillDashboardElement.clear();
         lstBillDashboardElement = AppConfig.getInstance().getBillerSetting();
-
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" + 0, "20-4-2021", 1, 10));
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("Water", "2,00" + 1, "20-4-2019", 2, 10));
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("Mobile", "2,00" + 2, "10-4-2018", 3, 10));
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("TV", "2,00" + 3, "24-4-2021", 4, 10));
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("Internet", "2,00" + 4, "09-4-2021", 7, 20));
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("Electricity", "2,00" + 0, "22-4-2021", 8, 20));
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("Water", "2,00" + 1, "14-4-2021", 9, 30));
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("Mobile", "2,00" + 2, "17-4-2021", 10, 30));
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("TV", "2,00" + 3, "23-4-2022", 11, 20));
-//        lstBillDashboardElement.add(new DModelBillDashboardInfo("Internet", "2,00" + 4, "02-4-2022", 12, 30));
-//        for (int i = 0; i < lstBillDashboardElement.size(); i++) {
-//            if (act != 0) {
-////                if (lstBillDashboardElement.get(i).getAct() == act) {
-////                    lstBillDashboardElementFilter.add(new DModelBillDashboardInfo(lstBillDashboardElement.get(i).BillType, lstBillDashboardElement.get(i).Amount, lstBillDashboardElement.get(i).DueDate, lstBillDashboardElement.get(i).Status, lstBillDashboardElement.get(i).Act));
-////                }
-//
-//            } else {
-//
-////                lstBillDashboardElementFilter.add(new DModelBillDashboardInfo(lstBillDashboardElement.get(i).BillType, lstBillDashboardElement.get(i).Amount, lstBillDashboardElement.get(i).DueDate, lstBillDashboardElement.get(i).Status, lstBillDashboardElement.get(i).Act));
-//            }
-//        }
-
-
-
         populateBils(act, lstBillDashboardElement);
 
     }
@@ -183,8 +158,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         break;
                     case EVENT_B:
                         String key = "key"+ (lstBillDashboardElement.get(position).getRefference_number());
-
-                        navToElectricityHomeFragment(position,key);
+                        navToElectricityHomeFragment(position,key,lstBillDashboardElement.get(position).getBillType());
                         break;
                 }
             });
@@ -289,7 +263,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void navToElectricityHomeFragment(int selection,String key) {
+    private void navToElectricityHomeFragment(int selection, String key, String billType) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft;
         Fragment frg = new ElectricityHomeFragment();
@@ -297,6 +271,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection", selection);
         bundle.putString("key_fordata", key);
+        bundle.putString("key_billType", billType);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
