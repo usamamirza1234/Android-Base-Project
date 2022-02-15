@@ -64,8 +64,8 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
 
 
         holder.txv_bill.setText(mData.get(position).BillType);
-        holder.txv_city.setText(mData.get(position).getDuedate());
-        holder.txv_address.setText(mData.get(position).getPayableafterduedate());
+        holder.txv_city.setText(mData.get(position).duedate);
+        holder.txv_address.setText(mData.get(position).payableafterduedate);
 //        holder.txv_status.setText(mData.get(position).Status);
 //        holder.txv_act.setText(mData.get(position).Act);
 

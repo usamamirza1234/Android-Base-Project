@@ -87,7 +87,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             sref = bundle.getString("key_iesco");
             arrayKey = bundle.getString("key_fordata");
             selection = bundle.getInt("key_selection");
-       //     arrayKey1 = bundle.getString("key_fordata1");
+             arrayKey1 = bundle.getString("key_fordata1");
         }
         lstBillInfo = new ArrayList<>();
         lstData = new ArrayList<>();

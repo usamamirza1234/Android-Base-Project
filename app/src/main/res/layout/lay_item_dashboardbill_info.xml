@@ -53,7 +53,7 @@
                     android:padding="10dp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:text="Reference No"
+                    android:text="Amount"
                     android:textColor="@color/black"
                     android:textCursorDrawable="@null"
                     android:textSize="@dimen/fontsize_mini" />
@@ -67,7 +67,7 @@
                     android:padding="10dp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:text="Account No"
+                    android:text="Due Date"
                     android:textColor="@color/black"
                     android:textCursorDrawable="@null"
                     android:textSize="@dimen/fontsize_mini" />
