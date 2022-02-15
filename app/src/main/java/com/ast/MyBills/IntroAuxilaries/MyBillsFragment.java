@@ -446,7 +446,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                                 }
 
                             }
-                            String key1 = "key1"+ (More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills());
+                            String key1 = "key1"+ More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber();
 
 
 
@@ -457,7 +457,9 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
                             AppConfig.getInstance().saveBillsList(key1,lastBill);
                             AppConfig.getInstance().getBillsList(key1);
-                            Log.d(TAG,"onWebResult1: Keyyear" + AppConfig.getInstance().getBillsList(key1));
+                            Log.d(TAG,"SIZE WITHOUT KEY: " +lastBill.size());
+                            Log.d(TAG,"SIZE WITH KEY: " + AppConfig.getInstance().getBillsList(key1).size());
+                            Log.d(TAG,"KEY: " + key1);
 
                         }
 
