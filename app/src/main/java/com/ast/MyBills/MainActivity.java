@@ -240,6 +240,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         hideLastStackFragment(ft);
         ft.commit();
     }
+    private void navToBillerSettingFragment() {
+        Fragment frg = new MyBillsFragment();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_MyBillsFragment);
+        ft.addToBackStack(AppConstt.FragTag.FN_MyBillsFragment);
+        hideLastStackFragment(ft);
+        ft.commit();
+
+    }
 
     private void navToMyBillsFragment() {
         Fragment frg = new MyBillsFragment();
@@ -407,7 +416,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.lay_navigationview_llSetting:
                 closeDrawar();
-                navToEditProfileFragment();
+                navToBillerSettingFragment();
 
                 break;
             case R.id.lay_navigationview_llEditProfile:
@@ -423,7 +432,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.tlSetting:
-                navToEditProfileFragment();
+                navToBillerSettingFragment();
 
 
                 break;

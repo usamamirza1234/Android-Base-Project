@@ -61,7 +61,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
     TextView txv_billDetails_current_amount;
     TextView txv_billDetails_reference;
     TextView txv_billDetails_MeterStatus;
-    TextView lpc;
+    TextView BilltypeHeading;
     EditText ref;
     RelativeLayout add;
     String sref = "";
@@ -77,7 +77,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         init();
         bindviews(frg);
 
-        lpc.setText(billType+"");
+        BilltypeHeading.setText(billType+"");
 
         populateBillInfo(lstBillInfo);
       //  setBillDetails();
@@ -102,7 +102,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
     }
 
     private void bindviews(View view) {
-        lpc = view.findViewById(R.id.lpc);
+        BilltypeHeading = view.findViewById(R.id.BilltypeHeading);
         ref = view.findViewById(R.id.frg_my_bills_edt_ref);
         add = view.findViewById(R.id.frg_my_bills_rlAdd);
         add.setOnClickListener(this);
@@ -249,6 +249,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection", selection);
         bundle.putString("key_fordata", arrayKey);
+        bundle.putString("key_billType", billType);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_BillAnaylsisFragment);

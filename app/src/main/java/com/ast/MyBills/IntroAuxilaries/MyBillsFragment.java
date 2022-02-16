@@ -345,7 +345,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void RequestBillyear(String StrRef) {
-        showProgDialog();
+        showProgInstallingDataDialog();
         More_WebHit_Get_Bills more_webHit_get_bills = new More_WebHit_Get_Bills();
         more_webHit_get_bills.getBills(getContext(), new IWebCallback() {
             @Override
@@ -385,7 +385,12 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         dModel_importantDates.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
                         dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
                         lstImp.add(dModel_importantDates);
-                        lstMyBills.add(new DModel_Bills(str_billType + "", (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) + "", edt_Account.getText().toString() + "", More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEAFTERDUEDATE(), More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE()));
+
+                        lstMyBills.add(new DModel_Bills(str_billType + "",
+                                (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) + "",
+                                edt_Account.getText().toString() + "",
+                                More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE(),
+                                More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE()));
                         billListingRcvAdapter.notifyDataSetChanged();
 
                         AppConfig.getInstance().saveimp(lstImp);
@@ -399,7 +404,11 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                             for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size(); i++) {
                                 if (i > 0) {
                                     AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
-                                    DModel_Bill dModel_bill = new DModel_Bill(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0), More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1), More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2), More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3));
+                                    DModel_Bill dModel_bill = new DModel_Bill
+                                            (More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0),
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1),
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2),
+                                            More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3));
                                     lastBill.add(dModel_bill);
                                 }
                             }
@@ -433,7 +442,14 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
             }
         }, StrRef);
     }
+    private void showProgInstallingDataDialog() {
+        progressDialog = new Dialog(getActivity(), R.style.AppTheme);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.dialog_installing_progress);
 
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
 
     //region  functions for Dialog
     private void dismissProgDialog() {

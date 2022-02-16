@@ -88,8 +88,8 @@ EditText edtName,edtPhone,edtEmail;
                             edtPhone.getText().toString() + ""));
 
             AppConfig.getInstance().saveEditProfile(lstEditProfile);
-
-            navToBillerSettingFragment();
+            Toast.makeText(getContext(), "Done", Toast.LENGTH_LONG).show();
+            //navToBillerSettingFragment();
 
         }
     }

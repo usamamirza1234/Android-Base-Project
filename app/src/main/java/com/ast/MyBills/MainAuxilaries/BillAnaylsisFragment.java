@@ -53,18 +53,20 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     Integer selection = null;
     TextView txv_billDetails_company;
     String sref = "";
+    String billType = "";
     private final boolean isFirstTime = true;
     private ArrayList<DModelBillInfo> lstBillInfo;
     private ArrayList<String> xLabel;
     private Dialog progressDialog;
     private String arrayKey="000";
+    TextView BilltypeHeading;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View frg = inflater.inflate(R.layout.fragment_bill_anaylsis, container, false);
 
         init();
         bindviews(frg);
-
+        BilltypeHeading.setText(billType+"");
         populateBillInfo(  lstBillInfo);
         showBarHistoryUnit(lstBillAnaylsis);
         populateBillAnaylsis(lstBillAnaylsis);
@@ -74,6 +76,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     private void init() {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
+            billType = bundle.getString("key_billType");
             selection = bundle.getInt("key_selection");
             sref = bundle.getString("key_iesco");
             arrayKey = bundle.getString("key_fordata");
@@ -91,6 +94,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     }
 
     private void bindviews(View view) {
+        BilltypeHeading = view.findViewById(R.id.analysisHeading);
         rcvElectInfo = view.findViewById(R.id.frg_bill_anaylsis_rcvElectricityInfo);
         rcvBillAnaylsis = view.findViewById(R.id.frg_bill_anaylsis_rcvMonthsAnaylsis);
         llBillDetails = view.findViewById(R.id.frg_bill_anaylsis_llBill_Details);
@@ -232,6 +236,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection", selection);
         bundle.putString("key_fordata", arrayKey);
+        bundle.putString("key_billType", billType);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_PdfFragment);
         Log.d("selection", "selectedPosition navToPDFFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_PdfFragment);

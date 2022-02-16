@@ -1,7 +1,9 @@
 package com.ast.MyBills.IntroAuxilaries;
 
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -32,7 +34,7 @@ public class SplashFragment extends Fragment {
     private final int DURATION_SPLASH = 1500;
     private IBadgeUpdateListener mBadgeUpdateListener;
     private LinearLayout llEng, llArbc;
-
+    private Dialog progressDialog;
     public SplashFragment() {
     }
 
@@ -112,6 +114,14 @@ public class SplashFragment extends Fragment {
 
 
 
+    }
+    private void showProgInstallingDataDialog() {
+        progressDialog = new Dialog(getActivity(), R.style.AppTheme);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.dialog_installing_progress);
+
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     public void navToPreSignInVAFragment() {

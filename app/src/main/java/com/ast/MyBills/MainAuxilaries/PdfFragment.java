@@ -57,10 +57,11 @@ public class PdfFragment extends Fragment implements View.OnClickListener, OnLoa
     PDFRcvAdapter pdfRcvAdapter;
     int position_ = 0;
     Integer selection = null;
-    TextView txv_billDetails_company;
+    TextView txv_billDetails_company,BilltypeHeading;
     String sref = "";
     private ArrayList<DModelBillInfo> lstPDF;
     private String arrayKey="";
+    String billType = "";
 //pdf
 PDFView pdfview;
 
@@ -70,7 +71,7 @@ PDFView pdfview;
 
         init();
         bindviews(frg);
-
+        BilltypeHeading.setText(billType+"");
 
         populateBillInfo(lstPDF);
 
@@ -95,6 +96,7 @@ PDFView pdfview;
             selection = bundle.getInt("key_selection");
             Log.d("selection", "selectedPosition init " + selection);
             sref = bundle.getString("key_iesco");
+            billType = bundle.getString("key_billType");
             arrayKey = bundle.getString("key_fordata");
         }
         setBottomBar();
@@ -106,7 +108,7 @@ PDFView pdfview;
 
     private void bindviews(View view) {
 
-
+        BilltypeHeading = view.findViewById(R.id.PDFHeading);
 
         rcvElectInfo = view.findViewById(R.id.frg_home_electricity_rcvElectricityInfo);
         llBillDetails = view.findViewById(R.id.frg_home_electricity_llBill_Details);
@@ -287,6 +289,8 @@ PDFView pdfview;
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection" , selection);
         bundle.putString("key_fordata", arrayKey);
+        bundle.putString("key_billType", billType);
+
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ChartHistoryFragment);
         Log.d("selection", "selectedPosition navToPDFFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_ChartHistoryFragment);

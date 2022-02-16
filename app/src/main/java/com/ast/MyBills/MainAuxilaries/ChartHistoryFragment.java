@@ -56,11 +56,12 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
     ChartHistoryRcvAdapter chartHistoryRcvAdapter;
     int position_ = 0;
     Integer selection = null;
-    TextView txv_billDetails_company;
+    TextView txv_billDetails_company,BilltypeHeading;
     LinearLayout llChartHistoryImportantDates;
     String sref = "";
     private String arrayKey="";
     private String arrayKey1="";
+    String billType = "";
     private ArrayList<DModelBillInfo> lstChartHistory;
     ArrayList<DModel_Bill> lstChartPayments;
     ArrayList<DModel_Bill> lstChartUnits;
@@ -84,7 +85,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
 //            llBillDetails.setVisibility(View.GONE);
         }
 
-
+        BilltypeHeading.setText(billType+"");
         showBarHistoricalPayment(lstChartPayments);
         showBarHistoricalUnitsConsumed(lstChartUnits);
 
@@ -101,20 +102,21 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
             Log.d("selection", "selectedPosition init " + selection);
             sref = bundle.getString("key_iesco");
             arrayKey = bundle.getString("key_fordata");
+            billType = bundle.getString("key_billType");
         }
         setBottomBar();
 
-        lstChartPayments = AppConfig.getInstance().getBillsList(arrayKey1);
-
+        lstChartPayments = AppConfig.getInstance().getBillsList(arrayKey+"Chart");
+        lstChartUnits = AppConfig.getInstance().getBillsList(arrayKey+"Chart");
         lstChartHistory = AppConfig.getInstance().getBillsIESCO(arrayKey);
-        lstChartUnits = AppConfig.getInstance().getBillsList(arrayKey1);
 
+        Log.d("MYBILL", "onWebResult: KEYChart " +arrayKey+"chart" + " "  + lstChartUnits .size());
       //  lstChartHistory = AppConfig.getInstance().getBillsIESCO("");
     }
 
     private void bindviews(View view) {
 
-
+        BilltypeHeading = view.findViewById(R.id.chartHeading);
 
         rcvElectInfo = view.findViewById(R.id.frg_home_electricity_rcvElectricityInfo);
 
