@@ -23,7 +23,7 @@ import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_CreateAccount;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_EditProfile;
-import com.ast.MyBills.MainAuxilaries.DModels.DModel_ImportantDates;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.Utils.CustomToast;
 import com.ast.MyBills.Utils.PinEntry;
 import com.google.gson.Gson;
@@ -459,7 +459,7 @@ public class AppConfig {
 
     //imp
 
-    public void saveimp(ArrayList<DModel_ImportantDates> lstimp) {
+    public void saveimp(ArrayList<DModel_Bills> lstimp) {
         String json = gson.toJson(lstimp);
         editor.putString("key_lst_imp", json);
         editor.commit();
@@ -467,9 +467,9 @@ public class AppConfig {
         Log.d("sharedPref","saveimp: " + json);
     }
 
-    public ArrayList<DModel_ImportantDates> getimp() {
-        Type type = new TypeToken<ArrayList<DModel_ImportantDates>>() {}.getType();
-        ArrayList<DModel_ImportantDates> list = gson.fromJson(sharedPref.getString("key_lst_imp", ""), type);
+    public ArrayList<DModel_Bills> getimp() {
+        Type type = new TypeToken<ArrayList<DModel_Bills>>() {}.getType();
+        ArrayList<DModel_Bills> list = gson.fromJson(sharedPref.getString("key_lst_imp", ""), type);
         if (list == null)
             list = new ArrayList<>();
         else
@@ -480,21 +480,21 @@ public class AppConfig {
 
     //impString
 
-    public void saveimpString(ArrayList<String> lstimpString) {
+    public void saveimpString(ArrayList<String> lstimpString,String impKey) {
         String json = gson.toJson(lstimpString);
-        editor.putString("key_lst_impString", json);
+        editor.putString(impKey, json);
         editor.commit();
 
         Log.d("sharedPref","saveimp: " + json);
     }
 
-    public ArrayList<String> getimpString() {
+    public ArrayList<String> getimpString(String impKey) {
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        ArrayList<String> list = gson.fromJson(sharedPref.getString("key_lst_impString", ""), type);
+        ArrayList<String> list = gson.fromJson(sharedPref.getString(impKey, ""), type);
         if (list == null)
             list = new ArrayList<>();
         else
-            saveimpString(list);
+            saveimpString(list,impKey);
         return list;
     }
 

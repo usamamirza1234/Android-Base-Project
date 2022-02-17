@@ -220,6 +220,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection" , selection);
         bundle.putString("key_fordata", arrayKey);
+        bundle.putString("key_billType", billType);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
         frg.setArguments(bundle);

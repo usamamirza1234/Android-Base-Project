@@ -100,9 +100,10 @@ PDFView pdfview;
             arrayKey = bundle.getString("key_fordata");
         }
         setBottomBar();
-
+        Log.d("MYBILL", "onWebResult: KEYChart " +arrayKey+"pdf");
        // lstPDF = AppConfig.getInstance().getBillsIESCO("");
         lstPDF = AppConfig.getInstance().getBillsIESCO(arrayKey);
+
         //lstPDF = new ArrayList<>();
     }
 
@@ -255,6 +256,7 @@ PDFView pdfview;
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection" , selection);
+        bundle.putString("key_billType", billType);
         bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
@@ -271,6 +273,7 @@ PDFView pdfview;
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection" , selection);
+        bundle.putString("key_billType", billType);
         bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);

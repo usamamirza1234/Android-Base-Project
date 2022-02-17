@@ -60,7 +60,6 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
     LinearLayout llChartHistoryImportantDates;
     String sref = "";
     private String arrayKey="";
-    private String arrayKey1="";
     String billType = "";
     private ArrayList<DModelBillInfo> lstChartHistory;
     ArrayList<DModel_Bill> lstChartPayments;
@@ -105,12 +104,13 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
             billType = bundle.getString("key_billType");
         }
         setBottomBar();
-
+        lstChartPayments = new ArrayList<>();
+        lstChartUnits = new ArrayList<>();
         lstChartPayments = AppConfig.getInstance().getBillsList(arrayKey+"Chart");
         lstChartUnits = AppConfig.getInstance().getBillsList(arrayKey+"Chart");
         lstChartHistory = AppConfig.getInstance().getBillsIESCO(arrayKey);
 
-        Log.d("MYBILL", "onWebResult: KEYChart " +arrayKey+"chart" + " "  + lstChartUnits .size());
+        Log.d("MYBILL", "onWebResult: KEYChart " +arrayKey+"chart" + " "  + lstChartPayments );
       //  lstChartHistory = AppConfig.getInstance().getBillsIESCO("");
     }
 
@@ -353,6 +353,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection" , selection);
+        bundle.putString("key_billType", billType);
         bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ElectricityHomeFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_ElectricityHomeFragment);
@@ -370,6 +371,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection" , selection);
         bundle.putString("key_fordata", arrayKey);
+        bundle.putString("key_billType", billType);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_BillAnaylsisFragment);
         Log.d("selection", "selectedPosition navToBillAnaylsisFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_BillAnaylsisFragment);
@@ -387,6 +389,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         Bundle bundle = new Bundle();
         bundle.putString("key_fordata", arrayKey);
         bundle.putInt("key_selection" , selection);
+        bundle.putString("key_billType", billType);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_PdfFragment);
         Log.d("selection", "selectedPosition navToPDFFragment " + selection);
         ft.addToBackStack(AppConstt.FragTag.FN_PdfFragment);

@@ -287,6 +287,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         FragmentTransaction ft;
         Fragment frg = new ImportantDatesFragment();
         ft = fm.beginTransaction();
+
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
         ft.hide(this);

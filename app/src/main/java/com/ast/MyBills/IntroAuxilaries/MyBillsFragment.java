@@ -61,7 +61,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     private TextView edt_Account;
     private Dialog progressDialog;
     private ArrayList<DModelBillInfo> lstBillInfo;
-    private ArrayList<DModel_ImportantDates> lstImp;
+    private ArrayList<DModel_Bills> lstImp;
     private final String TAG = "MYBILL";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -380,21 +380,27 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
                         lstBillInfo.add(dModelBillInfo);
                         AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-                        DModel_ImportantDates dModel_importantDates = new DModel_ImportantDates();
-                        dModel_importantDates.setBiller(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
-                        dModel_importantDates.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
-                        dModel_importantDates.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-                        lstImp.add(dModel_importantDates);
+//                        DModel_Bills dModel_bills = new DModel_Bills();
+//                        dModel_bills.setBiller(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
+//                        dModel_bills.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
+//                        dModel_bills.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+//
+//                        lstImp.add(dModel_bills);
 
                         lstMyBills.add(new DModel_Bills(str_billType + "",
                                 (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) + "",
                                 edt_Account.getText().toString() + "",
                                 More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE(),
-                                More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE()));
+                                More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE(),
+                                More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType()));
                         billListingRcvAdapter.notifyDataSetChanged();
 
+
+                        String impkey = "impkey"+ (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
+                        Log.d(TAG, "onWebResult: impKey " + impkey);
+
                         AppConfig.getInstance().saveimp(lstImp);
-                        AppConfig.getInstance().saveimpString(AppConfig.getInstance().lstImpDates);
+                        AppConfig.getInstance().saveimpString(AppConfig.getInstance().lstImpDates,impkey);
 
 
                         String key = "key"+ (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());

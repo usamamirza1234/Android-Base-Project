@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ast.MyBills.MainAuxilaries.DModels.DModel_ImportantDates;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.IAdapterCallback;
 
@@ -19,12 +19,12 @@ import java.util.ArrayList;
 public class ImportantDatesRcvAdapter extends RecyclerView.Adapter<ImportantDatesRcvAdapter.ViewHolder> {
 
 
-    private final ArrayList<DModel_ImportantDates> mData;
+    private final ArrayList<DModel_Bills> mData;
     private final Context mContext;
     private final IAdapterCallback iAdapterCallback;
 
 
-    public ImportantDatesRcvAdapter(Context mContext, ArrayList<DModel_ImportantDates> mData,
+    public ImportantDatesRcvAdapter(Context mContext, ArrayList<DModel_Bills> mData,
                                     IAdapterCallback iAdapterCallback) {
         this.mContext = mContext;
         this.mData = mData;
@@ -48,8 +48,8 @@ public class ImportantDatesRcvAdapter extends RecyclerView.Adapter<ImportantDate
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
 
-        holder.txv_date.setText(mData.get(position).getDueDate());
-        holder.txv_amount.setText(mData.get(position).getAmount());
+        holder.txv_date.setText(mData.get(position).getDuedate());
+        holder.txv_amount.setText(mData.get(position).getPayableafterduedate());
         holder.txv_biller.setText(mData.get(position).getBiller());
 
         holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position));

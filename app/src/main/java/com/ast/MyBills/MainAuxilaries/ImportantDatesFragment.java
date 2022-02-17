@@ -24,6 +24,7 @@ import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.ImportantDatesRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBanner;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_ImportantDates;
 import com.ast.MyBills.MainAuxilaries.MaterialCalendar.decorators.DisableSelectedDatesDecorator;
 import com.ast.MyBills.MainAuxilaries.MaterialCalendar.decorators.EventDecorator;
@@ -72,10 +73,10 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
     IBadgeUpdateListener mBadgeUpdateListener;
     private SimpleDateFormat mFormat, mFormatForApi;
     ImportantDatesRcvAdapter importantDatesRcvAdapter;
-    ArrayList<DModel_ImportantDates> lstImportantDates;
+    ArrayList<DModel_Bills> lstImportantDates;
     RecyclerView rcvImportantDates;
     ArrayList<String> strlstImportantDates;
-
+    private String arrayKey="";
 
     View frg;
 
@@ -87,7 +88,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         bindviews(frg);
         initializeAds();
         populateCalenders();
-        populateImportantDates(lstImportantDates);
+        populateImportantDates();
         return frg;
     }
 
@@ -267,7 +268,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
     //endregion
 
     //region Important Dates
-    private void populateImportantDates(ArrayList<DModel_ImportantDates> lstImportantDates) {
+    private void populateImportantDates() {
       //  lstImportantDates.clear();
 //        int size = (strlstImportantDates.size());
 //        for (int i = 0; i < size; i++) {
@@ -276,6 +277,9 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
 //           // lstImportantDates.add(new DModel_ImportantDates( AppConfig.getInstance().lstImpUSAMA.get(i).toString() + "", "" , ""));
 //
 //        }
+
+        lstImportantDates.clear();
+        lstImportantDates = AppConfig.getInstance().getBillerSetting();
 
         if (importantDatesRcvAdapter == null) {
 
@@ -307,12 +311,22 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
     //region Fragment Compulsory
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void init() {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+
+            arrayKey = bundle.getString("key_fordata");
+        }
+
         setBottomBar();
+
+
         lstElectricAds = new ArrayList<>();
         lstImportantDates = new ArrayList<>();
         strlstImportantDates = new ArrayList();
         lstImportantDates = AppConfig.getInstance().getimp();
-        AppConfig.getInstance().lstImpDates = AppConfig.getInstance().getimpString();
+        AppConfig.getInstance().lstImpDates = AppConfig.getInstance().getimpString(arrayKey+"ImpKey");
+
+        Log.d("MYBILL", "onWebResult: KEYimp " +arrayKey+"imp");
 
         for (int i=0; i<AppConfig.getInstance().    lstImpDates.size();i++)
         {

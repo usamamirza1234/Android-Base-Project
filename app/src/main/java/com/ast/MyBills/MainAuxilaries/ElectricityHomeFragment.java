@@ -196,7 +196,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
               break;
 
             case R.id.frg_home_electricity_llImportantdates:
-                navToImportantDatesFragment();
+                navToImportantDatesFragment(arrayKey);
                 break;
 
             case R.id.frg_my_bills_rlAdd:
@@ -229,12 +229,16 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         }
     }
 
-    private void navToImportantDatesFragment() {
+    private void navToImportantDatesFragment(String arrayKey) {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft;
         Fragment frg = new ImportantDatesFragment();
         ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+
+        bundle.putString("key_fordata", arrayKey);
+
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
         ft.hide(this);
@@ -266,6 +270,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putInt("key_selection", selection);
+        bundle.putString("key_billType", billType);
         bundle.putString("key_fordata", arrayKey);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_PdfFragment);
         Log.d("selection", "selectedPosition navToPDFFragment " + selection);
