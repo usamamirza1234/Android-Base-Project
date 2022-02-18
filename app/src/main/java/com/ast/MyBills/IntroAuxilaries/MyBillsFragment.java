@@ -398,9 +398,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         billListingRcvAdapter.notifyDataSetChanged();
 
 
-//                        wtf you are doing ?????????
-//                        saving key like "impkey12312312312312" and wnt to get like "key12312312312312ImpKey"
-//                            you are make me chutiyaaaaaaaaa
+
 //                     ??   String impkey =  "impkey" + (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) ;
 //                    ??    Log.d(TAG, "onWebResult: impKey " + impkey);
 //
@@ -413,8 +411,6 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         AppConfig.getInstance().saveIESCO(key, lstBillInfo);
 
 
-//                        ????? Or agar aik jaga sy imp dates ati han to dates ma yh
-//                                ?? dynamic key wala kam kueeeeeeeeeeeee krna ha>???????????????????
 //                      ??  String impkey =  key + "impkey";
 
 

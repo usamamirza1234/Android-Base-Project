@@ -320,33 +320,13 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
 
 
         lstImpDates = AppConfig.getInstance().getimpString(arrayKey+"ImpKey");
-//        ??? AGR AIK JGA SY A RA HA TO DYNAMIC KEY KU CHIYE HA?????????????????????
-//        ?? isn't i ask k sb smj a gya ha
-//            ???? sara krwa k diya tha concept smjhny gya tha mera or tera time zaya ni krny gya tha
-//                ?? wasnt i told you how busy i am????????
-//        ?? upr sy isi liy khta tha k gando k triky sy kam kro taky yh gando smj jy asani sy kiya
-//                chutiyap chl rah ha
-//        why thi array key ?? arrayKey or ha b to khin say ani chiye na bundle ma likh dainy sy a jay gi ???????
-    //        String key = arrayKey+"impkey";
 
+           String key = arrayKey+"impkey";
 
-
-
-        String key = "impkey";
+      //  String key = "impkey";
         lstImpDates = AppConfig.getInstance().getimpString(key);
 
         Log.d("impp111", "onWebResult: impKey " + key + " " + AppConfig.getInstance().getimpString(key).size() );
-
-//        ???  what is this ??
-//        saving key like "impkey12312312312312" and wnt to get like "key12312312312312ImpKey"
-        Log.d("MYBILL", "onWebResult: KEYimp " +arrayKey+"imp");
-//            ???  what is this what do you want to log????  (arrayKey+"imp") is same with (arrayKey+"ImpKey") ??
-//
-//
-//        ?? I told you to dont do this like AppConfig.getInstance().lstImpDates ??
-//        ?? I have done only to trivers data in app
-
-
 
         for (int i=0; i<lstImpDates.size();i++)
         {
