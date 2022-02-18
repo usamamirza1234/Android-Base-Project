@@ -106,11 +106,17 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         setBottomBar();
         lstChartPayments = new ArrayList<>();
         lstChartUnits = new ArrayList<>();
-        lstChartPayments = AppConfig.getInstance().getBillsList(arrayKey+"Chart");
-        lstChartUnits = AppConfig.getInstance().getBillsList(arrayKey+"Chart");
+        lstChartPayments = AppConfig.getInstance().getBillsList(arrayKey+"years");
+        lstChartUnits = AppConfig.getInstance().getBillsList(arrayKey+"years");
         lstChartHistory = AppConfig.getInstance().getBillsIESCO(arrayKey);
 
-        Log.d("MYBILL", "onWebResult: KEYChart " +arrayKey+"chart" + " "  + lstChartPayments );
+        Log.d("MYBILL", "onWebResult: KEYChart " +arrayKey+"chart" + " "  + lstChartPayments.size() );
+
+        for (int i =0; i<lstChartUnits.size(); i++)
+        {
+            Log.d("MYBILL",  " "  +  lstChartUnits.get(i).getMONTH());
+
+        }
       //  lstChartHistory = AppConfig.getInstance().getBillsIESCO("");
     }
 
