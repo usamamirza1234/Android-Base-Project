@@ -88,8 +88,13 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         lstBillInfo = AppConfig.getInstance().getBillsIESCO(arrayKey);
 
         lstBillAnaylsis = AppConfig.getInstance().getBillsList(arrayKey+"years");
-
         Log.d("MYBILL", "onWebResult: KEYYEAR " +arrayKey+"years" + " "  +  lstBillAnaylsis.size());
+
+        for (int i =0; i<lstBillAnaylsis.size(); i++)
+        {
+            Log.d("MYBILL",  " "  +  lstBillAnaylsis.get(i).getMONTH());
+
+        }
 
     }
 

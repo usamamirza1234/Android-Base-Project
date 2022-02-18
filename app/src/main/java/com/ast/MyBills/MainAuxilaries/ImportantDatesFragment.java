@@ -77,6 +77,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
     RecyclerView rcvImportantDates;
     ArrayList<String> strlstImportantDates;
     private String arrayKey="";
+    ArrayList<String> lstImpDates;
 
     View frg;
 
@@ -269,15 +270,6 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
 
     //region Important Dates
     private void populateImportantDates() {
-      //  lstImportantDates.clear();
-//        int size = (strlstImportantDates.size());
-//        for (int i = 0; i < size; i++) {
-//
-//
-//           // lstImportantDates.add(new DModel_ImportantDates( AppConfig.getInstance().lstImpUSAMA.get(i).toString() + "", "" , ""));
-//
-//        }
-
         lstImportantDates.clear();
         lstImportantDates = AppConfig.getInstance().getBillerSetting();
 
@@ -324,108 +316,70 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         lstImportantDates = new ArrayList<>();
         strlstImportantDates = new ArrayList();
         lstImportantDates = AppConfig.getInstance().getimp();
-        AppConfig.getInstance().lstImpDates = AppConfig.getInstance().getimpString(arrayKey+"ImpKey");
 
+
+
+      ??  lstImpDates = AppConfig.getInstance().getimpString(arrayKey+"ImpKey");
+        ??? AGR AIK JGA SY A RA HA TO DYNAMIC KEY KU CHIYE HA?????????????????????
+        ?? isn't i ask k sb smj a gya ha
+            ???? sara krwa k diya tha concept smjhny gya tha mera or tera time zaya ni krny gya tha
+                ?? wasnt i told you how busy i am????????
+        ?? upr sy isi liy khta tha k gando k triky sy kam kro taky yh gando smj jy asani sy kiya
+                chutiyap chl rah ha
+        why thi array key ?? arrayKey or ha b to khin say ani chiye na bundle ma likh dainy sy a jay gi ???????
+    ??        String key = arrayKey+"impkey";
+
+
+
+
+        String key = "impkey";
+        lstImpDates = AppConfig.getInstance().getimpString(key);
+
+        Log.d(TAG, "onWebResult: impKey " + key + " " + AppConfig.getInstance().getimpString(key).size() );
+
+        ???  what is this ??
+        saving key like "impkey12312312312312" and wnt to get like "key12312312312312ImpKey"
         Log.d("MYBILL", "onWebResult: KEYimp " +arrayKey+"imp");
+            ???  what is this what do you want to log????  (arrayKey+"imp") is same with (arrayKey+"ImpKey") ??
 
-        for (int i=0; i<AppConfig.getInstance().    lstImpDates.size();i++)
+
+        ?? I told you to dont do this like AppConfig.getInstance().lstImpDates ??
+        ?? I have done only to trivers data in app
+
+
+
+        for (int i=0; i<lstImpDates.size();i++)
         {
-            String strdate = AppConfig.getInstance().    lstImpDates.get(i);
+            String strdate = lstImpDates.get(i);
             Log.d("logApiData", "strdate:  " + strdate);
-
             SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);
             try {
                 Date date = format.parse(strdate);
                 Log.d("logApiData", "date1:  " + date);
-
-
                 SimpleDateFormat dayMonth = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 String strmonth = dayMonth.format(date);
                 Log.d("logApiData","formattedDate:  " +strmonth);
-
-
                 strlstImportantDates.add(strmonth);
-
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-
         }
-//        String date = "15-Oct-2018";
-
-
-
-//        strlstImportantDates.add("2022-01-24");
-//        strlstImportantDates.add("2022-01-26");
-//        strlstImportantDates.add("2022-01-9");
-//        strlstImportantDates.add("2022-01-27");
-//        strlstImportantDates.add("2022-01-28");
-//        strlstImportantDates.add("2022-01-1");
-//
-//        strlstImportantDates.add("2022-02-3");
-//        strlstImportantDates.add("2022-02-4");
-//
-//        strlstImportantDates.add("2022-02-6");
-
-
-
     }
 
 
 
 
     private void bindviews(View view) {
-
         viewPgrFeaturedBanner = view.findViewById(R.id.frg_market_viewpgr_featured_banner);
         circleIndicator = view.findViewById(R.id.frg_market_viewpagr_indicator);
-
-
-
         rcvImportantDates = view.findViewById(R.id.frg_my_bills_rcvImportantDate);
         materialCalendarView = view.findViewById(R.id.dlg_reorder_mcv_calndr);
         materialCalendarView_nextMonth = view.findViewById(R.id.dlg_reorder_mcv_calndr_nextmonth);
-
-
-    //    final ActionBar actionBar = getActivity().getActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(false);
-       // actionBar.setTitle(null);
-//
-//        compactCalendar = (CompactCalendarView) view.findViewById(R.id.compactcalendar_view);
-//        compactCalendar.setUseThreeLetterAbbreviation(true);
-//
-//        //Set an event for Teachers' Professional Day 2016 which is 21st of October
-//
-//        Event ev1 = new Event(Color.RED, 1477040400000L, "Teachers' Professional Day");
-//        compactCalendar.addEvent(ev1);
-//
-//        compactCalendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
-//            @Override
-//            public void onDayClick(Date dateClicked) {
-//                Context context = getContext();
-//
-//                if (dateClicked.toString().compareTo("Fri jan 21 00:00:00 AST 2022") == 0) {
-//                    Toast.makeText(context, "Teachers' Professional Day", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    Toast.makeText(context, "No Events Planned for that day", Toast.LENGTH_SHORT).show();
-//                }
-//
-//
-//            }
-//
-//            @Override
-//            public void onMonthScroll(Date firstDayOfNewMonth) {
-//               // actionBar.setTitle(dateFormatMonth.format(firstDayOfNewMonth));
-//            }
-//        });
-//
-
     }
 
 
 
     public class timerTask extends TimerTask {
-
         @Override
         public void run() {
             if (getActivity() != null) {
@@ -472,9 +426,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         if (getActivity() != null && isAdded()) {
             mBadgeUpdateListener.setToolbarState(AppConstt.ToolbarState.TOOLBAR_VISIBLE);
             mBadgeUpdateListener.setHeaderTitle(getString(R.string.frg_important_dates));
-
         }
-
     }
 
     @Override
@@ -484,6 +436,4 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
             setBottomBar();
         }
     }
-    //endregion
-
 }

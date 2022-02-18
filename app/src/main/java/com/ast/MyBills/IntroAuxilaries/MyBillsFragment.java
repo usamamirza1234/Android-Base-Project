@@ -41,7 +41,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     IBadgeUpdateListener mBadgeUpdateListener;
 
     ArrayList<DModel_Bills> lstMyBills;
-
+    ArrayList<String> lstImpDates;
     BillListingRcvAdapter billListingRcvAdapter;
     BillTypeSpinnerAdapter billTypeSpinnerAdapter;
     BillerSpinnerAdapter billerSpinnerAdapter;
@@ -241,7 +241,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     private void init() {
         setBottomBar();
         lstImp = new ArrayList<>();
-        AppConfig.getInstance().lstImpDates = new ArrayList<>();
+        lstImpDates = new ArrayList<>();
         // lstMyBills = new ArrayList<>();
         lstBillInfo = new ArrayList<>();
         lastBill = new ArrayList<>();
@@ -379,7 +379,9 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
 
                         lstBillInfo.add(dModelBillInfo);
-                        AppConfig.getInstance().lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+                       lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+                       lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
+                       lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
 //                        DModel_Bills dModel_bills = new DModel_Bills();
 //                        dModel_bills.setBiller(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
 //                        dModel_bills.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
@@ -396,16 +398,37 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         billListingRcvAdapter.notifyDataSetChanged();
 
 
-                        String impkey = "impkey"+ (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
-                        Log.d(TAG, "onWebResult: impKey " + impkey);
+                        wtf you are doing ?????????
+                        saving key like "impkey12312312312312" and wnt to get like "key12312312312312ImpKey"
+                            you are make me chutiyaaaaaaaaa
+                     ??   String impkey =  "impkey" + (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) ;
+                    ??    Log.d(TAG, "onWebResult: impKey " + impkey);
 
-                        AppConfig.getInstance().saveimp(lstImp);
-                        AppConfig.getInstance().saveimpString(AppConfig.getInstance().lstImpDates,impkey);
+                      ??  AppConfig.getInstance().saveimp(lstImp);
+                      ??  AppConfig.getInstance().saveimpString(lstImpDates,impkey);
 
 
                         String key = "key"+ (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
                         Log.d(TAG, "onWebResult: Key " + key);
                         AppConfig.getInstance().saveIESCO(key, lstBillInfo);
+
+
+                        ????? Or agar aik jaga sy imp dates ati han to dates ma yh
+                                ?? dynamic key wala kam kueeeeeeeeeeeee krna ha>???????????????????
+                      ??  String impkey =  key + "impkey";
+
+
+
+                        String impkey =   "impkey";
+                        Log.d(TAG, "onWebResult: impKey " + impkey);
+
+                        AppConfig.getInstance().saveimp(lstImp);
+                        AppConfig.getInstance().saveimpString(lstImpDates,impkey);
+                        Log.d(TAG, "onWebResult: impKey " + impkey + " " + AppConfig.getInstance().getimpString(impkey).size() );
+
+
+
+
                         if (More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size() > 0) {
                             for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size(); i++) {
                                 if (i > 0) {

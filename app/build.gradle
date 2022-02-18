@@ -7,8 +7,8 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.armoomragames.denketa"
-        minSdkVersion 16
+        applicationId 'ast.bills.app'
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
