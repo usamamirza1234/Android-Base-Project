@@ -1,8 +1,5 @@
 package com.ast.MyBills.MainAuxilaries;
 
-import android.app.ActionBar;
-import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -18,14 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ast.MyBills.AppConfig;
-import com.ast.MyBills.IntroAuxilaries.WebServices.More_WebHit_Get_Bills;
-import com.ast.MyBills.MainAuxilaries.Adapters.Dashboardinforcvadapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.ImportantDatesRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBanner;
-import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
-import com.ast.MyBills.MainAuxilaries.DModels.DModel_ImportantDates;
 import com.ast.MyBills.MainAuxilaries.MaterialCalendar.decorators.DisableSelectedDatesDecorator;
 import com.ast.MyBills.MainAuxilaries.MaterialCalendar.decorators.EventDecorator;
 import com.ast.MyBills.MainAuxilaries.MaterialCalendar.materialcalendarview.CalendarDay;
@@ -36,50 +28,40 @@ import com.ast.MyBills.Utils.IAdapterCallback;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
 import com.duolingo.open.rtlviewpager.RtlViewPager;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
-import com.github.sundeepk.compactcalendarview.domain.Event;
-
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
-import static android.content.ContentValues.TAG;
-
 
 public class ImportantDatesFragment extends Fragment implements View.OnClickListener {
     CompactCalendarView compactCalendar;
-    private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
-    private boolean isFirstTime = true;
     Timer timer;
     int currentPage, mIndicatorPosition;
-    private ArrayList<DModelBanner> lstElectricAds;
-    private RtlViewPager viewPgrFeaturedBanner;
-    private CircleIndicator circleIndicator;
-    private FeaturedAdsViewPagerAdapter featuredAdsViewPagerAdapter;
-
-
-     MaterialCalendarView materialCalendarView;
-    private MaterialCalendarView materialCalendarView_nextMonth;
+    MaterialCalendarView materialCalendarView;
     IBadgeUpdateListener mBadgeUpdateListener;
-    private SimpleDateFormat mFormat, mFormatForApi;
     ImportantDatesRcvAdapter importantDatesRcvAdapter;
     ArrayList<DModel_Bills> lstImportantDates;
     RecyclerView rcvImportantDates;
     ArrayList<String> strlstImportantDates;
-    private String arrayKey="";
     ArrayList<String> lstImpDates;
-
     View frg;
+    private final SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
+    private boolean isFirstTime = true;
+    private ArrayList<DModelBanner> lstElectricAds;
+    private RtlViewPager viewPgrFeaturedBanner;
+    private CircleIndicator circleIndicator;
+    private FeaturedAdsViewPagerAdapter featuredAdsViewPagerAdapter;
+    private MaterialCalendarView materialCalendarView_nextMonth;
+    private SimpleDateFormat mFormat, mFormatForApi;
+    private String arrayKey = "";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -175,7 +157,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
             for (int i = 0; i < strlstImportantDates.size(); i++) {
 
 //                String date = "2021-08-28";
-                String date = strlstImportantDates.get(i).toString();
+                String date = strlstImportantDates.get(i);
                 Date days = null;
 
                 if (date != null) {
@@ -189,7 +171,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
                     Log.d("LOG_AS", "formated date time: " + days.getTime() + "");
 
 
-                    CalendarDay calDays = dateTimeSlots.from(days);
+                    CalendarDay calDays = CalendarDay.from(days);
 
                     listDates.add(calDays);
 
@@ -227,7 +209,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
                     .commit();
 
 
-              materialCalendarView_nextMonth.addDecorator(new EventDecorator(getActivity()));
+            materialCalendarView_nextMonth.addDecorator(new EventDecorator(getActivity()));
 //            materialCalendarView_nextMonth.addDecorator(new DisableDatesDecorator());
 //            materialCalendarView_nextMonth.addDecorator(new TodayDateDecorator(getActivity()));
 
@@ -240,7 +222,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
             for (int i = 0; i < strlstImportantDates.size(); i++) {
 
 //                String date = "2021-08-28";
-                String date = strlstImportantDates.get(i).toString();
+                String date = strlstImportantDates.get(i);
                 Date days = null;
 
                 if (date != null) {
@@ -254,7 +236,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
                     Log.d("LOG_AS", "formated date time: " + days.getTime() + "");
 
 
-                    CalendarDay calDays = dateTimeSlots.from(days);
+                    CalendarDay calDays = CalendarDay.from(days);
 
                     listDates.add(calDays);
 
@@ -318,18 +300,16 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         lstImportantDates = AppConfig.getInstance().getimp();
 
 
+        lstImpDates = AppConfig.getInstance().getimpString(arrayKey + "ImpKey");
 
-        lstImpDates = AppConfig.getInstance().getimpString(arrayKey+"ImpKey");
+        String key = arrayKey + "impkey";
 
-           String key = arrayKey+"impkey";
-
-      //  String key = "impkey";
+        //  String key = "impkey";
         lstImpDates = AppConfig.getInstance().getimpString(key);
 
-        Log.d("impp111", "onWebResult: impKey " + key + " " + AppConfig.getInstance().getimpString(key).size() );
+        Log.d("impp111", "onWebResult: impKey " + key + " " + AppConfig.getInstance().getimpString(key).size());
 
-        for (int i=0; i<lstImpDates.size();i++)
-        {
+        for (int i = 0; i < lstImpDates.size(); i++) {
             String strdate = lstImpDates.get(i);
             Log.d("logApiData", "strdate:  " + strdate);
             SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);
@@ -338,15 +318,13 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
                 Log.d("logApiData", "date1:  " + date);
                 SimpleDateFormat dayMonth = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 String strmonth = dayMonth.format(date);
-                Log.d("logApiData","formattedDate:  " +strmonth);
+                Log.d("logApiData", "formattedDate:  " + strmonth);
                 strlstImportantDates.add(strmonth);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
     }
-
-
 
 
     private void bindviews(View view) {
@@ -357,7 +335,26 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         materialCalendarView_nextMonth = view.findViewById(R.id.dlg_reorder_mcv_calndr_nextmonth);
     }
 
+    void setBottomBar() {
 
+        try {
+            mBadgeUpdateListener = (IBadgeUpdateListener) getActivity();
+        } catch (ClassCastException castException) {
+            castException.printStackTrace(); // The activity does not implement the listener
+        }
+        if (getActivity() != null && isAdded()) {
+            mBadgeUpdateListener.setToolbarState(AppConstt.ToolbarState.TOOLBAR_VISIBLE);
+            mBadgeUpdateListener.setHeaderTitle(getString(R.string.frg_important_dates));
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!isHidden()) {
+            setBottomBar();
+        }
+    }
 
     public class timerTask extends TimerTask {
         @Override
@@ -393,27 +390,6 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
                     }
                 });
             }
-        }
-    }
-
-    void setBottomBar() {
-
-        try {
-            mBadgeUpdateListener = (IBadgeUpdateListener) getActivity();
-        } catch (ClassCastException castException) {
-            castException.printStackTrace(); // The activity does not implement the listener
-        }
-        if (getActivity() != null && isAdded()) {
-            mBadgeUpdateListener.setToolbarState(AppConstt.ToolbarState.TOOLBAR_VISIBLE);
-            mBadgeUpdateListener.setHeaderTitle(getString(R.string.frg_important_dates));
-        }
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!isHidden()) {
-            setBottomBar();
         }
     }
 }

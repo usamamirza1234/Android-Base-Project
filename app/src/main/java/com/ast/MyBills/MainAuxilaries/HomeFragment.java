@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,15 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ast.MyBills.AppConfig;
-import com.ast.MyBills.IntroAuxilaries.WebServices.More_WebHit_Get_Bills;
 import com.ast.MyBills.MainAuxilaries.Adapters.Dashboardinforcvadapter;
 import com.ast.MyBills.MainAuxilaries.Adapters.FeaturedAdsViewPagerAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBanner;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillDashboardInfo;
-import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
+import com.ast.MyBills.Utils.CustomToast;
 import com.ast.MyBills.Utils.IAdapterCallback;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
 import com.duolingo.open.rtlviewpager.RtlViewPager;
@@ -48,8 +48,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     RecyclerView rcvdashboardinfo;
     LinearLayout llBillDetails, llHistory;
     Dashboardinforcvadapter dashboardinforcvadapter;
-    int position_ = 0;
+    Integer position_ = null;
     Integer selection = null;
+    String key = "";
     private IBadgeUpdateListener mBadgeUpdateListener;
     private boolean isFirstTime = true;
     private ArrayList<DModelBanner> lstElectricAds;
@@ -144,21 +145,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void populateBils(int act, ArrayList<DModel_Bills> lstvdsf) {
 
-        int s =act;
+        int s = act;
         dashboardinforcvadapter = null;
         if (dashboardinforcvadapter == null) {
 
 
-            dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(),lstvdsf, act,  (eventId, position) -> {
+            dashboardinforcvadapter = new Dashboardinforcvadapter(getActivity(), lstvdsf, act, (eventId, position) -> {
 
                 switch (eventId) {
                     case EVENT_A:
                         position_ = position;
                         selection = position;
+                        key = "key" + (lstBillDashboardElement.get(position).getRefference_number());
                         break;
                     case EVENT_B:
-                        String key = "key"+ (lstBillDashboardElement.get(position).getRefference_number());
-                        navToElectricityHomeFragment(position,key,lstBillDashboardElement.get(position).getBillType());
+                        navToElectricityHomeFragment(position, key, lstBillDashboardElement.get(position).getBillType());
                         break;
                 }
             });
@@ -256,9 +257,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.homeImportantdates:
-
-                navToImportantDatesFragment();
-
+                if (isListSelected())
+                    navToImportantDatesFragment(key);
+                else
+                    CustomToast.showToastMessage(getActivity(), "Select Bill first", Toast.LENGTH_SHORT);
                 break;
         }
     }
@@ -281,17 +283,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void navToImportantDatesFragment() {
+    private void navToImportantDatesFragment(String Key) {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft;
         Fragment frg = new ImportantDatesFragment();
         ft = fm.beginTransaction();
-
+        Bundle bundle = new Bundle();
+        bundle.putString("key_fordata", Key);
+        frg.setArguments(bundle);
         ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
         ft.hide(this);
         ft.commit();
+    }
+
+    private boolean isListSelected() {
+        return position_ != null;
     }
 
     public class timerTask extends TimerTask {
@@ -331,6 +339,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         }
     }
+
+
 //
 //    private void navToBillAnaylsisFragment(int selection) {
 //

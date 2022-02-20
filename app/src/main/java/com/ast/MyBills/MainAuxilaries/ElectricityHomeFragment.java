@@ -238,9 +238,9 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         Bundle bundle = new Bundle();
 
         bundle.putString("key_fordata", arrayKey);
-
-        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_HistoryFragment);
-        ft.addToBackStack(AppConstt.FragTag.FN_HistoryFragment);
+        frg.setArguments(bundle);
+        ft.add(R.id.act_main_content_frg, frg, AppConstt.FragTag.FN_ImportantDatesFragment);
+        ft.addToBackStack(AppConstt.FragTag.FN_ImportantDatesFragment);
         ft.hide(this);
         ft.commit();
     }

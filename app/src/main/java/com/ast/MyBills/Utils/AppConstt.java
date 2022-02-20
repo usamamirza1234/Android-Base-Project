@@ -193,6 +193,7 @@ public interface AppConstt {
         String FN_BillerSettingFragment = "BillerSettingFragment" ;
         String FN_PdfFragment = "PdfFragment" ;
         String FN_ChartHistoryFragment = "ChartHistoryFragment" ;
+        String FN_ImportantDatesFragment = "ImportantDatesFragment" ;
     }
 
 
