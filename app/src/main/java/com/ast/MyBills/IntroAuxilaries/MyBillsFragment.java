@@ -372,17 +372,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         dModelBillInfo.setReadingDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
                         dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
                         dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-
                         lstBillInfo.add(dModelBillInfo);
-                        lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-                        // lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
-                        // lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
-//                        DModel_Bills dModel_bills = new DModel_Bills();
-//                        dModel_bills.setBiller(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
-//                        dModel_bills.setAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
-//                        dModel_bills.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-//
-//                        lstImp.add(dModel_bills);
 
                         lstMyBills.add(new DModel_Bills(str_billType + "",
                                 (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) + "",
@@ -391,31 +381,22 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                                 More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE(),
                                 More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType()));
                         billListingRcvAdapter.notifyDataSetChanged();
-
-
-//                     ??   String impkey =  "impkey" + (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) ;
-//                    ??    Log.d(TAG, "onWebResult: impKey " + impkey);
-//
-//                      ??  AppConfig.getInstance().saveimp(lstImp);
-//                      ??  AppConfig.getInstance().saveimpString(lstImpDates,impkey);
-
-
                         String key = "key" + (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
                         Log.d(TAG, "onWebResult: Key " + key);
                         AppConfig.getInstance().saveIESCO(key, lstBillInfo);
-
-
-//                      ??  String impkey =  key + "impkey";
-
-
-                        String impkey = key + "impkey";
+                        String impkey = "impkey";
+//                        String impkey = key + "impkey";
                         Log.d(TAG, "onWebResult: impKey " + impkey);
+                        ?? Example dates are added Testing purpose remove after first build
+                        lstImpDates.add("09-FEB-22");
+                        lstImpDates.add("19-FEB-22");
+                        lstImpDates.add("2-FEB-22");
+                        lstImpDates.addAll(AppConfig.getInstance().getimpString(impkey));
+                        lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
 
                         AppConfig.getInstance().saveimp(lstImp);
                         AppConfig.getInstance().saveimpString(lstImpDates, impkey);
                         Log.d(TAG, "onWebResult: impKey " + impkey + " " + AppConfig.getInstance().getimpString(impkey).size());
-
-
                         if (More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size() > 0) {
                             for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size(); i++) {
                                 if (i > 0) {
