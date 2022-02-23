@@ -28,6 +28,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.IntroActivity;
 import com.ast.MyBills.IntroAuxilaries.MyBillsFragment;
+import com.ast.MyBills.IntroAuxilaries.SignInFragment;
 import com.ast.MyBills.IntroAuxilaries.SignUpFragment;
 import com.ast.MyBills.IntroAuxilaries.WebServices.Intro_WebHit_Post_OTP;
 import com.ast.MyBills.R;
@@ -160,6 +161,15 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
         ft.add(R.id.act_intro_content_frg, frag, AppConstt.FragTag.FN_SignUpFragment);
         ft.addToBackStack(AppConstt.FragTag.FN_SignUpFragment);
         frag.setArguments(bundle);
+        ft.hide(this);
+        ft.commit();
+    }
+    private void navLogin() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment frag = new SignInFragment();
+        ft.add(R.id.act_intro_content_frg, frag, AppConstt.FragTag.FN_SignInFragment);
+        ft.addToBackStack(AppConstt.FragTag.FN_SignInFragment);
         ft.hide(this);
         ft.commit();
     }
@@ -416,7 +426,8 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
 
                 break;
             case R.id.frg_verifiacction_rl_login:
-                navToMyBillsFragment();
+               // navToMyBillsFragment();
+                navLogin();
                 //  navToSignUpFragment();
 
                 Log.d("LOG_AS", "postOTP: getPinCode " + AppConfig.getInstance().mUser.getPinCode());
