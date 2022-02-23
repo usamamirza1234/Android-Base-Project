@@ -305,10 +305,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
 //        String key = arrayKey + "impkey";
         String key = "impkey";
 
-        ??? Sir agr different bills ki due dates save krni han to APKA DYNAMIC wala taika chl ga ???? iski kiya logic ha
-        ?? meray khiyal ma to dynamic wala kam har bill ki uniqness k liy tha
-        ?? Agr "DYNAMIC trikay sy koi kam krna ha IDK your logic then use commented key (305 line)"
-        ??  "Anyways working for requiremnt"
+
 
 
 

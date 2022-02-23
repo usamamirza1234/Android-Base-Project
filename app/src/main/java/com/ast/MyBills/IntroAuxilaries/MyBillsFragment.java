@@ -387,10 +387,10 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         String impkey = "impkey";
 //                        String impkey = key + "impkey";
                         Log.d(TAG, "onWebResult: impKey " + impkey);
-                        ?? Example dates are added Testing purpose remove after first build
-                        lstImpDates.add("09-FEB-22");
-                        lstImpDates.add("19-FEB-22");
-                        lstImpDates.add("2-FEB-22");
+//
+//                        lstImpDates.add("09-FEB-22");
+//                        lstImpDates.add("19-FEB-22");
+//                        lstImpDates.add("2-FEB-22");
                         lstImpDates.addAll(AppConfig.getInstance().getimpString(impkey));
                         lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
 

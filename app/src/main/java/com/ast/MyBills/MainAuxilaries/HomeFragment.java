@@ -257,11 +257,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.homeImportantdates:
-                if (isListSelected())
+             //   if (isListSelected())
                     navToImportantDatesFragment(key);
-                else
-                    CustomToast.showToastMessage(getActivity(), "Select Bill first", Toast.LENGTH_SHORT);
-                break;
+//                else
+//                    CustomToast.showToastMessage(getActivity(), "Select Bill first", Toast.LENGTH_SHORT);
+//                break;
         }
     }
 
