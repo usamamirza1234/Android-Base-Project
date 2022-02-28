@@ -23,7 +23,9 @@ import com.ast.MyBills.MainAuxilaries.DModels.DModel_CreateAccount;
 import com.ast.MyBills.MainAuxilaries.VerificationFragment_OTP;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
+import com.ast.MyBills.Utils.DatabaseHelper;
 import com.ast.MyBills.Utils.IWebCallback;
+import com.ast.MyBills.Utils.User;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -60,6 +62,24 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         rlBack.setOnClickListener(this);
         rlNext.setOnClickListener(this);
         verifyNumber.setOnClickListener(this);
+
+
+
+
+        ?? check this method if work then it is perefered if not
+        DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+        User user = new User();
+        user.setEmail("usama@gmail.com");
+        user.setName("usama");
+        user.setPassword("pass");
+        databaseHelper.addUser(user);  ?? ADD USER
+
+
+        ?? Method 2
+        ?? onclick save/register
+                ?? save this password against this email this would register user
+        AppConfig.getInstance().setPassword(etEmail.getText().toString(), etPassword.getText().toString());
+
         return frg;
     }
     private void init() {

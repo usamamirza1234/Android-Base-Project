@@ -19,6 +19,7 @@ import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.IntroActivity;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
+import com.ast.MyBills.Utils.DatabaseHelper;
 
 
 public class SignInFragment extends Fragment implements View.OnClickListener {
@@ -100,6 +101,31 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
 
         private void checkErrorConditions() {
             if (checkPasswordError()) {
+
+                 ??Method 1 sqlite
+
+                DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+             boolean isUser =    databaseHelper.checkUser("Email","password");
+                if (isUser)
+                {
+                     ?? LOGIN
+                }else{
+                     ??Error
+                }
+
+
+
+                        ??Method 2 sharedpref
+
+                if ( AppConfig.getInstance().getPassword(edtName.getText().toString()).equals(edtPassword.getText().toString()))
+                {
+                    ?? LOGIN
+                }
+                else
+                {
+                    ??Error
+                }
+
 
 
 //                JsonObject jsonObject = new JsonObject();

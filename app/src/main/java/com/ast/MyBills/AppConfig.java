@@ -870,6 +870,15 @@ public class AppConfig {
 
 
 
+    public String getPassword(String key) {
+        return sharedPref.getString(key, "");
+    }
+
+    public void setPassword(String key,String password) {
+        editor.putString(key, password);
+        editor.commit();
+
+    }
 
 
 
