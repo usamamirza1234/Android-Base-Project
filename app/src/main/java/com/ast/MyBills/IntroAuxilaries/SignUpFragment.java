@@ -66,19 +66,16 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
 
 
-        ?? check this method if work then it is perefered if not
-        DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
-        User user = new User();
-        user.setEmail("usama@gmail.com");
-        user.setName("usama");
-        user.setPassword("pass");
-        databaseHelper.addUser(user);  ?? ADD USER
+       //check this method if work then it is perefered if not
+//        DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+//        User user = new User();
+//        user.setEmail("usama@gmail.com");
+//        user.setName("usama");
+//        user.setPassword("pass");
+//        databaseHelper.addUser(user);
+        // ADD USER
 
 
-        ?? Method 2
-        ?? onclick save/register
-                ?? save this password against this email this would register user
-        AppConfig.getInstance().setPassword(etEmail.getText().toString(), etPassword.getText().toString());
 
         return frg;
     }
@@ -198,7 +195,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
             AppConfig.getInstance().saveCreateAccount(lstCreateAccount);
 
-
+            // Method 2
+            //  onclick save/register
+            // save this password against this email this would register user
+            AppConfig.getInstance().setPassword(etEmail.getText().toString(), etPassword.getText().toString());
 
 
         }

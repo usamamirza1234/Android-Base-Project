@@ -102,28 +102,35 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
         private void checkErrorConditions() {
             if (checkPasswordError()) {
 
-                 ??Method 1 sqlite
+//               //  Method 1 sqlite
+//
+//                DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+//             boolean isUser =    databaseHelper.checkUser("Email","password");
+//                if (isUser)
+//                {
+//
+//                   //  LOGIN
+//                }else{
+//                   // Error
+//                }
 
-                DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
-             boolean isUser =    databaseHelper.checkUser("Email","password");
-                if (isUser)
-                {
-                     ?? LOGIN
-                }else{
-                     ??Error
-                }
 
 
-
-                        ??Method 2 sharedpref
+                    //Method 2 sharedpref
 
                 if ( AppConfig.getInstance().getPassword(edtName.getText().toString()).equals(edtPassword.getText().toString()))
                 {
-                    ?? LOGIN
+                    AppConfig.getInstance().mUser.isLoggedIn = true;
+                    AppConfig.getInstance().saveUserProfile();
+
+                    navToMainActivity();
+                    Toast.makeText(getContext(), "Login successfully", Toast.LENGTH_LONG).show();
+                  // LOGIN
                 }
                 else
                 {
-                    ??Error
+                    AppConfig.getInstance().showErrorMessage(getContext(), "Invalid Email or Password");
+                  // Error
                 }
 
 
@@ -136,10 +143,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
 //                requestUserSigin(jsonObject.toString());
 
 
-            AppConfig.getInstance().mUser.isLoggedIn = true;
-            AppConfig.getInstance().saveUserProfile();
 
-            navToMainActivity();
             }
         }
 

@@ -79,12 +79,12 @@
                     android:cursorVisible="true"
                     android:ems="10"
 
-                    android:hint="Name"
+                    android:hint="Email"
                     android:inputType="textPersonName"
                     android:padding="10dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="Admin"
+                    android:text="hasnainr128@gmail.com"
                     android:textColor="@color/light_gray3"
                     android:textColorHint="@color/light_gray3"
                     android:textCursorDrawable="@null" />
@@ -115,7 +115,7 @@
                     android:padding="10dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="Admin123"
+                    android:text="h12345"
                     android:textColor="@color/light_gray3"
                     android:textColorHint="@color/light_gray3"
                     android:textCursorDrawable="@null" />
