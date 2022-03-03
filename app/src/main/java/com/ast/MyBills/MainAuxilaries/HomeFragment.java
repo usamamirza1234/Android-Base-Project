@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,12 +23,15 @@ import com.ast.MyBills.MainAuxilaries.DModels.DModelBillDashboardInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
-import com.ast.MyBills.Utils.CustomToast;
 import com.ast.MyBills.Utils.IAdapterCallback;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
 import com.duolingo.open.rtlviewpager.RtlViewPager;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -139,7 +141,47 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lstBillDashboardElementFilter.clear();
         lstBillDashboardElement.clear();
         lstBillDashboardElement = AppConfig.getInstance().getBillerSetting();
-        populateBils(act, lstBillDashboardElement);
+
+
+        ArrayList<DModel_Bills> lstBillIsPaid = new ArrayList<>();
+        ArrayList<DModel_Bills> lstBillIsDue = new ArrayList<>();
+        ArrayList<DModel_Bills> lstBillIsUpcoming = new ArrayList<>();
+
+        String currentDate = new SimpleDateFormat("dd-MMM-yy", Locale.getDefault()).format(new Date());
+        SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);
+
+        for (int i = 0; i < lstBillDashboardElement.size(); i++) {
+//            if (lstBillDashboardElement.get(i).isPaid) // if you found isPaid wala check from api or sir bta dain k kisye niklana ha ispaid. is paid hoga to due or upcoming ni daikhna else daikna ha
+//            {
+//                lstBillIsPaid.add(lstBillDashboardElement.get(i));
+//            }
+//            else
+//                {
+            try {
+                Date dateFromApi = format.parse(lstBillDashboardElement.get(i).duedate);
+                Date dateFromCurrentDateString = format.parse(currentDate);
+                if (dateFromApi.after(dateFromCurrentDateString)) {
+                    lstBillIsUpcoming.add(lstBillDashboardElement.get(i));
+                } else {
+                    lstBillIsDue.add(lstBillDashboardElement.get(i));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+//            }
+
+        }
+        
+        if (act == AppConstt.bill.ALL) {
+            populateBils(act, lstBillDashboardElement);
+        } else if (act == AppConstt.bill.OVERDUE) {
+            populateBils(act, lstBillIsDue);
+        } else if (act == AppConstt.bill.UPCOMING) {
+            populateBils(act, lstBillIsUpcoming);
+        } else if (act == AppConstt.bill.PAID) {
+            populateBils(act, lstBillIsPaid);
+        }
+
 
     }
 
@@ -257,8 +299,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.homeImportantdates:
-             //   if (isListSelected())
-                    navToImportantDatesFragment(key);
+                //   if (isListSelected())
+                navToImportantDatesFragment(key);
 //                else
 //                    CustomToast.showToastMessage(getActivity(), "Select Bill first", Toast.LENGTH_SHORT);
 //                break;
