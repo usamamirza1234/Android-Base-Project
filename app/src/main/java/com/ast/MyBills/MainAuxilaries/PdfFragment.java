@@ -1,6 +1,8 @@
 package com.ast.MyBills.MainAuxilaries;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,13 +103,16 @@ PDFView pdfview;
         }
         setBottomBar();
         Log.d("MYBILL", "onWebResult: KEYChart " +arrayKey+"pdf");
-       // lstPDF = AppConfig.getInstance().getBillsIESCO("");
+       // lstPDF = AppConfig.getInstance().getBillsIESCO("
+        // ");
         lstPDF = AppConfig.getInstance().getBillsIESCO(arrayKey);
 
         //lstPDF = new ArrayList<>();
     }
 
     private void bindviews(View view) {
+
+
 
         BilltypeHeading = view.findViewById(R.id.PDFHeading);
 
@@ -172,11 +177,13 @@ PDFView pdfview;
 
                         position_ = position;
                         selection = position;
-//                        txvSelected_Disease.setVisibility(View.VISIBLE);
-//                        txvSelected_Disease.setText(AppConfig.getInstance().lst_DiseasesDef.get(position).getDiseaseName());
 
                         setBillDetails();
 
+                        //to show URL Based PDF if "http://docs.google.com/viewer?url=" is removed it will download it directly
+//                        Intent intent = new Intent(Intent.ACTION_VIEW);
+//                        intent.setDataAndType(Uri.parse( "http://docs.google.com/viewer?url=" + "https://www.ppsc.gop.pk/(S(2y5bvukt1lbgiaskirte4knb))/Misc_Uploading/Examiner%20Proforma_24-09-2021.pdf"), "text/html");
+//                        startActivity(intent);
 
                         break;
 
