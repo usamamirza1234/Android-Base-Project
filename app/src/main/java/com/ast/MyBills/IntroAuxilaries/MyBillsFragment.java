@@ -54,7 +54,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     String strbiller;
     private TextView txvBillType;
     private TextView edt_Reffrence;
-    private TextView edt_Account;
+    private TextView edt_Account, edthell;
     private Dialog progressDialog;
     private ArrayList<DModelBillInfo> lstBillInfo;
     private ArrayList<DModel_Bills> lstImp;
@@ -274,6 +274,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
                 break;
 
+
             case R.id.frg_signin_rlToolbar:
                 getActivity().onBackPressed();
                 break;
@@ -287,6 +288,8 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("ref", edt_Reffrence.getText().toString());
+
+            jsonObject.addProperty("acc", edt_Account.getText().toString());
             //  jsonObject.addProperty("account", edt_Account.getText().toString());
 //            jsonObject.addProperty("billtype", txvBillType.getText().toString());
 //            jsonObject.addProperty("biller", txvBiller.getText().toString());
@@ -297,17 +300,24 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
 
             }
+
+            if (!edt_Account.getText().toString().equalsIgnoreCase("")) {
+
+                RequestBillyear(edt_Account.getText().toString());
+
+
+            }
         }
     }
 
     private boolean checkPasswordError() {
-        if (!edt_Reffrence.getText().toString().equalsIgnoreCase("")) {
-            return true;
-        } else {
-            Toast.makeText(getContext(), "Enter all fields", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
+//        if (!edthell.getText().toString().equalsIgnoreCase("")) {
+//            return true;
+//        } else {
+//            Toast.makeText(getContext(), "Enter all fields", Toast.LENGTH_LONG).show();
+//            return false;
+//        }
+              return true;
     }
 
     void setBottomBar() {
@@ -427,7 +437,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 } else {
                     dismissProgDialog();
                     //  Toast.makeText(getContext(), "Reference Number Does Not Exist", Toast.LENGTH_LONG).show();
-                    AppConfig.getInstance().showErrorMessage(getContext(), "Reference Number Does Not Exist");
+                    AppConfig.getInstance().showErrorMessage(getContext(), "Reference Number Does Not Exist OR Having Server Error");
                 }
             }
 
