@@ -54,6 +54,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     String strbiller;
     private TextView txvBillType;
     private TextView edt_Reffrence;
+
     private TextView edt_Account, edthell;
     private Dialog progressDialog;
     private ArrayList<DModelBillInfo> lstBillInfo;
@@ -110,17 +111,17 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         // CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
 
 
-                        lstBiller.add("IESCO");
-                        lstBiller.add("LESCO");
-                        lstBiller.add("PESCO");
-                        lstBiller.add("GEPCO");
+                        lstBiller.add("iesco");
+                        lstBiller.add("lesco");
+                        lstBiller.add("pesco");
+                        lstBiller.add("gepco");
 
-                        lstBiller.add("FESCO");
-                        lstBiller.add("MEPCO");
-                        lstBiller.add("HESCO");
-                        lstBiller.add("SEPCO");
-                        lstBiller.add("QESCO");
-                        lstBiller.add("TESCO");
+                        lstBiller.add("fesco");
+                        lstBiller.add("mepco");
+                        lstBiller.add("hesco");
+                        lstBiller.add("sepco");
+                        lstBiller.add("qesco");
+                        lstBiller.add("tesco");
 
                         lstBiller.add(getResources().getString(R.string.select_biller_type));
                         billerSpinnerAdapter = new BillerSpinnerAdapter(getContext(), lstBiller);
@@ -294,16 +295,16 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 //            jsonObject.addProperty("billtype", txvBillType.getText().toString());
 //            jsonObject.addProperty("biller", txvBiller.getText().toString());
 
-            if (!edt_Reffrence.getText().toString().equalsIgnoreCase("")) {
+            if (!edt_Reffrence.getText().toString().equalsIgnoreCase("") && !spinnerBiller.toString().equalsIgnoreCase("")) {
 
-                RequestBillyear(edt_Reffrence.getText().toString());
+                RequestBillyear(edt_Reffrence.getText().toString(),spinnerBiller.toString() );
 
 
             }
 
-            if (!edt_Account.getText().toString().equalsIgnoreCase("")) {
+            if (!edt_Account.getText().toString().equalsIgnoreCase("")&& !spinnerBiller.toString().equalsIgnoreCase("")) {
 
-                RequestBillyear(edt_Account.getText().toString());
+                RequestBillyear(edt_Account.getText().toString(),spinnerBiller.toString());
 
 
             }
@@ -349,7 +350,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         AppConfig.getInstance().closeKeyboard(getActivity());
     }
 
-    private void RequestBillyear(String StrRef) {
+    private void RequestBillyear(String StrRef, String StrType) {
         showProgInstallingDataDialog();
         More_WebHit_Get_Bills more_webHit_get_bills = new More_WebHit_Get_Bills();
         more_webHit_get_bills.getBills(getContext(), new IWebCallback() {
@@ -447,7 +448,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 //Toast.makeText(getContext(), "Exception :" + ex.getMessage(), Toast.LENGTH_LONG).show();
                 AppConfig.getInstance().showErrorMessage(getContext(), "Exception :" + ex.getMessage());
             }
-        }, StrRef);
+        }, StrRef, StrType);
     }
 
     private void showProgInstallingDataDialog() {

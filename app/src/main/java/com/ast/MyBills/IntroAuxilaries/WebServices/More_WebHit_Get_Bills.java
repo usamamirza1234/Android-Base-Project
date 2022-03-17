@@ -22,8 +22,8 @@ public class More_WebHit_Get_Bills {
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
-    public void getBills(Context mContext, IWebCallback iWebCallback, String ref) {
-        String myUrl = "http://115.186.179.110:2222/scrapersapi/iesco/" + ref + "";
+    public void getBills(Context mContext, IWebCallback iWebCallback, String ref, String type) {
+        String myUrl = "http://115.186.179.110:2222/scrapersapi/"+type+"/" + ref + "";
 
         Log.d("LOG_AS", "getTermsConditions myUrl:" + myUrl);
 
