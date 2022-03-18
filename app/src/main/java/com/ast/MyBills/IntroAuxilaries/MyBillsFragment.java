@@ -49,6 +49,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     Spinner spinnerBiller;
     RelativeLayout biller;
     String str_billType = "";
+    String text="";
     RelativeLayout rlBack;
     ArrayList<DModel_Bill> lastBill;
     String strbiller;
@@ -196,9 +197,9 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 String selectedItem = parent.getItemAtPosition(position).toString();
 
                 int Pos = Integer.parseInt(selectedItem);
-                // txvBillType.setText(lstGender.get(position));
-
-//                strbiller = lstBiller.get(position);
+                 txvBillType.setText(lstBiller.get(Pos));
+                Log.d(TAG, "posss: pos " + Pos);
+                //strbiller = lstBiller.get(Pos);
             } // to close the onItemSelected
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -255,6 +256,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         rlAdd = view.findViewById(R.id.frg_my_bills_rlAdd);
         spinnerBillType = view.findViewById(R.id.frg_my_bills_spinnerBilltpe);
         spinnerBiller = view.findViewById(R.id.frg_my_bills_spinnerBiller);
+
         txvBillType = view.findViewById(R.id.frg_my_bills_txvBilltype);
 
 
@@ -262,6 +264,8 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         rlBack.setOnClickListener(this);
 
         rlAdd.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -295,16 +299,16 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 //            jsonObject.addProperty("billtype", txvBillType.getText().toString());
 //            jsonObject.addProperty("biller", txvBiller.getText().toString());
 
-            if (!edt_Reffrence.getText().toString().equalsIgnoreCase("") && !spinnerBiller.toString().equalsIgnoreCase("")) {
+            if (!edt_Reffrence.getText().toString().equalsIgnoreCase("") ) {
 
-                RequestBillyear(edt_Reffrence.getText().toString(),spinnerBiller.toString() );
+                RequestBillyear(edt_Reffrence.getText().toString(),txvBillType.getText().toString());
 
 
             }
 
-            if (!edt_Account.getText().toString().equalsIgnoreCase("")&& !spinnerBiller.toString().equalsIgnoreCase("")) {
+            if (!edt_Account.getText().toString().equalsIgnoreCase("")) {
 
-                RequestBillyear(edt_Account.getText().toString(),spinnerBiller.toString());
+                RequestBillyear(edt_Account.getText().toString(),txvBillType.getText().toString());
 
 
             }
@@ -345,6 +349,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
 
     }
+
 
     private void closeKeyboard() {
         AppConfig.getInstance().closeKeyboard(getActivity());
@@ -475,4 +480,5 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         progressDialog.setCancelable(false);
         progressDialog.show();
     }
+
 }
