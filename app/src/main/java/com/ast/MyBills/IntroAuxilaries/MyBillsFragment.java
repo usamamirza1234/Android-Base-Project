@@ -197,7 +197,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 String selectedItem = parent.getItemAtPosition(position).toString();
 
                 int Pos = Integer.parseInt(selectedItem);
-                 txvBillType.setText(lstBiller.get(Pos));
+//                 txvBillType.setText(lstBiller.get(position));
                 Log.d(TAG, "posss: pos " + Pos);
                 //strbiller = lstBiller.get(Pos);
             } // to close the onItemSelected
@@ -301,7 +301,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
             if (!edt_Reffrence.getText().toString().equalsIgnoreCase("") ) {
 
-                RequestBillyear(edt_Reffrence.getText().toString(),txvBillType.getText().toString());
+                RequestBillyear(edt_Reffrence.getText().toString(),spinnerBiller.toString());
 
 
             }

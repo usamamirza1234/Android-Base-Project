@@ -71,6 +71,9 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
                 Log.d("LOG_AS", "OverDue " + AppConstt.bill.OVERDUE);
                 holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position));
                 holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_overdue_off));
+
+
+
                 break;
 
             case AppConstt.bill.PAID:

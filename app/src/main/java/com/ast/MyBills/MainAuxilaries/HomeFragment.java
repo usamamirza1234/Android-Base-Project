@@ -1,5 +1,6 @@
 package com.ast.MyBills.MainAuxilaries;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,7 +63,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private RtlViewPager viewPgrFeaturedBanner;
     private CircleIndicator circleIndicator;
     private FeaturedAdsViewPagerAdapter featuredAdsViewPagerAdapter;
-
+TextView txvStatus;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,7 +75,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         initializeAds();
         populateBillInfo(ALL);
+        txvStatus.setText("All");
 
+        txvStatus.setTextColor(Color.parseColor("#F8C120"));
         if (selection == null) {
             selection = 0;
             // setBillDetails();
@@ -235,6 +238,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         rcvdashboardinfo = view.findViewById(R.id.frg_home_dashboard_rcvdashboardInfo);
         llImportantDates = view.findViewById(R.id.homeImportantdates);
         txvoverdue = view.findViewById(R.id.overdue);
+        txvStatus = view.findViewById(R.id.txvstatus);
         txvupcoming = view.findViewById(R.id.upcoming);
         txvpaid = view.findViewById(R.id.paid);
         txvall = view.findViewById(R.id.alll);
@@ -275,25 +279,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.overdue:
+
                 populateBillInfo(AppConstt.bill.OVERDUE);
-
-
+                txvStatus.setText("Overdue");
+                txvStatus.setTextColor(Color.parseColor("#ca2306"));
                 break;
             case R.id.alll:
                 populateBillInfo(ALL);
-
-
+                txvStatus.setText("All");
+                txvStatus.setTextColor(Color.parseColor("#F8C120"));
                 break;
 
             case R.id.upcoming:
                 populateBillInfo(AppConstt.bill.UPCOMING);
-
+                txvStatus.setText("Upcoming");
+                txvStatus.setTextColor(Color.parseColor("#017fd6"));
 
                 break;
 
             case R.id.paid:
                 populateBillInfo(AppConstt.bill.PAID);
-
+                txvStatus.setText("Paid");
+                txvStatus.setTextColor(Color.parseColor("#16ca6b"));
 
                 break;
 
