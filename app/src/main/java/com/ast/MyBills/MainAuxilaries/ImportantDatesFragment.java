@@ -130,8 +130,8 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         if (getActivity() != null) {
             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
             Date selectedDate = new Date();
-            mFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-            mFormatForApi = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            mFormat = new SimpleDateFormat("dd MM yyyy", Locale.ENGLISH);
+            mFormatForApi = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH);
             materialCalendarView.setSelectedDate(selectedDate);
             materialCalendarView.setPagingEnabled(false);
 
@@ -152,7 +152,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
 
             ArrayList<CalendarDay> listDates = new ArrayList<>();
             CalendarDay dateTimeSlots = new CalendarDay();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH);
 
             for (int i = 0; i < strlstImportantDates.size(); i++) {
 
@@ -195,8 +195,8 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
             Date selectedDate = new Date();
 
 
-            mFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-            mFormatForApi = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            mFormat = new SimpleDateFormat("dd MM yyyy", Locale.ENGLISH);
+            mFormatForApi = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH);
 
             materialCalendarView_nextMonth.setSelectedDate(selectedDate);
 
@@ -216,7 +216,7 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
             ArrayList<CalendarDay> listDates = new ArrayList<>();
 
             CalendarDay dateTimeSlots = new CalendarDay();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH);
 
 
             for (int i = 0; i < strlstImportantDates.size(); i++) {
@@ -319,11 +319,11 @@ public class ImportantDatesFragment extends Fragment implements View.OnClickList
         for (int i = 0; i < lstImpDates.size(); i++) {
             String strdate = lstImpDates.get(i);
             Log.d("logApiData", "strdate:  " + strdate);
-            SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);
+            SimpleDateFormat format = new SimpleDateFormat("dd MMM yy", Locale.ENGLISH);
             try {
                 Date date = format.parse(strdate);
                 Log.d("logApiData", "date1:  " + date);
-                SimpleDateFormat dayMonth = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                SimpleDateFormat dayMonth = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH);
                 String strmonth = dayMonth.format(date);
                 Log.d("logApiData", "formattedDate:  " + strmonth);
                 strlstImportantDates.add(strmonth);

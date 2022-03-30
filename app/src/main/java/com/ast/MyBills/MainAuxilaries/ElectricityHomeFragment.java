@@ -80,7 +80,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         BilltypeHeading.setText(billType+"");
 
         populateBillInfo(lstBillInfo);
-      //  setBillDetails();
+        // setBillDetails();
         return frg;
     }
 

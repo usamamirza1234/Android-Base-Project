@@ -150,8 +150,8 @@ TextView txvStatus;
         ArrayList<DModel_Bills> lstBillIsDue = new ArrayList<>();
         ArrayList<DModel_Bills> lstBillIsUpcoming = new ArrayList<>();
 
-        String currentDate = new SimpleDateFormat("dd-MMM-yy", Locale.getDefault()).format(new Date());
-        SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);
+        String currentDate = new SimpleDateFormat("dd MMM yy", Locale.getDefault()).format(new Date());
+        SimpleDateFormat format = new SimpleDateFormat("dd MMM yy", Locale.ENGLISH);
 
         for (int i = 0; i < lstBillDashboardElement.size(); i++) {
 //            if (lstBillDashboardElement.get(i).isPaid) // if you found isPaid wala check from api or sir bta dain k kisye niklana ha ispaid. is paid hoga to due or upcoming ni daikhna else daikna ha
@@ -161,6 +161,7 @@ TextView txvStatus;
 //            else
 //                {
             try {
+                String s = lstBillDashboardElement.get(i).duedate;
                 Date dateFromApi = format.parse(lstBillDashboardElement.get(i).duedate);
                 Date dateFromCurrentDateString = format.parse(currentDate);
                 if (dateFromApi.after(dateFromCurrentDateString)) {

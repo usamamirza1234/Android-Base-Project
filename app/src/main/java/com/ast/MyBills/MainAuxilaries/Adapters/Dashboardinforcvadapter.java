@@ -66,34 +66,38 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
             iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position);
         });
 
-        switch (_case) {
-            case AppConstt.bill.OVERDUE:
-                Log.d("LOG_AS", "OverDue " + AppConstt.bill.OVERDUE);
-                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position));
-                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_overdue_off));
-
-
-
-                break;
-
-            case AppConstt.bill.PAID:
-                Log.d("LOG_AS", "PAID " + AppConstt.bill.PAID);
-                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
-                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
-                break;
-
-            case AppConstt.bill.UPCOMING:
-                Log.d("LOG_AS", "UPCOMING " + AppConstt.bill.UPCOMING);
-                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_C, position));
-                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_upcoming_off));
-                break;
-
-            case AppConstt.bill.ALL:
-                Log.d("LOG_AS", "ALL " + AppConstt.bill.ALL);
-                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_D, position));
-                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_all_off));
-                break;
-        }
+//        switch (_case) {
+//            case AppConstt.bill.OVERDUE:
+//                Log.d("LOG_AS", "OverDue " + AppConstt.bill.OVERDUE);
+//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_A, position));
+//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_overdue_off));
+//                holder.txv_bill.setTextColor(mContext.getResources().getColor(R.color.white_1));
+//                holder.txv_city.setTextColor(mContext.getResources().getColor(R.color.white_1));
+//                holder.txv_address.setTextColor(mContext.getResources().getColor(R.color.white_1));
+//                holder.txv_view.setTextColor(mContext.getResources().getColor(R.color.white_1));
+//
+//
+//
+//                break;
+//
+//            case AppConstt.bill.PAID:
+//                Log.d("LOG_AS", "PAID " + AppConstt.bill.PAID);
+//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_B, position));
+//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
+//                break;
+//
+//            case AppConstt.bill.UPCOMING:
+//                Log.d("LOG_AS", "UPCOMING " + AppConstt.bill.UPCOMING);
+//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_C, position));
+//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_upcoming_off));
+//                break;
+//
+//            case AppConstt.bill.ALL:
+//                Log.d("LOG_AS", "ALL " + AppConstt.bill.ALL);
+//                holder.itemView.setOnClickListener(v -> iAdapterCallback.onAdapterEventFired(IAdapterCallback.EVENT_D, position));
+//                holder.llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_all_off));
+//                break;
+//        }
         holder.styleViewSection((selectedPosition != null && selectedPosition == holder.getAdapterPosition()), position);
     }
 
@@ -139,29 +143,92 @@ public class Dashboardinforcvadapter extends RecyclerView.Adapter<Dashboardinfor
 
         public void styleViewSection(boolean b, int Position) {
             if (!b) {
+                switch (_case) {
+                    case AppConstt.bill.OVERDUE:
+                        Log.d("LOG_AS", "OverDue " + AppConstt.bill.OVERDUE);
+
+                        llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_overdue_off));
+                        txv_bill.setTextColor(mContext.getResources().getColor(R.color.white_1));
+                        txv_city.setTextColor(mContext.getResources().getColor(R.color.white_1));
+                        txv_address.setTextColor(mContext.getResources().getColor(R.color.white_1));
+                        txv_view.setTextColor(mContext.getResources().getColor(R.color.white_1));
+
+
+
+                        break;
+
+
+                    case AppConstt.bill.PAID:
+                        Log.d("LOG_AS", "PAID " + AppConstt.bill.PAID);
+
+                       llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
+                       // llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_yellow_2));
+                        //  llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_yellow_2));
+                        txv_address.setTextColor(mContext.getResources().getColor(R.color.black));
+                        txv_city.setTextColor(mContext.getResources().getColor(R.color.black));
+                        txv_bill.setTextColor(mContext.getResources().getColor(R.color.black));
+                        //  txv_status.setTextColor(mContext.getResources().getColor(R.color.white));
+                        //  txv_act.setTextColor(mContext.getResources().getColor(R.color.white));
+                        txv_view.setTextColor(mContext.getResources().getColor(R.color.black));
+
+                        break;
+
+                    case AppConstt.bill.UPCOMING:
+                        Log.d("LOG_AS", "UPCOMING " + AppConstt.bill.UPCOMING);
+
+                        llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_upcoming_off));
+                      //  llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_yellow_2));
+                        //  llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_yellow_2));
+                        txv_address.setTextColor(mContext.getResources().getColor(R.color.black));
+                        txv_city.setTextColor(mContext.getResources().getColor(R.color.black));
+                        txv_bill.setTextColor(mContext.getResources().getColor(R.color.black));
+                        //  txv_status.setTextColor(mContext.getResources().getColor(R.color.white));
+                        //  txv_act.setTextColor(mContext.getResources().getColor(R.color.white));
+                        txv_view.setTextColor(mContext.getResources().getColor(R.color.black));
+                        break;
+
+                    case AppConstt.bill.ALL:
+                        Log.d("LOG_AS", "ALL " + AppConstt.bill.ALL);
+
+                        llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_all_off));
+                      //  llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_yellow_2));
+                        txv_address.setTextColor(mContext.getResources().getColor(R.color.black));
+                        txv_city.setTextColor(mContext.getResources().getColor(R.color.black));
+                        txv_bill.setTextColor(mContext.getResources().getColor(R.color.black));
+                        //  txv_status.setTextColor(mContext.getResources().getColor(R.color.white));
+                        //  txv_act.setTextColor(mContext.getResources().getColor(R.color.white));
+                        txv_view.setTextColor(mContext.getResources().getColor(R.color.black));
+                        break;
+
+                }
 
 //                if (_case==20){
 //                    llParent.setBackground(mContext.getResources().getDrawable(R.drawable.chb_btn_paid_off));
 //                }
 
-//                llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_gray_bg));
-                txv_address.setTextColor(mContext.getResources().getColor(R.color.black));
-                txv_city.setTextColor(mContext.getResources().getColor(R.color.black));
-                txv_bill.setTextColor(mContext.getResources().getColor(R.color.black));
-                //  txv_status.setTextColor(mContext.getResources().getColor(R.color.black));
-                // txv_act.setTextColor(mContext.getResources().getColor(R.color.black));
-                txv_view.setTextColor(mContext.getResources().getColor(R.color.black));
+////                llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_gray_bg));
+//                txv_address.setTextColor(mContext.getResources().getColor(R.color.black));
+//                txv_city.setTextColor(mContext.getResources().getColor(R.color.black));
+//                txv_bill.setTextColor(mContext.getResources().getColor(R.color.black));
+//                //  txv_status.setTextColor(mContext.getResources().getColor(R.color.black));
+//                // txv_act.setTextColor(mContext.getResources().getColor(R.color.black));
+//                txv_view.setTextColor(mContext.getResources().getColor(R.color.black));
 
             } else {
                 llParent.setBackgroundColor(mContext.getResources().getColor(R.color.thm_yellow_2));
-                txv_address.setTextColor(mContext.getResources().getColor(R.color.white));
-                txv_city.setTextColor(mContext.getResources().getColor(R.color.white));
-                txv_bill.setTextColor(mContext.getResources().getColor(R.color.white));
+                txv_address.setTextColor(mContext.getResources().getColor(R.color.black));
+                txv_city.setTextColor(mContext.getResources().getColor(R.color.black));
+                txv_bill.setTextColor(mContext.getResources().getColor(R.color.black));
                 //  txv_status.setTextColor(mContext.getResources().getColor(R.color.white));
                 //  txv_act.setTextColor(mContext.getResources().getColor(R.color.white));
                 txv_view.setTextColor(mContext.getResources().getColor(R.color.thm_blue_dark));
 
-
+                txv_address.setTextColor(mContext.getResources().getColor(R.color.white_1));
+                txv_city.setTextColor(mContext.getResources().getColor(R.color.white_1));
+                txv_bill.setTextColor(mContext.getResources().getColor(R.color.white_1));
+                //  txv_status.setTextColor(mContext.getResources().getColor(R.color.black));
+                // txv_act.setTextColor(mContext.getResources().getColor(R.color.black));
+                txv_view.setTextColor(mContext.getResources().getColor(R.color.thm_blue_dark));
             }
 
         }

@@ -49,18 +49,19 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     Spinner spinnerBiller;
     RelativeLayout biller;
     String str_billType = "";
-    String text="";
+    String str_biller = "";
+    String text = "";
     RelativeLayout rlBack;
     ArrayList<DModel_Bill> lastBill;
     String strbiller;
+    String[] type;
     private TextView txvBillType;
     private TextView edt_Reffrence;
-
     private TextView edt_Account, edthell;
     private Dialog progressDialog;
     private ArrayList<DModelBillInfo> lstBillInfo;
     private ArrayList<DModel_Bills> lstImp;
-
+    ArrayList<String> lstBiller = new ArrayList<>();
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View frg = inflater.inflate(R.layout.fragment_my_bills, container, false);
@@ -68,12 +69,21 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         init();
         bindviews(frg);
         populateMyBills(lstMyBills);
-
         populateSpinnerBillType();
         populateSpinnerBiller();
 
-
         return frg;
+    }
+
+    private void init() {
+        setBottomBar();
+        lstImp = new ArrayList<>();
+        lstImpDates = new ArrayList<>();
+        // lstMyBills = new ArrayList<>();
+        lstBillInfo = new ArrayList<>();
+        lastBill = new ArrayList<>();
+        lstMyBills = AppConfig.getInstance().getBillerSetting();
+
     }
 
     private void populateSpinnerBillType() {
@@ -106,7 +116,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 str_billType = (lstGender.get(position));
 
 
-                ArrayList<String> lstBiller = new ArrayList<>();
+//                ArrayList<String> lstBiller = new ArrayList<>();
                 switch (str_billType) {
                     case "Electricity":
                         // CustomToast.showToastMessage(getActivity(), str_billType + " selected", Toast.LENGTH_LONG);
@@ -182,14 +192,14 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void populateSpinnerBiller() {
-        ArrayList<String> lstBiller = new ArrayList<>();
-
-//        lstBiller.add("IESCO");
-//        lstBiller.add("WAPDA");
-//        lstBiller.add("GEPCO");
-//        lstBiller.add("PESCO");
-
-        lstBiller.add(getResources().getString(R.string.select_biller_type));
+//        ArrayList<String> lstBiller = new ArrayList<>();
+//
+////        lstBiller.add("IESCO");
+////        lstBiller.add("WAPDA");
+////        lstBiller.add("GEPCO");
+////        lstBiller.add("PESCO");
+//
+//        lstBiller.add(getResources().getString(R.string.select_biller_type));
 
         billerSpinnerAdapter = new BillerSpinnerAdapter(getContext(), lstBiller);
         spinnerBiller.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -197,9 +207,10 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 String selectedItem = parent.getItemAtPosition(position).toString();
 
                 int Pos = Integer.parseInt(selectedItem);
-//                 txvBillType.setText(lstBiller.get(position));
-                Log.d(TAG, "posss: pos " + Pos);
-                //strbiller = lstBiller.get(Pos);
+
+                str_biller = (lstBiller.get(position));
+
+
             } // to close the onItemSelected
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -235,15 +246,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void init() {
-        setBottomBar();
-        lstImp = new ArrayList<>();
-        lstImpDates = new ArrayList<>();
-        // lstMyBills = new ArrayList<>();
-        lstBillInfo = new ArrayList<>();
-        lastBill = new ArrayList<>();
-        lstMyBills = AppConfig.getInstance().getBillerSetting();
-    }
+
 
     private void bindviews(View view) {
         rcv_myBills = view.findViewById(R.id.frg_my_bills_rcvBills);
@@ -299,16 +302,16 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 //            jsonObject.addProperty("billtype", txvBillType.getText().toString());
 //            jsonObject.addProperty("biller", txvBiller.getText().toString());
 
-            if (!edt_Reffrence.getText().toString().equalsIgnoreCase("") ) {
+            if (!edt_Reffrence.getText().toString().equalsIgnoreCase("")) {
 
-                RequestBillyear(edt_Reffrence.getText().toString(),spinnerBiller.toString());
+                RequestBillyear(edt_Reffrence.getText().toString(), str_biller);
 
 
             }
 
             if (!edt_Account.getText().toString().equalsIgnoreCase("")) {
 
-                RequestBillyear(edt_Account.getText().toString(),txvBillType.getText().toString());
+                RequestBillyear(edt_Account.getText().toString(), str_biller);
 
 
             }
@@ -322,7 +325,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 //            Toast.makeText(getContext(), "Enter all fields", Toast.LENGTH_LONG).show();
 //            return false;
 //        }
-              return true;
+        return true;
     }
 
     void setBottomBar() {
@@ -364,40 +367,40 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                 if (isSuccess) {
                     dismissProgDialog();
                     if (More_WebHit_Get_Bills.responseObject != null &&
-                            More_WebHit_Get_Bills.responseObject.getIescoBill() != null) {
+                            More_WebHit_Get_Bills.responseObject.getData() != null) {
 
 
                         DModelBillInfo dModelBillInfo = new DModelBillInfo();
-                        dModelBillInfo.setName(More_WebHit_Get_Bills.responseObject.getIescoBill().getNAME());
-                        dModelBillInfo.setBillType(More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType());
-                        dModelBillInfo.setAddress(More_WebHit_Get_Bills.responseObject.getIescoBill().getADDRESS());
-                        dModelBillInfo.setCity(More_WebHit_Get_Bills.responseObject.getIescoBill().getCity());
-                        dModelBillInfo.setReference(More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
-                        dModelBillInfo.setAfterDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEAFTERDUEDATE());
-                        dModelBillInfo.setWithinDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
-                        dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
-                        dModelBillInfo.setBillMonth(More_WebHit_Get_Bills.responseObject.getIescoBill().getBILLMONTH());
-                        dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
-                        dModelBillInfo.setConsumerID(More_WebHit_Get_Bills.responseObject.getIescoBill().getCONSUMERID());
-                        dModelBillInfo.setCurrentAmount(More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE());
-                        dModelBillInfo.setMeterStatus(More_WebHit_Get_Bills.responseObject.getIescoBill().getSTATUS());
-                        dModelBillInfo.setTariff(More_WebHit_Get_Bills.responseObject.getIescoBill().getTARIFF());
-                        dModelBillInfo.setUnits(More_WebHit_Get_Bills.responseObject.getIescoBill().getTOTALUNITS());
-                        dModelBillInfo.setPresentReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPRESENTREADING());
-                        dModelBillInfo.setPrevReading(More_WebHit_Get_Bills.responseObject.getIescoBill().getPREVIOUSREADING());
-                        dModelBillInfo.setReadingDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getREADINGDATE());
-                        dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getISSUEDATE());
-                        dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+                        dModelBillInfo.setName(More_WebHit_Get_Bills.responseObject.getData().getNAME());
+                        dModelBillInfo.setBillType(More_WebHit_Get_Bills.responseObject.getData().getBillType());
+                        dModelBillInfo.setAddress(More_WebHit_Get_Bills.responseObject.getData().getADDRESS());
+                        dModelBillInfo.setCity(More_WebHit_Get_Bills.responseObject.getData().getCity());
+                        dModelBillInfo.setReference(More_WebHit_Get_Bills.responseObject.getData().getReferenceNumber());
+                        dModelBillInfo.setAfterDueDate(More_WebHit_Get_Bills.responseObject.getData().getPAYABLEAFTERDUEDATE());
+                        dModelBillInfo.setWithinDueDate(More_WebHit_Get_Bills.responseObject.getData().getPAYABLEWITHINDUEDATE());
+                        dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getData().getISSUEDATE());
+                        dModelBillInfo.setBillMonth(More_WebHit_Get_Bills.responseObject.getData().getBILLMONTH());
+                        dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getData().getDUEDATE());
+                        dModelBillInfo.setConsumerID(More_WebHit_Get_Bills.responseObject.getData().getCONSUMERID());
+                        dModelBillInfo.setCurrentAmount(More_WebHit_Get_Bills.responseObject.getData().getPAYABLEWITHINDUEDATE());
+                        dModelBillInfo.setMeterStatus(More_WebHit_Get_Bills.responseObject.getData().getSTATUS());
+                        dModelBillInfo.setTariff(More_WebHit_Get_Bills.responseObject.getData().getTARIFF());
+                        dModelBillInfo.setUnits(More_WebHit_Get_Bills.responseObject.getData().getTOTALUNITS());
+                        dModelBillInfo.setPresentReading(More_WebHit_Get_Bills.responseObject.getData().getPRESENTREADING());
+                        dModelBillInfo.setPrevReading(More_WebHit_Get_Bills.responseObject.getData().getPREVIOUSREADING());
+                        dModelBillInfo.setReadingDate(More_WebHit_Get_Bills.responseObject.getData().getREADINGDATE());
+                        dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getData().getISSUEDATE());
+                        dModelBillInfo.setDueDate(More_WebHit_Get_Bills.responseObject.getData().getDUEDATE());
                         lstBillInfo.add(dModelBillInfo);
 
                         lstMyBills.add(new DModel_Bills(str_billType + "",
-                                (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber()) + "",
+                                (More_WebHit_Get_Bills.responseObject.getData().getReferenceNumber()) + "",
                                 edt_Account.getText().toString() + "",
-                                More_WebHit_Get_Bills.responseObject.getIescoBill().getPAYABLEWITHINDUEDATE(),
-                                More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE(),
-                                More_WebHit_Get_Bills.responseObject.getIescoBill().getBillType()));
+                                More_WebHit_Get_Bills.responseObject.getData().getPAYABLEWITHINDUEDATE(),
+                                More_WebHit_Get_Bills.responseObject.getData().getDUEDATE(),
+                                More_WebHit_Get_Bills.responseObject.getData().getBillType()));
                         billListingRcvAdapter.notifyDataSetChanged();
-                        String key = "key" + (More_WebHit_Get_Bills.responseObject.getIescoBill().getReferenceNumber());
+                        String key = "key" + (More_WebHit_Get_Bills.responseObject.getData().getReferenceNumber());
                         Log.d(TAG, "onWebResult: Key " + key);
                         AppConfig.getInstance().saveIESCO(key, lstBillInfo);
                         String impkey = "impkey";
@@ -408,20 +411,20 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 //                        lstImpDates.add("19-FEB-22");
 //                        lstImpDates.add("2-FEB-22");
                         lstImpDates.addAll(AppConfig.getInstance().getimpString(impkey));
-                        lstImpDates.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getDUEDATE());
+                        lstImpDates.add(More_WebHit_Get_Bills.responseObject.getData().getDUEDATE());
 
                         AppConfig.getInstance().saveimp(lstImp);
                         AppConfig.getInstance().saveimpString(lstImpDates, impkey);
                         Log.d(TAG, "onWebResult: impKey " + impkey + " " + AppConfig.getInstance().getimpString(impkey).size());
-                        if (More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size() > 0) {
-                            for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().size(); i++) {
+                        if (More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().size() > 0) {
+                            for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().size(); i++) {
                                 if (i > 0) {
-                                    AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i));
+                                    AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i));
                                     DModel_Bill dModel_bill = new DModel_Bill
-                                            (More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(0),
-                                                    More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(1),
-                                                    More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(2),
-                                                    More_WebHit_Get_Bills.responseObject.getIescoBill().getLastYearBills().get(i).get(3));
+                                            (More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i).get(0),
+                                                    More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i).get(1),
+                                                    More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i).get(2),
+                                                    More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i).get(3));
                                     lastBill.add(dModel_bill);
                                 }
                             }
@@ -434,7 +437,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                     if (AppConfig.getInstance().getBillerSetting().size() > 0) {
-                        AppConfig.getInstance().getBillerSetting().clear();
+                       // AppConfig.getInstance().getBillerSetting().clear();
 
                     }
                     AppConfig.getInstance().saveBillerSetting(lstMyBills);
@@ -456,6 +459,13 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         }, StrRef, StrType);
     }
 
+
+    //region  functions for Dialog
+    private void dismissProgDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
     private void showProgInstallingDataDialog() {
         progressDialog = new Dialog(getActivity(), R.style.AppTheme);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -463,13 +473,6 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
         progressDialog.setCancelable(false);
         progressDialog.show();
-    }
-
-    //region  functions for Dialog
-    private void dismissProgDialog() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
     }
 
     private void showProgDialog() {
@@ -480,5 +483,5 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
         progressDialog.setCancelable(false);
         progressDialog.show();
     }
-
+    //endregion
 }
