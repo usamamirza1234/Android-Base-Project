@@ -73,375 +73,194 @@ public class More_WebHit_Get_Bills {
 
         public class ResponseModel {
 
-        public class Data
-    {
-        private String BILLMONTH;
-
-        private String READINGDATE;
-
-        private String ISSUEDATE;
-
-        private String DUEDATE;
-
-        private String NAME;
-
-        private String ADDRESS;
-
-        private String CONSUMERID;
-
-        private String PAYABLEWITHINDUEDATE;
-
-        private String PAYABLEAFTERDUEDATE;
-
-        private List<List<String>> lastYearBills;
-
-        private String billType;
-
-        private String city;
-
-        private String referenceNumber;
-
-        private String METERNO;
-
-        private String PREVIOUSREADING;
-
-        private String PRESENTREADING;
-
-        private String MF;
-
-        private String UNITS;
-
-        private String STATUS;
-
-        private String TARIFF;
-
-        private String TOTALUNITS;
-
-        public void setBILLMONTH(String BILLMONTH){
-            this.BILLMONTH = BILLMONTH;
-        }
-        public String getBILLMONTH(){
-            return this.BILLMONTH;
-        }
-        public void setREADINGDATE(String READINGDATE){
-            this.READINGDATE = READINGDATE;
-        }
-        public String getREADINGDATE(){
-            return this.READINGDATE;
-        }
-        public void setISSUEDATE(String ISSUEDATE){
-            this.ISSUEDATE = ISSUEDATE;
-        }
-        public String getISSUEDATE(){
-            return this.ISSUEDATE;
-        }
-        public void setDUEDATE(String DUEDATE){
-            this.DUEDATE = DUEDATE;
-        }
-        public String getDUEDATE(){
-            return this.DUEDATE;
-        }
-        public void setNAME(String NAME){
-            this.NAME = NAME;
-        }
-        public String getNAME(){
-            return this.NAME;
-        }
-        public void setADDRESS(String ADDRESS){
-            this.ADDRESS = ADDRESS;
-        }
-        public String getADDRESS(){
-            return this.ADDRESS;
-        }
-        public void setCONSUMERID(String CONSUMERID){
-            this.CONSUMERID = CONSUMERID;
-        }
-        public String getCONSUMERID(){
-            return this.CONSUMERID;
-        }
-        public void setPAYABLEWITHINDUEDATE(String PAYABLEWITHINDUEDATE){
-            this.PAYABLEWITHINDUEDATE = PAYABLEWITHINDUEDATE;
-        }
-        public String getPAYABLEWITHINDUEDATE(){
-            return this.PAYABLEWITHINDUEDATE;
-        }
-        public void setPAYABLEAFTERDUEDATE(String PAYABLEAFTERDUEDATE){
-            this.PAYABLEAFTERDUEDATE = PAYABLEAFTERDUEDATE;
-        }
-        public String getPAYABLEAFTERDUEDATE(){
-            return this.PAYABLEAFTERDUEDATE;
-        }
-        public void setLastYearBills(List<List<String>> lastYearBills){
-            this.lastYearBills = lastYearBills;
-        }
-        public List<List<String>> getLastYearBills(){
-            return this.lastYearBills;
-        }
-        public void setBillType(String billType){
-            this.billType = billType;
-        }
-        public String getBillType(){
-            return this.billType;
-        }
-        public void setCity(String city){
-            this.city = city;
-        }
-        public String getCity(){
-            return this.city;
-        }
-        public void setReferenceNumber(String referenceNumber){
-            this.referenceNumber = referenceNumber;
-        }
-        public String getReferenceNumber(){
-            return this.referenceNumber;
-        }
-        public void setMETERNO(String METERNO){
-            this.METERNO = METERNO;
-        }
-        public String getMETERNO(){
-            return this.METERNO;
-        }
-        public void setPREVIOUSREADING(String PREVIOUSREADING){
-            this.PREVIOUSREADING = PREVIOUSREADING;
-        }
-        public String getPREVIOUSREADING(){
-            return this.PREVIOUSREADING;
-        }
-        public void setPRESENTREADING(String PRESENTREADING){
-            this.PRESENTREADING = PRESENTREADING;
-        }
-        public String getPRESENTREADING(){
-            return this.PRESENTREADING;
-        }
-        public void setMF(String MF){
-            this.MF = MF;
-        }
-        public String getMF(){
-            return this.MF;
-        }
-        public void setUNITS(String UNITS){
-            this.UNITS = UNITS;
-        }
-        public String getUNITS(){
-            return this.UNITS;
-        }
-        public void setSTATUS(String STATUS){
-            this.STATUS = STATUS;
-        }
-        public String getSTATUS(){
-            return this.STATUS;
-        }
-        public void setTARIFF(String TARIFF){
-            this.TARIFF = TARIFF;
-        }
-        public String getTARIFF(){
-            return this.TARIFF;
-        }
-        public void setTOTALUNITS(String TOTALUNITS){
-            this.TOTALUNITS = TOTALUNITS;
-        }
-        public String getTOTALUNITS(){
-            return this.TOTALUNITS;
-        }
-    }
-
-
-    private Data data;
-
-    public void setData(Data data){
-        this.data = data;
-    }
-    public Data getData(){
-        return this.data;
-    }
 
 
 
+            public class Data
+            {
+                private String BILLMONTH;
 
-//
-//
-//
-//        public class IescoBill
-//        {
-//            private String BILLMONTH;
-//
-//            private String READINGDATE;
-//
-//            private String ISSUEDATE;
-//
-//            private String DUEDATE;
-//
-//            private String NAME;
-//
-//            private String ADDRESS;
-//
-//            private String CONSUMERID;
-//
-//            private String PAYABLEWITHINDUEDATE;
-//
-//            private String PAYABLEAFTERDUEDATE;
-//
-//            private List<List<String>> lastYearBills;
-//
-//            private String billType;
-//
-//            private String city;
-//
-//            private String referenceNumber;
-//
-//            private String METERNO;
-//
-//            private String PREVIOUSREADING;
-//
-//            private String PRESENTREADING;
-//
-//            private String MF;
-//
-//            private String UNITS;
-//
-//            private String STATUS;
-//
-//            private String TARIFF;
-//
-//            private String TOTALUNITS;
-//
-//            public void setBILLMONTH(String BILLMONTH){
-//                this.BILLMONTH = BILLMONTH;
-//            }
-//            public String getBILLMONTH(){
-//                return this.BILLMONTH;
-//            }
-//            public void setREADINGDATE(String READINGDATE){
-//                this.READINGDATE = READINGDATE;
-//            }
-//            public String getREADINGDATE(){
-//                return this.READINGDATE;
-//            }
-//            public void setISSUEDATE(String ISSUEDATE){
-//                this.ISSUEDATE = ISSUEDATE;
-//            }
-//            public String getISSUEDATE(){
-//                return this.ISSUEDATE;
-//            }
-//            public void setDUEDATE(String DUEDATE){
-//                this.DUEDATE = DUEDATE;
-//            }
-//            public String getDUEDATE(){
-//                return this.DUEDATE;
-//            }
-//            public void setNAME(String NAME){
-//                this.NAME = NAME;
-//            }
-//            public String getNAME(){
-//                return this.NAME;
-//            }
-//            public void setADDRESS(String ADDRESS){
-//                this.ADDRESS = ADDRESS;
-//            }
-//            public String getADDRESS(){
-//                return this.ADDRESS;
-//            }
-//            public void setCONSUMERID(String CONSUMERID){
-//                this.CONSUMERID = CONSUMERID;
-//            }
-//            public String getCONSUMERID(){
-//                return this.CONSUMERID;
-//            }
-//            public void setPAYABLEWITHINDUEDATE(String PAYABLEWITHINDUEDATE){
-//                this.PAYABLEWITHINDUEDATE = PAYABLEWITHINDUEDATE;
-//            }
-//            public String getPAYABLEWITHINDUEDATE(){
-//                return this.PAYABLEWITHINDUEDATE;
-//            }
-//            public void setPAYABLEAFTERDUEDATE(String PAYABLEAFTERDUEDATE){
-//                this.PAYABLEAFTERDUEDATE = PAYABLEAFTERDUEDATE;
-//            }
-//            public String getPAYABLEAFTERDUEDATE(){
-//                return this.PAYABLEAFTERDUEDATE;
-//            }
-//            public void setLastYearBills(List<List<String>> lastYearBills){
-//                this.lastYearBills = lastYearBills;
-//            }
-//            public List<List<String>> getLastYearBills(){
-//                return this.lastYearBills;
-//            }
-//            public void setBillType(String billType){
-//                this.billType = billType;
-//            }
-//            public String getBillType(){
-//                return this.billType;
-//            }
-//            public void setCity(String city){
-//                this.city = city;
-//            }
-//            public String getCity(){
-//                return this.city;
-//            }
-//            public void setReferenceNumber(String referenceNumber){
-//                this.referenceNumber = referenceNumber;
-//            }
-//            public String getReferenceNumber(){
-//                return this.referenceNumber;
-//            }
-//            public void setMETERNO(String METERNO){
-//                this.METERNO = METERNO;
-//            }
-//            public String getMETERNO(){
-//                return this.METERNO;
-//            }
-//            public void setPREVIOUSREADING(String PREVIOUSREADING){
-//                this.PREVIOUSREADING = PREVIOUSREADING;
-//            }
-//            public String getPREVIOUSREADING(){
-//                return this.PREVIOUSREADING;
-//            }
-//            public void setPRESENTREADING(String PRESENTREADING){
-//                this.PRESENTREADING = PRESENTREADING;
-//            }
-//            public String getPRESENTREADING(){
-//                return this.PRESENTREADING;
-//            }
-//            public void setMF(String MF){
-//                this.MF = MF;
-//            }
-//            public String getMF(){
-//                return this.MF;
-//            }
-//            public void setUNITS(String UNITS){
-//                this.UNITS = UNITS;
-//            }
-//            public String getUNITS(){
-//                return this.UNITS;
-//            }
-//            public void setSTATUS(String STATUS){
-//                this.STATUS = STATUS;
-//            }
-//            public String getSTATUS(){
-//                return this.STATUS;
-//            }
-//            public void setTARIFF(String TARIFF){
-//                this.TARIFF = TARIFF;
-//            }
-//            public String getTARIFF(){
-//                return this.TARIFF;
-//            }
-//            public void setTOTALUNITS(String TOTALUNITS){
-//                this.TOTALUNITS = TOTALUNITS;
-//            }
-//            public String getTOTALUNITS(){
-//                return this.TOTALUNITS;
-//            }
-//        }
-//
-//
-//        private IescoBill iescoBill;
-//
-//        public void setIescoBill(IescoBill iescoBill){
-//            this.iescoBill = iescoBill;
-//        }
-//        public IescoBill getIescoBill(){
-//            return this.iescoBill;
-//        }
+                private String READINGDATE;
+
+                private String ISSUEDATE;
+
+                private String DUEDATE;
+
+                private String NAME;
+
+                private String ADDRESS;
+
+                private String CONSUMERID;
+
+                private String PAYABLEWITHINDUEDATE;
+
+                private String PAYABLEAFTERDUEDATE;
+
+                private List<List<String>> LASTYEARBILLS;
+
+                private String BILLTYPE;
+
+                private String CITY;
+
+                private String REFERENCENUMBER;
+
+                private String METERNO;
+
+                private String PREVIOUSREADING;
+
+                private String PRESENTREADING;
+
+                private String MF;
+
+                private String UNITS;
+
+                private String STATUS;
+
+                private String TARIFF;
+
+                private String TOTALUNITS;
+
+                public void setBILLMONTH(String BILLMONTH){
+                    this.BILLMONTH = BILLMONTH;
+                }
+                public String getBILLMONTH(){
+                    return this.BILLMONTH;
+                }
+                public void setREADINGDATE(String READINGDATE){
+                    this.READINGDATE = READINGDATE;
+                }
+                public String getREADINGDATE(){
+                    return this.READINGDATE;
+                }
+                public void setISSUEDATE(String ISSUEDATE){
+                    this.ISSUEDATE = ISSUEDATE;
+                }
+                public String getISSUEDATE(){
+                    return this.ISSUEDATE;
+                }
+                public void setDUEDATE(String DUEDATE){
+                    this.DUEDATE = DUEDATE;
+                }
+                public String getDUEDATE(){
+                    return this.DUEDATE;
+                }
+                public void setNAME(String NAME){
+                    this.NAME = NAME;
+                }
+                public String getNAME(){
+                    return this.NAME;
+                }
+                public void setADDRESS(String ADDRESS){
+                    this.ADDRESS = ADDRESS;
+                }
+                public String getADDRESS(){
+                    return this.ADDRESS;
+                }
+                public void setCONSUMERID(String CONSUMERID){
+                    this.CONSUMERID = CONSUMERID;
+                }
+                public String getCONSUMERID(){
+                    return this.CONSUMERID;
+                }
+                public void setPAYABLEWITHINDUEDATE(String PAYABLEWITHINDUEDATE){
+                    this.PAYABLEWITHINDUEDATE = PAYABLEWITHINDUEDATE;
+                }
+                public String getPAYABLEWITHINDUEDATE(){
+                    return this.PAYABLEWITHINDUEDATE;
+                }
+                public void setPAYABLEAFTERDUEDATE(String PAYABLEAFTERDUEDATE){
+                    this.PAYABLEAFTERDUEDATE = PAYABLEAFTERDUEDATE;
+                }
+                public String getPAYABLEAFTERDUEDATE(){
+                    return this.PAYABLEAFTERDUEDATE;
+                }
+                public void setLASTYEARBILLS(List<List<String>> LASTYEARBILLS){
+                    this.LASTYEARBILLS = LASTYEARBILLS;
+                }
+                public List<List<String>> getLASTYEARBILLS(){
+                    return this.LASTYEARBILLS;
+                }
+                public void setBILLTYPE(String BILLTYPE){
+                    this.BILLTYPE = BILLTYPE;
+                }
+                public String getBILLTYPE(){
+                    return this.BILLTYPE;
+                }
+                public void setCITY(String CITY){
+                    this.CITY = CITY;
+                }
+                public String getCITY(){
+                    return this.CITY;
+                }
+                public void setREFERENCENUMBER(String REFERENCENUMBER){
+                    this.REFERENCENUMBER = REFERENCENUMBER;
+                }
+                public String getREFERENCENUMBER(){
+                    return this.REFERENCENUMBER;
+                }
+                public void setMETERNO(String METERNO){
+                    this.METERNO = METERNO;
+                }
+                public String getMETERNO(){
+                    return this.METERNO;
+                }
+                public void setPREVIOUSREADING(String PREVIOUSREADING){
+                    this.PREVIOUSREADING = PREVIOUSREADING;
+                }
+                public String getPREVIOUSREADING(){
+                    return this.PREVIOUSREADING;
+                }
+                public void setPRESENTREADING(String PRESENTREADING){
+                    this.PRESENTREADING = PRESENTREADING;
+                }
+                public String getPRESENTREADING(){
+                    return this.PRESENTREADING;
+                }
+                public void setMF(String MF){
+                    this.MF = MF;
+                }
+                public String getMF(){
+                    return this.MF;
+                }
+                public void setUNITS(String UNITS){
+                    this.UNITS = UNITS;
+                }
+                public String getUNITS(){
+                    return this.UNITS;
+                }
+                public void setSTATUS(String STATUS){
+                    this.STATUS = STATUS;
+                }
+                public String getSTATUS(){
+                    return this.STATUS;
+                }
+                public void setTARIFF(String TARIFF){
+                    this.TARIFF = TARIFF;
+                }
+                public String getTARIFF(){
+                    return this.TARIFF;
+                }
+                public void setTOTALUNITS(String TOTALUNITS){
+                    this.TOTALUNITS = TOTALUNITS;
+                }
+                public String getTOTALUNITS(){
+                    return this.TOTALUNITS;
+                }
+            }
+
+            private Data data;
+
+            public void setData(Data data){
+                this.data = data;
+            }
+            public Data getData(){
+                return this.data;
+            }
+
+
+
+
+
 
     }
 }

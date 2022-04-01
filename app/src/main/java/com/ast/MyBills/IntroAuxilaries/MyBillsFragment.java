@@ -372,10 +372,10 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
 
                         DModelBillInfo dModelBillInfo = new DModelBillInfo();
                         dModelBillInfo.setName(More_WebHit_Get_Bills.responseObject.getData().getNAME());
-                        dModelBillInfo.setBillType(More_WebHit_Get_Bills.responseObject.getData().getBillType());
+                        dModelBillInfo.setBillType(More_WebHit_Get_Bills.responseObject.getData().getBILLTYPE());
                         dModelBillInfo.setAddress(More_WebHit_Get_Bills.responseObject.getData().getADDRESS());
-                        dModelBillInfo.setCity(More_WebHit_Get_Bills.responseObject.getData().getCity());
-                        dModelBillInfo.setReference(More_WebHit_Get_Bills.responseObject.getData().getReferenceNumber());
+                        dModelBillInfo.setCity(More_WebHit_Get_Bills.responseObject.getData().getCITY());
+                        dModelBillInfo.setReference(More_WebHit_Get_Bills.responseObject.getData().getREFERENCENUMBER());
                         dModelBillInfo.setAfterDueDate(More_WebHit_Get_Bills.responseObject.getData().getPAYABLEAFTERDUEDATE());
                         dModelBillInfo.setWithinDueDate(More_WebHit_Get_Bills.responseObject.getData().getPAYABLEWITHINDUEDATE());
                         dModelBillInfo.setIusseDate(More_WebHit_Get_Bills.responseObject.getData().getISSUEDATE());
@@ -394,13 +394,13 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         lstBillInfo.add(dModelBillInfo);
 
                         lstMyBills.add(new DModel_Bills(str_billType + "",
-                                (More_WebHit_Get_Bills.responseObject.getData().getReferenceNumber()) + "",
+                                (More_WebHit_Get_Bills.responseObject.getData().getREFERENCENUMBER()) + "",
                                 edt_Account.getText().toString() + "",
                                 More_WebHit_Get_Bills.responseObject.getData().getPAYABLEWITHINDUEDATE(),
                                 More_WebHit_Get_Bills.responseObject.getData().getDUEDATE(),
-                                More_WebHit_Get_Bills.responseObject.getData().getBillType()));
+                                More_WebHit_Get_Bills.responseObject.getData().getBILLTYPE()));
                         billListingRcvAdapter.notifyDataSetChanged();
-                        String key = "key" + (More_WebHit_Get_Bills.responseObject.getData().getReferenceNumber());
+                        String key = "key" + (More_WebHit_Get_Bills.responseObject.getData().getREFERENCENUMBER());
                         Log.d(TAG, "onWebResult: Key " + key);
                         AppConfig.getInstance().saveIESCO(key, lstBillInfo);
                         String impkey = "impkey";
@@ -416,15 +416,15 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         AppConfig.getInstance().saveimp(lstImp);
                         AppConfig.getInstance().saveimpString(lstImpDates, impkey);
                         Log.d(TAG, "onWebResult: impKey " + impkey + " " + AppConfig.getInstance().getimpString(impkey).size());
-                        if (More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().size() > 0) {
-                            for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().size(); i++) {
+                        if (More_WebHit_Get_Bills.responseObject.getData().getLASTYEARBILLS().size() > 0) {
+                            for (int i = 0; i < More_WebHit_Get_Bills.responseObject.getData().getLASTYEARBILLS().size(); i++) {
                                 if (i > 0) {
-                                    AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i));
+                                    AppConfig.getInstance().lastYear.add(More_WebHit_Get_Bills.responseObject.getData().getLASTYEARBILLS().get(i));
                                     DModel_Bill dModel_bill = new DModel_Bill
-                                            (More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i).get(0),
-                                                    More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i).get(1),
-                                                    More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i).get(2),
-                                                    More_WebHit_Get_Bills.responseObject.getData().getLastYearBills().get(i).get(3));
+                                            (More_WebHit_Get_Bills.responseObject.getData().getLASTYEARBILLS().get(i).get(0),
+                                                    More_WebHit_Get_Bills.responseObject.getData().getLASTYEARBILLS().get(i).get(1),
+                                                    More_WebHit_Get_Bills.responseObject.getData().getLASTYEARBILLS().get(i).get(2),
+                                                    More_WebHit_Get_Bills.responseObject.getData().getLASTYEARBILLS().get(i).get(3));
                                     lastBill.add(dModel_bill);
                                 }
                             }
@@ -437,7 +437,7 @@ public class MyBillsFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                     if (AppConfig.getInstance().getBillerSetting().size() > 0) {
-                       // AppConfig.getInstance().getBillerSetting().clear();
+                        // TODO: 01-Apr-22 Uncomment        // AppConfig.getInstance().getBillerSetting().clear();
 
                     }
                     AppConfig.getInstance().saveBillerSetting(lstMyBills);
