@@ -65,7 +65,7 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
     ArrayList<DModel_Bill> lstChartPayments;
     ArrayList<DModel_Bill> lstChartUnits;
 
-
+String str;
     BarChart mBarHistoricalPayment,mBarHistoricalUnitsConsumed;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +87,8 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         BilltypeHeading.setText(billType+"");
         showBarHistoricalPayment(lstChartPayments);
         showBarHistoricalUnitsConsumed(lstChartUnits);
+
+
 
         return frg;
     }
@@ -138,7 +140,13 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
         History.setOnClickListener(this);
         billinfo.setOnClickListener(this);
         llChartHistoryImportantDates.setOnClickListener(this);
+
+
+
     }
+
+
+
 
     private void  showBarHistoricalPayment(ArrayList<DModel_Bill> lstpaymentHistory){
 
@@ -153,9 +161,13 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
 
         for (int i=0;i< lstpaymentHistory.size();i++)
         {
+
+            str = (lstpaymentHistory.get(i).getPAYMENT().replace(",", ""));
             xAxisValues.add(lstpaymentHistory.get(i).getMONTH());
-            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(lstpaymentHistory.get(i).getPAYMENT())));
+            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(str)));
         }
+
+
 
 //
 //        List<String> xAxisValues = new ArrayList<>();
@@ -315,6 +327,8 @@ public class ChartHistoryFragment extends Fragment implements View.OnClickListen
 
         }
     }
+
+
 
     void setBottomBar() {
 

@@ -9,7 +9,8 @@ public class MyDecimalValueFormatter extends ValueFormatter {
     private DecimalFormat mFormat;
 
     public MyDecimalValueFormatter() {
-        mFormat = new DecimalFormat("#");
+        mFormat = new DecimalFormat("####");
+
     }
 
     @Override

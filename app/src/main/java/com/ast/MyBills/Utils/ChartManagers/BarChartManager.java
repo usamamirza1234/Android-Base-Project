@@ -2,6 +2,7 @@ package com.ast.MyBills.Utils.ChartManagers;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.icu.number.NumberFormatter;
 
 
 import com.ast.MyBills.R;
@@ -17,6 +18,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -273,6 +275,9 @@ public class BarChartManager {
         barDataSet1.setValueFormatter(formatter);
 
 
+
+
+
         XAxis xAxis = barChart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
@@ -317,6 +322,12 @@ public class BarChartManager {
         // Display scores inside the bars
         barChart.setDrawValueAboveBar(false);
 
+
+
+
+
+
+
         barChart.animateY(2000);
         barChart.setData(barData);
         // to select numbers of bars u wanna show
@@ -326,6 +337,7 @@ public class BarChartManager {
         barData.setBarWidth(0.8f);
         barDataSet1.setValueTextColor(Color.BLACK);
         barDataSet1.setValueTextSize(10f);
+
 
     }
 

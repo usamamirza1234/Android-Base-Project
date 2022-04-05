@@ -60,6 +60,8 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
     private Dialog progressDialog;
     private String arrayKey="000";
     TextView BilltypeHeading;
+    String str;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View frg = inflater.inflate(R.layout.fragment_bill_anaylsis, container, false);
@@ -70,6 +72,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         populateBillInfo(  lstBillInfo);
         showBarHistoryUnit(lstBillAnaylsis);
         populateBillAnaylsis(lstBillAnaylsis);
+        setBillDetails();
         return frg;
     }
 
@@ -120,7 +123,8 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
         for (int i=0;i< lstUnitHistory.size();i++)
         {
             xAxisValues.add(lstUnitHistory.get(i).getMONTH());
-            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(lstUnitHistory.get(i).getPAYMENT())));
+            str = (lstUnitHistory.get(i).getPAYMENT().replace(",", ""));
+            yValueGroup1.add(new BarEntry((i+1), Float.parseFloat(str)));
         }
         BarChartManager barChartManager = new BarChartManager(mBarHistoryUnit, getContext());
         barChartManager.showBarChartVertical(yValueGroup1, xAxisValues);
@@ -133,7 +137,7 @@ public class BillAnaylsisFragment extends Fragment implements View.OnClickListen
                     case EVENT_A:
                         position_ = position;
                         selection = position;
-                        setBillDetails();
+                       // setBillDetails();
 
 
                         break;

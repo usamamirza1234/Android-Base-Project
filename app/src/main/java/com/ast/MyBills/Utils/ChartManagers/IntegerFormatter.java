@@ -23,6 +23,7 @@ public class IntegerFormatter extends ValueFormatter {
     public String getPieLabel(float value, PieEntry pieEntry) {
         if (pieChart != null && pieChart.isUsePercentValuesEnabled()) {
             // Converted to percent
+            
             return getFormattedValue(value);
         } else {
             // raw value, skip percent sign

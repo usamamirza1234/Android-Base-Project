@@ -83,7 +83,7 @@ PDFView pdfview;
 //            llBillDetails.setVisibility(View.GONE);
         }
         //else
-            //setBillDetails();
+         setBillDetails();
 
 
         return frg;
@@ -178,7 +178,7 @@ PDFView pdfview;
                         position_ = position;
                         selection = position;
 
-                        setBillDetails();
+                        //setBillDetails();
 
                         //to show URL Based PDF if "http://docs.google.com/viewer?url=" is removed it will download it directly
 //                        Intent intent = new Intent(Intent.ACTION_VIEW);

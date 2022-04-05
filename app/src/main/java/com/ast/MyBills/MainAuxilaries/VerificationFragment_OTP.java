@@ -165,6 +165,7 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
         ft.commit();
     }
     private void navLogin() {
+
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Fragment frag = new SignInFragment();
@@ -427,7 +428,9 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
                 break;
             case R.id.frg_verifiacction_rl_login:
                // navToMyBillsFragment();
+
                 navLogin();
+
                 //  navToSignUpFragment();
 
                 Log.d("LOG_AS", "postOTP: getPinCode " + AppConfig.getInstance().mUser.getPinCode());
