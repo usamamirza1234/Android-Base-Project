@@ -5,10 +5,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.style.LineBackgroundSpan;
 
+
 /**
- * Created by bilalahmed on 21/04/2017.
- * bilalahmed.cs@live.com
+ * Created by usamak.mirza@gmail.com
  */
+
 
 /**
  * Span to draw a dot under a section of text

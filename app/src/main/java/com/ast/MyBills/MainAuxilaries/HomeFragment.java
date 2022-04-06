@@ -54,16 +54,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Integer position_ = null;
     Integer selection = null;
     String key = "";
+    TextView txvStatus;
+    ArrayList<DModel_Bills> lstBillIsDue;
+    ArrayList<DModel_Bills> lstBillIsUpcoming;
     private IBadgeUpdateListener mBadgeUpdateListener;
     private boolean isFirstTime = true;
     private ArrayList<DModelBanner> lstElectricAds;
-    private ArrayList<DModelBillDashboardInfo> lstBillDashboardInfo;
-    private ArrayList<DModel_Bills> lstBillDashboardElement;
-    private ArrayList<DModel_Bills> lstBillDashboardElementFilter;
     private RtlViewPager viewPgrFeaturedBanner;
     private CircleIndicator circleIndicator;
     private FeaturedAdsViewPagerAdapter featuredAdsViewPagerAdapter;
-TextView txvStatus;
+    ArrayList<DModel_Bills> lstBillIsPaid;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -140,44 +141,11 @@ TextView txvStatus;
 
     //under
     private void populateBillInfo(int act) {
-
-        lstBillDashboardElementFilter.clear();
-        lstBillDashboardElement.clear();
-        lstBillDashboardElement = AppConfig.getInstance().getBillerSetting();
-
-
-        ArrayList<DModel_Bills> lstBillIsPaid = new ArrayList<>();
-        ArrayList<DModel_Bills> lstBillIsDue = new ArrayList<>();
-        ArrayList<DModel_Bills> lstBillIsUpcoming = new ArrayList<>();
-
-        String currentDate = new SimpleDateFormat("dd MMM yy", Locale.getDefault()).format(new Date());
-        SimpleDateFormat format = new SimpleDateFormat("dd MMM yy", Locale.ENGLISH);
-
-        for (int i = 0; i < lstBillDashboardElement.size(); i++) {
-//            if (lstBillDashboardElement.get(i).isPaid) // if you found isPaid wala check from api or sir bta dain k kisye niklana ha ispaid. is paid hoga to due or upcoming ni daikhna else daikna ha
-//            {
-//                lstBillIsPaid.add(lstBillDashboardElement.get(i));
-//            }
-//            else
-//                {
-            try {
-                String s = lstBillDashboardElement.get(i).duedate;
-                Date dateFromApi = format.parse(lstBillDashboardElement.get(i).duedate);
-                Date dateFromCurrentDateString = format.parse(currentDate);
-                if (dateFromApi.after(dateFromCurrentDateString)) {
-                    lstBillIsUpcoming.add(lstBillDashboardElement.get(i));
-                } else {
-                    lstBillIsDue.add(lstBillDashboardElement.get(i));
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-//            }
-
-        }
-        
         if (act == AppConstt.bill.ALL) {
-            populateBils(act, lstBillDashboardElement);
+            ArrayList<DModel_Bills> lstAllBill = new ArrayList<>();
+            lstAllBill.addAll(AppConfig.getInstance().lstBillDashboardElement);
+//            lstAllBill.addAll(AppConfig.getInstance().lstBillIsPaid);
+            populateBils(act, lstAllBill);
         } else if (act == AppConstt.bill.OVERDUE) {
             populateBils(act, lstBillIsDue);
         } else if (act == AppConstt.bill.UPCOMING) {
@@ -191,7 +159,6 @@ TextView txvStatus;
 
     private void populateBils(int act, ArrayList<DModel_Bills> lstvdsf) {
 
-        int s = act;
         dashboardinforcvadapter = null;
         if (dashboardinforcvadapter == null) {
 
@@ -202,10 +169,32 @@ TextView txvStatus;
                     case EVENT_A:
                         position_ = position;
                         selection = position;
-                        key = "key" + (lstBillDashboardElement.get(position).getRefference_number());
+
+                        if (act == AppConstt.bill.ALL) {
+                            ArrayList<DModel_Bills> lstAllBill = new ArrayList<>();
+                            lstAllBill.addAll(AppConfig.getInstance().lstBillDashboardElement);
+//                            lstAllBill.addAll(AppConfig.getInstance().lstBillIsPaid);
+                            key = "key" + (lstAllBill.get(position).getRefference_number());
+                        } else {
+                            key = "key" + (AppConfig.getInstance().lstBillDashboardElement.get(position).getRefference_number());
+                        }
+
                         break;
                     case EVENT_B:
-                        navToElectricityHomeFragment(position, key, lstBillDashboardElement.get(position).getBillType());
+
+
+                        if (act == AppConstt.bill.ALL) {
+                            ArrayList<DModel_Bills> lstAllBill = new ArrayList<>();
+                            lstAllBill.addAll(AppConfig.getInstance().lstBillDashboardElement);
+//                            lstAllBill.addAll(AppConfig.getInstance().lstBillIsPaid);
+
+                            navToElectricityHomeFragment(position, key, lstAllBill.get(position).getBillType());
+                        } else {
+
+                            navToElectricityHomeFragment(position, key, AppConfig.getInstance().lstBillDashboardElement.get(position).getBillType());
+                        }
+
+
                         break;
                 }
             });
@@ -224,9 +213,36 @@ TextView txvStatus;
     private void init() {
         setToolbar();
         lstElectricAds = new ArrayList<>();
-        lstBillDashboardInfo = new ArrayList<>();
-        lstBillDashboardElementFilter = new ArrayList<>();
-        lstBillDashboardElement = new ArrayList<>();
+        AppConfig.getInstance().lstBillDashboardElement = AppConfig.getInstance().getBillerSetting();
+        lstBillIsDue = new ArrayList<>();
+        lstBillIsUpcoming = new ArrayList<>();
+        lstBillIsPaid = new ArrayList<>();
+
+        String currentDate = new SimpleDateFormat("dd MMM yy", Locale.getDefault()).format(new Date());
+        SimpleDateFormat format = new SimpleDateFormat("dd MMM yy", Locale.ENGLISH);
+
+        for (int i = 0; i < AppConfig.getInstance().lstBillDashboardElement.size(); i++) {
+            if (AppConfig.getInstance().lstBillDashboardElement.get(i).getPaid()) // if you found isPaid wala check from api or sir bta dain k kisye niklana ha ispaid. is paid hoga to due or upcoming ni daikhna else daikna ha
+            {
+                lstBillIsPaid.add(AppConfig.getInstance().lstBillDashboardElement.get(i));
+            } else {
+                try {
+                    String s = AppConfig.getInstance().lstBillDashboardElement.get(i).duedate;
+                    Date dateFromApi = format.parse(AppConfig.getInstance().lstBillDashboardElement.get(i).duedate);
+                    Date dateFromCurrentDateString = format.parse(currentDate);
+                    if (dateFromApi.after(dateFromCurrentDateString)) {
+                        lstBillIsUpcoming.add(AppConfig.getInstance().lstBillDashboardElement.get(i));
+                    } else {
+                        lstBillIsDue.add(AppConfig.getInstance().lstBillDashboardElement.get(i));
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+
 
 
     }
@@ -248,6 +264,14 @@ TextView txvStatus;
         txvupcoming.setOnClickListener(this);
         txvpaid.setOnClickListener(this);
         llImportantDates.setOnClickListener(this);
+
+
+
+        txvall.setText(""+AppConfig.getInstance().lstBillDashboardElement.size());
+        txvoverdue.setText(""+lstBillIsDue.size());
+        txvpaid.setText(""+lstBillIsPaid.size());
+        txvupcoming.setText(""+lstBillIsUpcoming.size());
+
     }
 
 
@@ -271,6 +295,8 @@ TextView txvStatus;
         super.onHiddenChanged(hidden);
         if (!isHidden()) {
             setToolbar();
+            if (dashboardinforcvadapter != null)
+                dashboardinforcvadapter.notifyDataSetChanged();
         }
     }
 

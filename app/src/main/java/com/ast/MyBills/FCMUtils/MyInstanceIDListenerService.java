@@ -4,10 +4,11 @@ package com.ast.MyBills.FCMUtils;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
+
 /**
- * Created by bilalahmed on 04/05/2018.
- * bilalahmed.cs@live.com
+ * Created by usamak.mirza@gmail.com
  */
+
 
 public class MyInstanceIDListenerService extends FirebaseInstanceIdService {
 

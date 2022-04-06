@@ -23,9 +23,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ast.MyBills.AppConfig;
 import com.ast.MyBills.IntroAuxilaries.WebServices.More_WebHit_Get_Bills;
+import com.ast.MyBills.MainActivity;
 import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bills;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_EditProfile;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
@@ -33,8 +35,12 @@ import com.ast.MyBills.Utils.IBadgeUpdateListener;
 import com.ast.MyBills.Utils.IWebCallback;
 import com.google.gson.JsonObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_A;
 import static com.ast.MyBills.Utils.IAdapterCallback.EVENT_B;
@@ -51,6 +57,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
     String arrayKey = "000";
     String arrayKey1 = "";
     String billType = "";
+    int positionSelected = 0;
     Integer selection = 0;
     TextView txv_billDetails_company, txv_billDetails_name;
     TextView txvpdf, txvhistory;
@@ -97,6 +104,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             arrayKey = bundle.getString("key_fordata");
             billType = bundle.getString("key_billType");
             selection = bundle.getInt("key_selection");
+            positionSelected = bundle.getInt("key_selection");
             arrayKey1 = bundle.getString("key_fordata1");
         }
         lstBillInfo = new ArrayList<>();
@@ -256,15 +264,21 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             }
         });
 
-        rlupdatePayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        rlupdatePayment.setOnClickListener(v -> {
 
-                checkErrorConditions();
-                closeKeyboard();
-               Toast.makeText(getContext(), "Exception :" + "aa", Toast.LENGTH_LONG).show();
+            AppConfig.getInstance().lstBillDashboardElement.get(selection).setPayableafterduedate("100");
 
-            }
+            String currentDate = new SimpleDateFormat("dd MMM yy", Locale.getDefault()).format(new Date());
+            AppConfig.getInstance().lstBillDashboardElement.get(selection).duedate=(currentDate);
+            AppConfig.getInstance().saveBillerSetting(AppConfig.getInstance().lstBillDashboardElement);
+            closeKeyboard();
+            Toast.makeText(getContext(), "Added :" + AppConfig.getInstance().lstBillDashboardElement.size(), Toast.LENGTH_LONG).show();
+            dismissProgDialog();
+            ((MainActivity)getActivity()).navToHomeFragment();
+            //Uncomment solve this error by your own and comment line 261
+//                checkErrorConditions();
+
+
         });
     }
 
@@ -275,10 +289,27 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
             jsonObject.addProperty("Name", amount.getText().toString());
             jsonObject.addProperty("Email", date.getText().toString());
 
+            AppConfig.getInstance().lstBillDashboardElement.get(selection).setPaid(true);
+            AppConfig.getInstance().lstBillDashboardElement.get(selection).setAmount("100");
+            AppConfig.getInstance().lstBillDashboardElement.get(selection).setPayableafterduedate("100");
 
+            String currentDate = new SimpleDateFormat("dd MMM yy", Locale.getDefault()).format(new Date());
+//            SimpleDateFormat format = new SimpleDateFormat("dd MMM yy", Locale.ENGLISH);
+//            try {
+//                Date dateFromCurrentDateString = format.parse(currentDate);
+//                AppConfig.getInstance().lstBillDashboardElement.get(selection).setDueDate(dateFromCurrentDateString+"");
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
 
+//
 
-            Toast.makeText(getContext(), "Updated", Toast.LENGTH_LONG).show();
+            AppConfig.getInstance().saveBillerSetting(AppConfig.getInstance().lstBillDashboardElement);
+            closeKeyboard();
+            Toast.makeText(getContext(), "Added :" + AppConfig.getInstance().lstBillDashboardElement.size(), Toast.LENGTH_LONG).show();
+            dismissProgDialog();
+            ((MainActivity)getActivity()).navToHomeFragment();
+
 
 
         }

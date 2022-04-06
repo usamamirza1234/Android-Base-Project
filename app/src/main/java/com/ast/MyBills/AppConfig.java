@@ -74,8 +74,8 @@ public class AppConfig {
     //IESCO Year List
   public   List<List<String>> lastYear = new ArrayList<List<String>>();
     public ArrayList<DModel_Bill> lstBillAnaylsis;
-
-
+    public   ArrayList<DModel_Bills> lstBillDashboardElement= new ArrayList<>();
+//    public ArrayList<DModel_Bills> lstBillIsPaid = new ArrayList<>();
     //General golbal data for the App
     private Context mContext;
     private SharedPreferences sharedPref;

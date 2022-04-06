@@ -2,10 +2,11 @@ package com.ast.MyBills.Utils;
 
 import android.view.View;
 
+
 /**
- * Created by bilalahmed on 14/05/2018.
- * bilalahmed.cs@live.com
+ * Created by usamak.mirza@gmail.com
  */
+
 
 public interface IOnRecyclerItemClickListener {
     void onRecyclerItemClick(View view, int position);

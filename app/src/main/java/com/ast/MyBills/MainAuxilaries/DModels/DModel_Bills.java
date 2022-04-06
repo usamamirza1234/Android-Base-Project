@@ -10,6 +10,30 @@ public class DModel_Bills {
     public String payableafterduedate;
     public String duedate;
     public String Biller;
+    public Boolean Paid;
+    //
+    public String Amount;
+    public String DueDate;
+    public String IssueDate;
+    public String ReadingDate;
+    public String Billerr;
+
+    public DModel_Bills() {
+
+    }
+
+    //
+    public DModel_Bills(String s, String s1, String s2, String payableafterduedate, String duedate, String biller) {
+        BillType = s;
+        Refference_number = s1;
+        Account_number = s2;
+        this.payableafterduedate = payableafterduedate;
+        this.duedate = duedate;
+        this.Biller = biller;
+        this.Paid = false;
+
+
+    }
 
     public String getBiller() {
         return Biller;
@@ -17,15 +41,6 @@ public class DModel_Bills {
 
     public void setBiller(String biller) {
         Biller = biller;
-    }
-
-    //
-    public String Amount;
-    public String DueDate;
-    public String IssueDate;
-
-    public DModel_Bills() {
-
     }
 
     public String getAmount() {
@@ -60,18 +75,6 @@ public class DModel_Bills {
         ReadingDate = readingDate;
     }
 
-    public String ReadingDate;
-    //
-    public DModel_Bills(String s, String s1, String s2, String payableafterduedate, String duedate, String biller) {
-        BillType = s;
-        Refference_number = s1;
-        Account_number = s2;
-        this.payableafterduedate = payableafterduedate;
-        this.duedate = duedate;
-       this.Biller = biller;
-
-    }
-
     public String getBillerr() {
         return Billerr;
     }
@@ -80,7 +83,6 @@ public class DModel_Bills {
         Billerr = billerr;
     }
 
-    public String Billerr;
     public String getBillType() {
         return BillType;
     }
@@ -123,6 +125,14 @@ public class DModel_Bills {
 
     public int getAct() {
         return 0;
+    }
+
+    public Boolean getPaid() {
+        return Paid;
+    }
+
+    public void setPaid(Boolean paid) {
+        Paid = paid;
     }
 }
 

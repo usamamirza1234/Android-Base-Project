@@ -84,7 +84,7 @@
                     android:padding="10dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="hasnainr128@gmail.com"
+                    android:text="uk@gmail.com"
                     android:textColor="@color/light_gray3"
                     android:textColorHint="@color/light_gray3"
                     android:textCursorDrawable="@null" />
@@ -115,7 +115,7 @@
                     android:padding="10dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="h12345"
+                    android:text="123123"
                     android:textColor="@color/light_gray3"
                     android:textColorHint="@color/light_gray3"
                     android:textCursorDrawable="@null" />

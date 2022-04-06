@@ -8,8 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by bilalahmed on 04/05/2018.
- * bilalahmed.cs@live.com
+ * Created by usamak.mirza@gmail.com
  */
 
 public class DModelUser {

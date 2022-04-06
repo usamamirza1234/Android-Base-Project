@@ -9,10 +9,11 @@ import com.ast.MyBills.MainAuxilaries.MaterialCalendar.materialcalendarview.span
 
 import java.util.HashSet;
 
+
 /**
- * Created by bilalahmed on 21/04/2017.
- * bilalahmed.cs@live.com
+ * Created by usamak.mirza@gmail.com
  */
+
 
 /**
  * Decorate several days with a dot outlined
