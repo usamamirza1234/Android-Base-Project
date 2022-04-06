@@ -31,6 +31,7 @@ import com.ast.MyBills.IntroAuxilaries.MyBillsFragment;
 import com.ast.MyBills.IntroAuxilaries.SignInFragment;
 import com.ast.MyBills.IntroAuxilaries.SignUpFragment;
 import com.ast.MyBills.IntroAuxilaries.WebServices.Intro_WebHit_Post_OTP;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_EditProfile;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.CustomToast;
@@ -431,6 +432,7 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
 
                 navLogin();
 
+            //    checkErrorConditions();
                 //  navToSignUpFragment();
 
                 Log.d("LOG_AS", "postOTP: getPinCode " + AppConfig.getInstance().mUser.getPinCode());
@@ -461,6 +463,29 @@ public class VerificationFragment_OTP extends Fragment implements View.OnClickLi
                 break;
         }
     }
+
+
+    private void checkErrorConditions() {
+        if (checkPasswordError()) {
+            if (!mPIN.getText().toString().equalsIgnoreCase("") && !mPIN.getText().toString().isEmpty()) {
+
+                Toast.makeText(getContext(), "Enter Pin", Toast.LENGTH_LONG).show();
+
+
+            }
+        }
+    }
+
+    private boolean checkPasswordError() {
+        if (!mPIN.getText().toString().equalsIgnoreCase("") && !mPIN.getText().toString().isEmpty() ) {
+            return true;
+        } else {
+            Toast.makeText(getContext(), "Enter Pin", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+    }
+
 
     private void navToMyBillsFragment() {
         FragmentManager fm = getFragmentManager();

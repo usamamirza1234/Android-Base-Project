@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center"
+
+    >
+
+    <LinearLayout
+        android:id="@+id/llParentBG"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shp_rect_rounded_white_stoke"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="35dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edttext_height_medium"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
+
+                        <EditText
+                            android:id="@+id/frg_update_payment_edt_Amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:cursorVisible="true"
+                            android:hint="Enter Amount"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:text=""
+                            android:inputType="textPersonName"
+                            android:paddingEnd="10dp"
+                            android:textColor="@color/light_gray3"
+                            android:textColorHint="@color/light_gray3"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edttext_height_medium"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
+
+                        <EditText
+                            android:id="@+id/frg_update_payment_edt_Date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:cursorVisible="true"
+                            android:hint="Entre Date"
+                            android:padding="10dp"
+                            android:text=""
+                            android:paddingStart="10dp"
+
+                            android:paddingEnd="10dp"
+                            android:textColor="@color/light_gray3"
+                            android:textColorHint="@color/light_gray3"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edttext_height_medium"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
+
+                        <EditText
+
+                            android:id="@+id/frg_edit_profile_edt_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:cursorVisible="true"
+                            android:hint="@string/frg_edit_profile_yourGender"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+
+                            android:textColor="@color/light_gray3"
+                            android:textColorHint="@color/light_gray3"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini" />
+
+                    </RelativeLayout>
+
+
+
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edttext_height_medium"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
+
+                        <EditText
+                            android:id="@+id/frg_edit_profile_edt_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:cursorVisible="true"
+                            android:hint="@string/frg_edit_profile_cnic"
+                            android:padding="10dp"
+                            android:inputType="phone"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="@color/light_gray3"
+                            android:textColorHint="@color/light_gray3"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edttext_height_medium"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
+
+                        <EditText
+                            android:id="@+id/frg_edit_profile_edt_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:cursorVisible="true"
+                            android:hint="@string/frg_edit_profile_province"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="@color/light_gray3"
+                            android:textColorHint="@color/light_gray3"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edttext_height_medium"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/shp_rect_rounded_yellow_mini_stoke">
+
+                        <EditText
+
+                            android:id="@+id/frg_edit_profile_edt_confirm_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:cursorVisible="true"
+                            android:hint="@string/frg_edit_profile_edit_city"
+                            android:padding="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="@color/light_gray3"
+                            android:textColorHint="@color/light_gray3"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/fontsize_mini" />
+
+                    </RelativeLayout>
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/frg_update_payment_edt_UpdatePayment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/shp_rect_rounded_yellow_mini">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="10dp"
+                            android:text="Update Payment"
+                            android:textColor="@color/black_1"
+                            android:textSize="@dimen/fontsize_mini" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/close" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

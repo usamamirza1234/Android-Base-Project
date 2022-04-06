@@ -1,12 +1,14 @@
 package com.ast.MyBills.MainAuxilaries;
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,6 +26,7 @@ import com.ast.MyBills.IntroAuxilaries.WebServices.More_WebHit_Get_Bills;
 import com.ast.MyBills.MainAuxilaries.Adapters.ElectricityInfoRcvAdapter;
 import com.ast.MyBills.MainAuxilaries.DModels.DModelBillInfo;
 import com.ast.MyBills.MainAuxilaries.DModels.DModel_Bill;
+import com.ast.MyBills.MainAuxilaries.DModels.DModel_EditProfile;
 import com.ast.MyBills.R;
 import com.ast.MyBills.Utils.AppConstt;
 import com.ast.MyBills.Utils.IBadgeUpdateListener;
@@ -62,9 +65,10 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
     TextView txv_billDetails_reference;
     TextView txv_billDetails_MeterStatus;
     TextView BilltypeHeading;
-    EditText ref;
+    EditText ref,amount,date;
     RelativeLayout add;
     String sref = "";
+    RelativeLayout rlUpdatePayment;
     //request year
     List<DModel_Bill> lastBill = new ArrayList<>();
     private ArrayList<DModelBillInfo> lstBillInfo;
@@ -122,11 +126,18 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         txv_billDetails_reference = view.findViewById(R.id.frg_home_electricity_txv_bill_reference);
         txv_billDetails_MeterStatus = view.findViewById(R.id.frg_home_electricity_txv_bill_meter_status);
         txvpdf = view.findViewById(R.id.electricityhomepdf);
+        rlUpdatePayment = view.findViewById(R.id.frg_updatePayment);
         txvhistory = view.findViewById(R.id.electricityhomehistory);
 
+        amount = view.findViewById(R.id.frg_update_payment_edt_Amount);
+        date = view.findViewById(R.id.frg_update_payment_edt_Date);
+
+
+        rlUpdatePayment.setOnClickListener(this);
         txvpdf.setOnClickListener(this);
         txvhistory.setOnClickListener(this);
         llImportantdates.setOnClickListener(this);
+
     }
 
     private void populateBillInfo(ArrayList<DModelBillInfo> lstBillInfo) {
@@ -199,12 +210,104 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
                 navToImportantDatesFragment(arrayKey);
                 break;
 
-            case R.id.frg_my_bills_rlAdd:
-
+            case R.id.frg_updatePayment:
+                showProgPopUpDialog(progressDialog);
+           // Toast.makeText(getContext(), "Exception :" + "aa", Toast.LENGTH_LONG).show();
                 break;
 
         }
     }
+
+    private void showProgPopUpDialog(Dialog frg) {
+        progressDialog = new Dialog(getActivity(), R.style.AppTheme);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.dialog_lst_ey_dpt);
+        LinearLayout llParentBG;
+        TextView titleDesc;
+        llParentBG = progressDialog.findViewById(R.id.llParentBG);
+      //  llParentBG.setBackground(getActivity().getResources().getDrawable(R.color.white));
+
+
+
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+        searchRelventDept( progressDialog);
+  }
+
+    private void searchRelventDept( Dialog frg) {
+
+
+
+
+        RelativeLayout close, rlupdatePayment;
+
+        close = frg.findViewById(R.id.close);
+        rlupdatePayment = frg.findViewById(R.id.frg_update_payment_edt_UpdatePayment);
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+
+
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismissProgDialog();
+            }
+        });
+
+        rlupdatePayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                checkErrorConditions();
+                closeKeyboard();
+               Toast.makeText(getContext(), "Exception :" + "aa", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    private void checkErrorConditions() {
+        if (checkPasswordError()) {
+
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("Name", amount.getText().toString());
+            jsonObject.addProperty("Email", date.getText().toString());
+
+
+
+
+            Toast.makeText(getContext(), "Updated", Toast.LENGTH_LONG).show();
+
+
+        }
+    }
+
+    private boolean checkPasswordError() {
+        if (!amount.getText().toString().equalsIgnoreCase("") && !date.getText().toString().isEmpty()) {
+            return true;
+        } else {
+            Toast.makeText(getContext(), "Enter all fields", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+    }
+
+
+    private void closeKeyboard() {
+        AppConfig.getInstance().closeKeyboard(getActivity());
+    }
+
+    private void dismissProgDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+
+
+
 
     void setBottomBar() {
 
