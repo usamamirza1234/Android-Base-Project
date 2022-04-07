@@ -267,7 +267,7 @@ public class ElectricityHomeFragment extends Fragment implements View.OnClickLis
         rlupdatePayment.setOnClickListener(v -> {
 
             AppConfig.getInstance().lstBillDashboardElement.get(selection).setPayableafterduedate("100");
-
+            AppConfig.getInstance().lstBillDashboardElement.get(selection).setPaid(true);
             String currentDate = new SimpleDateFormat("dd MMM yy", Locale.getDefault()).format(new Date());
             AppConfig.getInstance().lstBillDashboardElement.get(selection).duedate=(currentDate);
             AppConfig.getInstance().saveBillerSetting(AppConfig.getInstance().lstBillDashboardElement);
